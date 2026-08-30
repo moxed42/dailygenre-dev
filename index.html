@@ -23,9 +23,12 @@
     <link rel="stylesheet" href="./assets/css/library-polish.css?v=build-v299" />
     <link rel="stylesheet" href="./assets/css/studio-polish.css?v=build-v299" />
     <link rel="stylesheet" href="./assets/css/ranks-polish.css?v=build-v299" />
-    <link rel="stylesheet" href="./assets/css/genre-identity.css?v=build-v299" />
-    <link rel="stylesheet" href="./assets/css/game-room.css?v=build-v299" />
-    <link rel="stylesheet" href="./assets/css/repair-bay-global-delete.css?v=build-v299" />
+    <!-- Non-blocking: these three only style screens that aren't shown on
+         first paint (Genre Identity detail, Game Room, Repair Bay), and
+         carry no shared/global selectors, verified by grep before deferring. -->
+    <link rel="stylesheet" href="./assets/css/genre-identity.css?v=build-v299" media="print" onload="this.media='all'" />
+    <link rel="stylesheet" href="./assets/css/game-room.css?v=build-v299" media="print" onload="this.media='all'" />
+    <link rel="stylesheet" href="./assets/css/repair-bay-global-delete.css?v=build-v299" media="print" onload="this.media='all'" />
     <script
       src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"
       crossorigin="anonymous"
