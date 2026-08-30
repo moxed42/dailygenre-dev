@@ -417,10 +417,16 @@ function switchScreen(name, options = {}) {
       const navigationRevision = ++screenNavigationRevision;
 
       applyScreenInertState(screen);
-      document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(el => {
+        el.classList.remove('active');
+        if (el.getAttribute('role') === 'tab') el.setAttribute('aria-selected', 'false');
+      });
 
       const tab = document.querySelector(`.tab-btn[data-screen="${name}"]`);
-      if (tab) tab.classList.add('active');
+      if (tab) {
+        tab.classList.add('active');
+        if (tab.getAttribute('role') === 'tab') tab.setAttribute('aria-selected', 'true');
+      }
 
       if (name !== 'listen') {
         document.title = screenTitle(name);
@@ -4840,10 +4846,16 @@ function loadListenScreen(genre, options = {}) {
       passwordInput.value = appPassword || '';
       passwordModal.classList.add('show');
       passwordInput.focus();
+      window.__dgPasswordModalCloseA11y = window.dgOpenModalA11y?.(
+        passwordModal.querySelector('.modal'),
+        closePasswordModal
+      );
     }
 
     function closePasswordModal() {
       passwordModal.classList.remove('show');
+      window.__dgPasswordModalCloseA11y?.();
+      window.__dgPasswordModalCloseA11y = null;
       try { passwordInput.blur(); } catch (_) {}
       // Do not leave the password sitting in a hidden field after save; appPassword
       // keeps the session copy for future saves without reopening this modal.

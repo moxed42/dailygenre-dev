@@ -1076,7 +1076,13 @@ function spotifyOpenPlaylistModalWithRows({ rows = [], sourceName = 'this select
   if (nameInput) nameInput.value = playlistName;
   if (status) status.textContent = '';
   spotifyRenderPlaylistSongs();
-  if (modal) modal.classList.add('show');
+  if (modal) {
+    modal.classList.add('show');
+    window.__dgSpotifyModalCloseA11y = window.dgOpenModalA11y?.(
+      modal.querySelector('.modal'),
+      closeSpotifyPlaylistModal
+    );
+  }
   spotifyReloadPlaylists();
 }
 
@@ -1106,6 +1112,8 @@ async function openSpotifyPlaylistModal(encodedGenreId='') {
 
 function closeSpotifyPlaylistModal() {
   document.getElementById('spotifyPlaylistModal')?.classList.remove('show');
+  window.__dgSpotifyModalCloseA11y?.();
+  window.__dgSpotifyModalCloseA11y = null;
   spotifyPlaylistContext = null;
 }
 

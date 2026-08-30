@@ -111,3 +111,50 @@ function isGenreZanger(genre) {
       const rating = String(genre?.rating || '').trim().toLowerCase();
       return status === 'veto' || status === 'zanger' || rating === 'zanger';
     }
+
+// Shared modal accessibility helper: traps Tab focus inside the modal,
+// closes on Escape, and restores focus to whatever triggered the modal
+// once it closes. Reused by the password-save modal and the Spotify
+// playlist modal rather than duplicating this logic in each.
+const DG_MODAL_FOCUSABLE_SELECTOR =
+  'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+function dgOpenModalA11y(modalRootEl, onEscape) {
+  if (!modalRootEl) return () => {};
+  const previouslyFocused = document.activeElement;
+
+  function handleKeydown(e) {
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      onEscape?.();
+      return;
+    }
+    if (e.key !== 'Tab') return;
+    const focusable = Array.from(
+      modalRootEl.querySelectorAll(DG_MODAL_FOCUSABLE_SELECTOR)
+    ).filter(el => el.offsetParent !== null);
+    if (!focusable.length) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
+  }
+
+  document.addEventListener('keydown', handleKeydown);
+
+  return function closeModalA11y() {
+    document.removeEventListener('keydown', handleKeydown);
+    try {
+      if (previouslyFocused && typeof previouslyFocused.focus === 'function') {
+        previouslyFocused.focus();
+      }
+    } catch (_) {}
+  };
+}
+
+window.dgOpenModalA11y = dgOpenModalA11y;

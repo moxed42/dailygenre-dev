@@ -114,7 +114,7 @@
           </div>
         </div>
         <div class="top-actions">
-          <div class="pill" id="remainingCount">Loading genres...</div>
+          <div class="pill" id="remainingCount" aria-live="polite">Loading genres...</div>
           <button
             id="spotifyConnectBtn"
             class="spotify-connect-btn"
@@ -125,10 +125,10 @@
         </div>
       </header>
 
-      <nav class="tabs">
-        <button class="tab-btn active" data-screen="spin">Spin</button>
+      <nav class="tabs" role="tablist" aria-label="Screens">
+        <button class="tab-btn active" id="tab-spin" data-screen="spin" role="tab" aria-selected="true" aria-controls="screen-spin">Spin</button>
         <button class="tab-btn tab-today-btn" id="topTodayBtn" type="button">Today</button>
-        <button class="tab-btn" data-screen="history">Archive</button>
+        <button class="tab-btn" id="tab-history" data-screen="history" role="tab" aria-selected="false" aria-controls="screen-history">Archive</button>
         <button
           class="tab-btn tab-action-btn"
           id="topCrateDigBtn"
@@ -144,12 +144,12 @@
         >
           Album Dive
         </button>
-        <button class="tab-btn" data-screen="viz">Visuals</button>
-        <button class="tab-btn" data-screen="review">Review</button>
-        <button class="tab-btn" data-screen="ranking">Ranking</button>
+        <button class="tab-btn" id="tab-viz" data-screen="viz" role="tab" aria-selected="false" aria-controls="screen-viz">Visuals</button>
+        <button class="tab-btn" id="tab-review" data-screen="review" role="tab" aria-selected="false" aria-controls="screen-review">Review</button>
+        <button class="tab-btn" id="tab-ranking" data-screen="ranking" role="tab" aria-selected="false" aria-controls="screen-ranking">Ranking</button>
       </nav>
 
-      <section class="screen active" id="screen-spin">
+      <section class="screen active" id="screen-spin" role="tabpanel" aria-labelledby="tab-spin">
         <div class="card" style="margin-top: 20px">
           <div class="spinner-shell">
             <div class="spinner-window">
@@ -354,7 +354,7 @@
         </div>
       </section>
 
-      <section class="screen" id="screen-history">
+      <section class="screen" id="screen-history" role="tabpanel" aria-labelledby="tab-history">
         <div class="panel archive-panel">
           <div class="archive-topline">
             <div>
@@ -464,7 +464,7 @@
         </div>
       </section>
 
-      <section class="screen" id="screen-viz">
+      <section class="screen" id="screen-viz" role="tabpanel" aria-labelledby="tab-viz">
         <div class="panel viz-panel">
           <div class="viz-shell">
             <div class="viz-hero">
@@ -746,7 +746,7 @@
         </div>
       </section>
 
-      <section class="screen" id="screen-review">
+      <section class="screen" id="screen-review" role="tabpanel" aria-labelledby="tab-review">
         <div class="panel review-panel">
           <div class="review-hero">
             <div>
@@ -779,7 +779,7 @@
         </div>
       </section>
 
-      <section class="screen" id="screen-ranking">
+      <section class="screen" id="screen-ranking" role="tabpanel" aria-labelledby="tab-ranking">
         <div class="panel">
           <div class="eyebrow">Relative ranking</div>
           <h2 style="margin: 0 0 8px; letter-spacing: -0.04em">
@@ -802,8 +802,8 @@
     </div>
 
     <div class="modal-backdrop" id="passwordModal">
-      <div class="modal">
-        <h3>Save changes</h3>
+      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="passwordModalTitle">
+        <h3 id="passwordModalTitle">Save changes</h3>
         <p>Enter the app password to save changes through Cloudflare.</p>
         <input id="passwordInput" type="password" placeholder="App password" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" data-lpignore="true" data-1p-ignore="true" data-bwignore="true" />
         <div class="row" style="margin-top: 14px">
@@ -821,9 +821,12 @@
     <div class="modal-backdrop" id="spotifyPlaylistModal">
       <div
         class="modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="spotifyPlaylistModalTitle"
         style="width: min(680px, 100%); max-height: 88vh; overflow: auto"
       >
-        <h3>Add this genre to Spotify</h3>
+        <h3 id="spotifyPlaylistModalTitle">Add this genre to Spotify</h3>
         <p id="spotifyPlaylistIntro">
           Choose a playlist target, then add the Spotify tracks from this genre.
         </p>
