@@ -707,6 +707,7 @@ function switchScreen(name, options = {}) {
 
     function updateRemainingCount() {
       invalidateUnlistenedCache();
+      remainingCount.classList.remove('pill-loading', 'pill-error');
       const stats = getRemainingCountDiagnostics();
       remainingCount.textContent = `${stats.remaining} genres remaining`;
       remainingCount.title = remainingCountMessage(stats) + '\n\nClick for excluded samples.';
@@ -8420,6 +8421,8 @@ function rerenderActiveScreenAfterDataLoad() {
 
 async function loadData() {
   remainingCount.textContent = 'Loading genres...';
+  remainingCount.classList.remove('pill-error');
+  remainingCount.classList.add('pill-loading');
 
   let workerLoaded = null;
   let githubLoaded = null;
@@ -8504,8 +8507,14 @@ async function loadData() {
   const githubMaxId = maxGenreId(githubLoaded && githubLoaded.data);
 
   if (!loaded || !Array.isArray(loaded.data)) {
+    remainingCount.classList.remove('pill-loading');
+    remainingCount.classList.add('pill-error');
     remainingCount.textContent = 'Could not load production data.';
     showSaveToast('Could not load production data from the Worker or GitHub JSON.', true);
+    // Surface the existing retry/diagnostics panel (assets/js/genre-data.js)
+    // right away instead of waiting for its 8-20s window-load timer, since
+    // we already know for certain the load failed.
+    window.DailyGenreCore?.check?.({ showOnFailure: true, source: 'load-data-failed' });
     return;
   }
 

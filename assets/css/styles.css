@@ -734,6 +734,27 @@
       font-size:.9rem;
     }
 
+    .pill.pill-loading {
+      animation: dg-pill-pulse 1.4s ease-in-out infinite;
+    }
+
+    @keyframes dg-pill-pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: .55; }
+    }
+
+    .pill.pill-error {
+      color:#ffb4a0;
+      border-color: rgba(240,98,98,.55);
+      background:linear-gradient(180deg, rgba(13,9,7,.95), rgba(46,20,14,.95));
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .pill.pill-loading {
+        animation: none;
+      }
+    }
+
     .tab-btn {
       border-radius:14px;
       color:#fff5df;
