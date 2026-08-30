@@ -1,0 +1,742 @@
+/* Daily Genre Identity v1 */
+.genre-identity-editor,
+.genre-identity-dna {
+  border: 1px solid rgba(190, 146, 79, 0.42);
+  border-radius: 24px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 248, 230, 0.96),
+    rgba(237, 211, 166, 0.9)
+  );
+  box-shadow:
+    0 18px 42px rgba(55, 30, 8, 0.11),
+    inset 0 1px 0 rgba(255, 255, 255, 0.55);
+}
+
+.genre-identity-editor {
+  margin: 14px 0;
+  padding: 18px;
+}
+
+.genre-identity-editor-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  align-items: flex-start;
+  margin-bottom: 14px;
+}
+
+.genre-identity-picker {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: end;
+  margin-bottom: 14px;
+}
+
+.genre-identity-picker label,
+.genre-identity-form label {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+}
+
+.genre-identity-picker label > span,
+.genre-identity-form label > span,
+.genre-identity-section-title {
+  color: var(--muted, #735a3c);
+  font-size: 0.72rem;
+  font-weight: 950;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.genre-identity-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.genre-identity-full,
+.genre-identity-section-title,
+.genre-identity-actions {
+  grid-column: 1 / -1;
+}
+
+.genre-identity-form input,
+.genre-identity-form textarea,
+.genre-identity-form select,
+.genre-identity-picker input {
+  background: rgba(255, 253, 244, 0.88);
+  border-color: rgba(153, 102, 37, 0.28);
+  border-radius: 14px;
+}
+
+.genre-identity-form small {
+  color: var(--muted, #735a3c);
+  font-weight: 600;
+}
+
+.genre-identity-media-list {
+  display: grid;
+  gap: 10px;
+}
+
+.genre-media-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 0;
+  padding: 14px;
+  border: 1px solid rgba(153, 102, 37, 0.22);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.28);
+}
+
+.genre-media-row legend {
+  padding: 0 8px;
+  color: var(--accent-dark, #7a4714);
+  font-weight: 950;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+}
+
+.genre-remove-media {
+  justify-self: start;
+}
+
+.genre-identity-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.genre-identity-dna {
+  padding: 14px;
+  margin: 14px 0;
+}
+
+.genre-identity-dna-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.genre-identity-dna h3 {
+  margin: 0;
+  font-size: 1.05rem;
+  letter-spacing: -0.04em;
+}
+
+.genre-identity-dna-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.genre-identity-dna-box {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+  border: 1px solid rgba(153, 102, 37, 0.2);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.32);
+  padding: 12px;
+}
+
+.genre-identity-dna-box span {
+  color: var(--muted, #735a3c);
+  font-size: 0.68rem;
+  font-weight: 950;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.genre-identity-dna-box strong {
+  color: var(--text, #22160d);
+  font-size: 0.94rem;
+  line-height: 1.18;
+}
+
+.genre-identity-dna-box a {
+  color: var(--accent-dark, #7a4714);
+  text-decoration: none;
+}
+
+.genre-identity-dna-box a:hover {
+  text-decoration: underline;
+}
+
+.genre-identity-dna-box em,
+.genre-identity-dna-box small {
+  color: var(--muted, #735a3c);
+  font-size: 0.78rem;
+  line-height: 1.3;
+}
+
+.genre-identity-dna-box em {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-style: italic;
+}
+
+@media (max-width: 780px) {
+  .genre-identity-picker,
+  .genre-identity-form,
+  .genre-media-row,
+  .genre-identity-dna-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .genre-identity-editor-head,
+  .genre-identity-dna-head {
+    display: grid;
+  }
+}
+
+/* === Genre Identity v2: clearer promotion on Dig page === */
+.genre-identity-alias-line {
+  margin: -2px 0 8px;
+  color: rgba(255, 245, 223, 0.76);
+  font-size: clamp(0.86rem, 1.4vw, 1rem);
+  font-style: italic;
+  line-height: 1.25;
+}
+
+.genre-identity-alias-line em {
+  color: rgba(255, 245, 223, 0.92);
+}
+
+.genre-identity-alias-line span {
+  font-style: normal;
+  color: var(--accent-soft, #ffe0a1);
+  font-weight: 800;
+}
+
+.genre-identity-status-line {
+  display: inline-flex;
+  width: fit-content;
+  max-width: 100%;
+  margin-top: 8px;
+  padding: 5px 9px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.34);
+  border: 1px solid rgba(153, 102, 37, 0.2);
+  color: var(--accent-dark, #7a4714);
+  font-size: 0.76rem;
+  font-weight: 900;
+}
+
+.genre-identity-dna-head p {
+  margin: 4px 0 0;
+}
+
+.genre-identity-alias-card {
+  display: grid;
+  gap: 4px;
+  margin: 0 0 10px;
+  padding: 10px 12px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.34);
+  border: 1px solid rgba(153, 102, 37, 0.18);
+}
+
+.genre-identity-alias-card span,
+.genre-identity-track-kicker {
+  color: var(--muted, #735a3c);
+  font-size: 0.68rem;
+  font-weight: 950;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.genre-identity-alias-card strong {
+  font-size: 0.92rem;
+  line-height: 1.25;
+}
+
+.genre-identity-track-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.genre-identity-track-card {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 10px;
+  align-items: start;
+  min-width: 0;
+  padding: 12px;
+  border-radius: 18px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 252, 242, 0.7),
+    rgba(248, 226, 184, 0.68)
+  );
+  border: 1px solid rgba(153, 102, 37, 0.22);
+}
+
+.genre-identity-track-card.is-seminal {
+  border-color: rgba(217, 141, 37, 0.5);
+  box-shadow: inset 4px 0 0 rgba(217, 141, 37, 0.72);
+}
+
+.genre-identity-track-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: var(--accent-soft, #ffe0a1);
+  color: var(--accent-dark, #7a4714);
+  font-weight: 950;
+  border: 1px solid rgba(153, 102, 37, 0.24);
+}
+
+.genre-identity-track-main {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.genre-identity-track-main strong {
+  font-size: 0.98rem;
+  line-height: 1.15;
+}
+
+.genre-identity-track-main a {
+  color: var(--text, #22160d);
+  text-decoration: none;
+}
+
+.genre-identity-track-main a:hover {
+  color: var(--accent-dark, #7a4714);
+  text-decoration: underline;
+}
+
+.genre-identity-track-main small,
+.genre-identity-track-main em {
+  color: var(--muted, #735a3c);
+  line-height: 1.3;
+}
+
+.genre-identity-track-main em {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-size: 0.8rem;
+}
+
+@media (max-width: 760px) {
+  .genre-identity-track-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.genre-identity-head-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.genre-identity-editor.studio-section-collapsed
+  > :not(.genre-identity-editor-head) {
+  display: none !important;
+}
+
+@media (max-width: 760px) {
+  .genre-identity-head-actions {
+    justify-content: flex-start;
+  }
+}
+
+/* === Genre Identity v3 / UX audit: robust Dig-page presentation === */
+.discovery-console > .genre-identity-dna {
+  margin: 2px 0 10px !important;
+}
+
+.detail-record-card .genre-identity-alias-line,
+.discovery-console .detail-record-card .genre-identity-alias-line {
+  color: color-mix(
+    in srgb,
+    var(--muted, #735a3c) 78%,
+    var(--text, #22160d)
+  ) !important;
+}
+
+.detail-record-card .genre-identity-alias-line em,
+.discovery-console .detail-record-card .genre-identity-alias-line em {
+  color: color-mix(
+    in srgb,
+    var(--text, #22160d) 86%,
+    var(--accent, #b7791f)
+  ) !important;
+}
+
+.genre-identity-dna {
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.genre-identity-dna-head .btn,
+.genre-identity-dna-head button {
+  white-space: nowrap;
+}
+
+.genre-identity-track-main strong,
+.genre-identity-track-main small,
+.genre-identity-track-main em,
+.genre-identity-alias-card strong {
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 680px) {
+  .genre-identity-dna,
+  .genre-identity-editor {
+    border-radius: 18px;
+    padding: 12px;
+  }
+
+  .genre-identity-dna-head {
+    gap: 8px;
+  }
+
+  .genre-identity-dna-head .btn,
+  .genre-identity-dna-head button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .genre-identity-track-card {
+    grid-template-columns: 28px minmax(0, 1fr);
+    padding: 10px;
+  }
+
+  .genre-identity-track-icon {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+/* === Genre Identity v4: structured block import === */
+.genre-identity-import {
+  grid-column: 1 / -1;
+  border: 1px solid rgba(127, 82, 28, 0.16);
+  border-radius: 18px;
+  background: rgba(255, 248, 229, 0.58);
+  padding: 10px 12px;
+}
+
+.genre-identity-import summary {
+  cursor: pointer;
+  font-weight: 950;
+  color: var(--text, #22160d);
+}
+
+.genre-identity-import textarea {
+  margin-top: 10px;
+  width: 100%;
+  min-height: 170px;
+  resize: vertical;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.83rem;
+  line-height: 1.42;
+}
+
+.genre-identity-import-actions {
+  margin-top: 9px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.genre-identity-import small {
+  display: block;
+  margin-top: 7px;
+  color: var(--muted, #735a3c);
+  font-weight: 700;
+}
+
+@media (max-width: 680px) {
+  .genre-identity-import-actions .btn {
+    width: 100%;
+  }
+}
+
+
+/* === Genre Identity v52: readable detail-page AKA alias line === */
+.detail-record-card .genre-identity-alias-line,
+.discovery-console .detail-record-card .genre-identity-alias-line {
+  color: rgba(255, 245, 223, 0.74) !important;
+  font-weight: 800 !important;
+  text-shadow: 0 2px 5px rgba(0,0,0,0.45) !important;
+}
+.detail-record-card .genre-identity-alias-line em,
+.discovery-console .detail-record-card .genre-identity-alias-line em {
+  color: #ffe0a1 !important;
+  font-weight: 950 !important;
+}
+.detail-record-card .genre-identity-alias-line span,
+.discovery-console .detail-record-card .genre-identity-alias-line span {
+  color: #ffd27c !important;
+  font-weight: 950 !important;
+}
+
+/* === Genre Identity v54: softer, higher-contrast alias line === */
+.detail-record-card .genre-identity-alias-line,
+.discovery-console .detail-record-card .genre-identity-alias-line {
+  color: rgba(255, 248, 232, 0.9) !important;
+  font-style: italic !important;
+  font-weight: 500 !important;
+  letter-spacing: -0.01em !important;
+  text-shadow: 0 2px 7px rgba(0, 0, 0, 0.6) !important;
+}
+.detail-record-card .genre-identity-alias-line em,
+.discovery-console .detail-record-card .genre-identity-alias-line em {
+  color: rgba(255, 248, 232, 0.94) !important;
+  font-style: italic !important;
+  font-weight: 500 !important;
+}
+.detail-record-card .genre-identity-alias-line span,
+.discovery-console .detail-record-card .genre-identity-alias-line span {
+  color: rgba(255, 232, 180, 0.94) !important;
+  font-style: normal !important;
+  font-weight: 800 !important;
+}
+
+/* === Genre Identity v55: smaller high-contrast alias line === */
+.detail-record-card .genre-identity-alias-line,
+.discovery-console .detail-record-card .genre-identity-alias-line {
+  margin: 2px 0 8px !important;
+  max-width: 100% !important;
+  color: rgba(255, 251, 241, 0.88) !important;
+  font-size: clamp(0.74rem, 1.1vw, 0.88rem) !important;
+  line-height: 1.22 !important;
+  font-style: italic !important;
+  font-weight: 450 !important;
+  letter-spacing: 0 !important;
+  text-shadow: 0 2px 7px rgba(0, 0, 0, 0.72) !important;
+}
+.detail-record-card .genre-identity-alias-line em,
+.discovery-console .detail-record-card .genre-identity-alias-line em {
+  color: rgba(255, 251, 241, 0.92) !important;
+  font-size: inherit !important;
+  font-style: italic !important;
+  font-weight: 450 !important;
+}
+.detail-record-card .genre-identity-alias-line span,
+.discovery-console .detail-record-card .genre-identity-alias-line span {
+  color: rgba(255, 239, 199, 0.9) !important;
+  font-size: 0.72em !important;
+  font-style: normal !important;
+  font-weight: 700 !important;
+}
+
+
+/* === v56: manual picker + alias contrast + mobile hardening === */
+.detail-record-card .genre-identity-alias-line,
+.discovery-console .detail-record-card .genre-identity-alias-line {
+  font-size: clamp(0.82rem, 1.35vw, 0.95rem) !important;
+  line-height: 1.22 !important;
+  max-width: min(52ch, 100%) !important;
+  color: rgba(255, 241, 211, 0.74) !important;
+  font-weight: 600 !important;
+  font-style: italic !important;
+  overflow-wrap: anywhere !important;
+}
+.detail-record-card .genre-identity-alias-line em,
+.discovery-console .detail-record-card .genre-identity-alias-line em {
+  color: rgba(255, 241, 211, 0.78) !important;
+  font-weight: 600 !important;
+  font-style: italic !important;
+}
+.detail-record-card .genre-identity-alias-line span,
+.discovery-console .detail-record-card .genre-identity-alias-line span {
+  color: rgba(255, 224, 161, 0.82) !important;
+  font-weight: 800 !important;
+}
+
+#manualResults2,
+#manualResults2.dc-manual-results-polished {
+  display: grid !important;
+  gap: 8px !important;
+}
+#manualResults2 button.list-item,
+#manualResults2 .dc-manual-result-card {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  width: 100% !important;
+  display: grid !important;
+  gap: 4px !important;
+  text-align: left !important;
+  cursor: pointer !important;
+  border: 1px solid rgba(244, 203, 128, 0.48) !important;
+  border-radius: 16px !important;
+  padding: 10px 12px !important;
+  background: linear-gradient(180deg, rgba(255,248,229,.98), rgba(234,210,169,.94)) !important;
+  color: var(--text, #22160d) !important;
+  box-shadow: 0 10px 24px rgba(38, 22, 10, 0.10), inset 0 1px 0 rgba(255,255,255,.52) !important;
+  font: inherit !important;
+  white-space: normal !important;
+}
+#manualResults2 button.list-item:hover,
+#manualResults2 button.list-item:focus-visible,
+#manualResults2 .dc-manual-result-card:hover,
+#manualResults2 .dc-manual-result-card:focus-visible {
+  transform: translateY(-1px) !important;
+  border-color: rgba(217, 141, 37, 0.58) !important;
+  outline: none !important;
+}
+#manualResults2 button.list-item strong,
+#manualResults2 .dc-manual-result-card strong {
+  color: var(--text, #22160d) !important;
+  font-weight: 950 !important;
+  letter-spacing: -0.03em !important;
+}
+#manualResults2 button.list-item .small,
+#manualResults2 .dc-manual-result-card .small {
+  color: var(--muted, #735a3c) !important;
+  font-size: 0.82rem !important;
+}
+
+.floating-listening-save.is-saving .floating-save-submit,
+#saveBtn.is-saving,
+#vizSaveLibraryBtn.is-saving,
+button[aria-busy="true"] {
+  opacity: 0.76 !important;
+  cursor: wait !important;
+}
+
+@media (max-width: 640px) {
+  .app {
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
+    padding-inline: 10px !important;
+  }
+  .screen-detail .listen-grid,
+  .listen-grid,
+  .detail-hero,
+  .detail-record-card,
+  .detail-edit-panel,
+  #listenDetails,
+  #listenEditPanel,
+  .song-focus-section,
+  .song-focus-player,
+  .song-focus-details-drawer,
+  .song-focus-queue-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    overflow-x: hidden !important;
+  }
+  .detail-record-card {
+    grid-template-columns: 1fr !important;
+    padding: 18px 16px !important;
+  }
+  .detail-record-card .genre-art {
+    width: 120px !important;
+    height: 120px !important;
+  }
+  .detail-record-card h2,
+  .song-focus-title {
+    max-width: 100% !important;
+    overflow-wrap: anywhere !important;
+    word-break: normal !important;
+  }
+  .detail-actions {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+    width: 100% !important;
+  }
+  .detail-actions .btn,
+  .detail-actions button,
+  .detail-actions a {
+    min-width: 0 !important;
+    width: 100% !important;
+    white-space: normal !important;
+    text-align: center !important;
+    justify-content: center !important;
+    padding-inline: 10px !important;
+  }
+  .detail-actions .spotify-play-btn,
+  .detail-actions .spotify-mini-play,
+  .detail-actions .btn.spotify-play-btn {
+    aspect-ratio: 1 / 1 !important;
+  }
+  input,
+  textarea,
+  select,
+  .song-focus-url-row input,
+  .genre-identity-import textarea {
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+  .row,
+  .editor-save-actions .row,
+  .track-card-edit-actions,
+  .song-focus-url-row,
+  .genre-identity-import-actions {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    width: 100% !important;
+  }
+  .row .btn,
+  .editor-save-actions .btn,
+  .track-card-edit-actions .btn,
+  .song-focus-url-row .btn,
+  .genre-identity-import-actions .btn {
+    width: 100% !important;
+    min-width: 0 !important;
+    white-space: normal !important;
+  }
+  .floating-listening-save {
+    left: 10px !important;
+    right: 10px !important;
+    bottom: 10px !important;
+    width: auto !important;
+    max-width: calc(100vw - 20px) !important;
+  }
+}
+
+/* Daily Genre v65 cache-bust marker */
+
+
+/* === Genre Identity v195: restored top description in Genre DNA === */
+.genre-identity-description-card {
+  display: grid;
+  gap: 6px;
+  margin: 0 0 10px;
+  padding: 12px 14px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.34);
+  border: 1px solid rgba(153, 102, 37, 0.18);
+}
+
+.genre-identity-description-card span {
+  color: var(--muted, #735a3c);
+  font-size: 0.68rem;
+  font-weight: 950;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.genre-identity-description-card p {
+  margin: 0;
+  color: var(--text, #22160d);
+  font-size: clamp(0.9rem, 1.25vw, 1rem);
+  line-height: 1.45;
+  font-weight: 700;
+}
