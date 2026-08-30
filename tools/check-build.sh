@@ -16,6 +16,32 @@ while IFS= read -r -d '' file; do
 done < <(find assets/js -type f -name '*.js' -print0)
 
 echo
+echo "== Minified assets in sync with source =="
+tmp_min_check="$(mktemp -d)"
+trap 'rm -rf "$tmp_min_check"' EXIT
+for f in assets/js/*.js; do
+  case "$f" in *.min.js) continue ;; esac
+  out="$tmp_min_check/$(basename "${f%.js}.min.js")"
+  npx --yes terser "$f" --compress --mangle --comments false -o "$out"
+  if ! diff -q "$out" "${f%.js}.min.js" > /dev/null 2>&1; then
+    echo "Stale: ${f%.js}.min.js does not match a fresh minify of $f"
+    echo "Run tools/build-min.sh and commit the result."
+    exit 1
+  fi
+done
+for f in assets/css/*.css; do
+  case "$f" in *.min.css) continue ;; esac
+  out="$tmp_min_check/$(basename "${f%.css}.min.css")"
+  npx --yes csso-cli "$f" --output "$out"
+  if ! diff -q "$out" "${f%.css}.min.css" > /dev/null 2>&1; then
+    echo "Stale: ${f%.css}.min.css does not match a fresh minify of $f"
+    echo "Run tools/build-min.sh and commit the result."
+    exit 1
+  fi
+done
+echo "All minified assets match their source."
+
+echo
 echo "== JSON validation =="
 node <<'NODE'
 const fs = require("fs");
