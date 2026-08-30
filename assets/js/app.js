@@ -8440,65 +8440,80 @@ async function loadData() {
     }, -1);
   }
 
-  // Start the lightweight SHA request alongside the Worker request. This keeps
-  // the freshness check without putting a second full JSON transfer on startup.
+  // Check the cheap SHA metadata and the local IndexedDB cache in parallel,
+  // before paying for any full data transfer. If the cached library's SHA
+  // still matches the current remote SHA, skip the Worker/GitHub fetch
+  // entirely -- the data changes at most once a day, but this runs on
+  // every page load.
   const githubMetadataPromise = fetchProductionDataMetadata();
+  const cachedEntryPromise = window.DailyGenreDataCache?.load?.() ?? Promise.resolve(null);
+  const [githubMetadataResult, cachedEntry] = await Promise.all([
+    githubMetadataPromise,
+    cachedEntryPromise
+  ]);
+  githubMetadata = githubMetadataResult;
 
-  try {
-    const res = await fetch(WORKER_URL, { method: 'GET', cache: 'no-store' });
-    const data = await res.json().catch(() => ({}));
-    if (res.ok && data.ok && Array.isArray(data.data)) {
-      workerLoaded = {
-        data: data.data,
-        sha: String(data.sha || ''),
-        source: 'worker'
-      };
-    } else {
-      console.warn('Production Worker data load did not return the expected shape; checking GitHub JSON.', data);
-    }
-  } catch (workerError) {
-    console.warn('Production Worker data load failed; checking GitHub JSON.', workerError);
-  }
+  const remoteShaForCache = String(githubMetadata?.sha || '');
+  const canUseCachedLibrary =
+    window.DailyGenreDataCache?.shouldUseCachedLibrary?.(cachedEntry, remoteShaForCache) ?? false;
 
-  githubMetadata = await githubMetadataPromise;
-
-  if (workerLoaded) {
-    loaded = workerLoaded;
-
-    const workerSha = String(workerLoaded.sha || '');
-    const githubSha = String(githubMetadata?.sha || '');
-
-    // A missing Worker SHA cannot be safely compared, so treat it like a
-    // mismatch. The expensive raw download occurs only on this exceptional path.
-    if (githubSha && (!workerSha || workerSha !== githubSha)) {
-      githubLoaded = await fetchProductionDataFallback(githubMetadata);
-
-      const workerCountForCheck = uniqueGenreCount(workerLoaded.data);
-      const githubCountForCheck = uniqueGenreCount(githubLoaded?.data);
-
-      if (githubLoaded && githubCountForCheck >= workerCountForCheck) {
-        loaded = githubLoaded;
-        console.warn('[Daily Genre] Worker revision differs from GitHub; using current GitHub data.', {
-          workerCount: workerCountForCheck,
-          githubCount: githubCountForCheck,
-          workerSha,
-          githubSha
-        });
-        showSaveToast('Worker revision was stale; loaded the current GitHub library.', false);
-      } else if (githubLoaded) {
-        console.warn('[Daily Genre] GitHub revision differed but returned fewer genres; keeping Worker data.', {
-          workerCount: workerCountForCheck,
-          githubCount: githubCountForCheck,
-          workerSha,
-          githubSha
-        });
-      }
-    }
+  if (canUseCachedLibrary) {
+    loaded = { data: cachedEntry.data, sha: cachedEntry.sha, source: 'cache' };
   } else {
-    // The Worker is unavailable or malformed, so pay the cost of the full raw
-    // GitHub download only as a true fallback.
-    githubLoaded = await fetchProductionDataFallback(githubMetadata);
-    loaded = githubLoaded;
+    try {
+      const res = await fetch(WORKER_URL, { method: 'GET', cache: 'no-store' });
+      const data = await res.json().catch(() => ({}));
+      if (res.ok && data.ok && Array.isArray(data.data)) {
+        workerLoaded = {
+          data: data.data,
+          sha: String(data.sha || ''),
+          source: 'worker'
+        };
+      } else {
+        console.warn('Production Worker data load did not return the expected shape; checking GitHub JSON.', data);
+      }
+    } catch (workerError) {
+      console.warn('Production Worker data load failed; checking GitHub JSON.', workerError);
+    }
+
+    if (workerLoaded) {
+      loaded = workerLoaded;
+
+      const workerSha = String(workerLoaded.sha || '');
+      const githubSha = String(githubMetadata?.sha || '');
+
+      // A missing Worker SHA cannot be safely compared, so treat it like a
+      // mismatch. The expensive raw download occurs only on this exceptional path.
+      if (githubSha && (!workerSha || workerSha !== githubSha)) {
+        githubLoaded = await fetchProductionDataFallback(githubMetadata);
+
+        const workerCountForCheck = uniqueGenreCount(workerLoaded.data);
+        const githubCountForCheck = uniqueGenreCount(githubLoaded?.data);
+
+        if (githubLoaded && githubCountForCheck >= workerCountForCheck) {
+          loaded = githubLoaded;
+          console.warn('[Daily Genre] Worker revision differs from GitHub; using current GitHub data.', {
+            workerCount: workerCountForCheck,
+            githubCount: githubCountForCheck,
+            workerSha,
+            githubSha
+          });
+          showSaveToast('Worker revision was stale; loaded the current GitHub library.', false);
+        } else if (githubLoaded) {
+          console.warn('[Daily Genre] GitHub revision differed but returned fewer genres; keeping Worker data.', {
+            workerCount: workerCountForCheck,
+            githubCount: githubCountForCheck,
+            workerSha,
+            githubSha
+          });
+        }
+      }
+    } else {
+      // The Worker is unavailable or malformed, so pay the cost of the full raw
+      // GitHub download only as a true fallback.
+      githubLoaded = await fetchProductionDataFallback(githubMetadata);
+      loaded = githubLoaded;
+    }
   }
 
   const workerCount = uniqueGenreCount(workerLoaded && workerLoaded.data);
@@ -8554,6 +8569,13 @@ async function loadData() {
     githubSha: String(githubMetadata?.sha || githubLoaded?.sha || '')
   };
   console.info('[Daily Genre] Data source selected', window.dailyGenreDataSource);
+
+  // Persist a freshly fetched (non-cache) library for next load's SHA check
+  // to short-circuit. Fire-and-forget: a cache write failure (quota,
+  // unsupported browser) should never affect the current session.
+  if (loaded.source !== 'cache' && loaded.sha) {
+    window.DailyGenreDataCache?.save?.(loaded.sha, loaded.data)?.catch?.(() => {});
+  }
 
   genres.forEach(g => {
     if (!Array.isArray(g.songs_listened)) g.songs_listened = g.songs_listened ? [].concat(g.songs_listened) : [];
