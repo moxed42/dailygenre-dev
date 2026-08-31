@@ -470,6 +470,7 @@ function switchScreen(name, options = {}) {
         requestAnimationFrame(() => window.scrollTo({ top: 0, left: 0, behavior: 'auto' }));
       }
 
+      window.dgRunPostHooks?.('switchScreen', name, options);
       return true;
     }
 
@@ -4707,6 +4708,7 @@ function loadListenScreen(genre, options = {}) {
             : '';
         listeningFocusMode = getListeningFocusMode(genre);
         refreshTopAlbumDiveButton();
+        window.dgRunPostHooks?.('loadListenScreen', genre, options);
         return true;
       }
 
@@ -4829,6 +4831,7 @@ function loadListenScreen(genre, options = {}) {
       markMountedListenScreenRendered(genre);
       // Existing saved artwork/metadata is displayed here. Missing metadata is enriched
       // only through the explicit Refresh Metadata action in Visuals.
+      window.dgRunPostHooks?.('loadListenScreen', genre, options);
     }
 
     function openPasswordModal(action) {
@@ -5290,6 +5293,7 @@ function loadListenScreen(genre, options = {}) {
       if (!options.preserveScroll || options.scrollTop) {
         requestAnimationFrame(() => window.scrollTo({ top: 0, left: 0, behavior: 'auto' }));
       }
+      window.dgRunPostHooks?.('openGenreDetail', genre, editMode, options);
       return true;
     }
 

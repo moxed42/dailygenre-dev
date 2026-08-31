@@ -342,16 +342,21 @@
     }, delay);
   }
 
-  function wrapHook(name, delay = 80) {
-    const original = window[name];
-    if (typeof original !== 'function' || original.__dgPerfV8Wrapped) return;
-    const wrapped = function dailyGenrePerfV8Hook(...args) {
-      const result = original.apply(this, args);
-      queueEnhance(delay);
-      return result;
-    };
-    wrapped.__dgPerfV8Wrapped = true;
-    window[name] = wrapped;
+  // Phase 3 of the architectural redesign: openGenreDetail, switchScreen, and
+  // loadListenScreen now call window.dgRunPostHooks(name, ...) at their own
+  // natural end (see assets/js/utils.js for the registry), so this just
+  // registers instead of capturing-and-reassigning the global. Same effect
+  // (queueEnhance fires after the base function's real work), one fewer
+  // fragile wrap layer. (renderListenDetails was never a real function in
+  // this app -- wrapHook's typeof-guard silently no-op'd on it before, so
+  // it's dropped here rather than carried forward as dead weight.)
+  let hooksRegistered = false;
+  function registerEnhanceHooks(delay = 80) {
+    if (hooksRegistered) return;
+    hooksRegistered = true;
+    ['openGenreDetail', 'switchScreen', 'loadListenScreen'].forEach((name) => {
+      window.dgRegisterPostHook?.(name, () => queueEnhance(delay));
+    });
   }
 
   function injectStyles() {
@@ -428,7 +433,7 @@
     window.addEventListener('dailygenre:data-ready', () => queueEnhance(80));
     window.addEventListener('load', () => queueEnhance(120), { once: true });
 
-    ['openGenreDetail', 'switchScreen', 'loadListenScreen', 'renderListenDetails'].forEach((name) => wrapHook(name, 90));
+    registerEnhanceHooks(90);
 
     window.DailyGenreToday = {
       ...(window.DailyGenreToday || {}),

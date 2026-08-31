@@ -112,6 +112,37 @@ function isGenreZanger(genre) {
       return status === 'veto' || status === 'zanger' || rating === 'zanger';
     }
 
+// Shared post-render hook registry -- Phase 3 of the architectural redesign.
+// Several patch files used to monkey-patch a base function (capture
+// window.someFunction, reassign it to a wrapper that calls the original then
+// does its own thing) to run code after that function finishes. That makes
+// load order load-bearing and every wrap adds another fragile layer. This
+// registry replaces that: a base function calls dgRunPostHooks('name', ...)
+// once at its own natural end, and any file that wants to react just calls
+// dgRegisterPostHook('name', fn) instead of wrapping anything. Hooks run in
+// registration order and a throwing hook can't break the base function or
+// any other hook.
+const dgPostRenderHooks = Object.create(null);
+
+function dgRegisterPostHook(name, fn) {
+  if (typeof fn !== 'function') return;
+  if (!dgPostRenderHooks[name]) dgPostRenderHooks[name] = [];
+  dgPostRenderHooks[name].push(fn);
+}
+
+function dgRunPostHooks(name, ...args) {
+  const hooks = dgPostRenderHooks[name];
+  if (!hooks || !hooks.length) return;
+  for (const hook of hooks) {
+    try { hook(...args); } catch (err) {
+      console.error(`[Daily Genre] Post-render hook for "${name}" failed`, err);
+    }
+  }
+}
+
+window.dgRegisterPostHook = dgRegisterPostHook;
+window.dgRunPostHooks = dgRunPostHooks;
+
 // Shared modal accessibility helper: traps Tab focus inside the modal,
 // closes on Escape, and restores focus to whatever triggered the modal
 // once it closes. Reused by the password-save modal and the Spotify
