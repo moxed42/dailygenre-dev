@@ -37,6 +37,9 @@ const SCRIPT_ORDER = [
   "listen-screen-cache.js",
   "archive-view-model-cache.js",
   "archive-render-reuse.js",
+  "core/review-queue.js",
+  "core/rankings-archive.js",
+  "core/data-load.js",
   "archive-progressive.js",
   "app.js",
 ];

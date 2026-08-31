@@ -60,8 +60,8 @@ test("Archive progressive state clamps to a smaller result set", () => {
   assert.equal(result.hasMore, false);
 });
 
-const appPath = path.join(__dirname, "..", "assets", "js", "app.js");
-const app = fs.readFileSync(appPath, "utf8");
+const { readAppSource } = require("./helpers/read-app-source.js");
+const app = readAppSource();
 
 test("Archive uses delegated open and playlist handlers", () => {
   assert.match(app, /function ensureArchiveListDelegation/);

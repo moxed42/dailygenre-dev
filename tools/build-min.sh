@@ -6,7 +6,7 @@ set -euo pipefail
 cd "$(git rev-parse --show-toplevel)"
 
 echo "== Minifying JS (terser) =="
-for f in assets/js/*.js; do
+for f in assets/js/*.js assets/js/core/*.js; do
   case "$f" in *.min.js) continue ;; esac
   out="${f%.js}.min.js"
   echo "  $f -> $out"

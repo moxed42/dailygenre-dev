@@ -1,10 +1,8 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
-const fs = require('node:fs');
-const path = require('node:path');
+const { readAppSource } = require('./helpers/read-app-source.js');
 
-const appPath = path.join(__dirname, '..', 'assets', 'js', 'app.js');
-const app = fs.readFileSync(appPath, 'utf8');
+const app = readAppSource();
 
 test('Archive uses measured adaptive desktop and mobile batch sizes', () => {
   assert.match(app, /const ARCHIVE_DESKTOP_BATCH_SIZE = 48;/);

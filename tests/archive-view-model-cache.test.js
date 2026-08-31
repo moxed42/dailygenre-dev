@@ -67,14 +67,8 @@ test('Archive view-model cache clears explicitly', () => {
   assert.equal(snapshot.counters.clears, 1);
 });
 
-const appPath = path.join(
-  __dirname,
-  '..',
-  'assets',
-  'js',
-  'app.js',
-);
-const app = fs.readFileSync(appPath, 'utf8');
+const { readAppSource } = require('./helpers/read-app-source.js');
+const app = readAppSource();
 
 test('Archive render uses the revisioned view-model cache', () => {
   assert.match(app, /createArchiveViewModelCache/);

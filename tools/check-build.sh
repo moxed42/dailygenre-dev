@@ -19,7 +19,7 @@ echo
 echo "== Minified assets in sync with source =="
 tmp_min_check="$(mktemp -d)"
 trap 'rm -rf "$tmp_min_check"' EXIT
-for f in assets/js/*.js; do
+for f in assets/js/*.js assets/js/core/*.js; do
   case "$f" in *.min.js) continue ;; esac
   out="$tmp_min_check/$(basename "${f%.js}.min.js")"
   npx --yes terser "$f" --compress --mangle --comments false -o "$out"

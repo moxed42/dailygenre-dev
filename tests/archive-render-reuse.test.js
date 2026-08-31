@@ -103,14 +103,8 @@ test('Archive DOM reuse invalidates explicitly', () => {
   assert.equal(reuse.snapshot().lastReason, 'uninitialized');
 });
 
-const appPath = path.join(
-  __dirname,
-  '..',
-  'assets',
-  'js',
-  'app.js',
-);
-const app = fs.readFileSync(appPath, 'utf8');
+const { readAppSource } = require('./helpers/read-app-source.js');
+const app = readAppSource();
 
 test('Archive rendering skips unchanged list and summary DOM work', () => {
   assert.match(app, /createArchiveRenderReuse/);
