@@ -146,23 +146,61 @@ the phased plan:
   confirmed Archive/Library, a genre detail page (Genre DNA definition card,
   "Check for similar genres"), and Game Room all work identically.
 
-### Remaining phases (not started)
+### Phase 3 — in progress
 
-- **Phase 3** — Replace monkey-patching with an explicit hook/extension-point
-  pattern in the remaining risky patch files: `studio-polish.js`,
-  `genre-identity.js` (wraps the router `switchScreen` itself, plus
-  `openGenreDetail`/`renderHistory`/`searchGenresInto`), `song-identity-roles.js`
-  (chains onto 7 functions including the *entire* save pipeline —
-  `prepareAndSaveCurrentGenre`, `saveLibraryUpdates`, `doSaveWithPassword`),
-  `genre-identity-alias-editor.js`, `songs.js` (wraps `loadListenScreen`,
-  `setSongReaction`), `listening-room.js` (wraps `filterGenres`,
-  `openCrateDig`, `openRandomListenedGenre` — explicitly documented in its own
-  header as needing app.js + songs.js + album-dive.js loaded first),
-  `library-polish.js`, `visuals.js`, `ranks-polish.js`,
-  `repair-bay-global-delete.js`. Highest value, highest risk — do one file at
-  a time, each with its own before/after characterization-test pass extending
-  Phase 0's suite, starting with the lowest-blast-radius file and ending with
-  `song-identity-roles.js`/`genre-identity.js`.
+**First step (done)** — Added a shared post-render hook registry to
+`assets/js/utils.js` (`dgRegisterPostHook`/`dgRunPostHooks`): a base function
+calls `dgRunPostHooks('name', ...)` once at its own natural end (every exit
+path, not just the common one), and anything that wants to react registers a
+callback instead of capturing `window.someFunction` and reassigning it.
+Wired into `switchScreen`, `openGenreDetail`, and `loadListenScreen` (all in
+`app.js`). Converted `library-polish.js`'s wrap of those same 3 functions to
+use the registry instead — one monkey-patch layer removed. Also discovered
+its 4th wrap target, `renderListenDetails`, was never a real function
+anywhere in the codebase (dead code, dropped). Relocated
+`genre-identity-alias-editor.js` → `core/genre-identity-alias-editor.js` too
+— turned out to override nothing at all, so it needed a Phase-2-style move,
+not a hook conversion.
+
+Two other files (`genre-identity.js`, `songs.js`) still wrap these same 3
+functions the old way — intentionally untouched this round; verified the new
+hooks still fire correctly through their wrap chains since they all call
+through to "the original" before doing their own thing.
+
+**Still remaining** — the harder, higher-value conversions:
+- `genre-identity.js` — wraps the router (`switchScreen`) itself, plus
+  `openGenreDetail`, `renderHistory`, `searchGenresInto`,
+  `dgStatsGenreFocusCandidates`.
+- `song-identity-roles.js` — chains onto **7 functions**, most of them the
+  entire save pipeline: `applySongsBulkAndSave`, `buildSongsBulkEditorText`,
+  `doSaveWithPassword`, `filterNewSongsAlreadyRepresentedByGenreIdentity`,
+  `finalizeListeningUpdatesBeforeSave`, `normalizeSongsListened`,
+  `overwriteSongsBulkAndSave`, `parseSongLinks`, `prepareAndSaveCurrentGenre`,
+  `saveLibraryUpdates`. Highest blast radius of any remaining file.
+- `songs.js` — wraps `loadListenScreen` (already hook-enabled, so converting
+  this file just means swapping its wrap for a registration) and
+  `setSongReaction`.
+- `listening-room.js` — wraps `filterGenres`, `openCrateDig`,
+  `openRandomListenedGenre` (and depends on `filterGenresForArchive`/
+  `openAdjacentGenre`, which `library-parent-category-filter.js`/
+  `listened-history-navigation.js` define — a real cross-file dependency
+  traced during Phase 2, must keep working).
+- `studio-polish.js` — wraps `renderReview`.
+- `ranks-polish.js` — wraps `renderRankings`, `moveRank`.
+- `repair-bay-global-delete.js` — mostly defines new destructive-delete
+  handlers rather than overriding existing ones; lower priority to convert.
+- `visuals.js` (2,824 lines) — turned out to override **nothing** on
+  inspection (only defines one new diagnostic global) — not really Phase-3
+  material at all, more a Phase-1-style "this file is huge, could be split
+  later" candidate. Deprioritized.
+
+**Remaining phases after Phase 3**:
+
+- **Phase 3 (continued)** — Convert the harder files listed above, one at a
+  time, each with its own before/after characterization-test pass extending
+  Phase 0's suite, starting with the lowest-blast-radius file
+  (`studio-polish.js`/`ranks-polish.js`) and ending with the two riskiest
+  (`song-identity-roles.js`, `genre-identity.js`).
 - **Phase 4 (optional)** — Real ES module boundaries (`<script type="module">`,
   explicit `export`/`import`) once Phase 3's hook pattern has replaced the
   reassignment-based patches. GitHub Pages serves ES modules natively, no
