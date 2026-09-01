@@ -551,6 +551,31 @@ before any module boundary could be drawn around it.
   styling can change; that horizontal-strip-with-visible-neighbors mechanic
   cannot go away.
 
+  **Foundation work (done)**:
+  - **Design tokens** (`d396f73`): consolidated 313 hardcoded hex colors
+    across 6 CSS files into `var(--token)` references against the existing
+    Retro Hi-Fi `:root` token set — a pure de-duplication refactor
+    (`tools/consolidate-tokens.js`), byte-identical rendered colors, verified
+    live. Also removed the specific spinner CSS properties in `styles.css`
+    that were fully dead (shadowed by the later Retro Hi-Fi rules on the
+    same selectors), keeping every still-live layout property intact.
+  - **Breakpoint scale — documented, not retrofitted**: investigating
+    turned up ~28 distinct breakpoint widths in use across the CSS files
+    (460–1120px), each tuned ad hoc per-component with no shared scale ever
+    established. Forcing them all onto one scale isn't a value-preserving
+    refactor like the token pass — it risks shifting real layout behavior
+    at those exact viewport widths, across files including the
+    10,534-line `library-polish.css`, which would need a full
+    component-by-component re-verification pass to be safe. Decided (with
+    the user) not to retrofit existing breakpoints. Instead, a 3-tier scale
+    (480px phone / 768px tablet / 1024px constrained desktop) is documented
+    as a convention in `styles.css` (right after the `:root` token block) —
+    any CSS written or substantially reworked as part of the rest of Phase 5
+    should use it instead of picking a new ad hoc value; existing working
+    breakpoints are left alone unless the screen they belong to is being
+    actively redesigned anyway (at which point they get modernized as part
+    of that pass, verified live at the time).
+
 ### Then, whenever the redesign work is deemed ready
 
 **Port everything back to `moxed42/dailygenre`** (branch

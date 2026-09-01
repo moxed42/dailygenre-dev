@@ -662,6 +662,21 @@
       --radius-lg:28px;
     }
 
+    /* Phase 5 breakpoint standard (documented, not retrofitted): existing
+       @media widths across the CSS files were never on a shared scale --
+       ~28 distinct values are in use today (460-1120px), each tuned ad hoc
+       to whatever component it was written for. Retrofitting all of them
+       onto one scale risks shifting real layout behavior at those exact
+       viewport widths without a full re-verification pass per component, so
+       existing breakpoints are intentionally left alone. Going forward, any
+       CSS written or substantially reworked as part of the Phase 5 redesign
+       should use this 3-tier scale instead of picking a new ad hoc value:
+         - max-width: 480px  (phone)
+         - max-width: 768px  (tablet / narrow desktop)
+         - max-width: 1024px (constrained desktop)
+       CSS custom properties can't be used inside @media conditions, so this
+       is a documented convention, not an enforced token. */
+
     body {
       background:
         radial-gradient(circle at 10% 0%, rgba(255,224,161,.16), transparent 30%),
