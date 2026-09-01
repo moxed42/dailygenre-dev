@@ -517,10 +517,30 @@
     }
 
     const ARCHIVE_RENDER_BATCH_SIZE = archiveRenderBatchSize();
-    const archiveProgressiveState =
-      window.DailyGenreArchiveProgressive?.createArchiveProgressiveState?.({
-        batchSize: ARCHIVE_RENDER_BATCH_SIZE,
-      }) || null;
+    // Phase 5 fix: this used to be computed once, synchronously, at this
+    // file's own top level -- but archive-progressive.js (which defines
+    // window.DailyGenreArchiveProgressive) loads AFTER core/rankings-archive.js
+    // in index.html's real script order, so window.DailyGenreArchiveProgressive
+    // was always undefined at this point and archiveProgressiveState was
+    // permanently null. That silently disabled all batching: every Archive
+    // render fell through to the "no progressive state" fallback (rendered:
+    // items.length), i.e. the FULL genre list rendered as real DOM every
+    // single time regardless of ARCHIVE_RENDER_BATCH_SIZE -- confirmed live,
+    // 1036 genres rendering ~2400 DOM nodes and a ~135,000px tall screen.
+    // Lazily creating it on first real use (well after all scripts have
+    // loaded) fixes this without depending on script tag order at all.
+    let archiveProgressiveStateInstance;
+    let archiveProgressiveStateInitialized = false;
+    function archiveProgressiveState() {
+      if (!archiveProgressiveStateInitialized) {
+        archiveProgressiveStateInitialized = true;
+        archiveProgressiveStateInstance =
+          window.DailyGenreArchiveProgressive?.createArchiveProgressiveState?.({
+            batchSize: ARCHIVE_RENDER_BATCH_SIZE,
+          }) || null;
+      }
+      return archiveProgressiveStateInstance;
+    }
     let archiveRenderedItems = [];
     const archiveProgressiveRenderDiagnostics = {
       renderPasses: 0,
@@ -620,7 +640,7 @@
       ensureArchiveListDelegation(list);
 
       const snapshot =
-        archiveProgressiveState?.prepare(signature, items.length) || {
+        archiveProgressiveState()?.prepare(signature, items.length) || {
           batchSize: items.length,
           signature,
           total: items.length,
@@ -715,12 +735,13 @@
 
     function loadMoreArchiveEntries() {
       const list = document.getElementById('historyList');
-      if (!list || !archiveProgressiveState) return false;
+      const progressiveState = archiveProgressiveState();
+      if (!list || !progressiveState) return false;
 
-      const before = archiveProgressiveState.snapshot();
+      const before = progressiveState.snapshot();
       if (!before.hasMore) return false;
 
-      const after = archiveProgressiveState.loadMore();
+      const after = progressiveState.loadMore();
       const nextItems = (archiveCurrentItems || []).slice(
         before.rendered,
         after.rendered,
@@ -775,7 +796,7 @@
     window.loadMoreArchiveEntries = loadMoreArchiveEntries;
     window.dailyGenreArchiveProgressiveDiagnostics = () => {
       const state =
-        archiveProgressiveState?.snapshot?.() || {
+        archiveProgressiveState()?.snapshot?.() || {
           batchSize: null,
           signature: '',
           total: (archiveCurrentItems || []).length,
@@ -790,7 +811,7 @@
         };
 
       return {
-        installed: Boolean(archiveProgressiveState),
+        installed: Boolean(archiveProgressiveState()),
         strategy: 'adaptive-batch-48-32-delegated',
         desktopBatchSize: ARCHIVE_DESKTOP_BATCH_SIZE,
         mobileBatchSize: ARCHIVE_MOBILE_BATCH_SIZE,
@@ -847,7 +868,7 @@
 
       if (!items.length) {
         const emptySnapshot =
-          archiveProgressiveState?.prepare(
+          archiveProgressiveState()?.prepare(
             archiveSignature,
             0,
           ) || {
