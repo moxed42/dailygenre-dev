@@ -597,12 +597,34 @@ before any module boundary could be drawn around it.
     failed image load (CDN hiccup, offline, blocked request) rendered its
     alt text spilling past the rounded box -- added `overflow:hidden` plus a
     smaller centered fallback font, byte-identical when images load fine.
+  - **Library (`cf44d51`)**: the biggest find of Phase 5 so far -- not
+    cosmetic, a real dead-batching bug. Switching to Archive with the full
+    library rendered EVERY genre as real DOM immediately (2431 elements, a
+    ~135,000px tall screen) instead of the intended 48-item (desktop) /
+    32-item (mobile) batch. Root cause: `core/rankings-archive.js` computed
+    `archiveProgressiveState` at its own file's top level, synchronously,
+    via `window.DailyGenreArchiveProgressive?.createArchiveProgressiveState`
+    -- but `archive-progressive.js` (which defines that global) loads
+    *after* `core/rankings-archive.js` in `index.html`'s real script order,
+    so the lookup always returned `undefined`, `archiveProgressiveState` was
+    permanently `null`, and every render silently fell through to the
+    "no state" fallback (`rendered: items.length`). This has been broken in
+    production since whenever these files were split apart, unnoticed
+    because neither existing archive-progressive test file replicated the
+    real script order (one only regex-matches source text against the
+    fallback path; the other unit-tests `archive-progressive.js` in
+    isolation). Fixed by making `archiveProgressiveState` a lazily
+    -initialized singleton (computed on first real use, not at parse time)
+    -- robust to load order rather than a reorder-and-hope fix. New test:
+    `tests/archive-progressive-load-order.test.js` (2 tests, confirmed to
+    fail against the old code and pass against the fix, using the harness's
+    `extraScripts` option to replicate the real load order).
 
-  Each screen: verified with `npm test` (134/134, the one pre-existing
-  rAF-timing flake in `router-switch-screen.test.js` reproduced and cleared
-  on isolated re-run as in every earlier phase), `check-build.sh`, and a
-  live local-server + headless-Chromium pass at phone/tablet/desktop widths
-  before committing.
+  Each screen: verified with `npm test` (136/136 as of the Library step, the
+  one pre-existing rAF-timing flake in `router-switch-screen.test.js`
+  reproduced and cleared on isolated re-run as in every earlier phase),
+  `check-build.sh`, and a live local-server + headless-Chromium pass at
+  phone/tablet/desktop widths before committing.
 
 ### Then, whenever the redesign work is deemed ready
 
