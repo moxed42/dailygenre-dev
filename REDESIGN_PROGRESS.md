@@ -484,15 +484,62 @@ whole codebase reassignment-free.
 1. Optionally sweep `repair-bay-global-delete.js` and `visuals.js` for any
    overrides that got missed — they were deprioritized rather than
    confirmed clean.
-2. Decide on Phase 4 (ES modules) or move straight to Phase 5 (the UX/visual
-   redesign) — see below.
+2. Phase 4 was evaluated and declined — see below. Part 2 (the architectural
+   redesign) is considered **complete as of Phase 3**. Phase 5 is next.
+
+### Phase 4 — evaluated, declined
+
+Investigated properly (an AST-based cross-file dependency analyzer,
+`tools/analyze-globals.js`, added as a one-off tool using `acorn` — a
+second test-only devDependency alongside `jsdom`) before writing any
+conversion code. Two findings killed it:
+
+1. This codebase's dependency graph is genuinely **circular**, not a DAG —
+   `app.js` calls into `spotify.js`/`review-queue.js`/`rankings-archive.js`,
+   which call back into `app.js` (which loads after them). Real ES modules
+   resolve imports statically and evaluate the graph in dependency order;
+   with cycles this deep plus top-level side-effecting code (`bootApp()`
+   runs immediately at module scope), a full conversion risks silently
+   reordering initialization.
+2. A safer-looking scoped subset (13 files with an acyclic dependency
+   prefix: `utils.js`, `normalize.js`, `data-cache.js`, `performance.js`,
+   `screen-cache.js`, `listen-screen-cache.js`, `song-index.js`,
+   `library-index.js`, `song-reaction.js`, `archive-view-model-cache.js`,
+   `archive-render-reuse.js`, `config.js`, `genre-data.js`) doesn't hold up
+   either, for the opposite reason in each half:
+   - 10 of those files (`normalize.js` through `archive-render-reuse.js`)
+     are already self-contained IIFE modules exposing one namespaced
+     `window.DailyGenreXxx` object each, with dedicated CommonJS
+     `require()`-based unit tests. They're already architecturally sound —
+     converting their syntax to real `export`/`import` would gain nothing
+     and would break those 10 test files (Node treats a `.js` file with
+     `export` syntax as a CommonJS syntax error unless the whole package
+     is declared an ES module, which would break every other classic-script
+     test too).
+   - `utils.js` and `config.js` are the opposite: `config.js` alone declares
+     ~48 top-level `let`/`const` bindings (`genres`, `currentGenre`,
+     `archiveView`, `libraryUpdatesPending`, etc.) read *and reassigned* as
+     bare identifiers from dozens of places across `app.js` and every patch
+     file — relying on shared lexical scope, the same "lexical, not
+     `window.*`" behavior Phase 0 already flagged. Making `config.js` a real
+     module would break every classic-script call site that does
+     `genres = x` or reads `currentGenre` bare, since modules don't share
+     lexical scope with classic scripts. Fixing that means rewriting every
+     such call site to explicit getters/setters — a large, high-risk,
+     behavior-changing effort on its own, not a mechanical Phase 4 step.
+
+**Decision (confirmed with the user)**: decline Phase 4 outright rather than
+ship a cosmetic no-op (the 10 IIFE files) or a disguised high-risk rewrite
+(the `config.js`/`utils.js` state model). The benefit — mostly
+readability/tooling for a solo-maintained static site with no build step —
+doesn't justify a refactor of comparable size to Phases 0–3 combined. If
+ever revisited, it would need to start with replacing `config.js`'s bare
+`let`/`const` globals with explicit getter/setter functions first (its own
+characterization-test pass, same discipline as Phase 0), as a prerequisite
+before any module boundary could be drawn around it.
 
 **Remaining phases**:
 
-- **Phase 4 (optional)** — Real ES module boundaries (`<script type="module">`,
-  explicit `export`/`import`) once Phase 3's hook pattern has replaced the
-  reassignment-based patches. GitHub Pages serves ES modules natively, no
-  bundler needed. Evaluate after Phase 3, not a commitment made now.
 - **Phase 5** — UX/visual redesign: mobile-friendly, consistent across
   desktop browsers. The user explicitly gave creative latitude here (layout,
   spacing, even color/typography can change if it improves usability) —
