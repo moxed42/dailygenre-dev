@@ -692,6 +692,20 @@ before any module boundary could be drawn around it.
     Studio Workbench overview, Routing Desk, Genre Identity, Repair Bay
     (including its expanded metadata/artwork repair forms), and QA Lab
     checked out clean at phone/tablet/desktop.
+  - **Ranks (no changes needed) -- last screen, Phase 5's screen-by-screen
+    pass is complete**: genre thumbnails (already covered by the
+    `.ranking-artwork` fix from the Today step), star-tier chips, rating
+    buttons, and up/down move-rank arrows all wrap correctly on mobile with
+    no truncation or overflow. One real characteristic worth noting, not
+    fixing: the screen renders its full ranked list unpaginated (~241
+    genres, ~5,500 DOM nodes in this dev dataset) -- superficially similar
+    to the Library bug, but confirmed via live timing (~62ms render) this
+    isn't a broken/regressed feature the way Library's batching was; Ranks
+    never had any batching code to begin with, so a long full-list page is
+    this screen's actual designed behavior (ranking is inherently a
+    full-list-ordering task), not a dead feature to restore. Flagged as a
+    possible future enhancement (a "load more per tier" control) rather
+    than building a new pagination system unprompted.
 
   Each screen: verified with `npm test` (136/136 as of the Library step, the
   one pre-existing rAF-timing flake in `router-switch-screen.test.js`
@@ -699,7 +713,14 @@ before any module boundary could be drawn around it.
   `check-build.sh`, and a live local-server + headless-Chromium pass at
   phone/tablet/desktop widths before committing.
 
-### Then, whenever the redesign work is deemed ready
+  **All 9 screens done**: Spin, Today, Library, Dig, Album Dive, Game Room,
+  Stats, Studio, Ranks -- in tab order, each verified live. Real bugs fixed:
+  the Spin marker obscuring text, two mobile-nav/artwork bugs on Today, the
+  dead Archive batching (the biggest find), two more artwork-overflow spots
+  on Dig, two more on Album Dive (one via a dead-CSS-selector red herring),
+  a truncating month selector on Stats, and the last artwork-overflow spot
+  on Studio. Game Room and Ranks needed no changes after thorough live
+  checks -- reported as such rather than manufacturing busywork.
 
 **Port everything back to `moxed42/dailygenre`** (branch
 `claude/github-daily-genre-context-lc5xej`): re-apply the verified diffs,
