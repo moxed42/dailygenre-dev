@@ -400,26 +400,55 @@ pass confirmed clicking the Dig tab's Crate Dig button opens a new random
 listened genre (document title changed), with both `listen-experience-mode`
 and `dc-discovery-console` CSS classes applied and no console errors.
 
+**Seventh step (done) — `studio-polish.js`'s `renderReview` wrap**:
+confirmed the override-hook registry (added for the save pipeline) was
+exactly the right tool. `renderReview()` (`core/review-queue.js`) now calls
+`dgRunOverrideHooks('renderReview')` as its literal first line — if
+Studio's text/paste guard is active, the registered override hook does the
+old early-exit's exact work itself (`captureInboxDraft()` → `apply()` →
+`restoreInboxDraft(draft)`) and returns `{ result: null }`, so the base
+never runs its own render logic at all, matching the original bypass
+exactly. Otherwise the override hook returns `undefined` and the base
+proceeds through its now-added `dgRunPreHooks`/`dgRunPostHooks` calls (at
+both of its exit points — the "no mount" early return and the normal
+fall-through). `studio-polish.js` registers a pre-hook (capture the inbox
+draft + section state, add the `studio-rendering` class) and a post-hook
+(the mobile-deferred-or-immediate `finishApply()`), handing state between
+them with the same small-stack pattern used for the shape-2 conversions
+earlier in Phase 3.
+
+New tests: `tests/studio-polish-render-review.test.js` (2 tests) — one
+confirming the normal path still produces the base's own markup
+(`.review-stat-grid`) alongside Studio's `apply()` output
+(`.studio-workbench`), one confirming the bypass path (Studio text entry
+active) skips the base's markup entirely while `apply()` still runs.
+Verified: 131/131 tests pass, `check-build.sh` passes, and a live
+local-server + headless-Chromium pass confirmed the normal Studio/Review
+render (stat grid, hero, workbench class, no console errors) — the
+text-entry-bypass path is real-browser-timing-sensitive to reproduce
+externally (a focused textarea can lose focus to Studio's own periodic
+re-render before the check runs) so it's covered by the jsdom test instead,
+which controls focus deterministically.
+
 **Natural next steps for whoever continues this**:
-1. The two shape-3 files (`studio-polish.js`'s early-exit guard,
-   `ranks-polish.js`'s full-reimplementation of `renderRankings`/`moveRank`)
-   are what's left of the hard cases. The new override-hook registry
-   (`dgRegisterOverrideHook`/`dgRunOverrideHooks`, added this step) is very
-   likely the right tool for `studio-polish.js`'s conditional early-exit —
-   check that first before reaching for anything new. `ranks-polish.js`'s
-   *full reimplementation* (not a wrap around any original at all) is closer
-   to `parseSongLinks`/`buildSongsBulkEditorText` above: it may not need
-   converting at all, just confirming it's a direct-ownership case like
-   those two rather than something that should be hook-ified.
+1. `ranks-polish.js`'s wraps of `renderRankings`/`moveRank` are the last
+   item. `renderRankingsPolished` was classified as a **full
+   reimplementation**, not a thin wrapper — closer to
+   `parseSongLinks`/`buildSongsBulkEditorText` (direct ownership, nothing to
+   hook onto) than to `renderReview`'s conditional-bypass shape. Confirm
+   that classification by reading the actual wrap body before deciding
+   whether any conversion is needed at all, same as this step did for
+   `filterGenresForArchive` (found dead) and for `renderReview` (found a
+   real override-hook case) — don't assume either verdict without checking.
 
 **Remaining phases after Phase 3**:
 
-- **Phase 3 (continued)** — Convert the two remaining shape-3 files
-  (`studio-polish.js`/`ranks-polish.js`), each with its own before/after
-  characterization-test pass extending Phase 0's suite. Every other file
-  originally called out (`genre-identity.js`, `song-identity-roles.js`,
-  `listening-room.js`) is now fully converted (or, for the one genuinely
-  dead wrap found in `listening-room.js`, confirmed to need no conversion).
+- **Phase 3 (continued)** — Investigate `ranks-polish.js`'s
+  `renderRankings`/`moveRank` wraps (the last unclassified case) and convert
+  if it turns out to need it. Every other file originally called out
+  (`genre-identity.js`, `song-identity-roles.js`, `listening-room.js`,
+  `studio-polish.js`) is now fully converted (or, for the one genuinely dead
+  wrap found in `listening-room.js`, confirmed to need no conversion).
 - **Phase 4 (optional)** — Real ES module boundaries (`<script type="module">`,
   explicit `export`/`import`) once Phase 3's hook pattern has replaced the
   reassignment-based patches. GitHub Pages serves ES modules natively, no
@@ -446,8 +475,8 @@ Nothing from Part 1 or Part 2 has been ported yet.
 
 ## How to verify anything in this repo
 
-- `npm test` (`node --test tests/*.test.js`) — 129 tests as of Phase 3's
-  sixth step.
+- `npm test` (`node --test tests/*.test.js`) — 131 tests as of Phase 3's
+  seventh step.
 - `bash tools/check-build.sh` — syntax check, minified-asset sync, JSON
   validity, cache-bust consistency.
 - Local static-server + headless-Chromium screenshots is the standard way

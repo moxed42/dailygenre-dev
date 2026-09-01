@@ -2162,11 +2162,22 @@
     }
   }
 
+  // renderReview() (core/review-queue.js) now calls
+  // dgRunOverrideHooks('renderReview') as its literal first line, and
+  // dgRunPreHooks/dgRunPostHooks around its real logic. This used to be a
+  // straight monkey-patch, but its early-exit branch (skip the original
+  // entirely while Studio's text/paste guard is active, running apply()
+  // instead) is a genuine bypass -- not expressible as a plain pre/post
+  // wrap -- so it needed the override-hook registry (added for
+  // song-identity-roles.js's save-pipeline conversion) rather than a
+  // simple hook conversion.
   function wrapRenderReview() {
-    const original = window.renderReview;
-    if (typeof original !== "function" || original.__studioWrapped)
-      return false;
-    function wrappedRenderReview() {
+    if (window.__dgStudioRenderReviewWrapped) return false;
+    window.__dgStudioRenderReviewWrapped = true;
+
+    const pendingRenderState = [];
+
+    window.dgRegisterOverrideHook?.("renderReview", () => {
       // Do not rebuild Studio while the Song Inbox/editor is actively receiving keyboard paste.
       // Ctrl/Cmd+V fires before the textarea value changes; replacing the textarea in that
       // window makes the paste appear as a flash and then disappear. Context-menu paste did
@@ -2175,13 +2186,21 @@
         const draft = captureInboxDraft();
         apply();
         restoreInboxDraft(draft);
-        return null;
+        return { result: null };
       }
+      return undefined;
+    });
+
+    window.dgRegisterPreHook?.("renderReview", () => {
       const draft = captureInboxDraft();
       const mount = document.getElementById("reviewContent");
       const sectionState = captureStudioSectionState(mount);
       if (mount) mount.classList.add("studio-rendering");
-      const result = original.apply(this, arguments);
+      pendingRenderState.push({ draft, mount, sectionState });
+    });
+
+    window.dgRegisterPostHook?.("renderReview", () => {
+      const { draft, mount, sectionState } = pendingRenderState.pop() || {};
       const finishApply = () => {
         apply();
         restoreStudioSectionState(mount, sectionState);
@@ -2195,11 +2214,8 @@
       } else {
         finishApply();
       }
-      return result;
-    }
-    wrappedRenderReview.__studioWrapped = true;
-    window.__dgStudioRenderReviewWrapped = true;
-    window.renderReview = wrappedRenderReview;
+    });
+
     return true;
   }
 

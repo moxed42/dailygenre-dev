@@ -1714,8 +1714,14 @@ function blockSaveIfDuplicateGenres() {
       renderReview();
     }
     function renderReview() {
+      const override = window.dgRunOverrideHooks?.('renderReview');
+      if (override) return override.result;
+      window.dgRunPreHooks?.('renderReview');
       const mount = document.getElementById('reviewContent');
-      if (!mount) return;
+      if (!mount) {
+        window.dgRunPostHooks?.('renderReview');
+        return;
+      }
       const stats = pendingReviewStats();
       const manualRows = stats.rows.filter(row => row.status !== 'routable');
       const queuedRows = collectQueuedPendingNominationRows();
@@ -1756,6 +1762,7 @@ function blockSaveIfDuplicateGenres() {
           </div>
           ${combinedRows.length ? `<datalist id="reviewPendingMoveGenreOptions">${reviewGenreDatalistOptions()}</datalist><div class="review-list-scroll" data-review-pending-total="${combinedRows.length}" data-review-pending-visible="${visiblePendingRows.length}">${visiblePendingRows.map(item => item.type === 'queued' ? reviewQueuedPendingRowHtml(item.row) : reviewManualPendingRowHtml(item.row)).join('')}</div>${hiddenPendingRows ? `<div class="review-load-next-wrap"><button type="button" class="btn btn-primary" onclick="loadNextReviewPendingQueue(25)">Load next 25 pending nominations</button><span class="small">${hiddenPendingRows} more remain after this visible batch.</span></div>` : ''}` : `<div class="viz-empty">No songs are currently queued as pending nominations.</div>`}
         </div>`
+      window.dgRunPostHooks?.('renderReview');
     }
 
     function runPendingTagCleanupFromReview() {
