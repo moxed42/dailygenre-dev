@@ -162,37 +162,80 @@ anywhere in the codebase (dead code, dropped). Relocated
 — turned out to override nothing at all, so it needed a Phase-2-style move,
 not a hook conversion.
 
-Two other files (`genre-identity.js`, `songs.js`) still wrap these same 3
-functions the old way — intentionally untouched this round; verified the new
-hooks still fire correctly through their wrap chains since they all call
-through to "the original" before doing their own thing.
+**Second step (done)** — Surveyed every remaining patch file's *actual wrap
+body*, not just which functions it touches — this mattered a lot: counting
+overrides was a poor proxy for conversion difficulty. Found 3 distinct
+wrapping shapes:
+1. **Simple post-hook** — call the original unconditionally, then do extra
+   work. Directly convertible.
+2. **Before-and-after wrap** — does real work both before *and* after
+   calling the original. Not convertible with a post-hooks-only registry;
+   needs a pre-hook mechanism too (not built yet).
+3. **Early-exit guard / full replacement** — sometimes skips calling the
+   original entirely, or reimplements the whole thing rather than wrapping
+   it. Not a hook-registry candidate at all; would need bigger surgery.
 
-**Still remaining** — the harder, higher-value conversions:
-- `genre-identity.js` — wraps the router (`switchScreen`) itself, plus
-  `openGenreDetail`, `renderHistory`, `searchGenresInto`,
-  `dgStatsGenreFocusCandidates`.
+Converted 2 of `genre-identity.js`'s wraps (both shape 1, both already
+hook-enabled from the first step): `switchScreen` (pushes browser history
+after a successful screen switch) and `loadListenScreen` (injects the Genre
+DNA card, via `patchListenLoadForDna`). Verified live, including the
+trickier back-button path: click Library → Ranks → browser Back correctly
+pops the `#screen=` hash *and* switches the screen back (the `popstate`
+handler still calls `switchScreen`, which still fires the converted hook).
+Left `genre-identity.js`'s other 2 wraps (`openGenreDetail` — shape 2,
+does pushState *before* calling original and replaceState *after*;
+`renderHistory` — shape 1, but `renderHistory` isn't hook-enabled yet since
+it lives in `core/rankings-archive.js`) and `dgStatsGenreFocusCandidates`
+untouched.
+
+**Classified the rest while investigating**:
+- `studio-polish.js`'s wrap of `renderReview` is **shape 3** — an early-exit
+  branch skips calling the original entirely while Studio's text/paste
+  guard is active, running its own `apply()` instead. Not a simple
+  conversion; would change real behavior if done naively.
+- `ranks-polish.js`'s wraps of `renderRankings`/`moveRank` are closer to
+  **shape 3** too — `renderRankingsPolished` is a full reimplementation, not
+  a thin wrapper around the original.
 - `song-identity-roles.js` — chains onto **7 functions**, most of them the
-  entire save pipeline: `applySongsBulkAndSave`, `buildSongsBulkEditorText`,
+  entire save pipeline (`applySongsBulkAndSave`, `buildSongsBulkEditorText`,
   `doSaveWithPassword`, `filterNewSongsAlreadyRepresentedByGenreIdentity`,
   `finalizeListeningUpdatesBeforeSave`, `normalizeSongsListened`,
   `overwriteSongsBulkAndSave`, `parseSongLinks`, `prepareAndSaveCurrentGenre`,
-  `saveLibraryUpdates`. Highest blast radius of any remaining file.
-- `songs.js` — wraps `loadListenScreen` (already hook-enabled, so converting
-  this file just means swapping its wrap for a registration) and
-  `setSongReaction`.
+  `saveLibraryUpdates`) — not yet individually classified by shape; highest
+  blast radius of any remaining file, inspect each wrap body before touching
+  anything here.
+- `songs.js` — wraps `loadListenScreen` (shape 1, already hook-enabled —
+  same easy conversion as genre-identity.js's) and `setSongReaction` (shape
+  1 too, confirmed while surveying — calls original unconditionally, then
+  restores scroll position; `setSongReaction` isn't hook-enabled yet).
 - `listening-room.js` — wraps `filterGenres`, `openCrateDig`,
-  `openRandomListenedGenre` (and depends on `filterGenresForArchive`/
-  `openAdjacentGenre`, which `library-parent-category-filter.js`/
-  `listened-history-navigation.js` define — a real cross-file dependency
-  traced during Phase 2, must keep working).
-- `studio-polish.js` — wraps `renderReview`.
-- `ranks-polish.js` — wraps `renderRankings`, `moveRank`.
+  `openRandomListenedGenre`; shape not yet checked. Also depends on
+  `filterGenresForArchive`/`openAdjacentGenre`, which
+  `library-parent-category-filter.js`/`listened-history-navigation.js`
+  define — a real cross-file dependency traced during Phase 2, must keep
+  working regardless of what happens here.
 - `repair-bay-global-delete.js` — mostly defines new destructive-delete
   handlers rather than overriding existing ones; lower priority to convert.
-- `visuals.js` (2,824 lines) — turned out to override **nothing** on
-  inspection (only defines one new diagnostic global) — not really Phase-3
-  material at all, more a Phase-1-style "this file is huge, could be split
-  later" candidate. Deprioritized.
+- `visuals.js` (2,824 lines) — overrides **nothing** on inspection (only
+  defines one new diagnostic global) — not really Phase-3 material at all,
+  more a Phase-1-style "this file is huge, could be split later" candidate.
+  Deprioritized.
+
+**Natural next steps for whoever continues this**:
+1. Easiest available win: convert `songs.js`'s `loadListenScreen` wrap (shape
+   1, already hook-enabled) — same pattern as the two just done.
+2. Add a `dgRunPostHooks('renderHistory', ...)` call to `renderHistory`'s
+   own end (in `core/rankings-archive.js`), then convert `genre-identity.js`'s
+   `renderHistory` wrap and check whether anything else wraps it too.
+3. Add `dgRunPostHooks('setSongReaction', ...)` to `setSongReaction`'s own
+   end, then convert `songs.js`'s wrap of it.
+4. Only after those: consider whether the registry needs a pre-hook
+   counterpart (`dgRegisterPreHook`/`dgRunPreHooks`) to handle shape-2 files
+   like `openGenreDetail`'s wrap — a real design decision, not just more of
+   the same pattern, so worth deciding deliberately rather than bolting on.
+5. `song-identity-roles.js` (the save pipeline) and the two shape-3 files
+   (`studio-polish.js`, `ranks-polish.js`) are the hardest remaining work —
+   tackle last, one at a time, each with new characterization tests first.
 
 **Remaining phases after Phase 3**:
 
