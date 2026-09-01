@@ -821,6 +821,24 @@
       }
     }
 
+    .save-status-chip {
+      cursor:pointer;
+      color:#2a1608;
+      background:linear-gradient(180deg, #ffd77a, #e8a63a);
+      border:1px solid rgba(120,72,12,.55);
+      box-shadow:0 10px 22px rgba(0,0,0,.22);
+      font-family:inherit;
+    }
+
+    .save-status-chip:hover {
+      filter:brightness(1.05);
+    }
+
+    .save-status-chip[aria-busy="true"] {
+      cursor:wait;
+      opacity:.75;
+    }
+
     .tab-btn {
       border-radius:14px;
       color:#fff5df;

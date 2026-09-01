@@ -284,11 +284,7 @@
             );
           });
         },
-        isAllowed: () => {
-          if (libraryUpdatesPending) return false;
-          const floatingSave = document.getElementById('floatingListeningSave');
-          return !floatingSave || floatingSave.classList.contains('hidden');
-        },
+        isAllowed: () => !libraryUpdatesPending,
         onEvent: (type, detail) => {
           window.__dailyGenrePerformanceTracker?.event?.(
             `screenCache.${type}`,
@@ -407,8 +403,7 @@ function switchScreen(name, options = {}) {
       const currentName = currentActive?.id?.replace('screen-', '') || '';
 
       if (!options.force && hasUnsavedChanges && currentName === 'listen' && name !== 'listen') {
-        const shouldLeave = window.confirm('You have unsaved changes. Leave without saving?');
-        if (!shouldLeave) return false;
+        try { showSaveToast('Left Listen with unsaved changes — use Save in the top bar to keep them.', false); } catch (_) {}
       }
 
       const screen = document.getElementById(`screen-${name}`);
@@ -4251,7 +4246,6 @@ Overwrite the selected queue row anyway? This will replace its title, artist, ar
       if (options.fromSpin) {
         setTimeout(() => showSaveToast('Set as today’s genre and marked in progress — use Save to persist it.', false), 80);
       }
-      try { if (!appPassword) setTimeout(() => promptLibrarySaveLogin(), 120); } catch (_) {}
       return true;
     }
     window.markGenreInProgressForToday = markGenreInProgressForToday;
@@ -6954,24 +6948,18 @@ function loadListenScreen(genre, options = {}) {
     }
 
     function toggleLibrarySaveButton(show) {
-      const button = document.getElementById('vizSaveLibraryBtn');
-      if (button) button.classList.toggle('hidden', !show);
-      const floating = document.getElementById('floatingListeningSave');
-      if (floating) floating.classList.toggle('hidden', !show);
+      const chip = document.getElementById('saveStatusChip');
+      if (chip) chip.classList.toggle('hidden', !show);
       if (!show) setLibrarySaveBusy(false);
     }
 
     function setLibrarySaveBusy(isSaving) {
-      const floating = document.getElementById('floatingListeningSave');
-      if (floating) {
-        floating.classList.toggle('is-saving', !!isSaving);
-        floating.setAttribute('aria-busy', isSaving ? 'true' : 'false');
-      }
+      const chip = document.getElementById('saveStatusChip');
+      if (chip) chip.setAttribute('aria-busy', isSaving ? 'true' : 'false');
 
       const buttons = Array.from(document.querySelectorAll([
         '#saveBtn',
-        '#vizSaveLibraryBtn',
-        '.floating-save-submit',
+        '#saveStatusChip',
         'button[onclick*="saveLibraryUpdates"]'
       ].join(',')));
       buttons.forEach((button) => {

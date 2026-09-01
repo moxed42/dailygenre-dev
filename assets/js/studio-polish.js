@@ -1302,8 +1302,7 @@
         <p>Route ambiguous songs, repair Spotify metadata, and keep the library clean without turning the listening pages into admin screens.</p>
       </div>
       <div class="studio-save-state ${s.libraryDirty ? "is-dirty" : ""}">
-        <span>${s.libraryDirty ? "Unsaved cleanup pending" : "No unsaved cleanup"}</span>
-        ${s.libraryDirty ? '<button type="button" class="btn btn-primary btn-tiny" onclick="saveLibraryUpdates()">Save cleanup</button>' : ""}
+        <span>${s.libraryDirty ? "Unsaved cleanup pending — use Save in the top bar." : "No unsaved cleanup"}</span>
       </div>
       <div class="studio-lane-grid">
         ${laneCard("studio-route-lane", "Needs decision", s.pending, "Pending nominations and unresolved routing choices.", "Route", pendingSample ? songTitle(pendingSample.song) : "")}

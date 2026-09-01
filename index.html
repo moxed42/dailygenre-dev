@@ -116,6 +116,15 @@
         <div class="top-actions">
           <div class="pill" id="remainingCount" aria-live="polite">Loading genres...</div>
           <button
+            type="button"
+            class="pill save-status-chip hidden"
+            id="saveStatusChip"
+            onclick="saveLibraryUpdates()"
+            aria-live="polite"
+          >
+            Unsaved changes · Save
+          </button>
+          <button
             id="spotifyConnectBtn"
             class="spotify-connect-btn"
             onclick="spotifyConnect()"
@@ -494,14 +503,6 @@
                     style="padding: 6px 12px; font-size: 0.82rem"
                   >
                     ↺ Refresh Next 5 Spotify Tracks
-                  </button>
-                  <button
-                    class="btn btn-primary hidden"
-                    id="vizSaveLibraryBtn"
-                    onclick="saveLibraryUpdates()"
-                    style="padding: 6px 12px; font-size: 0.82rem"
-                  >
-                    Save Library Updates
                   </button>
                   <button
                     class="btn btn-ghost"
@@ -985,44 +986,6 @@
     </div>
 
     <div id="saveToast" class="save-toast" aria-live="polite"></div>
-    <div
-      id="floatingListeningSave"
-      class="floating-listening-save hidden"
-      role="status"
-      aria-live="polite"
-    >
-      <div class="floating-listening-save-copy">
-        <strong>Unsaved listening</strong
-        ><span>Ratings, notes, flags, or track edits</span>
-      </div>
-      <div class="floating-listening-save-controls" aria-label="Save bar controls">
-        <button
-          type="button"
-          class="floating-save-tool floating-save-move"
-          data-floating-save-move
-          title="Move save bar"
-          aria-label="Move save bar"
-        >
-          ↕
-        </button>
-        <button
-          type="button"
-          class="floating-save-tool floating-save-close"
-          data-floating-save-collapse
-          title="Collapse save bar"
-          aria-label="Collapse save bar"
-        >
-          ×
-        </button>
-      </div>
-      <button
-        type="button"
-        class="btn btn-primary floating-save-submit"
-        onclick="saveLibraryUpdates()"
-      >
-        Save
-      </button>
-    </div>
 
     <script src="./assets/js/utils.min.js?v=build-v299" defer></script>
     <script src="./assets/js/data-cache.min.js?v=build-v299" defer></script>
