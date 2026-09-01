@@ -576,6 +576,34 @@ before any module boundary could be drawn around it.
     actively redesigned anyway (at which point they get modernized as part
     of that pass, verified live at the time).
 
+  **Screen-by-screen pass (in progress, going in tab order)**:
+  - **Spin (`e0c7337`)**: the horizontal spinner mechanic itself was already
+    solid (already a flexed, overflow-clipped chip strip; touch targets on
+    SPIN/toggle buttons already ~44-45px). The one real bug, found via live
+    screenshots: `.spinner-marker` was a full-height vertical bar dead-center
+    in the window, so it sliced through the text of whatever chip settled
+    there every time. Redesigned as a pair of small carets pinned to the
+    window's top/bottom edges, leaving the resting chip's text clear.
+  - **Today (`c67343f`)**: live screenshots at phone width surfaced two real
+    bugs. (1) The mobile-only prev/Archive/next nav row
+    (`listening-room.js`'s `makeMobileNav`) sits in a CSS grid
+    (`.dc-mobile-genre-nav`) whose 3 columns were all hard-locked to 42px --
+    sized for the single-character `<`/`>` icons -- so the middle button's
+    full-word "Archive" label clipped to an unreadable "rchi" fragment (a
+    grid item is sized by its track, not its own width). Fixed at the root:
+    `grid-template-columns: 42px auto 42px`, plus an auto-width override on
+    the button itself (both were needed). (2) The shared
+    `.genre-art`/`.song-artwork`/etc. rule had no `overflow:hidden`, so a
+    failed image load (CDN hiccup, offline, blocked request) rendered its
+    alt text spilling past the rounded box -- added `overflow:hidden` plus a
+    smaller centered fallback font, byte-identical when images load fine.
+
+  Each screen: verified with `npm test` (134/134, the one pre-existing
+  rAF-timing flake in `router-switch-screen.test.js` reproduced and cleared
+  on isolated re-run as in every earlier phase), `check-build.sh`, and a
+  live local-server + headless-Chromium pass at phone/tablet/desktop widths
+  before committing.
+
 ### Then, whenever the redesign work is deemed ready
 
 **Port everything back to `moxed42/dailygenre`** (branch
