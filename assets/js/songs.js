@@ -1126,22 +1126,30 @@ This removes it from every genre and Studio queue. It becomes permanent after Sa
     mount.innerHTML = `${renderFocusedSong(selected, detailsOpen, entries, activeFilter)}${detailsOpen ? renderSongDetails(selected) : ""}${renderSongQueue(entries, selectedKey, activeFilter, queueOpen)}`;
   }
 
+  // Phase 3 of the architectural redesign: setSongReaction now calls
+  // dgRunPreHooks/dgRunPostHooks at every exit path (see app.js), so this
+  // registers instead of wrapping. Same stack-based state hand-off as
+  // loadListenScreen above, for the same reason (pre/post fire back-to-back
+  // within one call, even though the restore itself is deferred).
   function installNoJumpReactionWrapper() {
     if (window.__dailyGenreNoJumpReactionV32) return;
-    const original = window.setSongReaction;
-    if (typeof original !== "function") return;
     window.__dailyGenreNoJumpReactionV32 = true;
-    window.setSongReaction = function dcNoJumpSetSongReaction(...args) {
+    const pendingAnchorSnapshots = [];
+    window.dgRegisterPreHook?.("setSongReaction", () => {
       const anchor =
         document.querySelector(".song-focus-player") ||
         document.querySelector(".song-focus-experience") ||
         document.getElementById("dc-songs");
-      const beforeTop = anchor?.getBoundingClientRect?.().top;
-      const beforeScroll = window.scrollY || window.pageYOffset || 0;
+      pendingAnchorSnapshots.push({
+        beforeTop: anchor?.getBoundingClientRect?.().top,
+        beforeScroll: window.scrollY || window.pageYOffset || 0,
+      });
       try {
         document.activeElement?.blur?.();
       } catch {}
-      const result = original.apply(this, args);
+    });
+    window.dgRegisterPostHook?.("setSongReaction", () => {
+      const { beforeTop, beforeScroll } = pendingAnchorSnapshots.pop() || {};
       const restore = () => {
         const nextAnchor =
           document.querySelector(".song-focus-player") ||
@@ -1166,8 +1174,7 @@ This removes it from every genre and Studio queue. It becomes permanent after Sa
       requestAnimationFrame(restore);
       setTimeout(restore, 40);
       setTimeout(restore, 140);
-      return result;
-    };
+    });
   }
 
   window.setSongFocus = setSelectedSongKey;
@@ -1181,24 +1188,35 @@ This removes it from every genre and Studio queue. It becomes permanent after Sa
   window.enhanceSongListeningExperience = enhanceSongListeningExperience;
   installNoJumpReactionWrapper();
 
-  const originalLoadListenScreen =
-    typeof loadListenScreen === "function" ? loadListenScreen : null;
-  if (originalLoadListenScreen && !window.__dailyGenreSongFocusWrapped) {
+  // Phase 3 of the architectural redesign: loadListenScreen now calls
+  // dgRunPreHooks/dgRunPostHooks (see assets/js/utils.js and app.js) instead
+  // of only being wrappable. The old wrap captured scroll position in a
+  // per-call closure variable between its "before" and "after" halves; a
+  // stack does the same job here since pre/post hooks for one invocation
+  // always fire back-to-back within that invocation's own synchronous call
+  // (only the enhancement itself is deferred via setTimeout), so even a
+  // reentrant call before the first's setTimeout fires still pushes/pops in
+  // correct LIFO order.
+  if (!window.__dailyGenreSongFocusWrapped) {
     window.__dailyGenreSongFocusWrapped = true;
-    loadListenScreen = function patchedLoadListenScreen(...args) {
-      const beforeX = window.scrollX || window.pageXOffset || 0;
-      const beforeY = window.scrollY || window.pageYOffset || 0;
-      const result = originalLoadListenScreen.apply(this, args);
+    const pendingScrollSnapshots = [];
+    window.dgRegisterPreHook?.("loadListenScreen", () => {
+      pendingScrollSnapshots.push({
+        x: window.scrollX || window.pageXOffset || 0,
+        y: window.scrollY || window.pageYOffset || 0,
+      });
+    });
+    window.dgRegisterPostHook?.("loadListenScreen", () => {
+      const snapshot = pendingScrollSnapshots.pop() || { x: 0, y: 0 };
       setTimeout(() => {
         enhanceSongListeningExperience();
         // v197: the carousel enhancement must not pull the viewport down to the songs
         // when entering or refreshing a genre page.
         if (!window.__dailyGenreAllowSongFocusAutoScroll) {
-          window.scrollTo({ top: beforeY, left: beforeX, behavior: 'auto' });
+          window.scrollTo({ top: snapshot.y, left: snapshot.x, behavior: 'auto' });
         }
       }, isMobilePerfMode() ? 60 : 0);
-      return result;
-    };
+    });
   }
 
   document.addEventListener("DOMContentLoaded", () =>

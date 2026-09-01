@@ -1655,7 +1655,11 @@ function switchScreen(name, options = {}) {
     let songReactionFallbackRenders = 0;
 
     function setSongReaction(encodedKey, value) {
-      if (!currentGenre) return;
+      window.dgRunPreHooks?.('setSongReaction', encodedKey, value);
+      if (!currentGenre) {
+        window.dgRunPostHooks?.('setSongReaction', encodedKey, value);
+        return;
+      }
       const key = decodeURIComponent(encodedKey || '');
       const reaction = [1,2,3].includes(Number(value)) ? Number(value) : null;
       const songs = officialSongsForLookup(currentGenre);
@@ -1670,7 +1674,10 @@ function switchScreen(name, options = {}) {
         }
       });
 
-      if (!updated) return;
+      if (!updated) {
+        window.dgRunPostHooks?.('setSongReaction', encodedKey, value);
+        return;
+      }
 
       // Daily Genre v247: explicit song reaction timing.
       const reactionPerformanceToken =
@@ -1749,6 +1756,7 @@ function switchScreen(name, options = {}) {
           },
         );
       }
+      window.dgRunPostHooks?.('setSongReaction', encodedKey, value);
     }
 
     const GENRE_RATING_LABELS = {
@@ -4699,6 +4707,7 @@ async function prepareAndSaveCurrentGenre(options = {}) {
     });
 
 function loadListenScreen(genre, options = {}) {
+      window.dgRunPreHooks?.('loadListenScreen', genre, options);
       if (shouldReuseMountedListenScreen(genre, options)) {
         currentGenre = genre;
         document.title = `${genre.genre || 'Genre'} | Daily Genre`;
@@ -5262,6 +5271,7 @@ function loadListenScreen(genre, options = {}) {
     }
 
     function openGenreDetail(genre, editMode=false, options = {}) {
+      window.dgRunPreHooks?.('openGenreDetail', genre, editMode, options);
       requestMountedListenScreenReuse(genre);
 
       if (!genre) return false;

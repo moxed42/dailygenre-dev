@@ -143,6 +143,37 @@ function dgRunPostHooks(name, ...args) {
 window.dgRegisterPostHook = dgRegisterPostHook;
 window.dgRunPostHooks = dgRunPostHooks;
 
+// Pre-hook counterpart, for the wraps that need to capture something (e.g.
+// scroll position) *before* the base function's own work runs, not just
+// react after. A base function calls dgRunPreHooks('name', ...) as its
+// first line (unconditionally -- before any of its own early-return/guard
+// logic, matching what a real "before" wrap would see), then
+// dgRunPostHooks('name', ...) at each of its exit points as before. If a
+// registrant needs to pass state from its pre-hook to its post-hook, it's
+// the registrant's own job to do that (e.g. a closure variable) -- the
+// registry itself doesn't try to correlate a pre/post pair, it just runs
+// whatever's registered for a name at the two points in time.
+const dgPreRenderHooks = Object.create(null);
+
+function dgRegisterPreHook(name, fn) {
+  if (typeof fn !== 'function') return;
+  if (!dgPreRenderHooks[name]) dgPreRenderHooks[name] = [];
+  dgPreRenderHooks[name].push(fn);
+}
+
+function dgRunPreHooks(name, ...args) {
+  const hooks = dgPreRenderHooks[name];
+  if (!hooks || !hooks.length) return;
+  for (const hook of hooks) {
+    try { hook(...args); } catch (err) {
+      console.error(`[Daily Genre] Pre-render hook for "${name}" failed`, err);
+    }
+  }
+}
+
+window.dgRegisterPreHook = dgRegisterPreHook;
+window.dgRunPreHooks = dgRunPreHooks;
+
 // Shared modal accessibility helper: traps Tab focus inside the modal,
 // closes on Escape, and restores focus to whatever triggered the modal
 // once it closes. Reused by the password-save modal and the Spotify

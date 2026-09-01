@@ -1766,42 +1766,37 @@
       } catch (_) {}
     });
 
-    const originalOpen = window.openGenreDetail;
-    if (
-      typeof originalOpen === "function" &&
-      !originalOpen.__dgUxHistoryWrapped
-    ) {
-      const wrappedOpen = function dgUxOpenGenreDetail(
-        genre,
-        editMode = false,
-        options = {},
-      ) {
-        if (genre && !suppress && !options.skipHistory && genre.id != null) {
-          try {
-            const targetHash = `#genre=${encodeURIComponent(String(genre.id))}`;
-            if (location.hash !== targetHash)
-              history.pushState(
-                stateForGenre(genre, editMode),
-                "",
-                genreUrl(genre.id),
-              );
-          } catch (_) {}
-        }
-        const result = originalOpen.apply(this, arguments);
-        if (result !== false && genre?.id != null) {
-          try {
-            history.replaceState(
+    // Phase 3 of the architectural redesign: openGenreDetail now calls
+    // window.dgRunPreHooks('openGenreDetail', ...) as its first line and
+    // window.dgRunPostHooks(...) right before its single success-path
+    // `return true` (see assets/js/utils.js and app.js) -- the pre-hook
+    // exactly replaces the old wrap's "before" pushState branch, and the
+    // post-hook firing only on success matches the old wrap's
+    // `result !== false` guard on its "after" replaceState branch.
+    window.dgRegisterPreHook?.("openGenreDetail", (genre, editMode = false, options = {}) => {
+      if (genre && !suppress && !options.skipHistory && genre.id != null) {
+        try {
+          const targetHash = `#genre=${encodeURIComponent(String(genre.id))}`;
+          if (location.hash !== targetHash)
+            history.pushState(
               stateForGenre(genre, editMode),
               "",
               genreUrl(genre.id),
             );
-          } catch (_) {}
-        }
-        return result;
-      };
-      wrappedOpen.__dgUxHistoryWrapped = true;
-      window.openGenreDetail = wrappedOpen;
-    }
+        } catch (_) {}
+      }
+    });
+    window.dgRegisterPostHook?.("openGenreDetail", (genre, editMode = false) => {
+      if (genre?.id != null) {
+        try {
+          history.replaceState(
+            stateForGenre(genre, editMode),
+            "",
+            genreUrl(genre.id),
+          );
+        } catch (_) {}
+      }
+    });
 
     window.addEventListener("popstate", (event) => {
       const st = event.state || {};
