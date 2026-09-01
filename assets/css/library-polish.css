@@ -1779,6 +1779,14 @@
   border: 1px solid rgba(44, 26, 16, 0.28);
   box-shadow: 0 26px 48px rgba(57, 31, 10, 0.22);
   background: rgba(255, 255, 255, 0.35);
+  /* Phase 5: same fix as the shared .genre-art/.song-artwork/etc rule --
+     object-fit only constrains a successfully-loaded image; a failed one
+     (CDN hiccup, offline, blocked request) renders its alt text, which can
+     spill past the rounded box without this. */
+  overflow: hidden;
+  font-size: 0.72rem;
+  text-align: center;
+  color: var(--faint, #9b7c54);
 }
 
 .song-focus-art-placeholder {
@@ -2094,6 +2102,12 @@
   object-fit: cover;
   border: 1px solid rgba(44, 26, 16, 0.18);
   background: rgba(255, 255, 255, 0.45);
+  /* Phase 5: same overflow fix as .song-focus-art/.genre-art -- clips a
+     failed image's alt-text fallback instead of letting it spill out. */
+  overflow: hidden;
+  font-size: 0.5rem;
+  text-align: center;
+  color: var(--faint, #9b7c54);
 }
 
 .song-focus-row-art.placeholder {
