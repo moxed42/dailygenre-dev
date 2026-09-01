@@ -634,6 +634,21 @@ before any module boundary could be drawn around it.
     Dive) and `.studio-thumb` (Studio/Review) -- are known instances of the
     same pattern, intentionally left for their own screens' passes rather
     than fixed out of scope here.
+  - **Album Dive (`b245459`)**: fixed `.album-slot-art` (the large hero
+    album art) as flagged in the Dig step, plus a related bug found live
+    that a static read wouldn't have caught: the album-shelf thumbnails
+    (`.album-rail-card img`, 52-58px) showed the same alt-text overflow
+    ("PILOT COVER", "HEX COVER" fragments spilling past their rounded
+    boxes). The selector that *looked* like the shelf-grid rule from
+    reading the CSS (`.album-dive-grid .album-slot-art`,
+    `library-polish.css:3382`) turned out to be dead code -- no element
+    with class `album-dive-grid` exists in the real DOM; the actual
+    thumbnail is an unclassed `<img>` inside `.album-rail-card`, found via
+    live DOM inspection. Since these thumbnails are small, went one step
+    further than the earlier fixes: `white-space:nowrap` +
+    `text-overflow:ellipsis` so a failed image's alt text truncates to one
+    clean line instead of wrapping into a multi-line block that fills the
+    whole box before clipping.
 
   Each screen: verified with `npm test` (136/136 as of the Library step, the
   one pre-existing rAF-timing flake in `router-switch-screen.test.js`
