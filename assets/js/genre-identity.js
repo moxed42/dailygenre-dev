@@ -1681,19 +1681,19 @@
     window.renderHistory = wrapped;
   }
 
+  // Phase 3 of the architectural redesign: loadListenScreen now calls
+  // window.dgRunPostHooks('loadListenScreen', ...) at its own natural end
+  // (see assets/js/utils.js), so this registers instead of capturing and
+  // reassigning the global -- same effect, one fewer fragile wrap layer.
+  let dnaHookRegistered = false;
   function patchListenLoadForDna() {
-    const original =
-      typeof loadListenScreen === "function" ? loadListenScreen : null;
-    if (!original || original.__identityDnaWrapped) return;
-    const wrapped = function identityWrappedLoadListenScreen(genre, ...rest) {
+    if (dnaHookRegistered) return;
+    dnaHookRegistered = true;
+    window.dgRegisterPostHook?.("loadListenScreen", (genre) => {
       if (genre && typeof genre === "object") lastListenGenre = genre;
-      const result = original.call(this, genre, ...rest);
       setTimeout(() => { injectDnaCard(genre); injectDetailIdentityImport(genre); }, 40);
       setTimeout(() => { injectDnaCard(genre); injectDetailIdentityImport(genre); }, 180);
-      return result;
-    };
-    wrapped.__identityDnaWrapped = true;
-    loadListenScreen = wrapped;
+    });
   }
 
   function installNavigationHistory() {
@@ -1747,34 +1747,24 @@
         history.replaceState(stateForScreen(activeScreen()), "", location.href);
     } catch (_) {}
 
-    const originalSwitch = window.switchScreen;
-    if (
-      typeof originalSwitch === "function" &&
-      !originalSwitch.__dgUxHistoryWrapped
-    ) {
-      const wrappedSwitch = function dgUxSwitchScreen(name, options = {}) {
-        const result = originalSwitch.apply(this, arguments);
+    // Phase 3 of the architectural redesign: switchScreen calls
+    // window.dgRunPostHooks('switchScreen', name, options) right before its
+    // own `return true` -- i.e. only on the success path, exactly matching
+    // this wrap's old `result !== false` check -- so registering here has
+    // the same effect as the old capture-and-reassign wrap, one fewer
+    // fragile layer.
+    window.dgRegisterPostHook?.("switchScreen", (name, options = {}) => {
+      if (suppress || name === "listen" || options.skipHistory) return;
+      try {
+        const nextUrl = screenUrl(name);
         if (
-          result !== false &&
-          !suppress &&
-          name !== "listen" &&
-          !options.skipHistory
+          location.hash !==
+          (name === "spin" ? "" : `#screen=${encodeURIComponent(name)}`)
         ) {
-          try {
-            const nextUrl = screenUrl(name);
-            if (
-              location.hash !==
-              (name === "spin" ? "" : `#screen=${encodeURIComponent(name)}`)
-            ) {
-              history.pushState(stateForScreen(name), "", nextUrl);
-            }
-          } catch (_) {}
+          history.pushState(stateForScreen(name), "", nextUrl);
         }
-        return result;
-      };
-      wrappedSwitch.__dgUxHistoryWrapped = true;
-      window.switchScreen = wrappedSwitch;
-    }
+      } catch (_) {}
+    });
 
     const originalOpen = window.openGenreDetail;
     if (
