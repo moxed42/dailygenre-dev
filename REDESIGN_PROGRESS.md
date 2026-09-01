@@ -204,10 +204,16 @@ untouched.
   `saveLibraryUpdates`) — not yet individually classified by shape; highest
   blast radius of any remaining file, inspect each wrap body before touching
   anything here.
-- `songs.js` — wraps `loadListenScreen` (shape 1, already hook-enabled —
-  same easy conversion as genre-identity.js's) and `setSongReaction` (shape
-  1 too, confirmed while surveying — calls original unconditionally, then
-  restores scroll position; `setSongReaction` isn't hook-enabled yet).
+- `songs.js` — wraps `loadListenScreen` and `setSongReaction`. **Correction
+  after closer inspection**: both are actually **shape 2** (before+after),
+  not shape 1 as first assumed from memory without re-reading the wrap body
+  — both capture the scroll position (`window.scrollX`/`scrollY`)
+  *immediately before* calling the original, specifically so they can
+  restore that pre-call position afterward and counteract a scroll-jump the
+  render might cause. A pure post-hook can't see "scroll position before
+  the call started" from inside the base function's own end — by then it's
+  too late, the jump may have already happened. Needs the same pre-hook
+  mechanism `openGenreDetail` needs. Left as monkey-patches.
 - `listening-room.js` — wraps `filterGenres`, `openCrateDig`,
   `openRandomListenedGenre`; shape not yet checked. Also depends on
   `filterGenresForArchive`/`openAdjacentGenre`, which
@@ -222,20 +228,31 @@ untouched.
   Deprioritized.
 
 **Natural next steps for whoever continues this**:
-1. Easiest available win: convert `songs.js`'s `loadListenScreen` wrap (shape
-   1, already hook-enabled) — same pattern as the two just done.
-2. Add a `dgRunPostHooks('renderHistory', ...)` call to `renderHistory`'s
+1. Add a `dgRunPostHooks('renderHistory', ...)` call to `renderHistory`'s
    own end (in `core/rankings-archive.js`), then convert `genre-identity.js`'s
-   `renderHistory` wrap and check whether anything else wraps it too.
-3. Add `dgRunPostHooks('setSongReaction', ...)` to `setSongReaction`'s own
-   end, then convert `songs.js`'s wrap of it.
-4. Only after those: consider whether the registry needs a pre-hook
-   counterpart (`dgRegisterPreHook`/`dgRunPreHooks`) to handle shape-2 files
-   like `openGenreDetail`'s wrap — a real design decision, not just more of
-   the same pattern, so worth deciding deliberately rather than bolting on.
-5. `song-identity-roles.js` (the save pipeline) and the two shape-3 files
-   (`studio-polish.js`, `ranks-polish.js`) are the hardest remaining work —
-   tackle last, one at a time, each with new characterization tests first.
+   `renderHistory` wrap (confirmed shape 1) and check whether anything else
+   wraps it too.
+2. Design and add a pre-hook counterpart (`dgRegisterPreHook`/`dgRunPreHooks`)
+   to the registry in `assets/js/utils.js` — needed for every shape-2 wrap
+   found so far (`openGenreDetail` in genre-identity.js; both of songs.js's
+   wraps). This is a real design decision (where exactly do "before" hooks
+   fire relative to a function's own guard/early-return logic, do they get
+   veto power over the base function running at all, etc.) — worth deciding
+   deliberately with fresh eyes, not bolted on in a rush.
+3. After the pre-hook mechanism exists: convert `openGenreDetail`'s wrap in
+   genre-identity.js, then both of `songs.js`'s wraps.
+4. `listening-room.js`'s wrap shapes still aren't checked — do that survey
+   before touching it.
+5. `song-identity-roles.js` (the save pipeline, 7 functions) and the two
+   shape-3 files (`studio-polish.js`, `ranks-polish.js`) are the hardest
+   remaining work — tackle last, one at a time, each with new
+   characterization tests first. `studio-polish.js`'s early-exit guard and
+   `ranks-polish.js`'s full-reimplementation pattern may turn out to need a
+   different mechanism than hooks entirely (e.g. an explicit "can I run
+   right now" guard callback, or accepting that a full reimplementation
+   should just replace the base function in its home file rather than stay
+   a wrap) — don't assume the hook registry is the right tool for shape 3
+   without reconsidering it fresh.
 
 **Remaining phases after Phase 3**:
 
