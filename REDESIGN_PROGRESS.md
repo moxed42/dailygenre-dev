@@ -806,3 +806,40 @@ isolated element screenshot was captured, not a real bug. Verified:
 the bar stays pinned and keeps the active tab highlighted while the Listen
 screen is scrolled to the bottom, scrolls horizontally for all 7 items,
 and the 768px tablet view is unaffected.
+
+**Phase 8 (`70d3869`) — fixed the core loop's two friction points**: (1)
+`markGenreInProgressForToday()` used to fire `promptLibrarySaveLogin()` via
+a `setTimeout` immediately after Spin's "I'll Listen to This" — so the
+second step of the daily ritual was an auth-password modal, before the
+user had done anything worth saving. That call is gone; `setGenreInProgressFromView()`/`setGenreRatingFromView()`'s own prompts (genuine
+in-screen edits, not the initial spin) were deliberately left alone. (2)
+Consolidated the save affordances: reading the actual code first showed
+`#saveBtn` calls `prepareAndSaveCurrentGenre()` — a genuinely richer
+function that also gathers the open editor's notes/favorite-song/
+monthly-flag/songs-bulk fields — not a redundant duplicate of
+`saveLibraryUpdates()` as the plan's text assumed, so it was left as-is.
+The three affordances that *were* truly redundant (the floating
+`#floatingListeningSave` bar with its own move/collapse controls, Studio's
+inline "Save cleanup" button, and Stats' `#vizSaveLibraryBtn`) were removed
+and replaced by one persistent chip in the topbar (`#saveStatusChip`, next
+to `#remainingCount`) that shows "Unsaved changes · Save" / a busy state
+and calls `saveLibraryUpdates()` — wired through the existing
+`toggleLibrarySaveButton()`/`setLibrarySaveBusy()` helpers so every call
+site that used to reach for the old buttons now drives the one chip. The
+blocking `window.confirm('You have unsaved changes...')` on navigating off
+Listen was replaced with a non-blocking toast ("Left Listen with unsaved
+changes — use Save in the top bar to keep them"), since save state is now
+always visible instead of needing a modal to surface it. Left the ~25
+scattered dead `.floating-listening-save*`/`.floating-save-*` CSS
+selectors in place (their target element no longer exists, so they're
+inert) — cleaning those up is folded into Phase 12's consistency pass,
+which already plans to touch the same CSS files. Verified: 136/136 tests,
+`check-build.sh`, and a live pass confirming spinning → "I'll Listen to
+This" no longer shows a login modal (zero unexpected dialogs across the
+whole flow), the topbar chip appears with the correct text and styling on
+every screen that used to have its own button (Listen, Studio, Stats),
+Studio's workbench-hero now shows "No unsaved cleanup"/"Unsaved cleanup
+pending" as plain status text with no separate button, `#vizSaveLibraryBtn`
+is gone from Stats leaving only Refresh/Backup, and navigating away from
+Listen with unsaved changes proceeds immediately (no blocking dialog) while
+the chip keeps reflecting the pending state on the new screen.
