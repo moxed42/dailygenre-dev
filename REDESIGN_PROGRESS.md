@@ -619,6 +619,21 @@ before any module boundary could be drawn around it.
     `tests/archive-progressive-load-order.test.js` (2 tests, confirmed to
     fail against the old code and pass against the fix, using the harness's
     `extraScripts` option to replicate the real load order).
+  - **Dig / Crate Dig (`86f0bb8`)**: opens the same Listening Room template
+    as Today (just picks a different genre via `openRandomListenedGenre`),
+    so most of the Today-screen fixes already applied here. Live-verifying
+    the actual entrypoint (clicking `#topCrateDigBtn`, not just the Today
+    path) found the same "failed image alt-text spills past the rounded
+    box" bug in two more places that don't go through the shared
+    `artworkHtml()` helper fixed in the Today pass: `.song-focus-art`
+    (`songs.js`'s song carousel, 190x190px -- confirmed live: "Spin Spin
+    Sugar - Armands Dark Garage Mix artwork" spilling well past its box)
+    and `.song-focus-row-art` (the 48x48px song-queue row thumbnails). Same
+    `overflow:hidden` + small centered fallback font fix. Two more artwork
+    classes with real (non-empty) alt text -- `.album-slot-art` (Album
+    Dive) and `.studio-thumb` (Studio/Review) -- are known instances of the
+    same pattern, intentionally left for their own screens' passes rather
+    than fixed out of scope here.
 
   Each screen: verified with `npm test` (136/136 as of the Library step, the
   one pre-existing rAF-timing flake in `router-switch-screen.test.js`
