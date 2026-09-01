@@ -291,6 +291,16 @@
   height: 48px;
   border-radius: 10px;
   object-fit: cover;
+  /* Phase 5: same overflow fix as .genre-art/.song-focus-art/etc -- most
+     .studio-thumb uses have alt="" (decorative, no risk), but
+     updateVisibleAlbumRepairThumb() sets alt="Album art" on one path, which
+     can still overflow this small box if the image fails to load. */
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 0.5rem;
+  text-align: center;
+  color: var(--faint, #9b7c54);
   border: 1px solid rgba(61, 36, 18, 0.18);
   background: rgba(61, 36, 18, 0.08);
 }
