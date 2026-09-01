@@ -782,3 +782,27 @@ oversight). Verified: 136/136 tests, `check-build.sh`, live phone/desktop
 passes confirming the one-click Listen-tab default, correct tab
 highlighting through Crate Dig/Album Dive/opening a genre from Library,
 and clean mobile wrapping of the new header row.
+
+**Phase 7 (`c24867c`) — fixed bottom tab bar on mobile**: at `<=600px`,
+`.tabs` repositions from stacked pill rows (previously up to 4 rows for 7
+buttons, eating a large share of the viewport) into a single fixed bottom
+bar using the existing wood-grain surface + brass hairline tokens, no new
+colors. Desktop pill row is untouched (rule is scoped to the existing
+mobile breakpoint). `.app` gets extra bottom padding and the save
+toast/floating save bar are nudged up so nothing sits underneath the new
+bar. The new rule set was appended at the very end of
+`library-polish.css` so it wins cascade order over the pre-existing
+`<=430px` 2-per-row grid rule for the same selectors. One rendering worry
+surfaced and was resolved during verification: an early `elementHandle.
+screenshot()` of `.tabs` alone showed unrelated page content instead of
+the bar, which looked like the bar might be disappearing on scroll —
+`getComputedStyle`/`getBoundingClientRect`/`elementFromPoint` all
+confirmed the bar was correctly `position:fixed` and topmost the whole
+time, and a same-moment full-viewport screenshot (with a longer wait for
+the "opened most recent" toast to clear) showed the bar rendering
+correctly at the bottom while scrolled — the anomaly was in how the
+isolated element screenshot was captured, not a real bug. Verified:
+136/136 tests, `check-build.sh`, and live 320/375/768px passes confirming
+the bar stays pinned and keeps the active tab highlighted while the Listen
+screen is scrolled to the bottom, scrolls horizontally for all 7 items,
+and the 768px tablet view is unaffected.
