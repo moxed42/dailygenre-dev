@@ -1755,6 +1755,14 @@
     /* ── Visualizations screen ────────────────────────────── */
     .viz-panel { padding: 0 0 32px; }
     .viz-mode-bar { display:flex; align-items:center; gap:10px; flex-wrap:wrap; padding:14px 16px 12px; border-bottom:1px solid var(--border, rgba(127,82,28,.18)); margin-bottom:16px; }
+
+    /* Phase 5: #vizMonthSelect was flexing down to ~77px on phone widths
+       (a flex item with no explicit sizing shrinks to share leftover space
+       equally, and "August 2026" doesn't fit in 77px), truncating to
+       "Augu" with no ellipsis. Giving it a sane min-width means the flex
+       row wraps it to its own line on narrow screens instead of squeezing
+       it unreadable. */
+    #vizMonthSelect { flex:0 1 auto; min-width:150px; }
     .viz-mode-btns { display:flex; gap:4px; }
     .viz-mode-btn { padding:7px 18px; border-radius:999px; border:1px solid var(--border, rgba(127,82,28,.3)); background:transparent; font-weight:800; font-size:.85rem; cursor:pointer; color:var(--muted, #7a5c38); transition:background .15s, color .15s; }
     .viz-mode-btn.active { background:var(--accent, #b8600c); color:#fff; border-color:transparent; }
