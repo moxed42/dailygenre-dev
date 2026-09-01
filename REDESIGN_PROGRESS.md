@@ -661,6 +661,22 @@ before any module boundary could be drawn around it.
     `:has()`/`backdrop-filter` cross-browser risk in `game-room.css`. This
     screen was already solid -- reporting that honestly rather than making
     a cosmetic change just to have one.
+  - **Stats / Visuals (`6f6e531`)**: this sandbox can't reach the Chart.js
+    CDN (jsdelivr blocked by org network policy), so the charts rendered
+    as empty canvases in a plain live pass -- rather than guess at chart
+    behavior from a static read, installed a local `chart.js@4.4.4` build
+    via `npm` (registry is reachable) and routed
+    `https://cdn.jsdelivr.net/**` to it in Playwright, so the real donut/bar
+    charts actually rendered for verification. Found one real bug:
+    `#vizMonthSelect` truncated to "Augu" on phone width instead of "August
+    2026" -- it's a flex item inside `.viz-mode-bar` (flex-wrap:wrap) with
+    no sizing of its own, so it shrank to whatever space was left after the
+    Monthly/All Time toggle buttons instead of wrapping to its own row.
+    Fixed with `flex:0 1 auto; min-width:150px`, confirmed no change to the
+    already-narrow desktop sidebar layout. Everything else on the
+    dashboard -- hero stats, listening-story summary, filter controls, the
+    charts themselves, highlights, artist discovery, songs-in-rotation,
+    genre crossovers -- checked out clean at phone/tablet/desktop.
 
   Each screen: verified with `npm test` (136/136 as of the Library step, the
   one pre-existing rAF-timing flake in `router-switch-screen.test.js`
