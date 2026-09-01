@@ -770,8 +770,12 @@ function switchScreen(name, options = {}) {
       if (event) event.preventDefault();
       const opened = openRandomListenedGenre();
       if (opened) {
-        document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
-        document.getElementById('topCrateDigBtn')?.classList.add('active');
+        // Part 3 Phase 6: used to force-highlight this button itself as
+        // the "active tab" -- correct back when it was a real top-level
+        // tab, stale now that it's an action button inside the Listen
+        // screen. openRandomListenedGenre() -> openGenreDetail() already
+        // calls switchScreen('listen'), which correctly highlights the
+        // real "Listen" nav tab; doing it again here would just undo that.
         requestAnimationFrame(() => window.scrollTo({ top: 0, left: 0, behavior: 'auto' }));
       }
     }
@@ -822,13 +826,18 @@ function switchScreen(name, options = {}) {
       if (!genre) {
         btn.classList.remove('has-active-dive');
         btn.innerHTML = 'Album Dive';
-        btn.title = 'Open the current Album Dive';
+        // Part 3 Phase 6: disable instead of leaving a click that just
+        // toasts "No active Album Dive yet" -- the button's own state now
+        // shows why, rather than a no-op click producing a surprise toast.
+        btn.disabled = true;
+        btn.title = 'No active Album Dive yet — start one from a genre’s Album Dive panel';
         return;
       }
       const saved = readActiveAlbumDiveState();
       const label = saved?.albumTitle ? ` · ${saved.albumTitle}` : '';
       btn.classList.add('has-active-dive');
       btn.innerHTML = 'Album Dive';
+      btn.disabled = false;
       btn.title = `Return to active Album Dive: ${genre.genre || 'Genre'}${label}`;
     }
     window.refreshTopAlbumDiveButton = refreshTopAlbumDiveButton;
@@ -849,8 +858,10 @@ function switchScreen(name, options = {}) {
       openGenreDetail(genre, false, { skipSpotifyHydration: true });
       if (typeof setAlbumDiveEditorMode === 'function') setAlbumDiveEditorMode(false);
       refreshTopAlbumDiveButton();
-      document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
-      document.getElementById('topAlbumDiveBtn')?.classList.add('active');
+      // Part 3 Phase 6: same as openCrateDig above -- openGenreDetail()
+      // already calls switchScreen('listen'), which correctly highlights
+      // the real "Listen" nav tab now that this button lives inside that
+      // screen rather than being a top-level tab itself.
       // v178: returning to an active dive should not force-scroll the page; keep the user's current viewport stable.
       return true;
     }
@@ -5549,6 +5560,18 @@ function loadListenScreen(genre, options = {}) {
     document.querySelectorAll('.tab-btn[data-screen]').forEach(btn => {
       btn.addEventListener('click', () => {
         const name = btn.dataset.screen;
+        // Part 3 Phase 6: the Listen tab needs to behave like the old
+        // top-level "Today" tab when reached from elsewhere in the app --
+        // otherwise clicking it just reveals whatever (if anything) is
+        // already loaded, with no one-click path to today's genre from a
+        // different screen. window.DailyGenreToday.open() already does
+        // exactly that (today, or most recent, or the empty-Archive
+        // fallback) and itself calls switchScreen('listen'), so the tab
+        // still gets highlighted correctly either way.
+        if (name === 'listen' && typeof window.DailyGenreToday?.open === 'function') {
+          window.DailyGenreToday.open();
+          return;
+        }
         const ok = switchScreen(name);
         if (!ok) return;
       });

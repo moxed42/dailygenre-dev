@@ -356,6 +356,38 @@
       color:var(--muted);
     }
 
+    /* Part 3 Phase 6: Today/Crate Dig/Album Dive used to be top-level nav
+       tabs, but all three just call openGenreDetail() with a different
+       genre-selection strategy -- they're actions on the Listen screen,
+       not separate places. This header row keeps them as one-click actions
+       (same elements/IDs/handlers as before, just relocated) with a status
+       line above them instead of a silent no-op toast when e.g. no Album
+       Dive is active. */
+    .listen-actions-row {
+      display:flex;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:16px;
+    }
+
+    .listen-actions-status {
+      color:var(--muted);
+      min-height:1.2em;
+    }
+
+    .listen-actions-buttons {
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+
+    .tab-album-dive-btn:disabled {
+      opacity:.55;
+      cursor:not-allowed;
+    }
+
     .listen-grid {
       display:grid;
       grid-template-columns: 1fr 1fr;

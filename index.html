@@ -127,23 +127,8 @@
 
       <nav class="tabs" role="tablist" aria-label="Screens">
         <button class="tab-btn active" id="tab-spin" data-screen="spin" role="tab" aria-selected="true" aria-controls="screen-spin">Spin</button>
-        <button class="tab-btn tab-today-btn" id="topTodayBtn" type="button">Today</button>
+        <button class="tab-btn" id="tab-listen" data-screen="listen" role="tab" aria-selected="false" aria-controls="screen-listen">Listen</button>
         <button class="tab-btn" id="tab-history" data-screen="history" role="tab" aria-selected="false" aria-controls="screen-history">Archive</button>
-        <button
-          class="tab-btn tab-action-btn"
-          id="topCrateDigBtn"
-          type="button"
-        >
-          Crate Dig
-        </button>
-        <button
-          class="tab-btn tab-action-btn tab-album-dive-btn"
-          id="topAlbumDiveBtn"
-          type="button"
-          title="Open the current Album Dive"
-        >
-          Album Dive
-        </button>
         <button class="tab-btn" id="tab-viz" data-screen="viz" role="tab" aria-selected="false" aria-controls="screen-viz">Visuals</button>
         <button class="tab-btn" id="tab-review" data-screen="review" role="tab" aria-selected="false" aria-controls="screen-review">Review</button>
         <button class="tab-btn" id="tab-ranking" data-screen="ranking" role="tab" aria-selected="false" aria-controls="screen-ranking">Ranking</button>
@@ -184,6 +169,21 @@
       </section>
 
       <section class="screen screen-detail" id="screen-listen">
+        <div class="listen-actions-row" id="listenActionsRow">
+          <div class="listen-actions-status small" id="listenActionsStatus"></div>
+          <div class="listen-actions-buttons">
+            <button class="tab-btn tab-today-btn" id="topTodayBtn" type="button">Today</button>
+            <button class="tab-btn tab-action-btn" id="topCrateDigBtn" type="button">Crate Dig</button>
+            <button
+              class="tab-btn tab-action-btn tab-album-dive-btn"
+              id="topAlbumDiveBtn"
+              type="button"
+              title="Open the current Album Dive"
+            >
+              Album Dive
+            </button>
+          </div>
+        </div>
         <div class="listen-grid">
           <div class="panel" style="min-width: 0; overflow: hidden">
             <div id="listenDetails">

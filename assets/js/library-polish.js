@@ -302,9 +302,37 @@
     return `<button type="button" class="btn btn-secondary dg-random-cleanup-btn ${extraClass}" data-dg-random-song-cleanup title="Open a random listened genre with logged songs for cleanup">Random cleanup</button>`;
   }
 
+  // Part 3 Phase 6: the Listen screen's header used to be three top-level
+  // nav tabs (Today/Crate Dig/Album Dive) that each silently did nothing
+  // useful outside their one precondition (e.g. Today falling back to
+  // "most recent" with no visible reason, Album Dive toasting an error).
+  // This gives the relocated header a one-line status instead, using the
+  // same todaysLoggedGenres()/mostRecentLoggedGenre() this file already
+  // computes for Today's own click handling.
+  function updateListenActionsStatus() {
+    const el = $('#listenActionsStatus');
+    if (!el) return;
+    const todayItems = todaysLoggedGenres();
+    const today = todayItems.find((genre) => {
+      const status = safeText(genre && genre.status).toLowerCase();
+      const rating = safeText(genre && genre.rating).toLowerCase();
+      return status !== 'veto' && rating !== 'zanger';
+    }) || todayItems[0];
+    if (today) {
+      const inProgress = safeText(today.status).toLowerCase() === 'in_progress' || safeText(today.status).toLowerCase() === 'in-progress';
+      el.textContent = `Today: ${today.genre || 'Unknown'}${inProgress ? ' · in progress' : ''}`;
+      return;
+    }
+    const recent = mostRecentLoggedGenre();
+    el.textContent = recent
+      ? `Nothing logged today · last was ${recent.genre || 'Unknown'}`
+      : 'Nothing logged yet';
+  }
+
   function enhanceDigPage() {
     enhanceQueued = false;
     normalizeTopNavLabels();
+    updateListenActionsStatus();
 
     const listenScreen = $('#screen-listen');
     const details = $('#listenDetails');
