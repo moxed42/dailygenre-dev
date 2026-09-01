@@ -751,6 +751,7 @@ function switchScreen(name, options = {}) {
 
 
     function openRandomListenedGenre() {
+      window.dgRunPreHooks?.('openRandomListenedGenre');
       const pool = genres.filter(g =>
         (g.status || '').toLowerCase() === 'listened' &&
         !!dateValue(g) &&
@@ -765,6 +766,7 @@ function switchScreen(name, options = {}) {
     }
 
     function openCrateDig(event) {
+      window.dgRunPreHooks?.('openCrateDig', event);
       if (event) event.preventDefault();
       const opened = openRandomListenedGenre();
       if (opened) {

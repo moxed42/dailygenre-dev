@@ -358,12 +358,50 @@ alert, `identityQueueRolesEnabled` gets set to `true` on the genre, and
 execution proceeds into the real `prepareAndSaveCurrentGenre` chain with no
 console errors.
 
+**Sixth step (done) — `listening-room.js`**: surveyed its wraps (4 total,
+more than the original 3-function catalog said) and found one of them is
+dead code:
+- `installSearchNormalization()`'s wrap of `filterGenresForArchive` —
+  investigated the "depends on `filterGenresForArchive`/`openAdjacentGenre`
+  from Phase 2" note from the earlier survey. `openAdjacentGenre` is real
+  and live (defined in `app.js`, overridden by
+  `core/listened-history-navigation.js`, called from real `onclick`
+  handlers) — no issue there. But `filterGenresForArchive` itself has **no
+  base definition anywhere in the entire codebase** — grepped every
+  `assets/js/*.js` and `assets/js/core/*.js` file for a function
+  declaration, a `window.filterGenresForArchive =` assignment, or even a
+  single call site, and found none. Both files that "wrap" it
+  (`listening-room.js` here, and `core/library-parent-category-filter.js`
+  from Phase 2) guard with `typeof filterGenresForArchive === 'function'`
+  before wrapping, which is never true — so both wraps are permanently
+  inert no-ops today. Left untouched (nothing to convert; no live behavior
+  to preserve or risk). Same category of finding as `renderListenDetails`
+  in Phase 3's first step.
+- `installRouteAwareness()`'s wraps of `openCrateDig` and
+  `openRandomListenedGenre` — real, shape-1-ish "before" wraps (`DC.crateDigIntent
+  = true` set before calling the original, nothing after). Converted:
+  added `dgRunPreHooks('openCrateDig', event)` /
+  `dgRunPreHooks('openRandomListenedGenre')` to the base functions in
+  `app.js`, and registered pre-hooks in `listening-room.js` instead of
+  reassigning. `openCrateDig` calls `openRandomListenedGenre()` internally,
+  so both pre-hooks fire on a Crate Dig click (same harmless double-set of
+  the same flag the old double-wrap already did).
+- `installLoadWrapper()`'s wrap of `loadListenScreen` — a real shape-2 wrap
+  (`ensureListenModeClasses()` before, a `setTimeout`-deferred
+  enhance+restructure after) that I'd missed in the original catalog.
+  `loadListenScreen` was already hook-enabled (from `songs.js`'s Phase 3
+  conversion), so this converted directly: `ensureListenModeClasses()`
+  became a pre-hook, the deferred enhancement became a post-hook.
+
+New tests: `tests/listening-room-hooks.test.js` (4 tests, using the same
+`extraScripts` harness option from the fifth step). Verified: 129/129 tests
+pass, `check-build.sh` passes, and a live local-server + headless-Chromium
+pass confirmed clicking the Dig tab's Crate Dig button opens a new random
+listened genre (document title changed), with both `listen-experience-mode`
+and `dc-discovery-console` CSS classes applied and no console errors.
+
 **Natural next steps for whoever continues this**:
-1. `listening-room.js`'s wrap shapes still aren't checked — do that survey
-   before touching it (it depends on `filterGenresForArchive`/
-   `openAdjacentGenre` from two already-relocated Phase 2 files, so trace
-   that interaction carefully, same as Phase 2 did).
-2. The two shape-3 files (`studio-polish.js`'s early-exit guard,
+1. The two shape-3 files (`studio-polish.js`'s early-exit guard,
    `ranks-polish.js`'s full-reimplementation of `renderRankings`/`moveRank`)
    are what's left of the hard cases. The new override-hook registry
    (`dgRegisterOverrideHook`/`dgRunOverrideHooks`, added this step) is very
@@ -376,12 +414,12 @@ console errors.
 
 **Remaining phases after Phase 3**:
 
-- **Phase 3 (continued)** — Convert the harder files listed above, one at a
-  time, each with its own before/after characterization-test pass extending
-  Phase 0's suite. `listening-room.js` and the two shape-3 files
-  (`studio-polish.js`/`ranks-polish.js`) are what's left — `genre-identity.js`
-  and `song-identity-roles.js`, the two riskiest files originally called out
-  here, are now both fully converted.
+- **Phase 3 (continued)** — Convert the two remaining shape-3 files
+  (`studio-polish.js`/`ranks-polish.js`), each with its own before/after
+  characterization-test pass extending Phase 0's suite. Every other file
+  originally called out (`genre-identity.js`, `song-identity-roles.js`,
+  `listening-room.js`) is now fully converted (or, for the one genuinely
+  dead wrap found in `listening-room.js`, confirmed to need no conversion).
 - **Phase 4 (optional)** — Real ES module boundaries (`<script type="module">`,
   explicit `export`/`import`) once Phase 3's hook pattern has replaced the
   reassignment-based patches. GitHub Pages serves ES modules natively, no
@@ -408,8 +446,8 @@ Nothing from Part 1 or Part 2 has been ported yet.
 
 ## How to verify anything in this repo
 
-- `npm test` (`node --test tests/*.test.js`) — 125 tests as of Phase 3's
-  fifth step.
+- `npm test` (`node --test tests/*.test.js`) — 129 tests as of Phase 3's
+  sixth step.
 - `bash tools/check-build.sh` — syntax check, minified-asset sync, JSON
   validity, cache-bust consistency.
 - Local static-server + headless-Chromium screenshots is the standard way
