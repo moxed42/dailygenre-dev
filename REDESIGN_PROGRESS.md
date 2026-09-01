@@ -677,6 +677,21 @@ before any module boundary could be drawn around it.
     dashboard -- hero stats, listening-story summary, filter controls, the
     charts themselves, highlights, artist discovery, songs-in-rotation,
     genre crossovers -- checked out clean at phone/tablet/desktop.
+  - **Studio / Review (`3ec1948`)**: fixed `.studio-thumb` -- the last of
+    the artwork classes flagged (in the Dig step) as a known instance of
+    the alt-text-overflow pattern. Confirmed via live inspection most uses
+    already have `alt=""` (decorative, no risk -- e.g. the Repair Bay row
+    thumbnails render correctly today), but
+    `updateVisibleAlbumRepairThumb()` sets `alt="Album art"` on one path,
+    which could still overflow the small 48px box if that image fails to
+    load. Same `overflow:hidden` + small centered fallback fix, with
+    `white-space:nowrap`/`text-overflow:ellipsis` since it's a small
+    thumbnail (matching the Album Dive shelf-thumbnail fix). This was the
+    last screen carrying a known deferred instance of this bug pattern --
+    every artwork class across the app has now been checked. Otherwise the
+    Studio Workbench overview, Routing Desk, Genre Identity, Repair Bay
+    (including its expanded metadata/artwork repair forms), and QA Lab
+    checked out clean at phone/tablet/desktop.
 
   Each screen: verified with `npm test` (136/136 as of the Library step, the
   one pre-existing rAF-timing flake in `router-switch-screen.test.js`
