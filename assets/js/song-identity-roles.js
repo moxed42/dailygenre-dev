@@ -336,15 +336,16 @@
       .join('\n');
   }
 
-  const originalNormalizeSongsListened = getBinding('normalizeSongsListened');
-  function patchedNormalizeSongsListened(arr) {
-    const source = Array.isArray(arr) ? arr : [];
-    const normalized = typeof originalNormalizeSongsListened === 'function'
-      ? originalNormalizeSongsListened(source)
-      : source.map(song => ({ ...song }));
-
-    normalized.forEach((song, index) => {
-      const raw = source[index] || {};
+  // normalizeSongsListened(arr) now calls dgRunPostHooks('normalizeSongsListened',
+  // normalized, source) with its own result array right before returning it.
+  // This hook mutates each already-normalized song object in place (it never
+  // needs to replace the array itself), so the plain post-hook mechanism is
+  // sufficient here even though the wrap used to "transform a return value" --
+  // mutation-in-place has the same effect as a real browser sees it, since
+  // the caller and the hook share the same array/object references.
+  function stampQueueRolesOntoNormalized(normalized, source) {
+    (normalized || []).forEach((song, index) => {
+      const raw = (source || [])[index] || {};
       const role = roleForSong(raw);
       if (role) {
         stampRole(song, role, Number(raw.identityIndex ?? -1));
@@ -358,8 +359,6 @@
       if (raw.__bulkIdentityRoleIgnored) song.__bulkIdentityRoleIgnored = raw.__bulkIdentityRoleIgnored;
       if (raw._bulkRow) song._bulkRow = raw._bulkRow;
     });
-
-    return normalized;
   }
 
   function normalizeLoose(value = '') {
@@ -595,77 +594,81 @@
     return true;
   }
 
-  const originalFinalize = getBinding('finalizeListeningUpdatesBeforeSave');
-  function patchedFinalizeListeningUpdatesBeforeSave() {
-    const genre = currentGenreValue();
-    markQueueModeFromTextarea(genre);
-    reconcileQueueRolesFromTextarea(genre);
-    syncIdentityMirrorsFromQueue(genre);
-
-    const result = typeof originalFinalize === 'function' ? originalFinalize() : undefined;
-
-    reconcileQueueRolesFromTextarea(genre);
-    syncIdentityMirrorsFromQueue(genre);
-    return result;
+  // finalizeListeningUpdatesBeforeSave: real "before + after" work around an
+  // unconditional call, so this is a clean pre/post hook pair -- no state
+  // hand-off needed since both sides just re-fetch currentGenreValue().
+  function registerFinalizeListeningUpdatesHooks() {
+    window.dgRegisterPreHook?.('finalizeListeningUpdatesBeforeSave', () => {
+      const genre = currentGenreValue();
+      markQueueModeFromTextarea(genre);
+      reconcileQueueRolesFromTextarea(genre);
+      syncIdentityMirrorsFromQueue(genre);
+    });
+    window.dgRegisterPostHook?.('finalizeListeningUpdatesBeforeSave', () => {
+      const genre = currentGenreValue();
+      reconcileQueueRolesFromTextarea(genre);
+      syncIdentityMirrorsFromQueue(genre);
+    });
   }
 
-  const originalFilterIdentityDuplicates = getBinding('filterNewSongsAlreadyRepresentedByGenreIdentity');
-  function patchedFilterNewSongsAlreadyRepresentedByGenreIdentity(resolved, previous, genre) {
-    if (genre?.identityQueueRolesEnabled || genre?.identityRolesSource === QUEUE_ROLE_MARKER || hasQueueRoles(resolved)) {
-      return { songs: Array.isArray(resolved) ? resolved : [], skipped: [] };
-    }
-    if (typeof originalFilterIdentityDuplicates === 'function') {
-      return originalFilterIdentityDuplicates(resolved, previous, genre);
-    }
-    return { songs: Array.isArray(resolved) ? resolved : [], skipped: [] };
-  }
-
-  const originalApplySongsBulkAndSave = getBinding('applySongsBulkAndSave');
-  async function patchedApplySongsBulkAndSave(button = null, options = {}) {
-    if (!validateAndApproveCurrentBlock()) return false;
-    markQueueModeFromTextarea();
-    if (typeof originalApplySongsBulkAndSave === 'function') {
-      return originalApplySongsBulkAndSave(button, options);
-    }
-    return false;
-  }
-
-  const originalPrepareAndSaveCurrentGenre = getBinding('prepareAndSaveCurrentGenre');
-  async function patchedPrepareAndSaveCurrentGenre(options = {}) {
-    if (!validateAndApproveCurrentBlock()) return false;
-    markQueueModeFromTextarea();
-    if (typeof originalPrepareAndSaveCurrentGenre === 'function') {
-      return originalPrepareAndSaveCurrentGenre(options);
-    }
-    return false;
-  }
-
-  const originalSaveLibraryUpdates = getBinding('saveLibraryUpdates');
-  async function patchedSaveLibraryUpdates(...args) {
-    if (!validateAndApproveCurrentBlock()) return false;
-    markQueueModeFromTextarea();
-    if (typeof originalSaveLibraryUpdates === 'function') {
-      return originalSaveLibraryUpdates(...args);
-    }
-    return false;
-  }
-
-  const originalDoSaveWithPassword = getBinding('doSaveWithPassword');
-  async function patchedDoSaveWithPassword(password) {
-    if (!validateAndApproveCurrentBlock()) {
-      const error = new Error('Save cancelled so duplicate or role warnings can be reviewed.');
-      error.code = 'USER_CANCELLED';
-      throw error;
-    }
-    markQueueModeFromTextarea();
-    try {
-      if (typeof originalDoSaveWithPassword === 'function') {
-        return await originalDoSaveWithPassword(password);
+  // filterNewSongsAlreadyRepresentedByGenreIdentity: a genuine conditional
+  // bypass -- when queue roles are active, this replaces the base's identity
+  // de-duplication entirely rather than running around it. That's exactly
+  // what an override hook is for.
+  function registerFilterIdentityDuplicatesOverride() {
+    window.dgRegisterOverrideHook?.('filterNewSongsAlreadyRepresentedByGenreIdentity', (resolved, previous, genre) => {
+      if (genre?.identityQueueRolesEnabled || genre?.identityRolesSource === QUEUE_ROLE_MARKER || hasQueueRoles(resolved)) {
+        return { result: { songs: Array.isArray(resolved) ? resolved : [], skipped: [] } };
       }
-      return null;
-    } finally {
+      return undefined;
+    });
+  }
+
+  // The 4 save-path gate functions all share the same shape: validate the
+  // pasted song block, and if it fails, abort *before* the base function's
+  // own logic runs at all (not just react after it). Each one previously
+  // captured "original" and called it conditionally; now each registers an
+  // override hook that does the identical gate-then-side-effect, and lets
+  // the base function run normally (by returning undefined) once the gate
+  // passes.
+  function registerSaveGateOverrides() {
+    window.dgRegisterOverrideHook?.('applySongsBulkAndSave', () => {
+      if (!validateAndApproveCurrentBlock()) return { result: false };
+      markQueueModeFromTextarea();
+      return undefined;
+    });
+    window.dgRegisterOverrideHook?.('prepareAndSaveCurrentGenre', () => {
+      if (!validateAndApproveCurrentBlock()) return { result: false };
+      markQueueModeFromTextarea();
+      return undefined;
+    });
+    window.dgRegisterOverrideHook?.('saveLibraryUpdates', () => {
+      if (!validateAndApproveCurrentBlock()) return { result: false };
+      markQueueModeFromTextarea();
+      return undefined;
+    });
+    window.dgRegisterOverrideHook?.('doSaveWithPassword', () => {
+      if (!validateAndApproveCurrentBlock()) {
+        const error = new Error('Save cancelled so duplicate or role warnings can be reviewed.');
+        error.code = 'USER_CANCELLED';
+        throw error;
+      }
+      markQueueModeFromTextarea();
+      return undefined;
+    });
+  }
+
+  // doSaveWithPassword's gate used to reset approvedSignature in a `finally`
+  // wrapped around the *entire* original call (join-in-flight branch, the
+  // real save attempt, success or failure) -- not something an override hook
+  // (which only runs before the base logic) can express. The base function
+  // now has its own outer try/finally that calls dgRunPostHooks('doSaveWithPassword')
+  // once the whole attempt has settled (awaiting the joined promise too, so
+  // the timing matches exactly), so this is registered as a post-hook.
+  function registerDoSaveWithPasswordSignatureReset() {
+    window.dgRegisterPostHook?.('doSaveWithPassword', () => {
       approvedSignature = '';
-    }
+    });
   }
 
   function wrapIdentityQueueInjection() {
@@ -777,16 +780,26 @@
     textarea.insertAdjacentElement('afterend', note);
   }
 
+  // parseSongLinks and buildSongsBulkEditorText aren't wraps at all -- there's
+  // no "original" being extended, these two fully own the bulk-editor text
+  // format (including the SEMINAL/MEDIA role columns) and always have. They
+  // stay as direct global installs; the hook registry is for adding behavior
+  // around an existing base implementation, and there isn't one here to hook.
   installGlobal('parseSongLinks', patchedParseSongLinks);
   installGlobal('buildSongsBulkEditorText', patchedBuildSongsBulkEditorText);
-  installGlobal('normalizeSongsListened', patchedNormalizeSongsListened);
-  installGlobal('filterNewSongsAlreadyRepresentedByGenreIdentity', patchedFilterNewSongsAlreadyRepresentedByGenreIdentity);
-  installGlobal('finalizeListeningUpdatesBeforeSave', patchedFinalizeListeningUpdatesBeforeSave);
-  installGlobal('applySongsBulkAndSave', patchedApplySongsBulkAndSave);
-  installGlobal('overwriteSongsBulkAndSave', button => patchedApplySongsBulkAndSave(button, { overwriteSongs: true }));
-  installGlobal('prepareAndSaveCurrentGenre', patchedPrepareAndSaveCurrentGenre);
-  installGlobal('saveLibraryUpdates', patchedSaveLibraryUpdates);
-  installGlobal('doSaveWithPassword', patchedDoSaveWithPassword);
+
+  window.dgRegisterPostHook?.('normalizeSongsListened', stampQueueRolesOntoNormalized);
+  registerFilterIdentityDuplicatesOverride();
+  registerFinalizeListeningUpdatesHooks();
+  registerSaveGateOverrides();
+  registerDoSaveWithPasswordSignatureReset();
+
+  // overwriteSongsBulkAndSave used to need its own reassignment here because
+  // it had to call the *patched* applySongsBulkAndSave to pick up the gate.
+  // Now that the gate lives inside applySongsBulkAndSave itself (as an
+  // override hook), app.js's own window.overwriteSongsBulkAndSave --
+  // `(button) => applySongsBulkAndSave(button, { overwriteSongs: true })`
+  // -- already calls through correctly, so there's nothing left to install here.
 
   wrapIdentityQueueInjection();
   simplifyIdentityEditor();

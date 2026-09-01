@@ -174,6 +174,41 @@ function dgRunPreHooks(name, ...args) {
 window.dgRegisterPreHook = dgRegisterPreHook;
 window.dgRunPreHooks = dgRunPreHooks;
 
+// Override-hook registry: for the handful of wraps that don't just react
+// around a base function but conditionally *replace* its result -- e.g. "if
+// the queue-role save format is active, skip the base's own duplicate check
+// and return this instead." A pre/post hook can't express that (the base
+// always runs); an override hook can veto the base entirely. A base function
+// calls dgRunOverrideHooks('name', ...args) as its literal first line; if the
+// call returns a truthy object (shape { result }), the base returns
+// override.result immediately without running its own logic. Registered
+// hooks run in order and the first one to return an object wins -- a hook
+// that doesn't want to override returns undefined so the next hook (or the
+// base itself) gets to decide. Unlike post-hooks, an override hook's
+// exceptions are NOT swallowed: a hook can throw deliberately to make the
+// base function itself throw (e.g. rejecting a save with a specific error),
+// exactly like a monkey-patch wrap that threw before calling the original.
+const dgOverrideHooks = Object.create(null);
+
+function dgRegisterOverrideHook(name, fn) {
+  if (typeof fn !== 'function') return;
+  if (!dgOverrideHooks[name]) dgOverrideHooks[name] = [];
+  dgOverrideHooks[name].push(fn);
+}
+
+function dgRunOverrideHooks(name, ...args) {
+  const hooks = dgOverrideHooks[name];
+  if (!hooks || !hooks.length) return undefined;
+  for (const hook of hooks) {
+    const outcome = hook(...args);
+    if (outcome && typeof outcome === 'object') return outcome;
+  }
+  return undefined;
+}
+
+window.dgRegisterOverrideHook = dgRegisterOverrideHook;
+window.dgRunOverrideHooks = dgRunOverrideHooks;
+
 // Shared modal accessibility helper: traps Tab focus inside the modal,
 // closes on Escape, and restores focus to whatever triggered the modal
 // once it closes. Reused by the password-save modal and the Spotify

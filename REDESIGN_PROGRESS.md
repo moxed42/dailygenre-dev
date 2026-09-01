@@ -247,33 +247,141 @@ and shows the DNA card; clicking a song's reaction control still shows the
 "Reaction selected" toast and the unsaved-changes panel with no console
 errors — the full pre-hook → base logic → post-hook chain works for all 3.
 
+**Fourth step (done)** — Converted `renderHistory`'s wrap. Added
+`dgRunPostHooks('renderHistory', options)` to all 3 of `renderHistory`'s
+exit points in `core/rankings-archive.js` (the "no list element" guard, the
+"no matching entries" empty state, and the normal fall-through — the old
+wrap only cared about the return value, not which internal branch produced
+it, so the hook needed to fire in every case, not just the common one).
+`genre-identity.js`'s `patchLibraryAliasFallback()` no longer reassigns
+`window.renderHistory`; it registers a post-hook doing the identical
+alias-fallback retry (temporarily swap the search box to a matched alias's
+canonical genre name, re-render, restore). That retry now calls
+`window.renderHistory()` directly (there's no more pre-wrap "original" to
+fall back to) — traced through deliberately: the nested call's own post-hook
+invocation sees `.archive-card` already populated and returns immediately,
+so it doesn't recurse further. Confirmed no other file wraps `renderHistory`.
+Verified: 119/119 tests (one unrelated pre-existing rAF-timing flake
+reproduced and cleared on re-run, as in earlier phases), `check-build.sh`
+passes, live local-server + headless-Chromium pass confirmed the Archive
+screen renders all entries and a search term ("hip hop") correctly filters
+the list with no console errors.
+
+**Fifth step (done) — the save pipeline** (`song-identity-roles.js`, the
+highest-blast-radius file): its wrap shapes turned out to be genuinely
+different from everything converted so far, and not all expressible with
+the existing pre/post hook registries. Full survey of its 9 overridden
+functions:
+
+- `normalizeSongsListened`: calls through to the original, then
+  *transforms* the result (stamps role fields onto each item). A plain
+  post-hook can't replace a return value — but since the transform only
+  *mutates* the already-built array's objects in place (never reassigns
+  it), passing that same array by reference into a post-hook works
+  identically: it now does `dgRunPostHooks('normalizeSongsListened',
+  normalized, source)` right before returning `normalized`, and the
+  registered hook mutates items in place exactly as the old wrap did.
+- `finalizeListeningUpdatesBeforeSave`: real work both before and after an
+  unconditional call — a clean pre/post hook pair, no state hand-off needed
+  since both sides just re-fetch `currentGenreValue()` themselves.
+- `filterNewSongsAlreadyRepresentedByGenreIdentity`: a genuine conditional
+  **bypass** — when queue roles are active, it returns a different value
+  instead of running the base's own de-dup logic at all, not around it. No
+  existing hook shape can express "skip the base and substitute this
+  value", so this added a **third hook registry**:
+  `dgRegisterOverrideHook`/`dgRunOverrideHooks` in `utils.js`. A base
+  function calls `dgRunOverrideHooks('name', ...args)` as its literal first
+  line; if any registered hook returns a truthy `{ result }` object, the
+  base returns `override.result` immediately without running its own logic.
+  An override hook that doesn't want to intervene returns `undefined` so
+  the base runs normally. Unlike post-hooks, an override hook's exceptions
+  are NOT swallowed — a hook can throw deliberately to make the base
+  function itself throw, exactly like a wrap that threw before calling the
+  original.
+- `applySongsBulkAndSave`, `prepareAndSaveCurrentGenre`, `saveLibraryUpdates`,
+  `doSaveWithPassword`: all 4 share the same shape — validate the pasted
+  song block first, and if it fails, abort *before* the base's own logic
+  runs at all (3 return `false`, `doSaveWithPassword` throws a
+  `USER_CANCELLED` error). Each now registers an override hook doing that
+  exact gate-then-side-effect (`validateAndApproveCurrentBlock()` +
+  `markQueueModeFromTextarea()`), returning `undefined` to let the base
+  proceed once the gate passes.
+- `doSaveWithPassword` additionally used to reset `approvedSignature = ''`
+  in a `finally` wrapped around the *entire* original call (join-in-flight
+  branch, the real save attempt, success or failure) — not expressible from
+  an override hook, which only runs before the base logic. `doSaveWithPassword`
+  in `app.js` now has its own outer `try/finally` calling
+  `dgRunPostHooks('doSaveWithPassword')` once the whole attempt has settled
+  (the join-in-flight branch now does `return await productionSaveRequestInFlight`
+  instead of a bare `return`, so the finally's timing matches the old wrap's
+  `await` exactly), and `song-identity-roles.js` registers the signature
+  reset as a post-hook.
+- `parseSongLinks` and `buildSongsBulkEditorText`: **not wraps at all** —
+  there's no "original" being extended, these two fully own the bulk-editor
+  text format (including the SEMINAL/MEDIA role columns) and always have.
+  Left as direct `installGlobal()` calls; the hook registry is for adding
+  behavior around an existing base implementation, and there isn't one here
+  to hook onto.
+- `overwriteSongsBulkAndSave`: used to need its own reassignment purely to
+  call the *patched* `applySongsBulkAndSave` instead of the plain one. Now
+  that the gate lives inside `applySongsBulkAndSave` itself, `app.js`'s own
+  `window.overwriteSongsBulkAndSave` already calls through correctly, so
+  this reassignment was deleted outright rather than converted.
+
+Confirmed no other file wraps any of these 9 functions (only plain callers
+elsewhere, e.g. `onclick="saveLibraryUpdates()"` in album-dive.js/
+ranks-polish.js/studio-polish.js, and genre-identity.js calling it directly
+— none reassign it).
+
+New tests: `tests/save-pipeline-queue-roles.test.js` (6 tests), using a new
+`extraScripts` option added to `tests/helpers/app-harness.js` (Phase 0's
+harness deliberately only loaded files up to `app.js`; this option lets a
+specific test layer a post-`app.js` patch file on top, e.g.
+`song-identity-roles.js`, without changing the shared `SCRIPT_ORDER` every
+other test relies on). Covers: a 2×SEMINAL conflict blocking
+`applySongsBulkAndSave` with the same alert as before; a valid block passing
+the gate and marking `identityQueueRolesEnabled`; `doSaveWithPassword`'s
+own dev-sandbox guard still firing first (the queue-roles gate itself isn't
+independently reachable from this sandbox, since the unconditional
+`DEV_SANDBOX_SAVE_DISABLED` throw comes first — same as before this
+conversion); `normalizeSongsListened` still stamping role fields in place;
+and `filterNewSongsAlreadyRepresentedByGenreIdentity` both bypassing and
+falling through correctly depending on queue-role state.
+
+Verified: 125/125 tests pass, `check-build.sh` passes, and a live
+local-server + headless-Chromium pass against the real song bulk editor
+confirmed: a 2×SEMINAL block still triggers the exact same
+"Song block cannot be saved yet... More than one SEMINAL row is present"
+alert and `applySongsBulkAndSave` resolves to `false` without reaching the
+real save pipeline; a corrected (1×SEMINAL) block passes the gate with no
+alert, `identityQueueRolesEnabled` gets set to `true` on the genre, and
+execution proceeds into the real `prepareAndSaveCurrentGenre` chain with no
+console errors.
+
 **Natural next steps for whoever continues this**:
-1. Add a `dgRunPostHooks('renderHistory', ...)` call to `renderHistory`'s
-   own end (in `core/rankings-archive.js`), then convert `genre-identity.js`'s
-   `renderHistory` wrap (confirmed shape 1) and check whether anything else
-   wraps it too.
-2. `listening-room.js`'s wrap shapes still aren't checked — do that survey
+1. `listening-room.js`'s wrap shapes still aren't checked — do that survey
    before touching it (it depends on `filterGenresForArchive`/
    `openAdjacentGenre` from two already-relocated Phase 2 files, so trace
    that interaction carefully, same as Phase 2 did).
-3. `song-identity-roles.js` (the save pipeline, 7 functions) and the two
-   shape-3 files (`studio-polish.js`, `ranks-polish.js`) are the hardest
-   remaining work — tackle last, one at a time, each with new
-   characterization tests first. `studio-polish.js`'s early-exit guard and
-   `ranks-polish.js`'s full-reimplementation pattern may need a different
-   mechanism than hooks entirely (e.g. an explicit "can I run right now"
-   guard callback, or accepting that a full reimplementation should just
-   replace the base function in its home file rather than stay a wrap) —
-   don't assume the hook registry is the right tool for shape 3 without
-   reconsidering it fresh.
+2. The two shape-3 files (`studio-polish.js`'s early-exit guard,
+   `ranks-polish.js`'s full-reimplementation of `renderRankings`/`moveRank`)
+   are what's left of the hard cases. The new override-hook registry
+   (`dgRegisterOverrideHook`/`dgRunOverrideHooks`, added this step) is very
+   likely the right tool for `studio-polish.js`'s conditional early-exit —
+   check that first before reaching for anything new. `ranks-polish.js`'s
+   *full reimplementation* (not a wrap around any original at all) is closer
+   to `parseSongLinks`/`buildSongsBulkEditorText` above: it may not need
+   converting at all, just confirming it's a direct-ownership case like
+   those two rather than something that should be hook-ified.
 
 **Remaining phases after Phase 3**:
 
 - **Phase 3 (continued)** — Convert the harder files listed above, one at a
   time, each with its own before/after characterization-test pass extending
-  Phase 0's suite, starting with the lowest-blast-radius file
-  (`studio-polish.js`/`ranks-polish.js`) and ending with the two riskiest
-  (`song-identity-roles.js`, `genre-identity.js`).
+  Phase 0's suite. `listening-room.js` and the two shape-3 files
+  (`studio-polish.js`/`ranks-polish.js`) are what's left — `genre-identity.js`
+  and `song-identity-roles.js`, the two riskiest files originally called out
+  here, are now both fully converted.
 - **Phase 4 (optional)** — Real ES module boundaries (`<script type="module">`,
   explicit `export`/`import`) once Phase 3's hook pattern has replaced the
   reassignment-based patches. GitHub Pages serves ES modules natively, no
@@ -300,7 +408,8 @@ Nothing from Part 1 or Part 2 has been ported yet.
 
 ## How to verify anything in this repo
 
-- `npm test` (`node --test tests/*.test.js`) — 119 tests as of Phase 2.
+- `npm test` (`node --test tests/*.test.js`) — 125 tests as of Phase 3's
+  fifth step.
 - `bash tools/check-build.sh` — syntax check, minified-asset sync, JSON
   validity, cache-bust consistency.
 - Local static-server + headless-Chromium screenshots is the standard way

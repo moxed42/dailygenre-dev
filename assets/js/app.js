@@ -1283,7 +1283,8 @@ function switchScreen(name, options = {}) {
   }
 
   function normalizeSongsListened(arr) {
-    return (arr || []).map(s => {
+    const source = arr || [];
+    const normalized = source.map(s => {
       const rawUrl = String(s?.url || '');
       const isLevelUp = !!s?.isLevelUp || /^(?:🔼\s*)?LEVEL\s*UP:\s*/i.test(rawUrl);
       const isAdd = !!s?.isAdd || /^(?:🔼\s*)?ADD:\s*/i.test(rawUrl);
@@ -1338,6 +1339,8 @@ function switchScreen(name, options = {}) {
       if (normalized.levelUp) stampLevelUpParent(normalized.levelUp, normalized);
       return normalized;
     });
+    window.dgRunPostHooks?.('normalizeSongsListened', normalized, source);
+    return normalized;
   }
 
     function songUrlLooksPlaceholder(url = '') {
@@ -1458,6 +1461,8 @@ function switchScreen(name, options = {}) {
     }
 
     function filterNewSongsAlreadyRepresentedByGenreIdentity(candidateSongs, previousSongs, genre) {
+      const override = window.dgRunOverrideHooks?.('filterNewSongsAlreadyRepresentedByGenreIdentity', candidateSongs, previousSongs, genre);
+      if (override) return override.result;
       const identityEntries = identityEntriesForSongSave(genre);
       if (!identityEntries.length) return { songs: candidateSongs || [], skipped: [] };
       const previous = inflateSongsFromStorage(previousSongs || []).filter(song => song && !song.isPending);
@@ -1897,6 +1902,8 @@ function switchScreen(name, options = {}) {
     };
 
     async function applySongsBulkAndSave(button = null, options = {}) {
+      const override = window.dgRunOverrideHooks?.('applySongsBulkAndSave', button, options);
+      if (override) return override.result;
       if (!currentGenre) {
         showSaveToast('Open a genre before applying songs.', true);
         return;
@@ -3265,6 +3272,7 @@ Overwrite the selected queue row anyway? This will replace its title, artist, ar
     }
 
     function finalizeListeningUpdatesBeforeSave() {
+      window.dgRunPreHooks?.('finalizeListeningUpdatesBeforeSave');
       if (currentGenre) {
         const studioCleanupSave = !!window.__dgStudioCleanupSavePending && document.getElementById('screen-review')?.classList.contains('active');
         try {
@@ -3277,6 +3285,7 @@ Overwrite the selected queue row anyway? This will replace its title, artist, ar
         }
         ensureCurrentGenreIsInLibrary();
       }
+      window.dgRunPostHooks?.('finalizeListeningUpdatesBeforeSave');
     }
 
     async function applySpotifyOembedFallback(song, url, options = {}) {
@@ -4250,6 +4259,8 @@ Overwrite the selected queue row anyway? This will replace its title, artist, ar
     }
 
 async function prepareAndSaveCurrentGenre(options = {}) {
+      const override = window.dgRunOverrideHooks?.('prepareAndSaveCurrentGenre', options);
+      if (override) return override.result;
       if (!currentGenre) {
         alert('Choose a genre first.');
         return;
@@ -5108,37 +5119,44 @@ function loadListenScreen(genre, options = {}) {
     // verified changes back to the production repo.
     throw Object.assign(new Error('Saving is disabled on the dailygenre-dev sandbox — it shares production data and this prevents accidental writes. Verify saves in production directly.'), { code: 'DEV_SANDBOX_SAVE_DISABLED' });
 
-    if (productionSaveRequestInFlight) {
-      productionSaveRecoveryDiagnostics.joined += 1;
-      console.info(
-        '[Daily Genre] Reusing the save already in progress instead of creating another commit.',
-      );
-      return productionSaveRequestInFlight;
-    }
-
-    productionSaveRecoveryDiagnostics.attempts += 1;
-    productionSaveRecoveryDiagnostics.lastOutcome = 'saving';
-    productionSaveRecoveryDiagnostics.lastError = '';
-
-    const request = performSaveWithPassword(password);
-    productionSaveRequestInFlight = request;
+    const override = window.dgRunOverrideHooks?.('doSaveWithPassword', password);
+    if (override) return override.result;
 
     try {
-      const result = await request;
-      productionSaveRecoveryDiagnostics.successes += 1;
-      productionSaveRecoveryDiagnostics.lastOutcome =
-        result?.recovered ? 'recovered' : 'success';
-      return result;
-    } catch (error) {
-      productionSaveRecoveryDiagnostics.failures += 1;
-      productionSaveRecoveryDiagnostics.lastOutcome = 'failed';
-      productionSaveRecoveryDiagnostics.lastError =
-        String(error?.message || error || 'Unknown save error');
-      throw error;
-    } finally {
-      if (productionSaveRequestInFlight === request) {
-        productionSaveRequestInFlight = null;
+      if (productionSaveRequestInFlight) {
+        productionSaveRecoveryDiagnostics.joined += 1;
+        console.info(
+          '[Daily Genre] Reusing the save already in progress instead of creating another commit.',
+        );
+        return await productionSaveRequestInFlight;
       }
+
+      productionSaveRecoveryDiagnostics.attempts += 1;
+      productionSaveRecoveryDiagnostics.lastOutcome = 'saving';
+      productionSaveRecoveryDiagnostics.lastError = '';
+
+      const request = performSaveWithPassword(password);
+      productionSaveRequestInFlight = request;
+
+      try {
+        const result = await request;
+        productionSaveRecoveryDiagnostics.successes += 1;
+        productionSaveRecoveryDiagnostics.lastOutcome =
+          result?.recovered ? 'recovered' : 'success';
+        return result;
+      } catch (error) {
+        productionSaveRecoveryDiagnostics.failures += 1;
+        productionSaveRecoveryDiagnostics.lastOutcome = 'failed';
+        productionSaveRecoveryDiagnostics.lastError =
+          String(error?.message || error || 'Unknown save error');
+        throw error;
+      } finally {
+        if (productionSaveRequestInFlight === request) {
+          productionSaveRequestInFlight = null;
+        }
+      }
+    } finally {
+      window.dgRunPostHooks?.('doSaveWithPassword');
     }
   }
 
@@ -6964,6 +6982,8 @@ function loadListenScreen(genre, options = {}) {
     }
 
     async function saveLibraryUpdates() {
+      const override = window.dgRunOverrideHooks?.('saveLibraryUpdates');
+      if (override) return override.result;
       finalizeListeningUpdatesBeforeSave();
       if (!libraryUpdatesPending) {
         setLibrarySaveBusy(false);

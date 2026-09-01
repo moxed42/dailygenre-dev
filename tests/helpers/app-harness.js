@@ -66,6 +66,12 @@ function extractBodyHtml() {
  *   doesn't call fetch, only functions do, but installing it up front keeps
  *   this harness simple and matches what a real page has available from the
  *   start).
+ * @param {string[]} [options.extraScripts]
+ *   Additional assets/js/*.js filenames to load, in order, immediately after
+ *   SCRIPT_ORDER's app.js -- for tests that specifically need one of the
+ *   post-app.js "-polish"/"-hotfix" patch files present (e.g. verifying a
+ *   hook-registered wrap actually fires), rather than Phase 0's base-only
+ *   scope.
  */
 async function createAppEnvironment(options = {}) {
   const bodyHtml = extractBodyHtml();
@@ -116,7 +122,7 @@ async function createAppEnvironment(options = {}) {
 
   const context = dom.getInternalVMContext();
 
-  for (const filename of SCRIPT_ORDER) {
+  for (const filename of [...SCRIPT_ORDER, ...(options.extraScripts || [])]) {
     const filePath = path.join(REPO_ROOT, "assets", "js", filename);
     const source = fs.readFileSync(filePath, "utf8");
     try {
