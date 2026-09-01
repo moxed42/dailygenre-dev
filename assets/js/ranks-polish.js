@@ -41,10 +41,13 @@
     { rating: "1", label: "Get This Off My Turntable", short: "1★" },
   ];
 
-  const originalRenderRankings =
-    typeof window.renderRankings === "function" ? window.renderRankings : null;
-  const originalMoveRank =
-    typeof window.moveRank === "function" ? window.moveRank : null;
+  // renderRankings is fully replaced below (renderRankingsPolished is a
+  // standalone reimplementation, never calling through to any original --
+  // same direct-ownership shape as song-identity-roles.js's parseSongLinks/
+  // buildSongsBulkEditorText). moveRank, by contrast, is a genuine post-only
+  // wrap (always calls the original, then does extra work) -- see
+  // registerMoveRankPostHook() below, which uses the hook registry instead
+  // of the old window.moveRank reassignment.
 
   function esc(value) {
     if (typeof window.escapeHtml === "function")
@@ -1135,14 +1138,7 @@
         event.stopPropagation();
         const id = btn.dataset.rankId;
         const dir = btn.dataset.rankMove;
-        if (originalMoveRank) originalMoveRank(id, dir);
-        else if (
-          typeof window.moveRank === "function" &&
-          window.moveRank !== moveRankPolished
-        )
-          window.moveRank(id, dir);
-        markRanksDirty("Rank order updated. Save Library Updates to persist.");
-        renderRankingsPolished();
+        if (typeof window.moveRank === "function") window.moveRank(id, dir);
       });
     });
 
@@ -1202,14 +1198,15 @@
     });
   }
 
-  function moveRankPolished(id, direction) {
-    if (originalMoveRank) originalMoveRank(id, direction);
-    markRanksDirty("Rank order updated. Save Library Updates to persist.");
-    renderRankingsPolished();
+  function registerMoveRankPostHook() {
+    window.dgRegisterPostHook?.("moveRank", () => {
+      markRanksDirty("Rank order updated. Save Library Updates to persist.");
+      renderRankingsPolished();
+    });
   }
+  registerMoveRankPostHook();
 
   window.renderRankings = renderRankingsPolished;
-  window.moveRank = moveRankPolished;
   window.DailyGenreRanksPolish = {
     apply: renderRankingsPolished,
     moveGenreToTier,

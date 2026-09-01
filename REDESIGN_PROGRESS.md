@@ -430,25 +430,65 @@ externally (a focused textarea can lose focus to Studio's own periodic
 re-render before the check runs) so it's covered by the jsdom test instead,
 which controls focus deterministically.
 
+**Eighth step (done) — `ranks-polish.js`, the last file — Phase 3 is
+complete**: read the actual wrap bodies rather than assuming the earlier
+classification, same discipline as every step before this one:
+- `renderRankings` — confirmed genuinely a **full reimplementation**.
+  `originalRenderRankings` is captured but grepped and traced through the
+  whole file: it's never called anywhere. `renderRankingsPolished` doesn't
+  extend a base, it fully replaces it — same direct-ownership shape as
+  `parseSongLinks`/`buildSongsBulkEditorText` in `song-identity-roles.js`.
+  Left `window.renderRankings = renderRankingsPolished` exactly as it was;
+  nothing to convert.
+- `moveRank` — the opposite: a genuine plain post-only wrap.
+  `moveRankPolished` always called the captured `originalMoveRank`
+  unconditionally, then did `markRanksDirty(...)` + a re-render. Converted:
+  `moveRank` (`core/rankings-archive.js`) now calls
+  `dgRunPostHooks('moveRank', id, direction)` at all 3 of its exit points
+  (both early-return guards plus the natural end — matching the old wrap's
+  "fires no matter which branch the base took" behavior, the same pattern
+  used for `renderHistory` and `setSongReaction` earlier in this phase).
+  `ranks-polish.js` registers a post-hook doing the identical
+  `markRanksDirty`/re-render instead of reassigning `window.moveRank`. Also
+  simplified a rank-move button's click handler, which used to duplicate
+  `markRanksDirty`/`renderRankingsPolished` calls manually as a fallback in
+  case the wrap hadn't installed yet — now it just calls
+  `window.moveRank(id, dir)` directly, which is always the real,
+  hook-enabled function.
+
+New tests: `tests/ranks-polish-move-rank.test.js` (3 tests). Verified:
+134/134 tests pass, `check-build.sh` passes, and a live local-server +
+headless-Chromium pass against the real Ranks screen confirmed clicking (and
+directly calling) `moveRank` both on a genuine swap (rank_order visibly
+changes between two real genres in the same tier) and at a tier boundary
+(no-op) correctly shows the "Rank order updated..." toast either way, with
+no console errors.
+
+**Phase 3 is now complete.** Every patch file originally cataloged
+(`library-polish.js`, `genre-identity.js`, `genre-identity-alias-editor.js`,
+`songs.js`, `song-identity-roles.js`, `listening-room.js`,
+`studio-polish.js`, `ranks-polish.js`) has been converted from
+monkey-patching to the hook registry, or — for the handful of cases that
+turned out not to be wraps at all (`parseSongLinks`/`buildSongsBulkEditorText`
+in `song-identity-roles.js`, `renderRankingsPolished` in `ranks-polish.js`,
+and one dead wrap of `filterGenresForArchive` found in both
+`listening-room.js` and `core/library-parent-category-filter.js`) —
+confirmed and left as direct ownership rather than forced into a hook shape
+that wouldn't fit. `repair-bay-global-delete.js` and `visuals.js` were
+deprioritized early on (mostly define new handlers/diagnostics rather than
+overriding existing ones) and were never revisited — a reasonable stopping
+point, but worth a final grep-for-`window\.\w+\s*=` pass before calling the
+whole codebase reassignment-free.
+
 **Natural next steps for whoever continues this**:
-1. `ranks-polish.js`'s wraps of `renderRankings`/`moveRank` are the last
-   item. `renderRankingsPolished` was classified as a **full
-   reimplementation**, not a thin wrapper — closer to
-   `parseSongLinks`/`buildSongsBulkEditorText` (direct ownership, nothing to
-   hook onto) than to `renderReview`'s conditional-bypass shape. Confirm
-   that classification by reading the actual wrap body before deciding
-   whether any conversion is needed at all, same as this step did for
-   `filterGenresForArchive` (found dead) and for `renderReview` (found a
-   real override-hook case) — don't assume either verdict without checking.
+1. Optionally sweep `repair-bay-global-delete.js` and `visuals.js` for any
+   overrides that got missed — they were deprioritized rather than
+   confirmed clean.
+2. Decide on Phase 4 (ES modules) or move straight to Phase 5 (the UX/visual
+   redesign) — see below.
 
-**Remaining phases after Phase 3**:
+**Remaining phases**:
 
-- **Phase 3 (continued)** — Investigate `ranks-polish.js`'s
-  `renderRankings`/`moveRank` wraps (the last unclassified case) and convert
-  if it turns out to need it. Every other file originally called out
-  (`genre-identity.js`, `song-identity-roles.js`, `listening-room.js`,
-  `studio-polish.js`) is now fully converted (or, for the one genuinely dead
-  wrap found in `listening-room.js`, confirmed to need no conversion).
 - **Phase 4 (optional)** — Real ES module boundaries (`<script type="module">`,
   explicit `export`/`import`) once Phase 3's hook pattern has replaced the
   reassignment-based patches. GitHub Pages serves ES modules natively, no
@@ -475,8 +515,8 @@ Nothing from Part 1 or Part 2 has been ported yet.
 
 ## How to verify anything in this repo
 
-- `npm test` (`node --test tests/*.test.js`) — 131 tests as of Phase 3's
-  seventh step.
+- `npm test` (`node --test tests/*.test.js`) — 134 tests as of Phase 3's
+  eighth (final) step.
 - `bash tools/check-build.sh` — syntax check, minified-asset sync, JSON
   validity, cache-bust consistency.
 - Local static-server + headless-Chromium screenshots is the standard way

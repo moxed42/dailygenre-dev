@@ -7,12 +7,18 @@
 
     function moveRank(id, direction) {
       const item = getGenreById(id);
-      if (!item || !item.rating || item.rating === 'zanger') return;
+      if (!item || !item.rating || item.rating === 'zanger') {
+        window.dgRunPostHooks?.('moveRank', id, direction);
+        return;
+      }
 
       const tierItems = rankedGenresForTier(item.rating);
       const index = tierItems.findIndex(g => String(g.id) === String(item.id));
       const swapIndex = direction === 'up' ? index - 1 : index + 1;
-      if (swapIndex < 0 || swapIndex >= tierItems.length) return;
+      if (swapIndex < 0 || swapIndex >= tierItems.length) {
+        window.dgRunPostHooks?.('moveRank', id, direction);
+        return;
+      }
 
       const other = tierItems[swapIndex];
       const temp = item.rank_order;
@@ -21,6 +27,7 @@
 
       ensureRankOrderForRating(item.rating);
       renderRankings();
+      window.dgRunPostHooks?.('moveRank', id, direction);
     }
 
     function renderRankings() {
