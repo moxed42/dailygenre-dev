@@ -204,16 +204,8 @@ untouched.
   `saveLibraryUpdates`) — not yet individually classified by shape; highest
   blast radius of any remaining file, inspect each wrap body before touching
   anything here.
-- `songs.js` — wraps `loadListenScreen` and `setSongReaction`. **Correction
-  after closer inspection**: both are actually **shape 2** (before+after),
-  not shape 1 as first assumed from memory without re-reading the wrap body
-  — both capture the scroll position (`window.scrollX`/`scrollY`)
-  *immediately before* calling the original, specifically so they can
-  restore that pre-call position afterward and counteract a scroll-jump the
-  render might cause. A pure post-hook can't see "scroll position before
-  the call started" from inside the base function's own end — by then it's
-  too late, the jump may have already happened. Needs the same pre-hook
-  mechanism `openGenreDetail` needs. Left as monkey-patches.
+- `songs.js` — wraps `loadListenScreen` and `setSongReaction`. Both were
+  shape 2 (before+after) — **converted in the third step, see below**.
 - `listening-room.js` — wraps `filterGenres`, `openCrateDig`,
   `openRandomListenedGenre`; shape not yet checked. Also depends on
   `filterGenresForArchive`/`openAdjacentGenre`, which
@@ -227,32 +219,53 @@ untouched.
   more a Phase-1-style "this file is huge, could be split later" candidate.
   Deprioritized.
 
+**Third step (done)** — Added the pre-hook counterpart
+(`dgRegisterPreHook`/`dgRunPreHooks`, same file) to handle shape-2 wraps: a
+base function calls `dgRunPreHooks('name', ...)` as its literal first line
+(unconditionally, before any of its own guard/early-return logic), and
+`dgRunPostHooks(...)` at each exit point as before. The registry doesn't
+correlate a pre/post pair itself — passing state from a pre-hook to its
+matching post-hook is the registrant's own job (a small stack/array works
+well, since pre/post for one invocation always fire back-to-back within
+that invocation's own synchronous call, even when the actual visual effect
+is `setTimeout`-deferred — so a stack handles reentrant calls correctly).
+
+Wired `dgRunPreHooks` into `openGenreDetail`, `loadListenScreen`, and
+`setSongReaction` (all in `app.js` — the last of these wasn't hook-enabled
+at all before this, so it got both pre- and post-hook calls added at every
+exit path). Converted all 3 shape-2 wraps identified so far:
+- `genre-identity.js`'s `openGenreDetail` wrap (pushState before,
+  replaceState after — now a pre-hook and a post-hook).
+- `songs.js`'s `loadListenScreen` wrap (scroll-position capture/restore
+  around the song-carousel enhancement).
+- `songs.js`'s `setSongReaction` wrap (anchor-position/scroll capture and
+  restore around a reaction toggle, so the viewport doesn't jump when the
+  song list re-renders).
+
+Verified live: genre-detail opening still pushes the right `#genre=` hash
+and shows the DNA card; clicking a song's reaction control still shows the
+"Reaction selected" toast and the unsaved-changes panel with no console
+errors — the full pre-hook → base logic → post-hook chain works for all 3.
+
 **Natural next steps for whoever continues this**:
 1. Add a `dgRunPostHooks('renderHistory', ...)` call to `renderHistory`'s
    own end (in `core/rankings-archive.js`), then convert `genre-identity.js`'s
    `renderHistory` wrap (confirmed shape 1) and check whether anything else
    wraps it too.
-2. Design and add a pre-hook counterpart (`dgRegisterPreHook`/`dgRunPreHooks`)
-   to the registry in `assets/js/utils.js` — needed for every shape-2 wrap
-   found so far (`openGenreDetail` in genre-identity.js; both of songs.js's
-   wraps). This is a real design decision (where exactly do "before" hooks
-   fire relative to a function's own guard/early-return logic, do they get
-   veto power over the base function running at all, etc.) — worth deciding
-   deliberately with fresh eyes, not bolted on in a rush.
-3. After the pre-hook mechanism exists: convert `openGenreDetail`'s wrap in
-   genre-identity.js, then both of `songs.js`'s wraps.
-4. `listening-room.js`'s wrap shapes still aren't checked — do that survey
-   before touching it.
-5. `song-identity-roles.js` (the save pipeline, 7 functions) and the two
+2. `listening-room.js`'s wrap shapes still aren't checked — do that survey
+   before touching it (it depends on `filterGenresForArchive`/
+   `openAdjacentGenre` from two already-relocated Phase 2 files, so trace
+   that interaction carefully, same as Phase 2 did).
+3. `song-identity-roles.js` (the save pipeline, 7 functions) and the two
    shape-3 files (`studio-polish.js`, `ranks-polish.js`) are the hardest
    remaining work — tackle last, one at a time, each with new
    characterization tests first. `studio-polish.js`'s early-exit guard and
-   `ranks-polish.js`'s full-reimplementation pattern may turn out to need a
-   different mechanism than hooks entirely (e.g. an explicit "can I run
-   right now" guard callback, or accepting that a full reimplementation
-   should just replace the base function in its home file rather than stay
-   a wrap) — don't assume the hook registry is the right tool for shape 3
-   without reconsidering it fresh.
+   `ranks-polish.js`'s full-reimplementation pattern may need a different
+   mechanism than hooks entirely (e.g. an explicit "can I run right now"
+   guard callback, or accepting that a full reimplementation should just
+   replace the base function in its home file rather than stay a wrap) —
+   don't assume the hook registry is the right tool for shape 3 without
+   reconsidering it fresh.
 
 **Remaining phases after Phase 3**:
 
