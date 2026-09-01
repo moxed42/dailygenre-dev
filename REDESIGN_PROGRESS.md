@@ -743,3 +743,42 @@ Nothing from Part 1 or Part 2 has been ported yet.
   (`/opt/pw-browsers/chromium-1194/chrome-linux/chrome`, `NODE_PATH=/opt/node22/lib/node_modules`)
   — mock the Worker/GitHub API endpoints via `page.route()` since the sandbox
   has no real network access to them either.
+
+## Part 3 — UX & Feature Redesign (in progress)
+
+With Phase 5's bug-fixing pass done, the user asked for a genuine
+design/UX-perspective review layered on top: navigation, flows, information
+architecture, feature gaps, content density — explicitly keeping the Retro
+Hi-Fi visual theme intact. A Plan-agent audit found the nav's "9 tabs"
+weren't 9 real places (3 had no `data-screen` at all, just verb buttons
+calling `openGenreDetail()` into the same screen). Full plan, all phases,
+lives in the plan file this session used — see there for Phases 7-12
+(mobile bottom nav, save-flow friction, Studio simplification, a real
+recommendation rail, onboarding/progress chip, consistency pass) and the
+explicit "not recommending" list (don't merge Spin into Listen, don't merge
+Library/Ranks, don't cut Game Room, don't touch the theme, etc.).
+
+**Phase 6 (`b9d4cc9`) — collapse nav to real destinations, demote Today/Dig/
+Album Dive into the Listen screen**: replaced the 3 verb buttons
+(`#topTodayBtn`/`#topCrateDigBtn`/`#topAlbumDiveBtn`, none of which had
+`data-screen`) with one real "Listen" tab, and moved the 3 buttons into a
+new header row inside `#screen-listen` itself — same elements/IDs/classes,
+so every existing handler kept working unchanged, just physically
+relocated. Two follow-on fixes found via live testing rather than assumed:
+the Listen tab needed its own `window.DailyGenreToday.open()` default (not
+a bare `switchScreen`) so clicking it from elsewhere still jumps straight
+to today's genre in one click; and `openCrateDig()`/`openCurrentAlbumDive()`
+used to manually force-highlight themselves as the "active tab" (correct
+when they were real top-level tabs, stale now) — deleted rather than
+redirected, since `switchScreen('listen')` (already called via
+`openGenreDetail`) highlights the real Listen tab on its own. Added a
+one-line status ("Today: X · in progress" / "Nothing logged today · last
+was Y") above the action row, and made the Album Dive button disable
+itself with an explanatory title when there's no active dive instead of
+leaving a click that just toasts an error. Nav: 9 buttons → 7 real
+destinations (Spin, Listen, Library, Game Room, Stats, Studio, Ranks —
+Game Room staying a peer tab for now is a deliberate smaller scope, not an
+oversight). Verified: 136/136 tests, `check-build.sh`, live phone/desktop
+passes confirming the one-click Listen-tab default, correct tab
+highlighting through Crate Dig/Album Dive/opening a genre from Library,
+and clean mobile wrapping of the new header row.
