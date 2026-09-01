@@ -1650,12 +1650,11 @@
   }
 
   function patchLibraryAliasFallback() {
-    const original = window.renderHistory;
-    if (typeof original !== "function" || original.__identityWrapped) return;
-    function wrapped() {
+    if (window.__dailyGenreLibraryAliasFallbackWrapped) return;
+    window.__dailyGenreLibraryAliasFallbackWrapped = true;
+    window.dgRegisterPostHook?.("renderHistory", (...args) => {
       const search = $("#archiveSearchInput");
       const raw = search?.value || "";
-      const result = original.apply(this, arguments);
       if (search && raw.trim()) {
         setTimeout(() => {
           const list = $("#historyList");
@@ -1669,16 +1668,13 @@
           const previous = search.value;
           search.value = matches[0].genre || previous;
           try {
-            original.apply(this, arguments);
+            window.renderHistory.apply(null, args);
           } finally {
             search.value = previous;
           }
         }, 0);
       }
-      return result;
-    }
-    wrapped.__identityWrapped = true;
-    window.renderHistory = wrapped;
+    });
   }
 
   // Phase 3 of the architectural redesign: loadListenScreen now calls

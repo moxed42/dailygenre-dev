@@ -809,7 +809,10 @@
       const sortEl =
         document.getElementById('archiveSortFilter');
       const list = document.getElementById('historyList');
-      if (!list) return;
+      if (!list) {
+        window.dgRunPostHooks?.('renderHistory', options);
+        return;
+      }
 
       const filters = {
         month: monthEl ? monthEl.value : '',
@@ -860,6 +863,7 @@
         );
         renderArchiveSummary(items, label);
         archiveUpdatePlaylistButtons();
+        window.dgRunPostHooks?.('renderHistory', options);
         return;
       }
 
@@ -878,6 +882,7 @@
       if (!renderResult?.reused) {
         renderArchiveSummary(items, label);
       }
+      window.dgRunPostHooks?.('renderHistory', options);
     }
 
     function archiveVisiblePlaylistGenreIds() {
