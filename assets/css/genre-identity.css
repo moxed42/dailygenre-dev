@@ -44,7 +44,7 @@
 .genre-identity-picker label > span,
 .genre-identity-form label > span,
 .genre-identity-section-title {
-  color: var(--muted, #735a3c);
+  color: var(--muted);
   font-size: 0.72rem;
   font-weight: 950;
   letter-spacing: 0.1em;
@@ -73,7 +73,7 @@
 }
 
 .genre-identity-form small {
-  color: var(--muted, #735a3c);
+  color: var(--muted);
   font-weight: 600;
 }
 
@@ -96,7 +96,7 @@
 
 .genre-media-row legend {
   padding: 0 8px;
-  color: var(--accent-dark, #7a4714);
+  color: var(--accent-dark);
   font-weight: 950;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -150,7 +150,7 @@
 }
 
 .genre-identity-dna-box span {
-  color: var(--muted, #735a3c);
+  color: var(--muted);
   font-size: 0.68rem;
   font-weight: 950;
   letter-spacing: 0.11em;
@@ -158,13 +158,13 @@
 }
 
 .genre-identity-dna-box strong {
-  color: var(--text, #22160d);
+  color: var(--text);
   font-size: 0.94rem;
   line-height: 1.18;
 }
 
 .genre-identity-dna-box a {
-  color: var(--accent-dark, #7a4714);
+  color: var(--accent-dark);
   text-decoration: none;
 }
 
@@ -174,7 +174,7 @@
 
 .genre-identity-dna-box em,
 .genre-identity-dna-box small {
-  color: var(--muted, #735a3c);
+  color: var(--muted);
   font-size: 0.78rem;
   line-height: 1.3;
 }
@@ -216,7 +216,7 @@
 
 .genre-identity-alias-line span {
   font-style: normal;
-  color: var(--accent-soft, #ffe0a1);
+  color: var(--accent-soft);
   font-weight: 800;
 }
 
@@ -229,7 +229,7 @@
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.34);
   border: 1px solid rgba(153, 102, 37, 0.2);
-  color: var(--accent-dark, #7a4714);
+  color: var(--accent-dark);
   font-size: 0.76rem;
   font-weight: 900;
 }
@@ -250,7 +250,7 @@
 
 .genre-identity-alias-card span,
 .genre-identity-track-kicker {
-  color: var(--muted, #735a3c);
+  color: var(--muted);
   font-size: 0.68rem;
   font-weight: 950;
   letter-spacing: 0.12em;
@@ -295,8 +295,8 @@
   border-radius: 999px;
   display: grid;
   place-items: center;
-  background: var(--accent-soft, #ffe0a1);
-  color: var(--accent-dark, #7a4714);
+  background: var(--accent-soft);
+  color: var(--accent-dark);
   font-weight: 950;
   border: 1px solid rgba(153, 102, 37, 0.24);
 }
@@ -313,18 +313,18 @@
 }
 
 .genre-identity-track-main a {
-  color: var(--text, #22160d);
+  color: var(--text);
   text-decoration: none;
 }
 
 .genre-identity-track-main a:hover {
-  color: var(--accent-dark, #7a4714);
+  color: var(--accent-dark);
   text-decoration: underline;
 }
 
 .genre-identity-track-main small,
 .genre-identity-track-main em {
-  color: var(--muted, #735a3c);
+  color: var(--muted);
   line-height: 1.3;
 }
 
@@ -370,8 +370,8 @@
 .discovery-console .detail-record-card .genre-identity-alias-line {
   color: color-mix(
     in srgb,
-    var(--muted, #735a3c) 78%,
-    var(--text, #22160d)
+    var(--muted) 78%,
+    var(--text)
   ) !important;
 }
 
@@ -379,7 +379,7 @@
 .discovery-console .detail-record-card .genre-identity-alias-line em {
   color: color-mix(
     in srgb,
-    var(--text, #22160d) 86%,
+    var(--text) 86%,
     var(--accent, #b7791f)
   ) !important;
 }
@@ -441,7 +441,7 @@
 .genre-identity-import summary {
   cursor: pointer;
   font-weight: 950;
-  color: var(--text, #22160d);
+  color: var(--text);
 }
 
 .genre-identity-import textarea {
@@ -465,7 +465,7 @@
 .genre-identity-import small {
   display: block;
   margin-top: 7px;
-  color: var(--muted, #735a3c);
+  color: var(--muted);
   font-weight: 700;
 }
 
@@ -485,7 +485,7 @@
 }
 .detail-record-card .genre-identity-alias-line em,
 .discovery-console .detail-record-card .genre-identity-alias-line em {
-  color: #ffe0a1 !important;
+  color: var(--accent-soft) !important;
   font-weight: 950 !important;
 }
 .detail-record-card .genre-identity-alias-line span,
@@ -586,7 +586,7 @@
   border-radius: 16px !important;
   padding: 10px 12px !important;
   background: linear-gradient(180deg, rgba(255,248,229,.98), rgba(234,210,169,.94)) !important;
-  color: var(--text, #22160d) !important;
+  color: var(--text) !important;
   box-shadow: 0 10px 24px rgba(38, 22, 10, 0.10), inset 0 1px 0 rgba(255,255,255,.52) !important;
   font: inherit !important;
   white-space: normal !important;
@@ -601,13 +601,13 @@
 }
 #manualResults2 button.list-item strong,
 #manualResults2 .dc-manual-result-card strong {
-  color: var(--text, #22160d) !important;
+  color: var(--text) !important;
   font-weight: 950 !important;
   letter-spacing: -0.03em !important;
 }
 #manualResults2 button.list-item .small,
 #manualResults2 .dc-manual-result-card .small {
-  color: var(--muted, #735a3c) !important;
+  color: var(--muted) !important;
   font-size: 0.82rem !important;
 }
 
@@ -726,7 +726,7 @@ button[aria-busy="true"] {
 }
 
 .genre-identity-description-card span {
-  color: var(--muted, #735a3c);
+  color: var(--muted);
   font-size: 0.68rem;
   font-weight: 950;
   letter-spacing: 0.12em;
@@ -735,7 +735,7 @@ button[aria-busy="true"] {
 
 .genre-identity-description-card p {
   margin: 0;
-  color: var(--text, #22160d);
+  color: var(--text);
   font-size: clamp(0.9rem, 1.25vw, 1rem);
   line-height: 1.45;
   font-weight: 700;

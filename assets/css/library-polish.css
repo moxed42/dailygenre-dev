@@ -1785,7 +1785,7 @@
   display: grid;
   place-items: center;
   font-size: 4rem;
-  color: #ffe0a1;
+  color: var(--accent-soft);
   background: radial-gradient(circle at 50% 50%, #4f321e, #18100b 70%);
 }
 
@@ -1949,7 +1949,7 @@
   gap: 5px;
   padding: 5px 9px;
   border-radius: 999px;
-  color: #ffe0a1;
+  color: var(--accent-soft);
   background: #332013;
   border: 1px solid rgba(255, 222, 161, 0.24);
   font-size: 0.72rem;
@@ -1974,14 +1974,14 @@
 
 .song-focus-badge.seminal {
   color: #fff7d6;
-  background: #7a4714;
+  background: var(--accent-dark);
   border-color: rgba(255, 224, 161, 0.34);
 }
 
 .song-focus-badge.media,
 .song-focus-badge.identity {
   color: #e3f1e6;
-  background: #496b3b;
+  background: var(--success);
   border-color: rgba(73, 107, 59, 0.32);
 }
 
@@ -2099,7 +2099,7 @@
 .song-focus-row-art.placeholder {
   display: grid;
   place-items: center;
-  color: #ffe0a1;
+  color: var(--accent-soft);
   background: #2c1a10;
 }
 
@@ -2436,7 +2436,7 @@
 }
 
 #screen-listen.listen-experience-mode .song-focus-filter.active {
-  color: #ffe0a1;
+  color: var(--accent-soft);
   background: #332013;
   border-color: rgba(255, 222, 161, 0.24);
 }
@@ -2608,7 +2608,7 @@
   padding: 5px 10px;
   border-radius: 999px;
   background: #332013;
-  color: #ffe0a1;
+  color: var(--accent-soft);
   font-size: 0.72rem;
   font-weight: 900;
   letter-spacing: 0.03em;
@@ -2721,7 +2721,7 @@
 
 .album-focus-edit-toggle[open] > summary {
   background: #332013;
-  color: #ffe0a1;
+  color: var(--accent-soft);
 }
 
 .album-focus-edit-body {
@@ -2895,7 +2895,7 @@
   object-fit: cover;
   background: radial-gradient(
     circle at 50% 50%,
-    #ffe0a1 0 10%,
+    var(--accent-soft) 0 10%,
     #1b120c 11% 30%,
     #d88a22 31% 36%,
     #0c0806 37% 63%,
@@ -3028,7 +3028,7 @@
   object-fit: cover;
   background: radial-gradient(
     circle at 50% 50%,
-    #ffe0a1 0 10%,
+    var(--accent-soft) 0 10%,
     #1b120c 11% 30%,
     #d88a22 31% 36%,
     #0c0806 37% 63%,
@@ -3086,11 +3086,11 @@
 }
 
 .album-focus-peek.sampled::after {
-  background: #d98d25;
+  background: var(--accent);
 }
 
 .album-focus-peek.finished::after {
-  background: #496b3b;
+  background: var(--success);
 }
 
 .album-focus-nav {
@@ -3160,11 +3160,11 @@
 }
 
 .album-rail-card.sampled .album-rail-status-dot {
-  background: #d98d25;
+  background: var(--accent);
 }
 
 .album-rail-card.finished .album-rail-status-dot {
-  background: #496b3b;
+  background: var(--success);
 }
 
 .album-rail-card.active .album-rail-status-dot {
@@ -3404,7 +3404,7 @@
   display: inline-grid;
   place-items: center;
   background: rgba(255, 252, 241, 0.58);
-  color: #735a3c;
+  color: var(--muted);
   font-size: 0.84rem;
   font-weight: 950;
   line-height: 1;
@@ -3571,7 +3571,7 @@
   height: 22px;
   border-radius: 999px;
   border: 1px solid rgba(127, 82, 28, 0.2);
-  color: #735a3c;
+  color: var(--muted);
   background: rgba(255, 252, 241, 0.66);
   font-size: 0.86rem;
   font-weight: 950;
@@ -4207,12 +4207,12 @@
 .dg-stats-typeahead-hint {
   margin-top: 5px;
   font-size: 0.78rem !important;
-  color: color-mix(in srgb, var(--muted, #735a3c) 82%, var(--text, #22160d));
+  color: color-mix(in srgb, var(--muted) 82%, var(--text));
   min-height: 1.1em;
 }
 
 .dg-stats-typeahead-hint.is-warning {
-  color: var(--danger, #9b3428) !important;
+  color: var(--danger) !important;
 }
 
 .dg-depth-chart-card {
@@ -4226,7 +4226,7 @@
 
 .dg-depth-chart-card .dg-depth-context-note {
   margin-top: 8px;
-  color: color-mix(in srgb, var(--muted, #735a3c) 86%, var(--text, #22160d));
+  color: color-mix(in srgb, var(--muted) 86%, var(--text));
   font-size: 0.82rem;
   font-weight: 700;
   line-height: 1.35;
@@ -4266,7 +4266,7 @@
   display: block;
   margin-top: 5px;
   max-width: 100%;
-  color: color-mix(in srgb, var(--muted, #735a3c) 86%, var(--text, #22160d));
+  color: color-mix(in srgb, var(--muted) 86%, var(--text));
   font-size: 0.78rem;
   font-weight: 650;
   line-height: 1.32;
@@ -4275,7 +4275,7 @@
 
 .song-focus-row.levelup-child .song-focus-row-reason::before {
   content: "Why: ";
-  color: color-mix(in srgb, var(--accent-dark, #7a4714) 80%, var(--text, #22160d));
+  color: color-mix(in srgb, var(--accent-dark) 80%, var(--text));
   font-weight: 950;
 }
 
@@ -4652,7 +4652,7 @@ body.dg-library-switching #historyList .archive-card {
 }
 
 .song-focus-edit-helper small {
-  color: var(--muted, #735a3c);
+  color: var(--muted);
   font-weight: 700;
   line-height: 1.35;
 }
@@ -4689,7 +4689,7 @@ body.dg-library-switching #historyList .archive-card {
   border-radius: 999px;
   border: 1px solid rgba(255, 224, 161, 0.28);
   background: rgba(255, 244, 218, 0.09);
-  color: #ffe0a1;
+  color: var(--accent-soft);
   font-weight: 950;
   line-height: 1;
   cursor: pointer;
@@ -5359,7 +5359,7 @@ body.dg-library-switching #historyList .archive-card {
   border-radius: 999px !important;
   border: 1px solid rgba(127, 82, 28, 0.18) !important;
   background: rgba(255, 252, 241, 0.86) !important;
-  color: #3a2414 !important;
+  color: var(--surface-3) !important;
   box-shadow:
     0 12px 28px rgba(63, 35, 12, 0.14),
     inset 0 1px 0 rgba(255, 255, 255, 0.52) !important;
@@ -5460,7 +5460,7 @@ body.dg-library-switching #historyList .archive-card {
 #screen-listen.listen-experience-mode .song-focus-queue-summary-sub,
 #dc-songs .song-focus-queue-summary-sub {
   margin-top: 3px !important;
-  color: var(--muted, #735a3c) !important;
+  color: var(--muted) !important;
   font-size: 0.82rem !important;
   font-weight: 750 !important;
   white-space: nowrap !important;
@@ -5529,7 +5529,7 @@ body.dg-library-switching #historyList .archive-card {
   height: 100% !important;
   display: grid !important;
   place-items: center !important;
-  color: #ffe0a1 !important;
+  color: var(--accent-soft) !important;
   background: #2c1a10 !important;
   font-weight: 950 !important;
   font-size: 0.9rem !important;
@@ -5544,7 +5544,7 @@ body.dg-library-switching #historyList .archive-card {
   height: 38px !important;
   border-radius: 999px !important;
   background: rgba(51, 32, 19, 0.1) !important;
-  color: var(--muted, #735a3c) !important;
+  color: var(--muted) !important;
   font-size: 0.75rem !important;
   font-weight: 950 !important;
   flex: 0 0 auto !important;
@@ -5782,7 +5782,7 @@ body.dc-listen-mode .dc-progress-strip span {
   padding: 6px 10px !important;
   border-radius: 999px !important;
   background: rgba(60, 36, 18, 0.08) !important;
-  color: #735a3c !important;
+  color: var(--muted) !important;
   font-size: 0.76rem !important;
   font-weight: 850 !important;
   letter-spacing: 0.02em !important;
@@ -5851,7 +5851,7 @@ body.dc-listen-mode .dc-session-tools summary::-webkit-details-marker {
 body.dc-listen-mode .dc-pending-alert summary small,
 body.dc-listen-mode .dc-liner-notes summary small,
 body.dc-listen-mode .dc-session-tools summary small {
-  color: #735a3c !important;
+  color: var(--muted) !important;
   text-transform: none !important;
   letter-spacing: 0 !important;
   font-size: 0.78rem !important;
@@ -6322,7 +6322,7 @@ body.dc-listen-mode details.dc-song-add-shortcut:not([open]) .dc-song-add-body {
 .inbox-target-genre span {
   display: block;
   margin-bottom: 6px;
-  color: var(--muted, #735a3c);
+  color: var(--muted);
   font-size: 0.72rem;
   font-weight: 950;
   letter-spacing: 0.08em;
@@ -6355,7 +6355,7 @@ body.dc-listen-mode details.dc-song-add-shortcut:not([open]) .dc-song-add-body {
 
 /* === Floating Save v49: clear saving state === */
 .floating-listening-save.is-saving {
-  border-color: color-mix(in srgb, var(--accent, #d98d25) 62%, transparent) !important;
+  border-color: color-mix(in srgb, var(--accent) 62%, transparent) !important;
   box-shadow:
     0 18px 44px rgba(38, 22, 10, 0.18),
     0 0 0 3px rgba(217, 141, 37, 0.14) !important;
@@ -6398,7 +6398,7 @@ body.dc-listen-mode details.dc-song-add-shortcut:not([open]) .dc-song-add-body {
   border-radius: 999px !important;
   background: rgba(255, 245, 223, 0.14) !important;
   border: 1px solid rgba(255, 224, 161, 0.22) !important;
-  color: #ffe0a1 !important;
+  color: var(--accent-soft) !important;
 }
 
 .detail-record-card .genre-header-rating-label {
@@ -6439,7 +6439,7 @@ body.dc-listen-mode details.dc-song-add-shortcut:not([open]) .dc-song-add-body {
 .detail-record-card .genre-header-zanger:hover,
 .detail-record-card .genre-header-zanger:focus-visible {
   color: #26170b !important;
-  background: #ffe0a1 !important;
+  background: var(--accent-soft) !important;
   outline: none !important;
   transform: translateY(-1px) !important;
 }
@@ -6477,7 +6477,7 @@ body.dc-listen-mode details.dc-song-add-shortcut:not([open]) .dc-song-add-body {
   border-radius: 0 !important;
   background: transparent !important;
   border: 0 !important;
-  color: #ffe0a1 !important;
+  color: var(--accent-soft) !important;
 }
 
 .detail-record-card .genre-header-rating-label {
@@ -6514,7 +6514,7 @@ body.dc-listen-mode details.dc-song-add-shortcut:not([open]) .dc-song-add-body {
 
 .detail-record-card .genre-header-star:hover,
 .detail-record-card .genre-header-star:focus-visible {
-  color: #ffe0a1 !important;
+  color: var(--accent-soft) !important;
   background: transparent !important;
   outline: none !important;
   transform: translateY(-1px) !important;
@@ -6626,7 +6626,7 @@ body.dc-listen-mode details.dc-song-add-shortcut:not([open]) .dc-song-add-body {
 }
 .detail-record-card .genre-identity-alias-line em,
 .discovery-console .detail-record-card .genre-identity-alias-line em {
-  color: #ffe0a1 !important;
+  color: var(--accent-soft) !important;
   font-weight: 950 !important;
 }
 .detail-record-card .genre-identity-alias-line span,
@@ -6652,7 +6652,7 @@ body.dc-listen-mode details.dc-song-add-shortcut:not([open]) .dc-song-add-body {
   gap: 3px !important;
   padding: 11px 13px !important;
   border-radius: 16px !important;
-  color: var(--text, #22160d) !important;
+  color: var(--text) !important;
   background: rgba(255, 252, 241, 0.68) !important;
   border: 1px solid rgba(120, 74, 27, 0.16) !important;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.46) !important;
@@ -6667,7 +6667,7 @@ body.dc-listen-mode details.dc-song-add-shortcut:not([open]) .dc-song-add-body {
 #manualResults2 .dc-manual-result-card:focus-visible {
   outline: none !important;
   transform: translateY(-1px) !important;
-  border-color: color-mix(in srgb, var(--accent, #d98d25) 54%, transparent) !important;
+  border-color: color-mix(in srgb, var(--accent) 54%, transparent) !important;
   background: rgba(255, 248, 229, 0.92) !important;
 }
 
@@ -6820,7 +6820,7 @@ button[aria-busy="true"] {
   border-radius: 16px !important;
   padding: 10px 12px !important;
   background: linear-gradient(180deg, rgba(255,248,229,.98), rgba(234,210,169,.94)) !important;
-  color: var(--text, #22160d) !important;
+  color: var(--text) !important;
   box-shadow: 0 10px 24px rgba(38, 22, 10, 0.10), inset 0 1px 0 rgba(255,255,255,.52) !important;
   font: inherit !important;
   white-space: normal !important;
@@ -6835,13 +6835,13 @@ button[aria-busy="true"] {
 }
 #manualResults2 button.list-item strong,
 #manualResults2 .dc-manual-result-card strong {
-  color: var(--text, #22160d) !important;
+  color: var(--text) !important;
   font-weight: 950 !important;
   letter-spacing: -0.03em !important;
 }
 #manualResults2 button.list-item .small,
 #manualResults2 .dc-manual-result-card .small {
-  color: var(--muted, #735a3c) !important;
+  color: var(--muted) !important;
   font-size: 0.82rem !important;
 }
 
@@ -6977,7 +6977,7 @@ button[aria-busy="true"] {
   border-radius: 18px !important;
   padding: 12px 14px !important;
   background: linear-gradient(180deg, rgba(255, 248, 229, 0.98), rgba(234, 210, 169, 0.94)) !important;
-  color: var(--text, #22160d) !important;
+  color: var(--text) !important;
   box-shadow: 0 12px 26px rgba(38, 22, 10, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.58) !important;
   font: inherit !important;
   line-height: 1.2 !important;
@@ -7003,7 +7003,7 @@ button[aria-busy="true"] {
 
 #manualResults2 > .dc-manual-result-card strong {
   display: block !important;
-  color: var(--text, #22160d) !important;
+  color: var(--text) !important;
   font-size: 1rem !important;
   line-height: 1.12 !important;
   font-weight: 1000 !important;
@@ -7013,7 +7013,7 @@ button[aria-busy="true"] {
 
 #manualResults2 > .dc-manual-result-card .small {
   margin-top: 0 !important;
-  color: var(--muted, #735a3c) !important;
+  color: var(--muted) !important;
   font-size: 0.82rem !important;
   line-height: 1.25 !important;
   font-weight: 800 !important;
@@ -7027,7 +7027,7 @@ button[aria-busy="true"] {
 .genre-identity-alias-line {
   font-size: clamp(0.72rem, 1.05vw, 0.82rem) !important;
   line-height: 1.25 !important;
-  color: color-mix(in srgb, var(--muted, #735a3c) 88%, var(--text, #22160d)) !important;
+  color: color-mix(in srgb, var(--muted) 88%, var(--text)) !important;
   opacity: 0.82 !important;
   font-style: normal !important;
   margin: -3px 0 7px !important;
@@ -7035,17 +7035,17 @@ button[aria-busy="true"] {
 .detail-record-card .genre-identity-alias-line em,
 .discovery-console .detail-record-card .genre-identity-alias-line em,
 .genre-identity-alias-line em {
-  color: color-mix(in srgb, var(--muted, #735a3c) 82%, var(--text, #22160d)) !important;
+  color: color-mix(in srgb, var(--muted) 82%, var(--text)) !important;
   font-style: normal !important;
   font-weight: 700 !important;
 }
 .genre-identity-alias-line span {
-  color: color-mix(in srgb, var(--muted, #735a3c) 75%, var(--accent, #d98d25)) !important;
+  color: color-mix(in srgb, var(--muted) 75%, var(--accent)) !important;
   font-weight: 850 !important;
 }
 
 #manualPanel {
-  border: 1px solid color-mix(in srgb, var(--border, #b98e55) 70%, transparent) !important;
+  border: 1px solid color-mix(in srgb, var(--border) 70%, transparent) !important;
   background: linear-gradient(180deg, rgba(255,248,229,.96), rgba(234,210,169,.92)) !important;
   box-shadow: var(--shadow), inset 0 1px 0 rgba(255,255,255,.52) !important;
 }
@@ -7064,17 +7064,17 @@ button[aria-busy="true"] {
   text-align: left !important;
   padding: 10px 12px !important;
   border-radius: 16px !important;
-  border: 1px solid color-mix(in srgb, var(--border, #b98e55) 70%, transparent) !important;
-  background: color-mix(in srgb, var(--surface, #f3e4c8) 82%, white) !important;
-  color: var(--text, #22160d) !important;
+  border: 1px solid color-mix(in srgb, var(--border) 70%, transparent) !important;
+  background: color-mix(in srgb, var(--surface) 82%, white) !important;
+  color: var(--text) !important;
   box-shadow: inset 0 1px 0 rgba(255,255,255,.42) !important;
   cursor: pointer !important;
 }
 #manualResults2 .dc-manual-result-card::before { display: none !important; }
 #manualResults2 .dc-manual-result-card:hover,
 #manualResults2 .dc-manual-result-card:focus-visible {
-  border-color: color-mix(in srgb, var(--accent, #d98d25) 58%, transparent) !important;
-  background: color-mix(in srgb, var(--accent-soft, #ffe0a1) 46%, var(--surface, #f3e4c8)) !important;
+  border-color: color-mix(in srgb, var(--accent) 58%, transparent) !important;
+  background: color-mix(in srgb, var(--accent-soft) 46%, var(--surface)) !important;
   outline: none !important;
 }
 #manualResults2 .dc-manual-result-card strong {
@@ -7088,7 +7088,7 @@ button[aria-busy="true"] {
 }
 #manualResults2 .dc-manual-result-card .small {
   grid-column: 1 / -1 !important;
-  color: color-mix(in srgb, var(--muted, #735a3c) 84%, var(--text, #22160d)) !important;
+  color: color-mix(in srgb, var(--muted) 84%, var(--text)) !important;
   font-size: 0.75rem !important;
   line-height: 1.2 !important;
   overflow: hidden !important;
@@ -7189,16 +7189,16 @@ button[aria-busy="true"] {
   min-width: 0 !important;
   padding: 6px !important;
   border-radius: 17px !important;
-  border: 1px solid color-mix(in srgb, var(--border, #b98e55) 68%, transparent) !important;
+  border: 1px solid color-mix(in srgb, var(--border) 68%, transparent) !important;
   background: linear-gradient(180deg, rgba(255, 248, 229, 0.96), rgba(234, 210, 169, 0.9)) !important;
   box-shadow: inset 0 1px 0 rgba(255,255,255,.52), 0 10px 24px rgba(38, 22, 10, 0.08) !important;
   overflow: hidden !important;
 }
 
 #manualResults2 .manual-result-row.selected {
-  border-color: color-mix(in srgb, var(--accent, #d98d25) 72%, transparent) !important;
+  border-color: color-mix(in srgb, var(--accent) 72%, transparent) !important;
   background: linear-gradient(180deg, rgba(255, 242, 207, 0.98), rgba(239, 201, 132, 0.94)) !important;
-  box-shadow: inset 4px 0 0 color-mix(in srgb, var(--accent, #d98d25) 78%, transparent), 0 12px 28px rgba(38, 22, 10, 0.11) !important;
+  box-shadow: inset 4px 0 0 color-mix(in srgb, var(--accent) 78%, transparent), 0 12px 28px rgba(38, 22, 10, 0.11) !important;
 }
 
 #manualResults2 .manual-result-main,
@@ -7214,7 +7214,7 @@ button[aria-busy="true"] {
   border: 0 !important;
   border-radius: 12px !important;
   background: transparent !important;
-  color: var(--text, #22160d) !important;
+  color: var(--text) !important;
   text-align: left !important;
   font: inherit !important;
   line-height: 1.15 !important;
@@ -7233,7 +7233,7 @@ button[aria-busy="true"] {
 #manualResults2 .manual-result-name {
   display: block !important;
   min-width: 0 !important;
-  color: var(--text, #22160d) !important;
+  color: var(--text) !important;
   font-size: 0.98rem !important;
   line-height: 1.08 !important;
   font-weight: 1000 !important;
@@ -7246,7 +7246,7 @@ button[aria-busy="true"] {
 #manualResults2 .manual-result-path {
   display: block !important;
   min-width: 0 !important;
-  color: color-mix(in srgb, var(--muted, #735a3c) 86%, var(--text, #22160d)) !important;
+  color: color-mix(in srgb, var(--muted) 86%, var(--text)) !important;
   font-size: 0.75rem !important;
   line-height: 1.18 !important;
   font-weight: 800 !important;
@@ -7268,9 +7268,9 @@ button[aria-busy="true"] {
   place-items: center !important;
   padding: 0 !important;
   border-radius: 999px !important;
-  border: 1px solid color-mix(in srgb, var(--accent, #d98d25) 52%, transparent) !important;
-  background: color-mix(in srgb, var(--accent-soft, #ffe0a1) 72%, white) !important;
-  color: var(--accent-dark, #7a4714) !important;
+  border: 1px solid color-mix(in srgb, var(--accent) 52%, transparent) !important;
+  background: color-mix(in srgb, var(--accent-soft) 72%, white) !important;
+  color: var(--accent-dark) !important;
   font-size: 0.9rem !important;
   font-weight: 1000 !important;
   line-height: 1 !important;
@@ -7281,16 +7281,16 @@ button[aria-busy="true"] {
 #manualResults2 .manual-result-info:hover,
 #manualResults2 .manual-result-info:focus-visible {
   outline: none !important;
-  background: var(--accent, #d98d25) !important;
+  background: var(--accent) !important;
   color: #1f140b !important;
 }
 
 #manualResults2 .manual-search-preview {
   min-width: 0 !important;
   max-width: 100% !important;
-  border: 1px solid color-mix(in srgb, var(--border, #b98e55) 58%, transparent) !important;
+  border: 1px solid color-mix(in srgb, var(--border) 58%, transparent) !important;
   border-radius: 18px !important;
-  background: color-mix(in srgb, var(--surface, #f3e4c8) 78%, white) !important;
+  background: color-mix(in srgb, var(--surface) 78%, white) !important;
   padding: 12px !important;
   box-shadow: inset 0 1px 0 rgba(255,255,255,.48) !important;
   overflow: hidden !important;
@@ -7304,7 +7304,7 @@ button[aria-busy="true"] {
 }
 
 #manualResults2 .manual-preview-kicker {
-  color: var(--accent-dark, #7a4714) !important;
+  color: var(--accent-dark) !important;
   font-size: 0.66rem !important;
   font-weight: 1000 !important;
   letter-spacing: 0.12em !important;
@@ -7313,7 +7313,7 @@ button[aria-busy="true"] {
 
 #manualResults2 .manual-preview-card h3 {
   margin: 0 !important;
-  color: var(--text, #22160d) !important;
+  color: var(--text) !important;
   font-size: 1.22rem !important;
   line-height: 0.98 !important;
   letter-spacing: -0.055em !important;
@@ -7324,7 +7324,7 @@ button[aria-busy="true"] {
 #manualResults2 .manual-preview-summary,
 #manualResults2 .manual-preview-meta,
 #manualResults2 .manual-preview-empty span {
-  color: var(--muted, #735a3c) !important;
+  color: var(--muted) !important;
   font-size: 0.82rem !important;
   line-height: 1.28 !important;
 }
@@ -7333,8 +7333,8 @@ button[aria-busy="true"] {
   margin: 2px 0 !important;
   padding: 9px 10px !important;
   border-radius: 14px !important;
-  background: color-mix(in srgb, var(--accent-soft, #ffe0a1) 42%, white) !important;
-  color: color-mix(in srgb, var(--accent-dark, #7a4714) 86%, var(--text, #22160d)) !important;
+  background: color-mix(in srgb, var(--accent-soft) 42%, white) !important;
+  color: color-mix(in srgb, var(--accent-dark) 86%, var(--text)) !important;
   font-size: 0.84rem !important;
   line-height: 1.26 !important;
 }
@@ -7356,8 +7356,8 @@ button[aria-busy="true"] {
 #manualResults2 .manual-empty-state {
   padding: 12px !important;
   border-radius: 16px !important;
-  border: 1px dashed color-mix(in srgb, var(--border, #b98e55) 70%, transparent) !important;
-  color: var(--muted, #735a3c) !important;
+  border: 1px dashed color-mix(in srgb, var(--border) 70%, transparent) !important;
+  color: var(--muted) !important;
   background: rgba(255,255,255,.22) !important;
 }
 
@@ -7835,7 +7835,7 @@ body.dc-listen-mode .sp-play-btn {
 .album-focus-readmore:hover,
 .album-focus-readmore:focus-visible {
   background: #332013;
-  color: #ffe0a1;
+  color: var(--accent-soft);
   transform: translateY(-1px);
 }
 .album-slot-clear-btn {
@@ -7951,7 +7951,7 @@ body.dc-listen-mode .sp-play-btn {
 }
 
 .album-dive-summary-main strong {
-  color: var(--text, #22160d) !important;
+  color: var(--text) !important;
   font-size: clamp(1.02rem, 2vw, 1.25rem) !important;
   line-height: 1.05 !important;
   letter-spacing: -0.04em !important;
@@ -7961,7 +7961,7 @@ body.dc-listen-mode .sp-play-btn {
 }
 
 .album-dive-summary-main small {
-  color: var(--muted, #735a3c) !important;
+  color: var(--muted) !important;
   font-weight: 750 !important;
   overflow: hidden !important;
   text-overflow: ellipsis !important;
@@ -7992,13 +7992,13 @@ body.dc-listen-mode .sp-play-btn {
   border-radius: 999px !important;
   border: 1px solid rgba(127, 82, 28, 0.18) !important;
   background: rgba(255, 252, 241, 0.72) !important;
-  color: var(--accent-dark, #7a4714) !important;
+  color: var(--accent-dark) !important;
   font-size: 0.74rem !important;
   font-weight: 950 !important;
 }
 
 .album-dive-panel[open] .album-dive-expand-cue {
-  color: var(--muted, #735a3c) !important;
+  color: var(--muted) !important;
 }
 
 .album-dive-panel[open] .album-dive-expand-cue::before {
@@ -8480,7 +8480,7 @@ body.dc-listen-mode .dc-pending-alert summary .dc-open-review {
 
 .viz-meta-inline-edit label {
   margin: 0;
-  color: var(--muted, #735a3c);
+  color: var(--muted);
   font-size: 0.66rem;
   font-weight: 950;
   letter-spacing: 0.1em;
@@ -8616,7 +8616,7 @@ body.dc-listen-mode .dc-desktop-genre-nav {
   border-radius: 999px;
   border: 1px solid rgba(120, 74, 27, 0.18);
   background: rgba(255, 252, 241, 0.58);
-  color: var(--muted, #735a3c);
+  color: var(--muted);
   font-size: 0.68rem;
   font-weight: 950;
   letter-spacing: 0.08em;
@@ -8656,10 +8656,10 @@ body.dc-listen-mode .dc-desktop-genre-nav {
 
 .album-reaction-btn {
   min-height: 34px;
-  border: 1px solid color-mix(in srgb, var(--border, #b98e55) 70%, transparent);
+  border: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
   border-radius: 999px;
   background: rgba(255, 252, 241, 0.58);
-  color: var(--text, #22160d);
+  color: var(--text);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -8671,13 +8671,13 @@ body.dc-listen-mode .dc-desktop-genre-nav {
 
 .album-reaction-btn small {
   font-size: 0.72rem;
-  color: var(--muted, #735a3c);
+  color: var(--muted);
   font-weight: 900;
 }
 
 .album-reaction-btn.active {
-  background: var(--accent-soft, #ffe0a1);
-  border-color: color-mix(in srgb, var(--accent, #d98d25) 72%, transparent);
+  background: var(--accent-soft);
+  border-color: color-mix(in srgb, var(--accent) 72%, transparent);
   box-shadow: inset 0 0 0 1px rgba(255,255,255,.45), 0 8px 18px rgba(88, 46, 12, 0.12);
 }
 
@@ -8723,7 +8723,7 @@ body.dc-listen-mode .dc-desktop-genre-nav {
   border: 1px solid rgba(120, 74, 27, 0.16);
   border-radius: 15px;
   background: rgba(255, 252, 241, 0.58);
-  color: var(--text, #22160d);
+  color: var(--text);
   padding: 8px;
   cursor: pointer;
 }
@@ -8731,7 +8731,7 @@ body.dc-listen-mode .dc-desktop-genre-nav {
 .album-dive-queue-row:hover,
 .album-dive-queue-row:focus-visible {
   outline: none;
-  border-color: color-mix(in srgb, var(--accent, #d98d25) 55%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 55%, transparent);
   transform: translateY(-1px);
 }
 
@@ -8765,7 +8765,7 @@ body.dc-listen-mode .dc-desktop-genre-nav {
 
 .album-dive-queue-main small,
 .album-dive-queue-main em {
-  color: var(--muted, #735a3c);
+  color: var(--muted);
   font-size: 0.78rem;
   line-height: 1.2;
 }
@@ -8796,10 +8796,10 @@ body.dc-listen-mode .dc-desktop-genre-nav {
 
 .album-track-top-btn {
   min-height: 30px;
-  border: 1px solid color-mix(in srgb, var(--border, #b98e55) 70%, transparent);
+  border: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
   border-radius: 999px;
   background: rgba(255, 252, 241, 0.62);
-  color: var(--muted, #735a3c);
+  color: var(--muted);
   font-size: 0.76rem;
   font-weight: 950;
   padding: 4px 8px;
@@ -8808,9 +8808,9 @@ body.dc-listen-mode .dc-desktop-genre-nav {
 }
 
 .album-track-top-btn.active {
-  background: color-mix(in srgb, var(--accent-soft, #ffe0a1) 82%, white);
-  color: var(--accent-dark, #7a4714);
-  border-color: color-mix(in srgb, var(--accent, #d98d25) 62%, transparent);
+  background: color-mix(in srgb, var(--accent-soft) 82%, white);
+  color: var(--accent-dark);
+  border-color: color-mix(in srgb, var(--accent) 62%, transparent);
 }
 
 .album-top-track-picker {
@@ -8837,7 +8837,7 @@ body.dc-listen-mode .dc-desktop-genre-nav {
   background: rgba(255,255,255,.34);
   border: 1px solid rgba(120, 74, 27, 0.12);
   font-weight: 800;
-  color: var(--text, #22160d);
+  color: var(--text);
 }
 
 .album-top-track-check.active {
@@ -8903,7 +8903,7 @@ body.dc-listen-mode .dc-desktop-genre-nav {
   align-items: center !important;
 }
 .album-dive-summary-stat {
-  color: var(--muted, #735a3c);
+  color: var(--muted);
   font-weight: 900;
   font-size: 0.86rem;
   line-height: 1.2;
@@ -8933,8 +8933,8 @@ body.dc-listen-mode .dc-desktop-genre-nav {
 }
 .album-dive-queue-row.is-active,
 .album-dive-queue-row.active {
-  border-color: color-mix(in srgb, var(--accent, #d98d25) 62%, transparent);
-  background: color-mix(in srgb, var(--accent-soft, #ffe0a1) 28%, rgba(255,252,241,.7));
+  border-color: color-mix(in srgb, var(--accent) 62%, transparent);
+  background: color-mix(in srgb, var(--accent-soft) 28%, rgba(255,252,241,.7));
 }
 @media (max-width: 760px) {
   .album-dive-summary-actions-clean {
@@ -9350,7 +9350,7 @@ textarea[data-dg-identity-textarea="1"] {
   margin: 4px 0 2px;
   padding: 12px;
   border-radius: 22px;
-  border: 1px solid color-mix(in srgb, var(--border, #b98e55) 72%, transparent);
+  border: 1px solid color-mix(in srgb, var(--border) 72%, transparent);
   background: linear-gradient(180deg, rgba(255, 248, 229, 0.7), rgba(234, 210, 169, 0.52));
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45);
 }
@@ -9364,7 +9364,7 @@ textarea[data-dg-identity-textarea="1"] {
 }
 
 .album-focus-shelf-top-head span {
-  color: var(--accent-dark, #7a4714);
+  color: var(--accent-dark);
   font-size: 0.72rem;
   font-weight: 950;
   letter-spacing: 0.12em;
@@ -9372,7 +9372,7 @@ textarea[data-dg-identity-textarea="1"] {
 }
 
 .album-focus-shelf-top-head small {
-  color: var(--muted, #735a3c);
+  color: var(--muted);
   font-size: 0.78rem;
   font-weight: 800;
 }
@@ -9442,7 +9442,7 @@ textarea[data-dg-identity-textarea="1"] {
 
 /* === Album Dive v153: active session continuity === */
 .tab-album-dive-btn.has-active-dive {
-  border-color: color-mix(in srgb, var(--accent, #d98d25) 58%, rgba(255,245,223,.2)) !important;
+  border-color: color-mix(in srgb, var(--accent) 58%, rgba(255,245,223,.2)) !important;
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,.16),
     inset 0 -5px 0 rgba(0,0,0,.16),
@@ -9472,9 +9472,9 @@ textarea[data-dg-identity-textarea="1"] {
   margin: -2px 0 4px;
   padding: 6px 10px;
   border-radius: 999px;
-  background: color-mix(in srgb, var(--accent-soft, #ffe0a1) 56%, white);
-  border: 1px solid color-mix(in srgb, var(--accent, #d98d25) 35%, transparent);
-  color: color-mix(in srgb, var(--accent-dark, #7a4714) 82%, var(--text, #22160d));
+  background: color-mix(in srgb, var(--accent-soft) 56%, white);
+  border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+  color: color-mix(in srgb, var(--accent-dark) 82%, var(--text));
   font-size: 0.78rem;
   font-weight: 950;
   letter-spacing: 0.02em;
@@ -9511,7 +9511,7 @@ textarea[data-dg-identity-textarea="1"] {
   justify-content: flex-end;
   margin: 10px 0 0;
   padding-top: 10px;
-  border-top: 1px dashed color-mix(in srgb, var(--border, #b98e55) 58%, transparent);
+  border-top: 1px dashed color-mix(in srgb, var(--border) 58%, transparent);
 }
 
 .album-focus-view-shelf-top .album-focus-carousel,
@@ -9623,7 +9623,7 @@ textarea[data-dg-identity-textarea="1"] {
 .album-focus-controls-drawer,
 .album-focus-tracks-drawer,
 .album-focus-maintenance {
-  border: 1px solid color-mix(in srgb, var(--border, #b98e55) 62%, transparent);
+  border: 1px solid color-mix(in srgb, var(--border) 62%, transparent);
   border-radius: 20px;
   background: linear-gradient(180deg, rgba(255, 248, 229, 0.64), rgba(234, 210, 169, 0.44));
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.42);
@@ -9639,7 +9639,7 @@ textarea[data-dg-identity-textarea="1"] {
   gap: 12px !important;
   padding: 12px 14px !important;
   cursor: pointer;
-  color: var(--accent-dark, #7a4714);
+  color: var(--accent-dark);
   font-size: 0.78rem;
   font-weight: 950;
   letter-spacing: 0.11em;
@@ -9663,8 +9663,8 @@ textarea[data-dg-identity-textarea="1"] {
   display: inline-grid;
   place-items: center;
   background: rgba(255, 255, 255, 0.38);
-  border: 1px solid color-mix(in srgb, var(--border, #b98e55) 52%, transparent);
-  color: var(--text, #22160d);
+  border: 1px solid color-mix(in srgb, var(--border) 52%, transparent);
+  color: var(--text);
   font-size: 0.95rem;
   letter-spacing: 0;
 }
@@ -9696,7 +9696,7 @@ textarea[data-dg-identity-textarea="1"] {
 
 .album-focus-control-field > span,
 .album-focus-control-top-songs > span {
-  color: var(--muted, #735a3c);
+  color: var(--muted);
   font-size: 0.68rem;
   font-weight: 950;
   letter-spacing: 0.1em;
@@ -9718,7 +9718,7 @@ textarea[data-dg-identity-textarea="1"] {
 }
 
 .album-focus-control-top-songs strong {
-  color: var(--text, #22160d);
+  color: var(--text);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -9727,7 +9727,7 @@ textarea[data-dg-identity-textarea="1"] {
 }
 
 .album-focus-control-top-songs small {
-  color: var(--muted, #735a3c);
+  color: var(--muted);
   font-size: 0.76rem;
   font-weight: 750;
   line-height: 1.25;
@@ -9753,7 +9753,7 @@ textarea[data-dg-identity-textarea="1"] {
 }
 
 .album-focus-tracks-drawer > summary small {
-  color: var(--muted, #735a3c);
+  color: var(--muted);
   font-size: 0.76rem;
   font-weight: 800;
   letter-spacing: 0 !important;
@@ -9965,7 +9965,7 @@ textarea[data-dg-identity-textarea="1"] {
 .album-focus-edit-details .album-focus-edit-help,
 .album-slot-card .album-focus-edit-help {
   margin: 8px 0 10px;
-  color: var(--muted, #735a3c);
+  color: var(--muted);
   font-size: 0.84rem;
   line-height: 1.35;
 }
@@ -9989,7 +9989,7 @@ textarea[data-dg-identity-textarea="1"] {
 
 .album-focus-edit-quick-grid label > span,
 .album-slot-replace-block label {
-  color: var(--muted, #735a3c);
+  color: var(--muted);
   font-size: 0.68rem;
   font-weight: 950;
   letter-spacing: 0.08em;
@@ -10008,7 +10008,7 @@ textarea[data-dg-identity-textarea="1"] {
 .album-slot-display-title .song-title-edition {
   display: block;
   margin-top: 3px;
-  color: var(--muted, #735a3c);
+  color: var(--muted);
   font-size: 0.44em;
   line-height: 1.12;
   letter-spacing: -0.025em;
@@ -10125,7 +10125,7 @@ textarea[data-dg-identity-textarea="1"] {
 .song-title-link .song-title-edition {
   display: inline;
   margin-left: 0.26em;
-  color: color-mix(in srgb, var(--muted, #735a3c) 84%, var(--text, #22160d));
+  color: color-mix(in srgb, var(--muted) 84%, var(--text));
   font-size: 0.74em;
   font-weight: 750;
   letter-spacing: -0.01em;
@@ -10174,9 +10174,9 @@ textarea[data-dg-identity-textarea="1"] {
   min-width: 28px;
   padding: 0;
   border-radius: 999px;
-  border: 1px solid color-mix(in srgb, var(--border, #b98e55) 60%, transparent);
-  background: color-mix(in srgb, var(--accent-soft, #ffe0a1) 58%, white);
-  color: var(--accent-dark, #7a4714);
+  border: 1px solid color-mix(in srgb, var(--border) 60%, transparent);
+  background: color-mix(in srgb, var(--accent-soft) 58%, white);
+  color: var(--accent-dark);
   display: inline-grid;
   place-items: center;
   font-size: 0.86rem;
@@ -10187,7 +10187,7 @@ textarea[data-dg-identity-textarea="1"] {
 
 #screen-listen.listen-experience-mode .song-focus-pencil-btn:hover,
 #screen-listen.listen-experience-mode .song-focus-pencil-btn:focus-visible {
-  background: color-mix(in srgb, var(--accent, #d98d25) 28%, white);
+  background: color-mix(in srgb, var(--accent) 28%, white);
   outline: none;
 }
 
@@ -10338,7 +10338,7 @@ textarea[data-dg-identity-textarea="1"] {
 #listenDetails .genre-identity-description {
   margin: 6px 0 0 !important;
   max-width: 92ch;
-  color: var(--muted, #735a3c) !important;
+  color: var(--muted) !important;
   font-size: clamp(0.98rem, 1.35vw, 1.12rem) !important;
   line-height: 1.45 !important;
   font-weight: 650 !important;

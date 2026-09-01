@@ -11,7 +11,7 @@
 .studio-workbench-hero,
 .studio-toolbar,
 .studio-lane {
-  border: 1px solid color-mix(in srgb, var(--border, #b98e55) 75%, transparent);
+  border: 1px solid color-mix(in srgb, var(--border) 75%, transparent);
   border-radius: 24px;
   background: linear-gradient(
     180deg,
@@ -67,7 +67,7 @@
 .studio-workbench-copy p {
   max-width: 760px;
   margin: 12px 0 0;
-  color: var(--muted, #735a3c);
+  color: var(--muted);
   font-size: 1.02rem;
   line-height: 1.36;
 }
@@ -81,7 +81,7 @@
   border: 1px solid rgba(120, 74, 27, 0.22);
   border-radius: 999px;
   background: rgba(255, 252, 241, 0.54);
-  color: var(--muted, #735a3c);
+  color: var(--muted);
   font-size: 0.82rem;
   font-weight: 850;
   white-space: nowrap;
@@ -89,8 +89,8 @@
 
 .studio-save-state.is-dirty {
   color: #432308;
-  background: color-mix(in srgb, var(--accent-soft, #ffe0a1) 76%, white);
-  border-color: color-mix(in srgb, var(--accent, #d98d25) 44%, transparent);
+  background: color-mix(in srgb, var(--accent-soft) 76%, white);
+  border-color: color-mix(in srgb, var(--accent) 44%, transparent);
 }
 
 .studio-lane-grid {
@@ -112,7 +112,7 @@
   display: grid;
   align-content: start;
   gap: 5px;
-  color: var(--text, #22160d);
+  color: var(--text);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.56);
   transition:
     transform 0.14s ease,
@@ -124,7 +124,7 @@
 .studio-lane-card:focus-visible {
   transform: translateY(-1px);
   outline: none;
-  border-color: color-mix(in srgb, var(--accent, #d98d25) 54%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 54%, transparent);
   box-shadow:
     0 14px 34px rgba(38, 22, 10, 0.14),
     inset 0 1px 0 rgba(255, 255, 255, 0.62);
@@ -143,7 +143,7 @@
 }
 
 .studio-lane-kicker {
-  color: var(--accent-dark, #7a4714);
+  color: var(--accent-dark);
   font-size: 0.68rem;
   letter-spacing: 0.11em;
   text-transform: uppercase;
@@ -156,7 +156,7 @@
 
 .studio-lane-copy,
 .studio-lane-sample {
-  color: var(--muted, #735a3c);
+  color: var(--muted);
   font-size: 0.82rem;
   line-height: 1.26;
 }
@@ -169,13 +169,13 @@
 }
 
 .studio-severity-high strong {
-  color: #9b3428;
+  color: var(--danger);
 }
 .studio-severity-med strong {
   color: #b06b19;
 }
 .studio-severity-low strong {
-  color: #496b3b;
+  color: var(--success);
 }
 
 .studio-toolbar {
@@ -192,7 +192,7 @@
   display: grid;
   gap: 5px;
   font-weight: 950;
-  color: var(--muted, #735a3c);
+  color: var(--muted);
   font-size: 0.72rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -230,7 +230,7 @@
 
 .studio-lane-head p {
   margin: 6px 0 0;
-  color: var(--muted, #735a3c);
+  color: var(--muted);
   line-height: 1.36;
 }
 
@@ -298,7 +298,7 @@
 .studio-thumb-empty {
   display: grid;
   place-items: center;
-  color: var(--muted, #735a3c);
+  color: var(--muted);
   font-weight: 950;
 }
 
@@ -313,7 +313,7 @@
 .inbox-unassigned-title {
   font-weight: 950;
   letter-spacing: -0.035em;
-  color: var(--text, #22160d);
+  color: var(--text);
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -336,7 +336,7 @@
   gap: 5px;
   flex-wrap: wrap;
   margin-top: 4px;
-  color: var(--muted, #735a3c);
+  color: var(--muted);
   font-size: 0.77rem;
   line-height: 1.2;
 }
@@ -350,13 +350,13 @@
   border-radius: 999px;
   background: rgba(61, 36, 18, 0.08);
   border: 1px solid rgba(120, 74, 27, 0.12);
-  color: var(--muted, #735a3c);
+  color: var(--muted);
   font-weight: 850;
 }
 
 .studio-workbench .review-chip.warn,
 .studio-mini-meta span:first-child {
-  color: #7a4714;
+  color: var(--accent-dark);
   background: rgba(217, 141, 37, 0.14);
   border-color: rgba(217, 141, 37, 0.22);
 }
@@ -386,7 +386,7 @@
 
 .studio-empty,
 .studio-typeahead-empty {
-  color: var(--muted, #735a3c);
+  color: var(--muted);
   font-style: italic;
   padding: 12px;
 }
@@ -437,7 +437,7 @@
   text-align: left;
   border: 0;
   background: transparent;
-  color: var(--text, #22160d);
+  color: var(--text);
   cursor: pointer;
   border-radius: 10px;
   padding: 7px 9px;
@@ -545,7 +545,7 @@
 }
 
 #reviewPendingQueueCard .review-track-title a {
-  color: var(--text, #22160d) !important;
+  color: var(--text) !important;
   text-decoration: none !important;
 }
 
@@ -641,13 +641,13 @@
 .studio-pending-reason {
   margin-top: 9px;
   max-width: 92ch;
-  color: var(--muted, #735a3c);
+  color: var(--muted);
   font-size: 0.86rem;
   line-height: 1.34;
 }
 
 .studio-pending-reason strong {
-  color: var(--accent-dark, #7a4714);
+  color: var(--accent-dark);
   font-size: 0.74rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -719,7 +719,7 @@
   display: block !important;
   margin-top: 6px !important;
   max-width: 100% !important;
-  color: var(--muted, #735a3c) !important;
+  color: var(--muted) !important;
   line-height: 1.3 !important;
 }
 
@@ -791,7 +791,7 @@
   border: 1px solid rgba(153, 102, 37, 0.24);
   border-radius: 999px;
   background: rgba(255, 253, 244, 0.72);
-  color: var(--accent-dark, #7a4714);
+  color: var(--accent-dark);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -807,8 +807,8 @@
   border-radius: 999px;
   display: grid;
   place-items: center;
-  background: var(--accent-soft, #ffe0a1);
-  color: var(--accent-dark, #7a4714);
+  background: var(--accent-soft);
+  color: var(--accent-dark);
   line-height: 1;
 }
 
@@ -1207,7 +1207,7 @@
 
 .studio-inline-track-edit label {
   margin: 0;
-  color: var(--muted, #735a3c);
+  color: var(--muted);
   font-size: 0.66rem;
   font-weight: 950;
   letter-spacing: 0.1em;
@@ -1256,14 +1256,14 @@
 
 /* === Studio v93: keep inline repair rows stable after URL updates === */
 .studio-mini-row.studio-inline-updated {
-  border-color: color-mix(in srgb, var(--success, #496b3b) 42%, var(--border, #b98e55));
+  border-color: color-mix(in srgb, var(--success) 42%, var(--border));
   background: linear-gradient(180deg, rgba(244, 251, 235, 0.72), rgba(255, 252, 241, 0.6));
 }
 
 .studio-inline-updated-chip {
-  color: color-mix(in srgb, var(--success, #496b3b) 82%, var(--text, #22160d)) !important;
-  background: color-mix(in srgb, var(--success-soft, #dce8c8) 86%, white) !important;
-  border-color: color-mix(in srgb, var(--success, #496b3b) 32%, transparent) !important;
+  color: color-mix(in srgb, var(--success) 82%, var(--text)) !important;
+  background: color-mix(in srgb, var(--success-soft) 86%, white) !important;
+  border-color: color-mix(in srgb, var(--success) 32%, transparent) !important;
 }
 
 .studio-inline-track-detail {
@@ -1277,9 +1277,9 @@
 /* === Studio v94: dedupe grouped artwork/metadata repair rows === */
 .studio-repair-copy-chip,
 .studio-inline-group-updated-chip {
-  color: color-mix(in srgb, var(--success, #496b3b) 82%, var(--text, #22160d)) !important;
-  background: color-mix(in srgb, var(--success-soft, #dce8c8) 86%, white) !important;
-  border-color: color-mix(in srgb, var(--success, #496b3b) 32%, transparent) !important;
+  color: color-mix(in srgb, var(--success) 82%, var(--text)) !important;
+  background: color-mix(in srgb, var(--success-soft) 86%, white) !important;
+  border-color: color-mix(in srgb, var(--success) 32%, transparent) !important;
 }
 
 .studio-mini-row-repair-grouped .studio-inline-track-edit label {
@@ -1304,7 +1304,7 @@
 }
 
 #reviewPendingQueueCard .review-pending-fitline > span {
-  color: var(--muted, #735a3c);
+  color: var(--muted);
   font-size: 0.72rem;
   font-weight: 950;
   letter-spacing: 0.08em;
@@ -1391,7 +1391,7 @@
 
 #reviewPendingQueueCard .studio-pending-route-copy {
   margin: 8px 0 0;
-  color: var(--muted, #735a3c);
+  color: var(--muted);
   font-size: 0.84rem;
   line-height: 1.32;
 }
@@ -1413,7 +1413,7 @@
 }
 
 #reviewPendingQueueCard .review-pending-route-genre > span {
-  color: var(--muted, #735a3c);
+  color: var(--muted);
   font-size: 0.68rem;
   font-weight: 950;
   letter-spacing: 0.08em;
@@ -1439,9 +1439,9 @@
 }
 
 #reviewPendingQueueCard .pending-fit-strong.active {
-  color: #22160d;
+  color: var(--text);
   background: linear-gradient(180deg, #ffdc8e, #d88c28);
-  border-color: #d98d25;
+  border-color: var(--accent);
   box-shadow: 0 0 0 3px rgba(217, 141, 37, 0.16);
 }
 
@@ -1529,7 +1529,7 @@
 }
 .review-duplicate-genre-card .review-card-head h3::before {
   content: "⚠ ";
-  color: #9b3428;
+  color: var(--danger);
 }
 .review-duplicate-genre-list {
   max-height: min(52vh, 520px) !important;
@@ -1583,7 +1583,7 @@
   padding: 2px 7px;
   border-radius: 999px;
   background: rgba(217, 141, 37, 0.14);
-  color: #7a4714;
+  color: var(--accent-dark);
   font-size: 0.66rem;
   font-weight: 950;
   letter-spacing: 0.04em;
@@ -1680,18 +1680,18 @@
   border-radius: 14px;
   border: 1px solid rgba(155, 52, 40, 0.18);
   background: rgba(255, 252, 241, 0.52);
-  color: var(--muted, #735a3c);
+  color: var(--muted);
   font-size: 0.83rem;
   line-height: 1.32;
 }
 
 .studio-retired-tag-route-note strong {
-  color: #7a4714;
+  color: var(--accent-dark);
 }
 
 .studio-action-strip .studio-action-helper {
   flex-basis: 100%;
-  color: var(--muted, #735a3c);
+  color: var(--muted);
   font-size: 0.84rem;
   line-height: 1.35;
   padding: 2px 4px 0;
@@ -1701,13 +1701,13 @@
 .studio-inline-repair-status {
   margin-top: 6px;
   min-height: 1.1em;
-  color: color-mix(in srgb, var(--success, #496b3b) 78%, var(--text, #22160d));
+  color: color-mix(in srgb, var(--success) 78%, var(--text));
   font-size: 0.78rem;
   font-weight: 850;
   line-height: 1.25;
 }
 .studio-inline-repair-status.is-error {
-  color: color-mix(in srgb, var(--danger, #9b3428) 78%, var(--text, #22160d));
+  color: color-mix(in srgb, var(--danger) 78%, var(--text));
 }
 .studio-mini-row-repair .studio-inline-track-edit .btn-tiny {
   min-width: 86px;

@@ -75,7 +75,7 @@
 }
 
 .ranks-tier-heading span {
-  color: var(--muted, #735a3c);
+  color: var(--muted);
   font-weight: 900;
   font-size: 0.82rem;
   white-space: nowrap;
@@ -91,7 +91,7 @@
   align-items: center;
   gap: 10px;
   margin: 6px 0 2px;
-  color: color-mix(in srgb, var(--muted, #735a3c) 82%, var(--text, #1f160c));
+  color: color-mix(in srgb, var(--muted) 82%, var(--text, #1f160c));
   font-size: 0.72rem;
   font-weight: 950;
   letter-spacing: 0.1em;
@@ -116,23 +116,23 @@
 .rank-band-marker.rank-band-high span {
   background: color-mix(in srgb, #2f6b3b 16%, var(--surface, #fff4dc));
   border-color: color-mix(in srgb, #2f6b3b 44%, transparent);
-  color: color-mix(in srgb, #2f6b3b 70%, var(--text, #22160d));
+  color: color-mix(in srgb, #2f6b3b 70%, var(--text));
 }
 
 .rank-band-marker.rank-band-upper span {
-  background: color-mix(in srgb, #d98d25 18%, var(--surface, #fff4dc));
-  border-color: color-mix(in srgb, #d98d25 48%, transparent);
+  background: color-mix(in srgb, var(--accent) 18%, var(--surface, #fff4dc));
+  border-color: color-mix(in srgb, var(--accent) 48%, transparent);
 }
 
 .rank-band-marker.rank-band-lower span {
-  background: color-mix(in srgb, #735a3c 12%, var(--surface, #fff4dc));
-  border-color: color-mix(in srgb, #735a3c 35%, transparent);
+  background: color-mix(in srgb, var(--muted) 12%, var(--surface, #fff4dc));
+  border-color: color-mix(in srgb, var(--muted) 35%, transparent);
 }
 
 .rank-band-marker.rank-band-low span {
-  background: color-mix(in srgb, #9b3428 12%, var(--surface, #fff4dc));
-  border-color: color-mix(in srgb, #9b3428 36%, transparent);
-  color: color-mix(in srgb, #9b3428 70%, var(--text, #22160d));
+  background: color-mix(in srgb, var(--danger) 12%, var(--surface, #fff4dc));
+  border-color: color-mix(in srgb, var(--danger) 36%, transparent);
+  color: color-mix(in srgb, var(--danger) 70%, var(--text));
 }
 
 .rank-band-high + .ranks-polish-row,
@@ -171,16 +171,16 @@
   border-top: 4px solid color-mix(in srgb, #2f6b3b 60%, var(--border, #c89548));
 }
 .ranks-polish-tier.rank-tier-4 {
-  border-top: 4px solid color-mix(in srgb, #d98d25 70%, var(--border, #c89548));
+  border-top: 4px solid color-mix(in srgb, var(--accent) 70%, var(--border, #c89548));
 }
 .ranks-polish-tier.rank-tier-3 {
   border-top: 4px solid color-mix(in srgb, #99621f 62%, var(--border, #c89548));
 }
 .ranks-polish-tier.rank-tier-2 {
-  border-top: 4px solid color-mix(in srgb, #735a3c 55%, var(--border, #c89548));
+  border-top: 4px solid color-mix(in srgb, var(--muted) 55%, var(--border, #c89548));
 }
 .ranks-polish-tier.rank-tier-1 {
-  border-top: 4px solid color-mix(in srgb, #9b3428 55%, var(--border, #c89548));
+  border-top: 4px solid color-mix(in srgb, var(--danger) 55%, var(--border, #c89548));
 }
 
 .ranks-polish-num {
@@ -191,11 +191,11 @@
   border-radius: 999px !important;
   background: color-mix(
     in srgb,
-    var(--accent-soft, #ffe0a1) 70%,
+    var(--accent-soft) 70%,
     white
   ) !important;
-  border: 1px solid color-mix(in srgb, var(--accent, #d98d25) 48%, transparent);
-  color: var(--accent-dark, #7a4714) !important;
+  border: 1px solid color-mix(in srgb, var(--accent) 48%, transparent);
+  color: var(--accent-dark) !important;
   font-size: 0.78rem !important;
   font-weight: 950 !important;
 }
@@ -218,8 +218,8 @@
 .ranks-polish-art-empty {
   display: grid !important;
   place-items: center;
-  background: color-mix(in srgb, var(--surface-2, #ead0a0) 70%, white);
-  color: var(--muted, #735a3c);
+  background: color-mix(in srgb, var(--surface-2) 70%, white);
+  color: var(--muted);
   font-weight: 950;
 }
 
@@ -248,14 +248,14 @@
 .ranks-polish-audition {
   font-size: 0.82rem;
   line-height: 1.2;
-  color: var(--muted, #735a3c);
+  color: var(--muted);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .ranks-polish-audition {
-  color: color-mix(in srgb, var(--muted, #735a3c) 75%, var(--text, #1f160c));
+  color: color-mix(in srgb, var(--muted) 75%, var(--text, #1f160c));
   font-weight: 750;
 }
 
@@ -308,19 +308,19 @@
 
 .ranks-album-dive-badge:focus-visible {
   box-shadow:
-    0 0 0 3px color-mix(in srgb, var(--accent, #d98d25) 28%, transparent),
+    0 0 0 3px color-mix(in srgb, var(--accent) 28%, transparent),
     0 4px 10px rgba(65, 34, 13, 0.12);
 }
 
 .ranks-album-dive-badge.has-dive {
-  color: color-mix(in srgb, #2f6b3b 78%, var(--text, #22160d));
+  color: color-mix(in srgb, #2f6b3b 78%, var(--text));
   background: color-mix(in srgb, #2f6b3b 14%, var(--surface, #fff4dc));
   border-color: color-mix(in srgb, #2f6b3b 42%, transparent);
 }
 
 .ranks-album-dive-badge.no-dive {
-  color: var(--muted, #735a3c);
-  background: color-mix(in srgb, var(--surface-2, #ead0a0) 52%, white);
+  color: var(--muted);
+  background: color-mix(in srgb, var(--surface-2) 52%, white);
   opacity: 0.72;
 }
 
@@ -369,7 +369,7 @@
   gap: 3px;
   padding: 4px;
   border-radius: 999px;
-  background: color-mix(in srgb, var(--surface-2, #ead0a0) 50%, white);
+  background: color-mix(in srgb, var(--surface-2) 50%, white);
   border: 1px solid color-mix(in srgb, var(--border, #c89548) 48%, transparent);
 }
 
@@ -381,7 +381,7 @@
   display: grid;
   place-items: center;
   background: transparent;
-  color: var(--muted, #735a3c);
+  color: var(--muted);
   font-weight: 950;
   font-size: 0.76rem;
   cursor: pointer;
@@ -389,13 +389,13 @@
 
 .rank-tier-btn:hover,
 .rank-tier-btn:focus-visible {
-  background: color-mix(in srgb, var(--accent-soft, #ffe0a1) 80%, white);
+  background: color-mix(in srgb, var(--accent-soft) 80%, white);
   color: var(--text, #1f160c);
   outline: none;
 }
 
 .rank-tier-btn.active {
-  background: var(--accent-dark, #7a4714);
+  background: var(--accent-dark);
   color: #fff4d8;
 }
 
@@ -410,7 +410,7 @@
   border-radius: 999px !important;
   box-shadow: none !important;
   background: color-mix(in srgb, var(--surface, #fff4dc) 76%, white) !important;
-  color: var(--muted, #735a3c) !important;
+  color: var(--muted) !important;
 }
 
 .ranks-empty-tier {
@@ -429,26 +429,26 @@
   border-top: 4px solid color-mix(in srgb, #2f6b3b 60%, var(--border, #c89548));
 }
 .ranks-polish-tier.rank-tier-4 {
-  border-top: 4px solid color-mix(in srgb, #d98d25 70%, var(--border, #c89548));
+  border-top: 4px solid color-mix(in srgb, var(--accent) 70%, var(--border, #c89548));
 }
 .ranks-polish-tier.rank-tier-3 {
   border-top: 4px solid color-mix(in srgb, #99621f 62%, var(--border, #c89548));
 }
 .ranks-polish-tier.rank-tier-2 {
-  border-top: 4px solid color-mix(in srgb, #735a3c 55%, var(--border, #c89548));
+  border-top: 4px solid color-mix(in srgb, var(--muted) 55%, var(--border, #c89548));
 }
 .ranks-polish-tier.rank-tier-1 {
-  border-top: 4px solid color-mix(in srgb, #9b3428 55%, var(--border, #c89548));
+  border-top: 4px solid color-mix(in srgb, var(--danger) 55%, var(--border, #c89548));
 }
 
 .ranks-polish-num {
   background: color-mix(
     in srgb,
-    var(--danger-soft, #f1c7b5) 75%,
+    var(--danger-soft) 75%,
     white
   ) !important;
-  border-color: color-mix(in srgb, var(--danger, #9b3428) 40%, transparent);
-  color: var(--danger, #9b3428) !important;
+  border-color: color-mix(in srgb, var(--danger) 40%, transparent);
+  color: var(--danger) !important;
 }
 
 .sr-only {
@@ -514,7 +514,7 @@
   }
   .ranks-polish-tier.rank-tier-4 {
     border-top: 4px solid
-      color-mix(in srgb, #d98d25 70%, var(--border, #c89548));
+      color-mix(in srgb, var(--accent) 70%, var(--border, #c89548));
   }
   .ranks-polish-tier.rank-tier-3 {
     border-top: 4px solid
@@ -522,11 +522,11 @@
   }
   .ranks-polish-tier.rank-tier-2 {
     border-top: 4px solid
-      color-mix(in srgb, #735a3c 55%, var(--border, #c89548));
+      color-mix(in srgb, var(--muted) 55%, var(--border, #c89548));
   }
   .ranks-polish-tier.rank-tier-1 {
     border-top: 4px solid
-      color-mix(in srgb, #9b3428 55%, var(--border, #c89548));
+      color-mix(in srgb, var(--danger) 55%, var(--border, #c89548));
   }
 
   .ranks-polish-num {
@@ -559,34 +559,34 @@
     color-mix(in srgb, #2f6b3b 12%, var(--surface, #fff8e8)),
     color-mix(in srgb, var(--surface, #fff8e8) 92%, white)
   ) !important;
-  border-left: 5px solid color-mix(in srgb, #2f6b3b 55%, var(--accent, #d98d25)) !important;
+  border-left: 5px solid color-mix(in srgb, #2f6b3b 55%, var(--accent)) !important;
 }
 
 .ranks-polish-row.rank-band-row-upper {
   background: linear-gradient(
     90deg,
-    color-mix(in srgb, #d98d25 10%, var(--surface, #fff8e8)),
+    color-mix(in srgb, var(--accent) 10%, var(--surface, #fff8e8)),
     color-mix(in srgb, var(--surface, #fff8e8) 92%, white)
   ) !important;
-  border-left: 5px solid color-mix(in srgb, #d98d25 62%, var(--border, #b98e55)) !important;
+  border-left: 5px solid color-mix(in srgb, var(--accent) 62%, var(--border)) !important;
 }
 
 .ranks-polish-row.rank-band-row-lower {
   background: linear-gradient(
     90deg,
-    color-mix(in srgb, #735a3c 8%, var(--surface, #fff8e8)),
+    color-mix(in srgb, var(--muted) 8%, var(--surface, #fff8e8)),
     color-mix(in srgb, var(--surface, #fff8e8) 92%, white)
   ) !important;
-  border-left: 5px solid color-mix(in srgb, #735a3c 42%, var(--border, #b98e55)) !important;
+  border-left: 5px solid color-mix(in srgb, var(--muted) 42%, var(--border)) !important;
 }
 
 .ranks-polish-row.rank-band-row-low {
   background: linear-gradient(
     90deg,
-    color-mix(in srgb, #9b3428 8%, var(--surface, #fff8e8)),
+    color-mix(in srgb, var(--danger) 8%, var(--surface, #fff8e8)),
     color-mix(in srgb, var(--surface, #fff8e8) 92%, white)
   ) !important;
-  border-left: 5px solid color-mix(in srgb, #9b3428 45%, var(--border, #b98e55)) !important;
+  border-left: 5px solid color-mix(in srgb, var(--danger) 45%, var(--border)) !important;
 }
 
 /* === Ranks Polish v3: stronger rank-band affordance ===================== */
@@ -596,9 +596,9 @@
   --rank-band-lower-bg: rgba(112, 72, 29, 0.18);
   --rank-band-low-bg: rgba(155, 52, 40, 0.18);
   --rank-band-high-border: #2f6b3b;
-  --rank-band-upper-border: #d98d25;
+  --rank-band-upper-border: var(--accent);
   --rank-band-lower-border: #8b642f;
-  --rank-band-low-border: #9b3428;
+  --rank-band-low-border: var(--danger);
 }
 
 .ranks-polish-row.ranking-row {
@@ -847,13 +847,13 @@
   white-space: nowrap !important;
   background: color-mix(
     in srgb,
-    var(--success-soft, #dce8c8) 74%,
+    var(--success-soft) 74%,
     white
   ) !important;
   color: color-mix(
     in srgb,
     var(--success, #2f6b3b) 78%,
-    var(--text, #22160d)
+    var(--text)
   ) !important;
   border: 1px solid color-mix(in srgb, var(--success, #2f6b3b) 42%, transparent) !important;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55) !important;
@@ -863,7 +863,7 @@
   transform: translateY(-1px);
   background: color-mix(
     in srgb,
-    var(--success-soft, #dce8c8) 54%,
+    var(--success-soft) 54%,
     white
   ) !important;
 }
@@ -873,7 +873,7 @@
   font-size: 0.74rem;
   font-weight: 800;
   letter-spacing: normal;
-  color: var(--muted, #735a3c);
+  color: var(--muted);
 }
 
 @media (max-width: 860px) {
@@ -904,7 +904,7 @@
 .ranks-jump-prefix {
   font-size: 0.76rem;
   font-weight: 950;
-  color: var(--accent-dark, #7a4714);
+  color: var(--accent-dark);
 }
 
 .ranks-jump-input {
@@ -915,8 +915,8 @@
   padding: 2px 3px !important;
   border: 0 !important;
   border-radius: 9px !important;
-  background: color-mix(in srgb, var(--accent-soft, #ffe0a1) 62%, white) !important;
-  color: var(--accent-dark, #7a4714) !important;
+  background: color-mix(in srgb, var(--accent-soft) 62%, white) !important;
+  color: var(--accent-dark) !important;
   font-size: 0.78rem !important;
   font-weight: 950 !important;
   text-align: center !important;
@@ -928,7 +928,7 @@
 .ranks-jump-input:focus {
   outline: none !important;
   box-shadow: 0 0 0 3px rgba(217, 141, 37, 0.2) !important;
-  background: color-mix(in srgb, var(--accent-soft, #ffe0a1) 74%, white) !important;
+  background: color-mix(in srgb, var(--accent-soft) 74%, white) !important;
 }
 
 .ranks-jump-input::-webkit-outer-spin-button,
@@ -961,7 +961,7 @@
   border-radius: 999px;
   border: 1px solid color-mix(in srgb, var(--border, #c89548) 65%, transparent);
   background: color-mix(in srgb, var(--surface, #fff4dc) 80%, white);
-  color: color-mix(in srgb, var(--muted, #735a3c) 82%, var(--text, #22160d));
+  color: color-mix(in srgb, var(--muted) 82%, var(--text));
   font-weight: 950;
   display: grid;
   place-items: center;
@@ -973,14 +973,14 @@
 .ranks-review-btn:focus-visible {
   outline: none;
   transform: translateY(-1px);
-  border-color: color-mix(in srgb, var(--accent, #d98d25) 55%, transparent);
-  background: color-mix(in srgb, var(--accent-soft, #ffe0a1) 70%, white);
+  border-color: color-mix(in srgb, var(--accent) 55%, transparent);
+  background: color-mix(in srgb, var(--accent-soft) 70%, white);
 }
 
 .ranks-review-btn.is-reviewed {
   color: #fff4d8;
   background: linear-gradient(180deg, #5d7a43, #36552d);
-  border-color: color-mix(in srgb, #496b3b 72%, var(--border, #c89548));
+  border-color: color-mix(in srgb, var(--success) 72%, var(--border, #c89548));
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.22),
     0 8px 16px rgba(54, 85, 45, 0.16);
@@ -1027,14 +1027,14 @@
 .ranks-album-dive-copy-btn:hover,
 .ranks-album-dive-copy-btn:focus-visible {
   transform: translateY(-1px);
-  background: color-mix(in srgb, var(--accent, #d98d25) 12%, var(--surface, #fffaf0));
+  background: color-mix(in srgb, var(--accent) 12%, var(--surface, #fffaf0));
   box-shadow: 0 4px 10px rgba(65, 34, 13, 0.12);
   outline: none;
 }
 
 .ranks-album-dive-copy-btn:focus-visible {
   box-shadow:
-    0 0 0 3px color-mix(in srgb, var(--accent, #d98d25) 28%, transparent),
+    0 0 0 3px color-mix(in srgb, var(--accent) 28%, transparent),
     0 4px 10px rgba(65, 34, 13, 0.12);
 }
 
