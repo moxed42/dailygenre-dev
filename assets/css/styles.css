@@ -4085,7 +4085,11 @@ body.spotify-player-open { padding-bottom: 116px; }
     .album-dive-summary textarea, .album-dive-verdict textarea { min-height:76px; }
     .album-dive-grid { display:grid; gap:14px; margin-top:14px; }
     .album-slot-card { display:grid; grid-template-columns:132px minmax(0,1fr); gap:14px; padding:14px; border-radius:22px; background:rgba(255,252,241,.62); border:1px solid rgba(127,82,28,.24); box-shadow:0 10px 24px rgba(64,38,13,.08); overflow:hidden; }
-    .album-slot-art { width:132px; height:132px; border-radius:18px; object-fit:cover; background:radial-gradient(circle at 50% 50%, var(--accent-soft) 0 10%, #1b120c 11% 30%, #d88a22 31% 36%, #0c0806 37% 63%, #2a1a10 64% 100%); border:1px solid rgba(255,224,161,.28); box-shadow:inset 0 1px 0 rgba(255,255,255,.18), 0 12px 22px rgba(0,0,0,.18); }
+    /* Phase 5: overflow:hidden + small centered fallback font, same fix as
+       .genre-art/.song-focus-art -- a failed image's alt text ("BREAKOUT
+       cover", etc.) otherwise spills past the small shelf-grid thumbnails
+       (as small as 88px via .album-dive-grid .album-slot-art elsewhere). */
+    .album-slot-art { width:132px; height:132px; border-radius:18px; object-fit:cover; overflow:hidden; font-size:.65rem; text-align:center; color:var(--faint); background:radial-gradient(circle at 50% 50%, var(--accent-soft) 0 10%, #1b120c 11% 30%, #d88a22 31% 36%, #0c0806 37% 63%, #2a1a10 64% 100%); border:1px solid rgba(255,224,161,.28); box-shadow:inset 0 1px 0 rgba(255,255,255,.18), 0 12px 22px rgba(0,0,0,.18); }
     .album-slot-main { display:grid; gap:10px; min-width:0; }
     .album-slot-kicker { display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap; }
     .album-slot-label { font-weight:1000; text-transform:uppercase; letter-spacing:.08em; color:#4e321c; font-size:.78rem; }
