@@ -1380,6 +1380,15 @@
     .genre-art, .song-artwork, .archive-artwork, .ranking-artwork {
       display:block;
       object-fit:cover;
+      /* overflow:hidden matters for the failed-image case: object-fit only
+         constrains a successfully-loaded image, but the alt text a browser
+         renders in its place when the image fails to load (CDN hiccup,
+         offline, blocked request) is plain text and can spill past the
+         rounded box otherwise. */
+      overflow:hidden;
+      font-size:.72rem;
+      text-align:center;
+      color:var(--faint);
       background:
         radial-gradient(circle at 50% 50%, var(--accent-soft) 0 10%, #1b120c 11% 30%, #d88a22 31% 36%, #0c0806 37% 63%, #2a1a10 64% 100%);
       border:1px solid rgba(255,224,161,.26);

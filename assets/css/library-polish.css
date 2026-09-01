@@ -8539,10 +8539,16 @@ body.dc-listen-mode .dc-desktop-genre-nav {
     display: none !important;
   }
 
+  /* Phase 5: middle column was also fixed at 42px, same as the prev/next
+     icon buttons either side of it -- but it holds the word "Archive", not
+     a single icon glyph, so it clipped to an unreadable middle fragment no
+     matter what width the button itself asked for (a grid item is sized by
+     its track, not its own width, unless the track itself allows it to
+     grow). auto lets that middle column size to the label's real content. */
   body.dc-listen-mode .dc-hero-actions .dc-mobile-genre-nav,
   body.dc-listen-mode .dc-compact-hero .detail-actions .dc-mobile-genre-nav {
     display: grid !important;
-    grid-template-columns: repeat(3, 42px) !important;
+    grid-template-columns: 42px auto 42px !important;
     gap: 8px !important;
     flex: 0 0 100% !important;
     width: 100% !important;
@@ -8583,9 +8589,18 @@ body.dc-listen-mode .dc-desktop-genre-nav {
     display: none !important;
   }
 
-  body.dc-listen-mode .dc-hero-actions .dc-mobile-archive-genre,
-  body.dc-listen-mode .dc-compact-hero .detail-actions .dc-mobile-archive-genre {
-    font-size: 1.05rem !important;
+  /* Phase 5: .dc-mobile-archive-genre inherited the shared 42px fixed-width
+     circular sizing above, meant for the single-character prev/next icon
+     buttons -- but this one's label is the word "Archive", which got
+     clipped down to an unreadable middle fragment inside that width. Give
+     it its own auto-width sizing instead of a fixed circle. */
+  body.dc-listen-mode .dc-hero-actions button.dc-mobile-archive-genre,
+  body.dc-listen-mode .dc-compact-hero .detail-actions button.dc-mobile-archive-genre {
+    width: auto !important;
+    min-width: auto !important;
+    max-width: none !important;
+    padding: 0 16px !important;
+    font-size: 0.92rem !important;
   }
 }
 
