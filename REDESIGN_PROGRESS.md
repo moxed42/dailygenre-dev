@@ -649,6 +649,18 @@ before any module boundary could be drawn around it.
     `text-overflow:ellipsis` so a failed image's alt text truncates to one
     clean line instead of wrapping into a multi-line block that fills the
     whole box before clipping.
+  - **Game Room (no changes needed)**: live-verified every state -- the
+    intro card, an in-progress round (clue, artwork, 4 answer choices,
+    "Show category hint"), the post-answer feedback (correct/incorrect
+    color-coded highlighting plus the genre-fit explanation), and the final
+    "Easy Mode Complete" summary screen -- at phone and desktop widths, and
+    played a full 10-round game end to end. Touch targets on the answer
+    buttons measured 60px tall (well above the ~44px minimum); its artwork
+    thumbnails already use `alt=""` (correctly decorative, so the alt-text
+    overflow bug found on every other screen doesn't apply here); no
+    `:has()`/`backdrop-filter` cross-browser risk in `game-room.css`. This
+    screen was already solid -- reporting that honestly rather than making
+    a cosmetic change just to have one.
 
   Each screen: verified with `npm test` (136/136 as of the Library step, the
   one pre-existing rAF-timing flake in `router-switch-screen.test.js`
