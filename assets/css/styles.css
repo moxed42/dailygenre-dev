@@ -219,15 +219,43 @@
       flex:0 0 auto;
     }
 
+    /* Phase 5: was a full-height vertical bar through the window's center --
+       it visually cut through the resting chip's own text every time (the
+       chip that settles dead-center is, by definition, always right behind
+       it). Redesigned as a pair of small carets pinned to the very top/
+       bottom edges of the window, pointing inward at the center chip,
+       leaving the text itself completely clear. */
     .spinner-marker {
       position:absolute;
-      top:8px;
-      bottom:8px;
+      top:0;
+      bottom:0;
       left:50%;
       transform:translateX(-50%);
-      width:5px;
-      border-radius:999px;
+      width:1px;
       z-index:4;
+      pointer-events:none;
+    }
+
+    .spinner-marker::before,
+    .spinner-marker::after {
+      content:"";
+      position:absolute;
+      left:50%;
+      transform:translateX(-50%);
+      width:0;
+      height:0;
+      border-left:8px solid transparent;
+      border-right:8px solid transparent;
+    }
+
+    .spinner-marker::before {
+      top:4px;
+      border-top:10px solid var(--accent);
+    }
+
+    .spinner-marker::after {
+      bottom:4px;
+      border-bottom:10px solid var(--accent);
     }
 
     .spin-actions, .row {
@@ -833,9 +861,9 @@
     }
     .spinner-window::before { background:linear-gradient(90deg, rgba(8,6,4,1), rgba(8,6,4,0)); }
     .spinner-window::after { background:linear-gradient(270deg, rgba(8,6,4,1), rgba(8,6,4,0)); }
-    .spinner-marker {
-      background:linear-gradient(180deg, #fff1b8, var(--accent));
-      box-shadow:0 0 0 6px rgba(217,141,37,.13), 0 0 34px rgba(217,141,37,.76);
+    .spinner-marker::before,
+    .spinner-marker::after {
+      filter:drop-shadow(0 0 6px rgba(217,141,37,.85));
     }
     .genre-chip {
       color:#23160c;
