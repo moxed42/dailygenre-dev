@@ -701,33 +701,65 @@ function switchScreen(name, options = {}) {
       return lines.join('\n');
     }
 
+    function localDateKey(date) {
+      const y = date.getFullYear();
+      const m = String(date.getMonth() + 1).padStart(2, '0');
+      const d = String(date.getDate()).padStart(2, '0');
+      return `${y}-${m}-${d}`;
+    }
+
+    function computeListeningStreakDays() {
+      const dates = new Set();
+      (Array.isArray(genres) ? genres : []).forEach(g => {
+        const d = dateValue(g);
+        if (d && /^\d{4}-\d{2}-\d{2}/.test(d)) dates.add(String(d).slice(0, 10));
+      });
+      if (!dates.size) return 0;
+      const cursor = new Date();
+      cursor.setHours(0, 0, 0, 0);
+      if (!dates.has(localDateKey(cursor))) {
+        cursor.setDate(cursor.getDate() - 1);
+        if (!dates.has(localDateKey(cursor))) return 0;
+      }
+      let streak = 0;
+      while (dates.has(localDateKey(cursor))) {
+        streak += 1;
+        cursor.setDate(cursor.getDate() - 1);
+      }
+      return streak;
+    }
+
     function updateRemainingCount() {
       invalidateUnlistenedCache();
       remainingCount.classList.remove('pill-loading', 'pill-error');
       const stats = getRemainingCountDiagnostics();
-      remainingCount.textContent = `${stats.remaining} genres remaining`;
-      remainingCount.title = remainingCountMessage(stats) + '\n\nClick for excluded samples.';
+      const explored = Math.max(0, stats.total - stats.remaining);
+      const streak = computeListeningStreakDays();
+      const streakText = streak > 0 ? `${streak}-day streak` : 'no streak yet';
+      remainingCount.textContent = `${explored.toLocaleString()} of ${stats.total.toLocaleString()} explored · ${streakText}`;
+      remainingCount.title = 'Click for progress details';
       console.debug('[Daily Genre] Remaining count diagnostics', stats);
     }
 
-    function showRemainingCountAudit() {
+    function toggleRemainingCountPopover() {
+      const popover = document.getElementById('remainingCountPopover');
+      if (!popover) return;
+      const willShow = popover.classList.contains('hidden');
+      if (!willShow) { popover.classList.add('hidden'); return; }
       const stats = getRemainingCountDiagnostics();
-      const sampleLines = (stats.excludedSamples || []).map((g, idx) => {
-        const bits = [g.reason, g.status ? `status=${g.status}` : '', g.date ? `date=${g.date}` : '', g.rating ? `rating=${g.rating}` : ''].filter(Boolean).join(' · ');
-        return `${idx + 1}. ${g.title} — ${bits}`;
-      });
-      const msg = [
-        remainingCountMessage(stats),
-        '',
-        'Why this may look low:',
-        'The spinner can only include actual loaded genre rows. If the max ID is much higher than the total row count, those are ID gaps or missing JSON objects, not hidden spin candidates.',
-        `Missing numeric IDs in loaded data (${stats.idAudit?.missingIdCount || 0}): ${(stats.idAudit?.missingIdPreview || []).join(', ') || '(none)'}`,
-        '',
-        'First excluded loaded-row samples:',
-        sampleLines.join('\n') || '(none)'
-      ].join('\n');
-      alert(msg);
-      console.debug('[Daily Genre] Remaining count audit detail', stats);
+      const explored = Math.max(0, stats.total - stats.remaining);
+      const pct = stats.total ? Math.round((explored / stats.total) * 100) : 0;
+      const streak = computeListeningStreakDays();
+      const streakLine = streak > 0
+        ? `${streak}-day streak — you've logged a genre every day for ${streak} day${streak === 1 ? '' : 's'}.`
+        : 'No active streak — log a genre today to start one.';
+      popover.innerHTML = `
+        <div class="remaining-count-popover-row"><strong>${explored.toLocaleString()}</strong> of <strong>${stats.total.toLocaleString()}</strong> genres explored (${pct}%)</div>
+        <div class="remaining-count-popover-row">${escapeHtml(streakLine)}</div>
+        <div class="remaining-count-popover-row"><strong>${stats.remaining.toLocaleString()}</strong> still in the spin pool</div>
+        <button type="button" class="btn btn-secondary btn-tiny" onclick="switchScreen('review'); document.getElementById('remainingCountPopover')?.classList.add('hidden');">Library diagnostics in Studio</button>
+      `;
+      popover.classList.remove('hidden');
     }
 
     function genreEmoji(genre) {
@@ -5575,7 +5607,13 @@ function loadListenScreen(genre, options = {}) {
     document.getElementById('topCrateDigBtn')?.addEventListener('click', openCrateDig);
     document.getElementById('topAlbumDiveBtn')?.addEventListener('click', openCurrentAlbumDive);
     manualToggleBtn.addEventListener('click', () => manualPanel.classList.toggle('hidden'));
-    remainingCount?.addEventListener('click', showRemainingCountAudit);
+    remainingCount?.addEventListener('click', toggleRemainingCountPopover);
+    document.addEventListener('click', (event) => {
+      const popover = document.getElementById('remainingCountPopover');
+      if (!popover || popover.classList.contains('hidden')) return;
+      if (event.target === remainingCount || remainingCount?.contains(event.target) || popover.contains(event.target)) return;
+      popover.classList.add('hidden');
+    });
 
     const manualSearch2 = document.getElementById('manualSearch2');
     const manualResults2 = document.getElementById('manualResults2');
@@ -7182,6 +7220,19 @@ function ensureBackToTopButton() {
   sync();
 }
 
+const ONBOARDING_DISMISSED_KEY = 'dailyGenreOnboardingDismissed';
+function initOnboardingBanner() {
+  const banner = document.getElementById('onboardingBanner');
+  if (!banner) return;
+  if (safeStorageGet(ONBOARDING_DISMISSED_KEY)) return;
+  banner.classList.remove('hidden');
+  const dismiss = () => {
+    banner.classList.add('hidden');
+    safeStorageSet(ONBOARDING_DISMISSED_KEY, '1');
+  };
+  document.getElementById('onboardingBannerClose')?.addEventListener('click', dismiss, { once: true });
+}
+
 bootApp().catch(err => {
   console.error('App boot failed:', err);
   if (remainingCount) remainingCount.textContent = 'Could not start app. Check console.';
@@ -7206,6 +7257,7 @@ async function bootApp() {
   if (spotifySession?.access_token) spotifyStartPolling();
   await loadData();
   ensureBackToTopButton();
+  initOnboardingBanner();
   suppressAutofillOnGeneratedControls();
   const activeScreen = document.querySelector('.screen.active');
   if (activeScreen) applyScreenInertState(activeScreen);

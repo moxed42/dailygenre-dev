@@ -276,11 +276,23 @@
     return document.getElementById("gameRoomMount");
   }
 
+  function gameRoomUnlockMessage(listenedCount, rounds) {
+    if (listenedCount < CHOICE_COUNT) {
+      const away = CHOICE_COUNT - listenedCount;
+      return `Listen to ${CHOICE_COUNT} genres to unlock Game Room — you're ${away} away.`;
+    }
+    if (Array.isArray(rounds) && rounds.length < ROUND_COUNT) {
+      return `Almost there — log a few more songs with full details so Game Room has enough playable clues (found ${rounds.length} of ${ROUND_COUNT} needed).`;
+    }
+    return "";
+  }
+
   function renderIntro(message = "") {
     const el = mount();
     if (!el) return;
     const listenedCount = genres().filter(isListenedGenre).length;
     const poolCount = buildQuestionPool().length;
+    const noticeMessage = message || gameRoomUnlockMessage(listenedCount);
     el.innerHTML = `
       <div class="game-room-hero">
         <div>
@@ -290,7 +302,7 @@
         </div>
         <div class="game-room-mode-pill">10 rounds</div>
       </div>
-      ${message ? `<div class="notice">${esc(message)}</div>` : ""}
+      ${noticeMessage ? `<div class="notice">${esc(noticeMessage)}</div>` : ""}
       <div class="game-room-intro-grid">
         <div class="game-room-rule"><strong>🎧 Listen</strong><span>Open the stored Spotify song or album.</span></div>
         <div class="game-room-rule"><strong>🎯 Choose</strong><span>All four answers come from listened genres only.</span></div>
@@ -310,7 +322,8 @@
   function startGame() {
     const rounds = buildRounds();
     if (rounds.length < ROUND_COUNT) {
-      renderIntro(`Game Room needs at least ${ROUND_COUNT} playable clues across at least ${CHOICE_COUNT} listened genres. It currently found ${rounds.length}.`);
+      const listenedCount = genres().filter(isListenedGenre).length;
+      renderIntro(gameRoomUnlockMessage(listenedCount, rounds));
       return;
     }
     state.rounds = rounds;

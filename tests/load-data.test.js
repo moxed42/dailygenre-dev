@@ -137,5 +137,5 @@ test("loadData() sets the pill-loading class while in flight and clears it once 
   await loadPromise;
 
   assert.equal(pill.classList.contains("pill-loading"), false);
-  assert.ok(pill.textContent.includes("remaining"));
+  assert.ok(pill.textContent.includes("explored"));
 });

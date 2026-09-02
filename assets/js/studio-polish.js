@@ -2099,6 +2099,32 @@
     }
   }
 
+  /* Part 3 Phase 11: the old "X genres remaining" pill used to stuff this
+     developer-facing spin-pool/ID-gap audit into its title attribute and a
+     raw alert() on click. Moved here, collapsed by default, so it's still
+     reachable for anyone who needs it without confronting every visitor. */
+  function renderDiagnosticsLane() {
+    if (typeof getRemainingCountDiagnostics !== "function") return "";
+    const stats = getRemainingCountDiagnostics();
+    const summary = typeof remainingCountMessage === "function" ? remainingCountMessage(stats) : "";
+    const missingIds = (stats.idAudit?.missingIdPreview || []).join(", ") || "(none)";
+    const sampleLines = (stats.excludedSamples || []).map((g, idx) => {
+      const bits = [g.reason, g.status ? `status=${g.status}` : "", g.date ? `date=${g.date}` : "", g.rating ? `rating=${g.rating}` : ""].filter(Boolean).join(" · ");
+      return `${idx + 1}. ${g.title} — ${bits}`;
+    }).join("\n");
+    return `<details class="studio-diagnostics-lane" id="studio-diagnostics-lane">
+      <summary><strong>Library diagnostics</strong><span>Spin-pool audit, ID gaps, exclusion samples</span></summary>
+      <div class="studio-diagnostics-body">
+        <p class="small">Advanced/developer-facing detail. Most people never need this.</p>
+        <pre class="studio-diagnostics-pre">${esc(summary)}</pre>
+        <h4>Missing numeric IDs (${stats.idAudit?.missingIdCount || 0})</h4>
+        <p class="small">${esc(missingIds)}</p>
+        <h4>First excluded loaded-row samples</h4>
+        <pre class="studio-diagnostics-pre">${esc(sampleLines || "(none)")}</pre>
+      </div>
+    </details>`;
+  }
+
   /* v201: Move legacy @tag import to the bottom of Studio, collapsed by default. */
   function moveLegacyTagImport(mount) {
     const hero = document.querySelector("#screen-review .review-hero");
@@ -2144,6 +2170,14 @@
       if (oldIdentityCleanup) oldIdentityCleanup.remove();
       tuneIdentityEditorForV200(mount);
       moveLegacyTagImport(mount);
+      if (!$("#studio-diagnostics-lane", mount)) {
+        const diagnosticsHtml = renderDiagnosticsLane();
+        if (diagnosticsHtml) {
+          const legacy = $(".studio-legacy-tag-import", mount);
+          if (legacy) legacy.insertAdjacentHTML("afterend", diagnosticsHtml);
+          else mount.insertAdjacentHTML("beforeend", diagnosticsHtml);
+        }
+      }
       const routeLane = $("#studio-route-lane", mount) || $("#studio-inbox-lane", mount);
       if (routeLane) routeLane.insertAdjacentHTML("afterend", renderIdentityCleanupLane());
       else mount.insertAdjacentHTML("beforeend", renderIdentityCleanupLane());

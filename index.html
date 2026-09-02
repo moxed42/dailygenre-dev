@@ -114,7 +114,10 @@
           </div>
         </div>
         <div class="top-actions">
-          <div class="pill" id="remainingCount" aria-live="polite">Loading genres...</div>
+          <div class="remaining-count-wrap">
+            <button type="button" class="pill" id="remainingCount" aria-live="polite">Loading genres...</button>
+            <div class="remaining-count-popover hidden" id="remainingCountPopover" role="dialog" aria-label="Progress details"></div>
+          </div>
           <button
             type="button"
             class="pill save-status-chip hidden"
@@ -145,6 +148,15 @@
 
       <section class="screen active" id="screen-spin" role="tabpanel" aria-labelledby="tab-spin">
         <div class="card" style="margin-top: 20px">
+          <div class="onboarding-banner hidden" id="onboardingBanner" role="note" aria-label="How Daily Genre works">
+            <button type="button" class="onboarding-banner-close" id="onboardingBannerClose" aria-label="Dismiss">&times;</button>
+            <div class="eyebrow">How this works</div>
+            <div class="onboarding-banner-steps">
+              <div class="onboarding-banner-step"><strong>1. Spin</strong><span>Get a random genre from your library.</span></div>
+              <div class="onboarding-banner-step"><strong>2. Listen</strong><span>Open it and log what you heard.</span></div>
+              <div class="onboarding-banner-step"><strong>3. Rate</strong><span>Star it so it feeds your rankings.</span></div>
+            </div>
+          </div>
           <div class="spinner-shell">
             <div class="spinner-window">
               <div class="spinner-marker"></div>
@@ -155,7 +167,7 @@
           <div class="spin-actions">
             <button class="btn btn-primary" id="spinBtn">SPIN</button>
             <button class="btn btn-secondary" id="manualToggleBtn">
-              Toggle manual picker
+              Pick one myself
             </button>
           </div>
 
