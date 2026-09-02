@@ -708,7 +708,7 @@
     const label = [song.artist, song.title || song.name].filter(Boolean).join(" — ") || "this song";
     if (!window.confirm(`Delete ${label} everywhere?
 
-This removes it from every genre and Studio queue. It becomes permanent after Save Library Updates.`)) return;
+This removes it from every genre and Studio queue. It becomes permanent after you Save in the top bar.`)) return;
     const previousText = button?.textContent || "Delete everywhere";
     if (button) {
       button.disabled = true;
@@ -745,7 +745,7 @@ This removes it from every genre and Studio queue. It becomes permanent after Sa
       if (!nextEntries.length) setSongDetailsOpen(false);
       enhanceSongListeningExperience();
       const deletedCount = (outcome?.deleted || 0) + (localRemoved && !outcome?.deleted ? localRemoved : 0);
-      if (typeof showSaveToast === "function") showSaveToast(`Deleted ${deletedCount} ${deletedCount === 1 ? "copy" : "copies"} everywhere — Save Library Updates to persist.`, false);
+      if (typeof showSaveToast === "function") showSaveToast(`Deleted ${deletedCount} ${deletedCount === 1 ? "copy" : "copies"} everywhere — Save in the top bar to persist.`, false);
     } catch (error) {
       console.error("Could not delete song everywhere", error);
       if (typeof showSaveToast === "function") showSaveToast(`Could not delete song everywhere: ${error?.message || error || "Unknown error"}`, true);
@@ -943,7 +943,7 @@ This removes it from every genre and Studio queue. It becomes permanent after Sa
             <input data-track-title-input type="text" value="${html(song.title || '')}" placeholder="Override title if metadata is messy">
             <input data-track-artist-input type="text" value="${html(song.artist || (Array.isArray(song.artists) ? song.artists.join(', ') : ''))}" placeholder="Override artist/channel if needed">
           </div>
-          <p class="song-focus-helper">Title/artist overrides are staged here. Click Apply URL / Overrides, then use the floating Save button to persist.</p>
+          <p class="song-focus-helper">Title/artist overrides are staged here. Click Apply URL / Overrides, then use Save in the top bar to persist.</p>
         </div>
         <div class="song-focus-detail-card song-focus-meta-card">
           <h4>Metadata</h4>

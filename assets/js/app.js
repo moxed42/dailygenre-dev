@@ -1754,7 +1754,7 @@ function switchScreen(name, options = {}) {
       }
 
       showSaveToast(
-        'Reaction selected — use the floating Save button to persist it.',
+        'Reaction selected — use Save in the top bar to persist it.',
         false,
       );
 
@@ -1978,7 +1978,7 @@ function switchScreen(name, options = {}) {
       loadListenScreen(currentGenre, { preserveDirty: true, skipSpotifyHydration: true });
       applyDetailEditMode(detailEditMode);
       restore();
-      showSaveToast('Monthly listening flag updated — use the floating Save button to persist it.', false);
+      showSaveToast('Monthly listening flag updated — use Save in the top bar to persist it.', false);
     }
 
     function clearMonthlyFlagsFromView() {
@@ -1991,7 +1991,7 @@ function switchScreen(name, options = {}) {
       loadListenScreen(currentGenre, { preserveDirty: true, skipSpotifyHydration: true });
       applyDetailEditMode(detailEditMode);
       restore();
-      showSaveToast('Monthly flags cleared — use the floating Save button to persist it.', false);
+      showSaveToast('Monthly flags cleared — use Save in the top bar to persist it.', false);
     }
 
     function enforceMonthlyExclusiveFlags(genre) {
@@ -2024,7 +2024,7 @@ function switchScreen(name, options = {}) {
       loadListenScreen(currentGenre, { preserveDirty: true, skipSpotifyHydration: true });
       applyDetailEditMode(detailEditMode);
       restore();
-      showSaveToast('Moved back to in progress — use the floating Save button to persist it.', false);
+      showSaveToast('Moved back to in progress — use Save in the top bar to persist it.', false);
       if (!appPassword) promptLibrarySaveLogin();
     }
     window.setGenreInProgressFromView = setGenreInProgressFromView;
@@ -2067,7 +2067,7 @@ function switchScreen(name, options = {}) {
       // genre page here can block Firefox's repaint until another control is clicked.
       // The save flow persists currentGenre.rating; full renders happen when changing pages.
       repaintGenreRatingAfterInput(currentGenre.rating);
-      showSaveToast(appPassword ? 'Genre rating updated — use the floating Save button to persist it.' : 'Genre rating updated — enter the save password to persist it.', false);
+      showSaveToast(appPassword ? 'Genre rating updated — use Save in the top bar to persist it.' : 'Genre rating updated — enter the save password to persist it.', false);
       // v209: let the browser paint the selected stars before opening the save-password modal.
       if (!appPassword) requestAnimationFrame(() => promptLibrarySaveLogin());
     }
@@ -2148,7 +2148,7 @@ function switchScreen(name, options = {}) {
       toggleLibrarySaveButton(true);
       loadListenScreen(currentGenre, { preserveDirty: true, skipSpotifyHydration: true });
       applyDetailEditMode(detailEditMode);
-      showSaveToast(wasFavorite ? 'Favorite track cleared — use the floating Save button to persist it.' : 'Favorite track updated — use the floating Save button to persist it.', false);
+      showSaveToast(wasFavorite ? 'Favorite track cleared — use Save in the top bar to persist it.' : 'Favorite track updated — use Save in the top bar to persist it.', false);
     }
 
     function genreRatingHeroMarkup(genre) {
@@ -3139,7 +3139,7 @@ Overwrite the selected queue row anyway? This will replace its title, artist, ar
     function renderPendingSongNotesPanel(genre = currentGenre) {
       const count = pendingSongNotesForGenre(genre).length;
       if (!count) return '';
-      return `<div class="pending-song-notes-panel"><div><strong>${count} pending song note${count === 1 ? '' : 's'}</strong><div class="small">These are staged locally. The floating Save button will roll them into the song cards and persist them.</div></div><div class="row" style="justify-content:flex-end;"><button type="button" class="btn btn-secondary" onclick="rollUpPendingSongNotesForCurrentGenre()">Roll up pending notes</button></div></div>`;
+      return `<div class="pending-song-notes-panel"><div><strong>${count} pending song note${count === 1 ? '' : 's'}</strong><div class="small">These are staged locally. Save in the top bar will roll them into the song cards and persist them.</div></div><div class="row" style="justify-content:flex-end;"><button type="button" class="btn btn-secondary" onclick="rollUpPendingSongNotesForCurrentGenre()">Roll up pending notes</button></div></div>`;
     }
 
     function savePendingSongNoteFromCard(encodedKey, pendingIndex, path = '', button = null) {
@@ -3244,7 +3244,7 @@ Overwrite the selected queue row anyway? This will replace its title, artist, ar
       loadListenScreen(currentGenre, { preserveDirty: true, skipSpotifyHydration: true });
       applyDetailEditMode(detailEditMode);
       restore();
-      showSaveToast(`${applied} song note${applied === 1 ? '' : 's'} rolled up — click use the floating Save button to persist.`, false);
+      showSaveToast(`${applied} song note${applied === 1 ? '' : 's'} rolled up — use Save in the top bar to persist.`, false);
     }
 
     function applyPendingSongNotesToCurrentGenreSilently() {
@@ -3376,7 +3376,7 @@ Overwrite the selected queue row anyway? This will replace its title, artist, ar
         applyDetailEditMode(detailEditMode);
         restore();
         markListeningUpdatePending();
-        showSaveToast('Spotify metadata refreshed — use the floating Save button to keep it.', false);
+        showSaveToast('Spotify metadata refreshed — use Save in the top bar to keep it.', false);
       } catch (err) {
         console.error('Spotify refresh failed', err);
         showSaveToast(`Spotify refresh failed: ${err?.message || err || 'Unknown error'}`, true);
@@ -3753,7 +3753,7 @@ Overwrite the selected queue row anyway? This will replace its title, artist, ar
             : `URL saved, but Spotify metadata did not refresh: ${metadataWarning}`,
             !recovered);
         } else {
-          showSaveToast('URL / overrides applied — use the floating Save button to keep them.', false);
+          showSaveToast('URL / overrides applied — use Save in the top bar to keep them.', false);
         }
       } catch (err) {
         console.error('Track URL update failed', err);
@@ -3779,7 +3779,7 @@ Overwrite the selected queue row anyway? This will replace its title, artist, ar
         currentGenre.pending_songs = pending;
         loadListenScreen(currentGenre, { preserveDirty: true, skipSpotifyHydration: true });
         markListeningUpdatePending();
-        showSaveToast('Pending nomination removed — use the floating Save button to keep it.', false);
+        showSaveToast('Pending nomination removed — use Save in the top bar to keep it.', false);
         return;
       }
 
@@ -4106,7 +4106,7 @@ Overwrite the selected queue row anyway? This will replace its title, artist, ar
         : '';
       const canSpotifyRefresh = !s.isPending && (/spotify\.com\/track\//i.test(rawUrl || s.spotifyUrl || '') || /^spotify:track:/i.test(rawUrl || s.spotifyUrl || ''));
       const trackEditHtml = canShowTrackTools
-        ? `<details class="track-card-editor"><summary>Edit / refresh track</summary><div class="track-card-edit-body"><input type="url" data-track-url-input value="${escapeHtml(rawUrl)}" placeholder="Paste Spotify, YouTube, Apple Music, SoundCloud, or Bandcamp track URL"><div class="track-card-manual-meta"><input type="text" data-track-title-input value="${escapeHtml(s.title || '')}" placeholder="Override title if YouTube/Apple title is messy"><input type="text" data-track-artist-input value="${escapeHtml(s.artist || (Array.isArray(s.artists) ? s.artists.join(', ') : ''))}" placeholder="Override artist/channel if needed"></div><div class="track-card-edit-actions"><button type="button" class="btn btn-primary" onclick="updateTrackUrlFromCard('${encodedKey}', ${editPendingIndex}, this, '${encodedPath}')">Apply URL / Overrides</button>${canSpotifyRefresh ? `<button type="button" class="btn btn-secondary" onclick="refreshGenrePageSpotifyTrack('${encodedKey}', this, '${encodedPath}')">Refresh Spotify</button>` : ''}<button type="button" class="btn btn-danger" onclick="removeTrackFromCard('${encodedKey}', ${editPendingIndex}, '${encodedPath}')">Remove from genre</button></div><div class="track-card-edit-note">Update accepts Spotify, YouTube, Apple Music, SoundCloud, or Bandcamp track links. Optional title/artist overrides replace messy YouTube or Apple metadata. Use the floating Save button to persist.</div></div></details>`
+        ? `<details class="track-card-editor"><summary>Edit / refresh track</summary><div class="track-card-edit-body"><input type="url" data-track-url-input value="${escapeHtml(rawUrl)}" placeholder="Paste Spotify, YouTube, Apple Music, SoundCloud, or Bandcamp track URL"><div class="track-card-manual-meta"><input type="text" data-track-title-input value="${escapeHtml(s.title || '')}" placeholder="Override title if YouTube/Apple title is messy"><input type="text" data-track-artist-input value="${escapeHtml(s.artist || (Array.isArray(s.artists) ? s.artists.join(', ') : ''))}" placeholder="Override artist/channel if needed"></div><div class="track-card-edit-actions"><button type="button" class="btn btn-primary" onclick="updateTrackUrlFromCard('${encodedKey}', ${editPendingIndex}, this, '${encodedPath}')">Apply URL / Overrides</button>${canSpotifyRefresh ? `<button type="button" class="btn btn-secondary" onclick="refreshGenrePageSpotifyTrack('${encodedKey}', this, '${encodedPath}')">Refresh Spotify</button>` : ''}<button type="button" class="btn btn-danger" onclick="removeTrackFromCard('${encodedKey}', ${editPendingIndex}, '${encodedPath}')">Remove from genre</button></div><div class="track-card-edit-note">Update accepts Spotify, YouTube, Apple Music, SoundCloud, or Bandcamp track links. Optional title/artist overrides replace messy YouTube or Apple metadata. Use Save in the top bar to persist.</div></div></details>`
         : '';
       const reactionStaged = currentGenre && stagedQueueReactionKeys.has(stagedReactionKey(currentGenre.id, songIdentity(s)));
       const isFavorite = currentGenre && isSameFavoriteSong(currentGenre, s);
@@ -5977,7 +5977,7 @@ function loadListenScreen(genre, options = {}) {
       const restore = preserveScrollSnapshot();
       renderVisuals();
       restore();
-      showSaveToast('Era override updated — click Save Library Updates to persist it.', false);
+      showSaveToast('Era override updated — click Save in the top bar to persist it.', false);
     }
 
     function visualDrilldownMountId(state=vizDrilldownState) {
@@ -6670,7 +6670,7 @@ function loadListenScreen(genre, options = {}) {
       libraryUpdatesPending = true;
       toggleLibrarySaveButton(true);
       setUnsavedState(true);
-      showSaveToast('Track deleted from this genre — click Save Library Updates to persist.', false);
+      showSaveToast('Track deleted from this genre — click Save in the top bar to persist.', false);
       const metaDetailsOpen = !!document.getElementById(mountId)?.querySelector('details.viz-queue-fold')?.open;
       const restore = preserveScrollSnapshot();
       renderVisuals();
@@ -6919,7 +6919,7 @@ function loadListenScreen(genre, options = {}) {
       toggleLibrarySaveButton(true);
       { const restore = preserveScrollSnapshot(); renderVisuals(); restore(); }
       const status = document.getElementById('vizRefreshStatus');
-      if (status) status.innerHTML = '<span class="viz-library-save-callout">Reaction selected — click Save Library Updates to persist it.</span>';
+      if (status) status.innerHTML = '<span class="viz-library-save-callout">Reaction selected — click Save in the top bar to persist it.</span>';
       showSaveToast('Reaction selected — save library updates to persist it.', false);
     }
 
@@ -7144,7 +7144,7 @@ function loadListenScreen(genre, options = {}) {
           updateSpotifyPauseDisplay();
           showSaveToast('Spotify paused requests. Save any completed updates; do not retry until the countdown ends.', false);
         } else if (spotifyRefreshReport.updated > 0) {
-          if (status) status.innerHTML = `<span class="viz-library-save-callout">Updated ${spotifyRefreshReport.updated} Spotify track${spotifyRefreshReport.updated === 1 ? '' : 's'} in ${escapeHtml(scopeLabel)}. Click Save Library Updates, then run another batch later.</span>`;
+          if (status) status.innerHTML = `<span class="viz-library-save-callout">Updated ${spotifyRefreshReport.updated} Spotify track${spotifyRefreshReport.updated === 1 ? '' : 's'} in ${escapeHtml(scopeLabel)}. Click Save in the top bar, then run another batch later.</span>`;
           showSaveToast('Spotify metadata batch complete — save library updates to persist it.', false);
         } else if (status) {
           status.textContent = 'No tracks were updated. Check the Missing Metadata Queue below.';

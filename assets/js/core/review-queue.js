@@ -526,7 +526,7 @@ function blockSaveIfDuplicateGenres() {
       const restore = preserveScrollSnapshot();
       renderReview();
       restore();
-      showSaveToast(`${message} Save Library Updates to persist.`, false);
+      showSaveToast(`${message} Save in the top bar to persist.`, false);
     }
 
     function setReviewPendingFit(targetId, pendingIndex, encodedKey, value) {
@@ -1705,7 +1705,7 @@ function blockSaveIfDuplicateGenres() {
       setUnsavedState(true);
       libraryUpdatesPending = true;
       toggleLibrarySaveButton(true);
-      showSaveToast(`Routed to ${target.genre}. Save Library Updates to persist.`);
+      showSaveToast(`Routed to ${target.genre}. Save in the top bar to persist.`);
       renderReview();
     }
 
@@ -1749,7 +1749,6 @@ function blockSaveIfDuplicateGenres() {
               <p class="small" style="margin:6px 0 0;">One routing desk for queued nominations and songs that need a better genre match. Confirm the best matching genre, choose fit 4 or 5, then send the song as an <strong>ADD</strong>. Use the source genre to keep it there and clear the pending flag.</p>
             </div>
             <div class="review-card-copy-actions">
-              ${libraryUpdatesPending ? '<button type="button" class="btn btn-primary" onclick="saveLibraryUpdates()">Save Library Updates</button>' : ''}
               <button type="button" class="btn btn-secondary review-pending-copy-btn" onclick="copyReviewPendingQueueFirst25()" title="Copy the first 25 visible pending nominations">⧉ Copy first 25</button>
               <button type="button" class="btn btn-secondary btn-tiny" onclick="refreshReviewPendingQueueList()" title="Refresh this visible routing batch from current data">Refresh list</button>
               ${hiddenPendingRows ? `<button type="button" class="btn btn-primary btn-tiny" onclick="loadNextReviewPendingQueue(25)" title="Show the next 25 pending nominations">Load next 25</button>` : ''}
@@ -1829,8 +1828,8 @@ function blockSaveIfDuplicateGenres() {
 
       showSaveToast(
         added
-          ? `Moved pending nomination to ${target.genre}. Save Library Updates to persist.`
-          : `Pending nomination already exists in ${target.genre}. Save Library Updates to persist.`,
+          ? `Moved pending nomination to ${target.genre}. Save in the top bar to persist.`
+          : `Pending nomination already exists in ${target.genre}. Save in the top bar to persist.`,
         false
       );
     }

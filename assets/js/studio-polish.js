@@ -2740,7 +2740,7 @@ Overwrite the selected repair row anyway? This will replace its title, artist, a
     const copyCount = unique.length > 1 ? ` and ${unique.length - 1} matching ${unique.length === 2 ? "copy" : "copies"}` : "";
     if (!window.confirm(`Delete ${label}${copyCount} everywhere?
 
-This removes it from every genre queue and pending list. It becomes permanent after Save Library Updates.`)) return;
+This removes it from every genre queue and pending list. It becomes permanent after you Save in the top bar.`)) return;
     const previous = button?.textContent || "Delete everywhere";
     if (button) {
       button.disabled = true;
@@ -2766,7 +2766,7 @@ This removes it from every genre queue and pending list. It becomes permanent af
           meta.insertAdjacentHTML("afterbegin", '<span class="studio-repair-resolved-chip">deleted everywhere · save pending</span>');
         }
       }
-      toast(`Deleted ${result.deleted} ${result.deleted === 1 ? "track" : "tracks"} everywhere from ${result.genresTouched} ${result.genresTouched === 1 ? "genre" : "genres"} — Save Library Updates to persist.`, false);
+      toast(`Deleted ${result.deleted} ${result.deleted === 1 ? "track" : "tracks"} everywhere from ${result.genresTouched} ${result.genresTouched === 1 ? "genre" : "genres"} — Save in the top bar to persist.`, false);
       setTimeout(() => refreshStudioRepairList(null), 180);
     } catch (error) {
       console.error("Studio delete everywhere failed", error);

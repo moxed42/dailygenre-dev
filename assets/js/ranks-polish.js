@@ -213,7 +213,7 @@
     if (options.clear) {
       delete genre.refinedRating;
       delete genre.refined_rating;
-      markRanksDirty(`Cleared refined rating for ${genre.genre || "genre"}. Save Library Updates to persist.`);
+      markRanksDirty(`Cleared refined rating for ${genre.genre || "genre"}. Save in the top bar to persist.`);
       renderRankingsPolished();
       return true;
     }
@@ -368,8 +368,8 @@
     } catch (_) {}
     markRanksDirty(
       next
-        ? `Marked ${genre.genre || "genre"} as manually ranked. Save Library Updates to persist.`
-        : `Cleared manual rank review for ${genre.genre || "genre"}. Save Library Updates to persist.`,
+        ? `Marked ${genre.genre || "genre"} as manually ranked. Save in the top bar to persist.`
+        : `Cleared manual rank review for ${genre.genre || "genre"}. Save in the top bar to persist.`,
     );
     renderRankingsPolished();
     return true;
@@ -746,7 +746,7 @@
     } catch (_) {}
     if (typeof window.showSaveToast === "function")
       window.showSaveToast(
-        message || "Rank changes pending. Save Library Updates to persist.",
+        message || "Rank changes pending. Save in the top bar to persist.",
         false,
       );
     try {
@@ -868,7 +868,7 @@
       window.genres = source;
     } catch (_) {}
     markRanksDirty(
-      `Moved ${genre.genre || "genre"} to #${to + 1} in ${rating}★. Save Library Updates to persist.`,
+      `Moved ${genre.genre || "genre"} to #${to + 1} in ${rating}★. Save in the top bar to persist.`,
     );
     renderRankingsPolished();
     setTimeout(renderRankingsPolished, 0);
@@ -902,7 +902,7 @@
       ? ` near prior #${returnRank}`
       : " at the bottom of the tier";
     markRanksDirty(
-      `Moved ${genre.genre || "genre"} to ${target}★${suffix}. Save Library Updates to persist.`,
+      `Moved ${genre.genre || "genre"} to ${target}★${suffix}. Save in the top bar to persist.`,
     );
     renderRankingsPolished();
     setTimeout(renderRankingsPolished, 0);
@@ -930,7 +930,7 @@
       window.genres = source;
     } catch (_) {}
     markRanksDirty(
-      `Restored ${genre.genre || "genre"} to the spin pool. Save Library Updates to persist.`,
+      `Restored ${genre.genre || "genre"} to the spin pool. Save in the top bar to persist.`,
     );
     renderRankingsPolished();
     setTimeout(renderRankingsPolished, 0);
@@ -1200,7 +1200,7 @@
 
   function registerMoveRankPostHook() {
     window.dgRegisterPostHook?.("moveRank", () => {
-      markRanksDirty("Rank order updated. Save Library Updates to persist.");
+      markRanksDirty("Rank order updated. Save in the top bar to persist.");
       renderRankingsPolished();
     });
   }
@@ -1383,7 +1383,7 @@
     try {
       if (typeof window.showSaveToast === "function")
         window.showSaveToast(
-          `Moved ${genre.genre || "genre"} to ${target}★. Save Library Updates to persist.`,
+          `Moved ${genre.genre || "genre"} to ${target}★. Save in the top bar to persist.`,
           false,
         );
     } catch (_) {}
@@ -1467,7 +1467,7 @@
     });
 
     try { window.genres = list; } catch (_) {}
-    markDirty(`Moved ${item.genre || "genre"} ${direction}. Save Library Updates to persist.`);
+    markDirty(`Moved ${item.genre || "genre"} ${direction}. Save in the top bar to persist.`);
     try { if (typeof window.renderRankings === "function") window.renderRankings(); } catch (_) {}
     setTimeout(() => { try { if (typeof window.renderRankings === "function") window.renderRankings(); } catch (_) {} }, 0);
     return true;
@@ -1534,7 +1534,7 @@
     items.splice(to, 0, moved);
     items.forEach((g, idx) => { g.rank_order = idx + 1; });
     try { window.genres = list; } catch (_) {}
-    markDirty(`Moved ${item.genre || "genre"} to #${to + 1}. Save Library Updates to persist.`);
+    markDirty(`Moved ${item.genre || "genre"} to #${to + 1}. Save in the top bar to persist.`);
     try { if (typeof window.renderRankings === "function") window.renderRankings(); } catch (_) {}
     setTimeout(() => { try { if (typeof window.renderRankings === "function") window.renderRankings(); } catch (_) {} }, 0);
     return true;
