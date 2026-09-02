@@ -922,3 +922,45 @@ against the whole library) still works unaffected. The old entry point
 (`openSimilarGenresForCurrentGenre`, `enhanceListenHeader`, the "Check
 for similar genres" button) was removed entirely — no dangling second
 path.
+
+**Phase 11 (`a8ec510`) — onboarding banner + progress/streak chip**: the
+`#remainingCount` pill — the most prominent chrome in the app — used to
+stuff a developer-facing ID-gap/status-bucket audit into its `title`
+attribute and dump the same thing plus more (missing numeric ID list,
+first excluded-row samples) into a raw `alert()` on click. Replaced with
+a friendly readout ("241 of 1,043 explored · 6-day streak") that opens a
+small popover on click instead of a modal. Streak is computed by walking
+backward day-by-day from today (or yesterday, if nothing's logged yet
+today) through each genre's `date_normalized`, counting consecutive
+dated days. The full diagnostic moved to a new collapsed-by-default
+"Library diagnostics" `<details>` in Studio, reusing
+`getRemainingCountDiagnostics()`/`remainingCountMessage()` from app.js
+verbatim — only the presentation changed. Found and removed, during live
+verification, a **second independent copy** of this exact diagnostic in
+`listening-room.js` (`compactRemainingClick`/`buildCompactRemainingAudit`
+— never listed in the plan's file inventory, discovered only because it
+broke the new popover): it attached its own capturing click listener to
+`#remainingCount` that called `stopImmediatePropagation()` and
+`alert()`ed a slightly differently-worded version of the same audit,
+silencing every other click handler on that element including the new
+popover's. Removed entirely (all-local helper functions, unused
+elsewhere). Also added: a one-time dismissible "How this works" banner
+(Spin → Listen → Rate) on the Spin screen shown until dismissed via
+`safeStorageGet`/`safeStorageSet`-backed localStorage, never reappearing
+after; "Toggle manual picker" reworded to "Pick one myself"; Game Room's
+raw "Game Room needs at least 10 playable clues across at least 4
+listened genres. It currently found 3." replaced with "Listen to 4
+genres to unlock Game Room — you're 1 away." (or an "almost there"
+message when the genre count already qualifies but clue data doesn't),
+now shown proactively on Game Room's own intro screen rather than only
+after a failed Start click. Verified: 136/136 tests (one test's
+assertion updated to match the intentional new pill copy: `"remaining"`
+→ `"explored"`; the pre-existing `router-switch-screen.test.js` flake
+from Phase 10 recurred here too, confirmed the same way — unrelated to
+this phase), `check-build.sh`, and a live pass confirming the banner
+shows once and never reappears after dismissal + reload, the popover
+renders live progress/streak/spin-pool numbers and no longer collides
+with the diagnostics disclosure's click handler, Studio's diagnostics
+lane shows the full relocated audit correctly, and Game Room's proactive
+message computes the correct "you're N away" distance against a small
+test dataset.
