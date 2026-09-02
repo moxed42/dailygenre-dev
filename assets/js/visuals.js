@@ -35,7 +35,7 @@ function renderVisuals() {
     renderUnratedSongs("vizUnratedSongsMonthly", items);
     clearStatsMetadataQueue("vizMetadataQueueMonthly");
     vizMonthlyCharts(items);
-    renderVizCalendar("vizCalendarMonthly", month, baseItems);
+    renderVizCalendar("vizCalendarMonthly", month, genres);
     renderVisualDrilldown();
   } else {
     vizRenderKPIs(document.getElementById("vizKpiAlltime"), [
@@ -63,12 +63,15 @@ function renderVisuals() {
 /* Listening Calendar: a compact grid, one small tile per day of the
    selected month, showing which genre (if any) was logged that day.
    Deliberately not a full calendar layout (no weekday header/alignment)
-   -- just a dense day-1-through-N grid. Always built from baseItems
-   (not the genre-focus-filtered items) so it keeps showing the whole
-   month regardless of the focus selector -- that selector narrows the
-   other cards to one genre's stats, but this grid's whole point is the
-   full month's day-by-day picture. */
-function renderVizCalendar(mountId, month, baseItems) {
+   -- just a dense day-1-through-N grid. Built from the full, unfiltered
+   genre list (not vizBaseGenres(), which only includes listened/veto --
+   that silently dropped in_progress genres, whose date is set the
+   moment they're marked in-progress from Spin, from the calendar
+   entirely) and not the genre-focus-filtered items either, so it keeps
+   showing the whole month regardless of status or the focus selector --
+   that selector narrows the other cards to one genre's stats, but this
+   grid's whole point is the full month's day-by-day picture. */
+function renderVizCalendar(mountId, month, allGenres) {
   const mount = document.getElementById(mountId);
   if (!mount) return;
   if (!month) {
@@ -78,7 +81,7 @@ function renderVizCalendar(mountId, month, baseItems) {
   const [year, monthNum] = month.split("-").map(Number);
   const daysInMonth = new Date(year, monthNum, 0).getDate();
   const byDay = {};
-  (baseItems || []).forEach((genre) => {
+  (allGenres || []).forEach((genre) => {
     if (typeof isGenreZanger === "function" && isGenreZanger(genre)) return;
     const d = dateValue(genre);
     if (!d || !d.startsWith(month)) return;
