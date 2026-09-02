@@ -843,3 +843,33 @@ pending" as plain status text with no separate button, `#vizSaveLibraryBtn`
 is gone from Stats leaving only Refresh/Backup, and navigating away from
 Listen with unsaved changes proceeds immediately (no blocking dialog) while
 the chip keeps reflecting the pending state on the new screen.
+
+**Phase 9 (`bfb4cc0`) — investigated Studio/Stats "duplicate queues," found
+mostly no duplication to remove**: the plan assumed Studio's `renderReview()`
+opened cluttered (4 counter tiles + toolbar + 6 always-visible lanes + a
+Legacy block) and that Stats' maintenance cards
+(`#vizNeedsAttentionMonthly`/`#vizUnratedSongsMonthly`/
+`#vizMetadataQueueMonthly` and all-time twins) were redundant copies of the
+same queues. Reading the actual code found neither true: Studio already
+opens with a concise 4-card hero (Route/Identity/Repair/Review counts) and
+every lane collapsed by default (`makeStudioSectionsCollapsible` sets
+`studio-section-collapsed` on mount; clicking a hero card jumps to and
+expands only that lane) — already the "Today's bench" shape the plan
+wanted, not the sprawling always-open layout assumed. On the Stats side:
+Studio's Repair Bay has no inline era-year override, which Stats' Missing
+Metadata Queue does (`renderMetadataQueue`'s `metadataEra_*` inputs) — a
+real, distinct capability, not a copy. Studio's QA Lab detects duplicates
+via cross-genre fit clusters (`duplicateGroups`); Stats' "Possible
+duplicates" detects same-genre identity matches
+(`collectDuplicateMaintenanceRows`) — different detection logic answering
+a different question. Deleting either to "de-duplicate" would have been a
+real feature regression, not a cleanup, so both were left alone rather
+than force a change the plan assumed was needed but the code didn't
+support. The one genuinely safe, valuable change from this phase shipped:
+Library's 17-option `#archiveFlagFilter` grouped into three `<optgroup>`
+sections (Content / Missing / Problems) for scannability — pure markup,
+filtering still reads `.value` and is unaffected by the grouping.
+Verified: 136/136 tests, `check-build.sh`, and a live pass confirming the
+three optgroup labels render correctly and filtering by an option inside a
+group (tested "Unlistened genres") still narrows the Library list exactly
+as before.
