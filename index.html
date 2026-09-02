@@ -441,22 +441,28 @@
             </select>
             <select id="archiveFlagFilter">
               <option value="">Any flags</option>
-              <option value="contender">Monthly contender</option>
-              <option value="alt">Has Alt Take</option>
-              <option value="pending">Has Pending</option>
-              <option value="album-dive">Has Album Dive</option>
-              <option value="songs">Has song log</option>
-              <option value="non-spotify-links">Has non-Spotify links</option>
-              <option value="youtube-links">Has YouTube links</option>
-              <option value="level-up-issues">Possible Level Up issues</option>
-              <option value="favorite">Has favorite song</option>
-              <option value="missing-songs">Missing song log</option>
-              <option value="unlistened">Unlistened genres</option>
-              <option value="missing-favorite">Missing favorite song</option>
-              <option value="missing-identity">Missing Genre Identity</option>
-              <option value="notes">Has notes</option>
-              <option value="unranked">Songs logged, no rank yet</option>
-              <option value="zanger">Zanger</option>
+              <optgroup label="Content">
+                <option value="contender">Monthly contender</option>
+                <option value="alt">Has Alt Take</option>
+                <option value="album-dive">Has Album Dive</option>
+                <option value="songs">Has song log</option>
+                <option value="favorite">Has favorite song</option>
+                <option value="notes">Has notes</option>
+                <option value="zanger">Zanger</option>
+              </optgroup>
+              <optgroup label="Missing">
+                <option value="missing-songs">Missing song log</option>
+                <option value="missing-favorite">Missing favorite song</option>
+                <option value="missing-identity">Missing Genre Identity</option>
+                <option value="unlistened">Unlistened genres</option>
+              </optgroup>
+              <optgroup label="Problems">
+                <option value="pending">Has Pending</option>
+                <option value="non-spotify-links">Has non-Spotify links</option>
+                <option value="youtube-links">Has YouTube links</option>
+                <option value="level-up-issues">Possible Level Up issues</option>
+                <option value="unranked">Songs logged, no rank yet</option>
+              </optgroup>
             </select>
             <select id="archiveSortFilter">
               <option value="newest">Newest first</option>
