@@ -964,3 +964,50 @@ with the diagnostics disclosure's click handler, Studio's diagnostics
 lane shows the full relocated audit correctly, and Game Room's proactive
 message computes the correct "you're N away" distance against a small
 test dataset.
+
+**Phase 12 (`92d9614`) — investigated the consistency pass, found little
+that actually needed fixing**: the plan assumed the app had "5 different
+collapsible-section implementations" and "4 different filter-row idioms"
+in chaotic overlap, and recommended merging them into one shared
+disclosure component and one shared filter-bar component. Reading the
+actual code found this premise mostly didn't hold, the same way Phase
+9's assumed Stats/Studio duplication didn't: of the app's `<details>`
+blocks, 13 already have their own dedicated, working CSS
+(`.album-focus-controls-drawer`, `.viz-queue-fold`,
+`.studio-diagnostics-lane`, `.genre-identity-import`, etc.) — only 3
+were genuinely unstyled and relying on raw browser defaults
+(`album-dive.js`'s bare manual-metadata `<details>`, its
+`.album-listen-expand` wrapper, and
+`genre-identity-alias-editor.js`'s `.v259-alias-import`). Studio's
+custom `.studio-collapse-btn`/`.studio-section-collapsed` system isn't a
+naive duplicate of `<details>` either — it does real work `<details>`
+can't (mobile-perf-mode debounced re-applies, section-open-state
+preservation across re-renders via `captureStudioSectionState`) that a
+wholesale conversion would have to reimplement or lose. And the "4
+filter-row idioms" (Library's facet filters, Stats' monthly/all-time
+mode toggle, Studio's global search+priority filter, the detail screen's
+Songs/Albums view tabs) each answer a genuinely different question, not
+a copy-pasted inconsistency — forcing them into one shared component
+would likely make at least one of them a worse fit for its actual job,
+echoing the plan's own "don't split Stats into separate tabs" reasoning.
+Rather than force a large, high-blast-radius rewrite the code didn't
+actually need, shipped the one genuine, safe gap: a new shared
+`.dg-disclosure` CSS class (bordered card, "+"/"−" circular marker,
+matching the app's existing warm-surface tokens) applied to the 3
+previously-unstyled `<details>` elements. Everything else — Studio's
+collapse system, the 4 filter rows — left as-is. Verified: 136/136 tests
+(same pre-existing `router-switch-screen.test.js` flake, confirmed
+unrelated the same way as Phases 10-11), `check-build.sh`, and a
+computed-style check confirming `.dg-disclosure` renders with the
+intended border/gradient/radius on the live page.
+
+## Part 3 status: complete
+
+All 7 phases (6–12) planned for the UX/feature redesign are shipped,
+verified, and pushed to `dailygenre-dev`. Three of them (9, 10 sub-goal
+scope, and 12) ended up delivering less code than the plan assumed
+because direct investigation of the real implementation showed the
+assumed problem didn't fully exist — each time, documented honestly
+here rather than forcing an unneeded change. Nothing from Part 3 has
+been ported to production (`moxed42/dailygenre`) yet; that remains a
+separate, explicitly-deferred step.
