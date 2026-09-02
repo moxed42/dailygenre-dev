@@ -35,6 +35,7 @@ function renderVisuals() {
     renderUnratedSongs("vizUnratedSongsMonthly", items);
     clearStatsMetadataQueue("vizMetadataQueueMonthly");
     vizMonthlyCharts(items);
+    renderVizCalendar("vizCalendarMonthly", month, baseItems);
     renderVisualDrilldown();
   } else {
     vizRenderKPIs(document.getElementById("vizKpiAlltime"), [
@@ -57,6 +58,62 @@ function renderVisuals() {
   toggleLibrarySaveButton(libraryUpdatesPending);
   if (Date.now() < spotifyRefreshPausedUntil) updateSpotifyPauseDisplay();
   statsPolishApply();
+}
+
+/* Listening Calendar: one cell per day of the selected month, showing
+   which genre (if any) was logged that day. Always built from baseItems
+   (not the genre-focus-filtered items) so the calendar keeps showing the
+   whole month regardless of the focus selector -- that selector narrows
+   the other cards to one genre's stats, but the calendar's whole point is
+   the full month's day-by-day picture. */
+function renderVizCalendar(mountId, month, baseItems) {
+  const mount = document.getElementById(mountId);
+  if (!mount) return;
+  if (!month) {
+    mount.innerHTML = '<div class="viz-empty">No month selected.</div>';
+    return;
+  }
+  const [year, monthNum] = month.split("-").map(Number);
+  const daysInMonth = new Date(year, monthNum, 0).getDate();
+  const firstWeekday = new Date(year, monthNum - 1, 1).getDay();
+  const byDay = {};
+  (baseItems || []).forEach((genre) => {
+    const d = dateValue(genre);
+    if (!d || !d.startsWith(month)) return;
+    const day = Number(d.slice(8, 10));
+    if (!day) return;
+    if (!byDay[day]) byDay[day] = [];
+    byDay[day].push(genre);
+  });
+  const today = new Date();
+  const todayKey = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
+  const weekdayLabels = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+  const cells = [];
+  for (let i = 0; i < firstWeekday; i++) {
+    cells.push('<div class="viz-cal-cell viz-cal-cell-empty"></div>');
+  }
+  for (let day = 1; day <= daysInMonth; day++) {
+    const dayGenres = byDay[day] || [];
+    const primary = dayGenres[0];
+    const dateKey = `${month}-${String(day).padStart(2, "0")}`;
+    const isToday = dateKey === todayKey;
+    if (!primary) {
+      cells.push(`<div class="viz-cal-cell ${isToday ? "is-today" : ""}"><div class="viz-cal-daynum">${day}</div></div>`);
+      continue;
+    }
+    const isZanger = String(primary.rating || "") === "zanger";
+    const rating = isZanger ? 0 : vizNumericRating(primary);
+    const more = dayGenres.length > 1 ? `<span class="viz-cal-more">+${dayGenres.length - 1}</span>` : "";
+    cells.push(`<button type="button" class="viz-cal-cell has-genre ${isToday ? "is-today" : ""} ${isZanger ? "is-zanger" : ""}" onclick="openGenreByIdEncoded('${visualActionArg(primary.id)}', false)" title="${escapeHtml(primary.genre || "Unknown")}">
+      <div class="viz-cal-daynum">${day}</div>
+      <div class="viz-cal-genre">${escapeHtml(primary.genre || "Unknown")}</div>
+      ${rating ? `<div class="viz-cal-rating">${"★".repeat(rating)}</div>` : isZanger ? '<div class="viz-cal-rating viz-cal-zanger">Zanger</div>' : ""}
+      ${more}
+    </button>`);
+  }
+
+  mount.innerHTML = `<div class="viz-cal-weekdays">${weekdayLabels.map((w) => `<div>${w}</div>`).join("")}</div><div class="viz-cal-grid">${cells.join("")}</div>`;
 }
 
 function initVisuals() {
