@@ -866,6 +866,59 @@
       gap:8px;
     }
 
+    /* Part 3 Phase 12: shared disclosure skin for stray <details> elements
+       that had no dedicated styling of their own (most <details> blocks in
+       the app already have one, e.g. .album-focus-controls-drawer,
+       .viz-queue-fold, .studio-diagnostics-lane -- this fills the gap for
+       the few that didn't, rather than inventing a parallel system). */
+    .dg-disclosure {
+      border:1px solid color-mix(in srgb, var(--border) 62%, transparent);
+      border-radius:14px;
+      background:linear-gradient(180deg, rgba(255,248,229,.64), rgba(234,210,169,.44));
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.42);
+      overflow:hidden;
+      margin:12px 0;
+    }
+
+    .dg-disclosure > summary {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:11px 14px;
+      cursor:pointer;
+      color:var(--muted);
+      font-size:.78rem;
+      font-weight:900;
+      letter-spacing:.04em;
+      list-style:none;
+    }
+
+    .dg-disclosure > summary::-webkit-details-marker {
+      display:none;
+    }
+
+    .dg-disclosure > summary::after {
+      content:"+";
+      width:22px;
+      height:22px;
+      border-radius:999px;
+      display:inline-grid;
+      place-items:center;
+      background:rgba(255,255,255,.38);
+      border:1px solid color-mix(in srgb, var(--border) 52%, transparent);
+      color:var(--text);
+      font-size:.9rem;
+    }
+
+    .dg-disclosure[open] > summary::after {
+      content:"\2212";
+    }
+
+    .dg-disclosure > *:not(summary) {
+      padding:0 14px 14px;
+    }
+
     .remaining-count-popover-row {
       font-size:.82rem;
       line-height:1.4;

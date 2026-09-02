@@ -190,7 +190,7 @@
         <span class="small">Tracks: use <code>| SEMINAL</code> or <code>| MEDIA | media title | media type</code> in the song block.</span>
       </div>
 
-      <details class="v259-alias-import">
+      <details class="v259-alias-import dg-disclosure">
         <summary>Paste genre name and aliases block</summary>
         <textarea id="v259AliasBlockImport" rows="7" placeholder="GENRE: Minimal Psytrance\n\nALIASES:\nZenonesque\nMinimal Psy"></textarea>
         <div class="v259-identity-actions">

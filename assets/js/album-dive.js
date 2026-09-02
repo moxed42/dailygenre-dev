@@ -1350,7 +1350,7 @@ function renderAlbumDiveSlot(slot) {
                 )
                 .join("")}
             </select>`;
-  const manualMetadataDetails = `<details>
+  const manualMetadataDetails = `<details class="dg-disclosure">
             <summary>Edit / replace this album</summary>
             ${albumDiveEditQuickBlock(slot, safeKey)}
           </details>`;
@@ -1383,7 +1383,7 @@ function renderAlbumDiveSlot(slot) {
               ${reactionButtons}
             </div>
             <div class="album-listen-favorite"><strong>Top songs:</strong> ${escapeHtml(favoriteLabel)}</div>
-            <details class="album-listen-expand">
+            <details class="album-listen-expand dg-disclosure">
               <summary>Album controls / Favorite / Edit</summary>
               <div class="album-listen-expand-body">
                 <div class="album-slot-meta">
