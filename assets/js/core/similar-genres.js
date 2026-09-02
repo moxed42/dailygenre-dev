@@ -307,8 +307,19 @@
       .dg-similar-title-row{display:flex;flex-wrap:wrap;align-items:baseline;gap:5px 10px}.dg-similar-title-row h3{margin:0;font-size:1rem}
       .dg-similar-status,.dg-similar-aliases,.dg-similar-category{font-size:.75rem;opacity:.72}.dg-similar-category{margin-top:2px}
       .dg-similar-reasons{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px}.dg-similar-reasons span{padding:.22rem .42rem;border-radius:999px;background:rgba(255,255,255,.07);font-size:.69rem}
-      .dg-similar-empty{padding:16px;border:1px dashed rgba(255,255,255,.15);border-radius:12px;opacity:.72}.dg-check-similar-btn{margin-top:8px}
+      .dg-similar-empty{padding:16px;border:1px dashed rgba(255,255,255,.15);border-radius:12px;opacity:.72}
       @media(max-width:680px){.dg-library-search-mode{width:100%;margin:8px 0 0}.dg-library-search-mode button{flex:1}.dg-similar-card{grid-template-columns:auto minmax(0,1fr)}.dg-similar-card>.btn{grid-column:2;justify-self:start}}
+      .dg-similar-rail{margin:16px 0;padding:14px 16px;border:1px solid var(--border,#b98e55);border-radius:14px;background:var(--surface,#f3e4c8);color:var(--text,#22160d)}
+      .dg-similar-rail-head{margin-bottom:10px}
+      .dg-similar-rail-head p.small{margin:2px 0 0;color:var(--muted,#735a3c);font-size:.78rem}
+      .dg-similar-rail-track{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(180px,1fr);gap:10px;overflow-x:auto;padding-bottom:2px;scroll-snap-type:x proximity}
+      .dg-similar-rail-card{scroll-snap-align:start;display:flex;flex-direction:column;gap:4px;padding:11px 12px;border:1px solid rgba(0,0,0,.12);border-radius:12px;background:rgba(255,255,255,.5)}
+      .dg-similar-rail-card.is-listened{border-color:var(--accent,#d98d25)}
+      .dg-similar-rail-name{font-weight:900;font-size:.92rem}
+      .dg-similar-rail-reason{font-size:.74rem;color:var(--muted,#735a3c)}
+      .dg-similar-rail-status{font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.03em;opacity:.75}
+      .dg-similar-rail-card .btn{margin-top:4px;align-self:flex-start}
+      @media(max-width:680px){.dg-similar-rail-track{grid-auto-columns:minmax(160px,82%)}}
     `;
     document.head.appendChild(style);
   }
@@ -356,42 +367,94 @@
     return window.currentGenre || null;
   }
 
-  function openSimilarGenresForCurrentGenre() {
-    const genre = currentGenreObject();
+  /* Daily Genre Part 3 Phase 10: "Sounds like this" inline rail.
+     Replaces the old "Check for similar genres" button, which used to eject
+     the user to the Library screen and type their own genre name into
+     search. That entry point is gone -- this is the only path now. */
+  function topSimilarNeighbors(genre, limit = 3) {
     const name = genreName(genre);
-    if (!name) return;
-    try {
-      if (typeof showScreen === "function") showScreen("history");
-      else if (typeof window.showScreen === "function") window.showScreen("history");
-    } catch (_) {}
-    const apply = () => {
-      enhanceLibrarySearch();
-      const input = document.getElementById("archiveSearchInput");
-      if (!input) return false;
-      input.value = name;
-      setMode("similar");
-      input.focus();
-      input.scrollIntoView({ behavior: "smooth", block: "center" });
-      return true;
-    };
-    if (!apply()) [50,150,350,700].forEach(delay => setTimeout(apply, delay));
+    if (!name) return [];
+    const id = String(genre?.id ?? "");
+    return searchSimilarGenres(name, limit + 6)
+      .filter(result => String(result.genre?.id ?? "") !== id)
+      .slice(0, limit);
   }
 
-  function enhanceListenHeader() {
-    const genre = currentGenreObject();
-    if (!genre) return false;
-    const screen = document.querySelector("#screen-listen.active, #listenScreen.active, .screen.active[data-screen='listen']");
-    if (!screen) return false;
-    if (screen.querySelector(".dg-check-similar-btn")) return true;
-    const anchor = screen.querySelector(".genre-category-line, .genre-category, .listen-category, .listening-room-header .small, .genre-header .small") || screen.querySelector("h1, h2");
-    if (!anchor) return false;
-    const button = document.createElement("button");
-    button.type = "button";
-    button.className = "btn btn-secondary btn-tiny dg-check-similar-btn";
-    button.textContent = "Check for similar genres";
-    button.addEventListener("click", openSimilarGenresForCurrentGenre);
-    anchor.insertAdjacentElement("afterend", button);
-    return true;
+  function renderSimilarGenresRailHtml(genre) {
+    const neighbors = topSimilarNeighbors(genre, 3);
+    if (!neighbors.length) return "";
+    return `<section class="dg-similar-rail" aria-label="Sounds like this">
+      <div class="dg-similar-rail-head">
+        <div class="eyebrow">Sounds like this</div>
+        <p class="small">Ranked locally from names, aliases, categories, and descriptions.</p>
+      </div>
+      <div class="dg-similar-rail-track">
+        ${neighbors.map(result => {
+          const neighbor = result.genre;
+          const id = String(neighbor?.id ?? "");
+          const listened = isListened(neighbor);
+          const rating = ratingText(neighbor);
+          const reason = result.reasons[0] || "";
+          const status = listened ? (rating ? `${rating} rated` : "Listened") : "Unheard — spin this next";
+          return `<article class="dg-similar-rail-card ${listened ? "is-listened" : "is-unheard"}">
+            <div class="dg-similar-rail-name">${escapeHtml(genreName(neighbor))}</div>
+            ${reason ? `<div class="dg-similar-rail-reason">${escapeHtml(reason)}</div>` : ""}
+            <div class="dg-similar-rail-status">${escapeHtml(status)}</div>
+            <button type="button" class="btn btn-secondary btn-tiny" data-dg-open-similar-rail="${escapeHtml(id)}">Open genre</button>
+          </article>`;
+        }).join("")}
+      </div>
+    </section>`;
+  }
+
+  function mountSimilarGenresRail(explicitGenre) {
+    const genre = explicitGenre || currentGenreObject();
+    const root = document.getElementById("listenDetails");
+    if (!genre || !root) return;
+    const existing = root.querySelector(".dg-similar-rail");
+    const html = renderSimilarGenresRailHtml(genre);
+    if (!html) {
+      existing?.remove();
+      return;
+    }
+    if (existing) {
+      existing.outerHTML = html;
+      return;
+    }
+
+    // Discovery Console restructures the original detail DOM shortly after
+    // loadListenScreen (see genre-identity.js's injectDnaCard for the same
+    // anchor chain and the reason it's needed). Insert after the DNA card
+    // when present so the two don't compete for the same slot, otherwise
+    // after the console's own vibe/progress/record anchors.
+    const consoleWrap = root.querySelector(".discovery-console");
+    if (consoleWrap) {
+      const anchor = consoleWrap.querySelector(".genre-identity-dna, .dc-vibe-line, .dc-progress-strip, .detail-record-card");
+      if (anchor) { anchor.insertAdjacentHTML("afterend", html); return; }
+      consoleWrap.insertAdjacentHTML("afterbegin", html);
+      return;
+    }
+
+    const anchor = root.querySelector(".song-listening-room, .dc-song-listening-section, .album-dive-panel, .detail-log-section");
+    if (anchor) anchor.insertAdjacentHTML("beforebegin", html);
+    else root.querySelector(".detail-hero")?.insertAdjacentHTML("beforeend", html);
+  }
+
+  function handleSimilarRailClick(event) {
+    const button = event.target?.closest?.("[data-dg-open-similar-rail]");
+    if (!button) return;
+    const id = button.getAttribute("data-dg-open-similar-rail");
+    const genre = getGenres().find(item => String(item?.id ?? "") === String(id));
+    if (genre) openGenre(genre);
+  }
+
+  function patchListenLoadForSimilarRail() {
+    if (window.__dgSimilarGenresRailHookInstalled) return;
+    window.__dgSimilarGenresRailHookInstalled = true;
+    window.dgRegisterPostHook?.("loadListenScreen", (genre) => {
+      setTimeout(() => mountSimilarGenresRail(genre), 40);
+      setTimeout(() => mountSimilarGenresRail(genre), 200);
+    });
   }
 
   let scheduled = false;
@@ -401,18 +464,18 @@
     requestAnimationFrame(() => {
       scheduled = false;
       enhanceLibrarySearch();
-      enhanceListenHeader();
     });
   }
 
   function start() {
     installStyles();
     scheduleEnhance();
+    patchListenLoadForSimilarRail();
+    document.addEventListener("click", handleSimilarRailClick, true);
     new MutationObserver(scheduleEnhance).observe(document.documentElement, { childList: true, subtree: true });
   }
 
-  window.DailyGenreSimilarGenres = { search: searchSimilarGenres, score: scoreGenre, openForCurrent: openSimilarGenresForCurrentGenre, setMode };
-  window.openSimilarGenresForCurrentGenre = openSimilarGenresForCurrentGenre;
+  window.DailyGenreSimilarGenres = { search: searchSimilarGenres, score: scoreGenre, setMode };
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start, { once: true });
   else start();
