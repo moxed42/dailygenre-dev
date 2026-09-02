@@ -873,3 +873,52 @@ Verified: 136/136 tests, `check-build.sh`, and a live pass confirming the
 three optgroup labels render correctly and filtering by an option inside a
 group (tested "Unlistened genres") still narrows the Library list exactly
 as before.
+
+**Phase 8 follow-up (`c2cc537`)** — found while starting Phase 10: Phase 8
+left ~15 toast/helper strings across `app.js`, `ranks-polish.js`,
+`songs.js`, `studio-polish.js`, and `core/review-queue.js` still saying
+"use the floating Save button" or "click Save Library Updates" — both
+describing UI Phase 8 had already removed. Reworded all of them to point
+at "Save in the top bar". Also found a 4th save button Phase 8's audit
+missed: `core/review-queue.js`'s native Pending Nominations card head
+still rendered its own "Save Library Updates" button whenever
+`libraryUpdatesPending` was true — redundant with the topbar chip exactly
+like the three Phase 8 already removed. Removed it. Verified: 136/136
+tests, `node --check` on every touched file, and a grep confirming no
+stale "floating Save"/"Save Library Updates" strings remained.
+
+**Phase 10 (`f90936f`) — inline "Sounds like this" recommendation rail**:
+replaced `openSimilarGenresForCurrentGenre()` — which used to navigate
+away to the Library screen and type the current genre's name into search,
+ejecting the user from the genre they were looking at — with an inline
+rail directly on the detail screen. Reuses `scoreGenre()`/
+`searchSimilarGenres()` from `core/similar-genres.js` exactly as-is; only
+the presentation changed. The rail shows the top 3 neighbors (self
+excluded) as a horizontal card row: name, the single strongest reason
+string (e.g. "Exact alias match", "Shared name terms: avant, garde"), and
+either the existing rating or "Unheard — spin this next", each with an
+"Open genre" action. Mounted via a `loadListenScreen` post-hook (the same
+`dgRegisterPostHook` mechanism Phase 3 introduced), following
+`genre-identity.js`'s `injectDnaCard` anchor-chain exactly — Discovery
+Console restructures the whole detail DOM on a 20ms-delayed timer after
+`loadListenScreen` renders, so the rail schedules its own two delayed
+mount attempts (40ms, 200ms) and targets the DNA card / vibe-line /
+progress-strip / record-card anchors in that priority order, with the
+same older-DOM fallback chain the DNA card uses. Hit one real bug during
+verification: the rail didn't appear at all on the first live pass because
+`index.html` loads `.min.js`, not source — forgot to run
+`tools/build-min.sh` before testing, so the browser was running the
+pre-Phase-10 minified file. Once rebuilt, verified end-to-end: 136/136
+tests (one unrelated pre-existing flake in
+`router-switch-screen.test.js` confirmed via `git stash` to fail
+identically without any of this session's changes — a test-ordering
+issue, not a regression), `check-build.sh`, and a live pass on a real
+genre ("Avant-garde jazz") showing 3 correctly-scored neighbors with real
+reason strings, confirming clicking "Open genre" actually navigates
+there, confirming the rail renders correctly at mobile width with
+horizontal scroll, and confirming the Library's separate "Similar
+styles" search-mode toggle (a different feature — search any typed term
+against the whole library) still works unaffected. The old entry point
+(`openSimilarGenresForCurrentGenre`, `enhanceListenHeader`, the "Check
+for similar genres" button) was removed entirely — no dangling second
+path.
