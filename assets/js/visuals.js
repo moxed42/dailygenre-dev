@@ -79,29 +79,26 @@ function renderVizCalendar(mountId, month, baseItems) {
   const daysInMonth = new Date(year, monthNum, 0).getDate();
   const byDay = {};
   (baseItems || []).forEach((genre) => {
+    if (typeof isGenreZanger === "function" && isGenreZanger(genre)) return;
     const d = dateValue(genre);
     if (!d || !d.startsWith(month)) return;
     const day = Number(d.slice(8, 10));
     if (!day) return;
-    if (!byDay[day]) byDay[day] = [];
-    byDay[day].push(genre);
+    if (!byDay[day]) byDay[day] = genre;
   });
   const today = new Date();
   const todayKey = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
 
   const cells = [];
   for (let day = 1; day <= daysInMonth; day++) {
-    const dayGenres = byDay[day] || [];
-    const primary = dayGenres[0];
+    const primary = byDay[day];
     const dateKey = `${month}-${String(day).padStart(2, "0")}`;
     const isToday = dateKey === todayKey;
     if (!primary) {
       cells.push(`<div class="viz-cal-cell ${isToday ? "is-today" : ""}"><span class="viz-cal-daynum">${day}</span></div>`);
       continue;
     }
-    const isZanger = String(primary.rating || "") === "zanger";
-    const more = dayGenres.length > 1 ? ` +${dayGenres.length - 1}` : "";
-    cells.push(`<button type="button" class="viz-cal-cell has-genre ${isToday ? "is-today" : ""} ${isZanger ? "is-zanger" : ""}" onclick="openGenreByIdEncoded('${visualActionArg(primary.id)}', false)" title="${escapeHtml(primary.genre || "Unknown")}${more}">
+    cells.push(`<button type="button" class="viz-cal-cell has-genre ${isToday ? "is-today" : ""}" onclick="openGenreByIdEncoded('${visualActionArg(primary.id)}', false)" title="${escapeHtml(primary.genre || "Unknown")}">
       <span class="viz-cal-daynum">${day}</span>
       <span class="viz-cal-genre">${escapeHtml(primary.genre || "Unknown")}</span>
     </button>`);
