@@ -7411,10 +7411,15 @@ button[aria-busy="true"] {
 
 
 /* === v60: mobile genre-page containment + remove inert jump floater === */
+/* overflow-x:clip alone does not establish a new containing block and, on
+   iPhone Safari, does not reliably stop position:fixed descendants that
+   escape past the viewport edge from leaving the document horizontally
+   scrollable -- overflow-x:hidden does, so set both. */
 html,
 body {
   max-width: 100% !important;
   overflow-x: clip !important;
+  overflow-x: hidden !important;
 }
 
 .dc-mobile-jump-nav,
@@ -7498,6 +7503,7 @@ body.dc-listen-mode .sp-play-btn {
     padding-left: 8px !important;
     padding-right: 8px !important;
     overflow-x: clip !important;
+    overflow-x: hidden !important;
   }
 
   body.dc-listen-mode .panel,
