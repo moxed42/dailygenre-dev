@@ -1144,3 +1144,142 @@ Items 2 and 6 are reported honestly as not-fixed-in-code: #2 has no
 identified cause, #6 is normal Spotify platform behavior. Nothing here
 has been ported to production (`moxed42/dailygenre`); review at
 https://moxed42.github.io/dailygenre-dev before approving that.
+
+## 2026-09-06 — bug-bash round 2 (10 items, includes a prod-data sync)
+
+Round 2 on the same live-Safari feedback thread, plus a broadened report
+of the horizontal-scroll bug (fixed once already in round 1 for the
+miniplayer alone, but the user confirmed the page body itself can still
+get stuck scrolled sideways on iPhone 15 Safari).
+
+0. **Synced `genres_data.json` from production.** `assets/js/config.js`'s
+   `DATA_URL` points at
+   `raw.githubusercontent.com/moxed42/dailygenre/main/genres_data.json` —
+   fetched that exact file and overwrote this repo's local copy before
+   doing any further backfill work, so any editorial audit below reflects
+   what the live site actually serves rather than dev's drifted copy.
+   Confirmed "FEELS LIKE A FEM QUEEN" (Kevin Jz Prodigy, Ballroom) is
+   present post-sync with `score: 5` and a filled `reason`, closing out
+   the premise of the bug report that prompted this sync.
+1. **Version bump**: `v300` → `v301`, cache-bust `build-v300` →
+   `build-v301`, footer/meta timestamp updated, `check-build.sh` passes.
+2. **Audit of songs missing fit rationale.** `song.reason` (the "Why
+   this song fits" text) has no mechanical/deterministic generator —
+   unlike `scoreGenre()` in `core/similar-genres.js`, which compares
+   genre-to-genre, not song-to-genre — so per the standing instruction
+   not to fabricate content, wrote a **read-only**
+   `tools/audit-missing-song-reasons.js` instead of a backfill script.
+   Against the freshly-synced production data it found **15 songs**
+   with a `score` but no `reason` (all pre-role-tagging CANON-era rows):
+   "Octet in E-Flat, Op. 20: III. Scherzo" (Chamber music), "Ain't
+   Nobody" (Boogie), "We Belong Together" (Doo-wop), "The Devil Wears a
+   Suit and Tie" / "The Devil Had A Hold Of Me" (Gothic country),
+   "Looping the Rooms" (Dubstep), "Ode to My Family" (Jangle pop),
+   "Stressed Out" (Pop rap), "You're Gonna Go Far, Kid" (Pop punk),
+   "Love Me Dead" / "Lump" (Alternative rock), "Punk Rock Girl" (College
+   rock), "Happy Idiot" (Indie rock), "Are You Gonna Be My Girl" (Garage
+   rock), "I Am a Poseur" (Punk rock). Flagged for manual/editorial
+   fill-in via the existing song-details editing workflow, not
+   backfilled with placeholder text.
+3. **MEDIA touchstone not shown in the song details card.** MEDIA-role
+   entries carry `media`/`mediaTitle`/`mediaType` fields that
+   `renderSongDetails()` in `songs.js` never surfaced. Added a "Media:
+   `<name>` (`<type>`)" line to the metadata card for any entry with
+   `role === "MEDIA"` (or `identityType === "media"`) that has a media
+   field set.
+4. **External-link arrow wrapping onto its own line.** The focused-song
+   title and its trailing `↗` are one clickable `<a>`, not two separate
+   elements — on a long title at narrow widths the arrow was word-
+   wrapping alone below the title. Switched the plain space between the
+   title and the arrow span to `&nbsp;` (both occurrences — the hero
+   title in `renderFocusedSong()` and the queue row title) and added
+   `white-space:nowrap` to `.song-link-arrow`, so the arrow stays glued
+   to the last word instead of stranding on its own line.
+5. **Blank leftmost "Spin" tab — re-investigated, still unreproducible.**
+   Re-checked every angle from round 1 (no `:first-child`/`#tab-spin`
+   CSS rule, no pseudo-element icon system for tabs) plus a new one:
+   whether any generic "highlight active tab" pass rebuilds tab
+   `innerHTML`/`textContent` instead of only toggling classes.
+   `switchScreen()` in `app.js` only ever does
+   `classList.add/remove('active')` and `aria-selected` toggling on
+   `.tab-btn` elements — it never touches their text. Grepped every
+   `data-screen="spin"` reference across `app.js`/`core/*.js`/
+   `genre-identity.js`/`game-room.js`: all of them are navigation calls
+   (`switchScreen("spin")`, a `.click()` fallback), none set text or
+   innerHTML. No code-level cause found again — leaving unfixed rather
+   than guess-patching a UI bug with no identified mechanism.
+6. **iPhone Safari overflow — second pass, nothing new found.**
+   Re-grepped every `100vw` usage: all remaining instances are inside
+   `max-width:`, which cannot itself force an element wider than the
+   viewport the way a bare `width:100vw` can. Re-checked every
+   `position:fixed` rule: the ones with `inset:0` or explicit
+   `left/right:0` are fine, and the bottom tab bar (`library-polish.css`,
+   `@media (max-width:600px)`) already uses
+   `position:fixed;left:0;right:0;bottom:0` — correctly constrained, no
+   `100vw`/`translate(-50%)` pattern like the miniplayer had before
+   round 1's fix. Nothing to change here.
+7. **Stats "Month" tile text overflowing into the neighboring tile.**
+   `.viz-kpi-row` is `display:grid` with
+   `grid-template-columns:repeat(auto-fit,minmax(120px,1fr))`; grid
+   items default to `min-width:auto`, so a long value like "September
+   2026" at `.viz-kpi-val`'s `1.9rem`/900-weight size could exceed its
+   120px track and spill into "38 SONGS" next to it instead of wrapping
+   — the classic CSS-grid `min-width:auto` overflow bug, not a
+   white-space issue. Added `min-width:0` to `.viz-kpi` (lets the grid
+   item actually shrink to its track) and `overflow-wrap:break-word` to
+   `.viz-kpi-val` (styles.css). Checked the `#screen-viz` mobile/theme
+   overrides — they only touch color/background/border, not width, so
+   they don't undo this.
+8. **Now Playing bar only showed on the Stats screen.**
+   `#spotifyNowPlaying` was mounted once, statically, inside
+   `#screen-viz`'s hero card, so `spotifyRenderNowPlaying()` only had
+   anything to render into while that screen was active. Followed the
+   `#saveStatusChip` precedent (a persistent topbar element rather than
+   screen-scoped): moved the mount `<div>` into the shared topbar and
+   added a compact `.spotify-now-playing-topbar` variant instead of the
+   roomy hero-card styling. `spotifyRenderNowPlaying()` /
+   `spotifyRefreshNowPlaying()` / the 30s polling interval in
+   `spotify.js` are untouched — `spotifyStartPolling()` already runs
+   from app init independent of the active screen, so only the mount
+   point and CSS needed to move.
+9. **Main-body horizontal scroll still stuck on iPhone Safari (highest
+   priority — confirmed still broken after round 1's miniplayer fix).**
+   Round 1 fixed the miniplayer's own `100vw` sizing, but the user
+   confirmed the page body itself can still get stuck scrolled sideways
+   on an iPhone 15. Found the gap: a v60-era safety net sets
+   `overflow-x:clip !important` on `html`/`body` (and again on
+   `body.dc-listen-mode .app` under a mobile media query), but
+   `overflow-x:clip` doesn't establish a new containing block and, on
+   iOS Safari specifically, doesn't reliably stop `position:fixed`
+   descendants that escape the viewport edge from leaving the document
+   horizontally scrollable — `overflow-x:hidden` does. Added
+   `overflow-x:hidden !important` alongside the existing `clip` at both
+   sites in `library-polish.css`. Re-audited beyond that single fix: no
+   bare `width:100vw` outside a `max-width:` context exists anywhere in
+   CSS, and no fixed/absolute-width element wider than ~375px was found
+   sitting in normal document flow. **Honest confidence note**: this is
+   a plausible, targeted fix for a real gap (clip vs. hidden) found by
+   code review, but it was not confirmed against a live iPhone Safari
+   session or a real headless browser (see verification note below) —
+   treat it as "best identified fix, not confirmed to fully resolve"
+   until it's checked on-device.
+
+**Verified**: `npm test` (136/136), `tools/check-build.sh` (JS syntax,
+minified-asset sync after `tools/build-min.sh`, JSON validity including
+the freshly-synced `genres_data.json`, and version/cache-bust
+consistency). Attempted a live local-server + headless-Chromium/
+Playwright pass for the mobile-layout-affecting changes (arrow wrap,
+month tile, now-playing bar, item 9's overflow fix): `npx playwright
+install chromium` failed with a `403` from this sandbox's network
+policy (same as round 1), so no real browser was available. Also tried
+`jsdom` as a fallback for the `scrollWidth`-vs-`innerWidth` check the
+plan calls for, but `jsdom` doesn't perform real CSS layout — it always
+reports `scrollWidth` as `0` regardless of actual overflow, so that
+check could not be meaningfully run either. Item 9 is therefore backed
+by static CSS/code review and the documented clip-vs-hidden reasoning
+only, **not** by an actual rendered/interactive verification — stated
+here plainly rather than claimed. Items 5 and 6 are reported honestly as
+not-fixed-in-code: #5 has no identified cause after two investigation
+passes, #6 found no new instance of the bug class. Nothing here has been
+ported to production (`moxed42/dailygenre`); review at
+https://moxed42.github.io/dailygenre-dev before approving that.
