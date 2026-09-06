@@ -915,6 +915,10 @@ This removes it from every genre and Studio queue. It becomes permanent after yo
     if (song.isrc) meta.push(`ISRC: ${song.isrc}`);
     if (song.releaseDate) meta.push(`Release: ${song.releaseDate}`);
     if (song.releaseSource) meta.push(`Source: ${song.releaseSource}`);
+    const mediaLabel = song.media || song.mediaTitle;
+    if ((song.role === "MEDIA" || song.identityType === "media") && mediaLabel) {
+      meta.push(`Media: ${mediaLabel}${song.mediaType ? ` (${song.mediaType})` : ""}`);
+    }
     return `<section class="song-focus-details-drawer song-focus-details-compact">
       <div class="song-focus-details-head">
         <div>
