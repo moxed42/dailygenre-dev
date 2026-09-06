@@ -654,6 +654,7 @@
       songSection,
       pendingSection,
       albumPanel,
+      tasteReading,
     } = pieces;
 
     const consoleWrap = document.createElement("div");
@@ -669,6 +670,10 @@
     if (vibe) {
       vibe.classList.add("dc-vibe-line");
       consoleWrap.appendChild(vibe);
+    }
+
+    if (tasteReading) {
+      consoleWrap.appendChild(tasteReading);
     }
 
     if (songSection) {
@@ -743,6 +748,7 @@
     const pendingSection =
       songSection?.querySelector(":scope > .pending-section") || null;
     const albumPanel = root.querySelector(":scope > .album-dive-panel");
+    const tasteReading = root.querySelector(":scope > .taste-reading-box");
 
     simplifyHero(record);
     createConsoleChrome(root, {
@@ -757,6 +763,7 @@
       songSection,
       pendingSection,
       albumPanel,
+      tasteReading,
     });
     root.dataset.dcStructured = "1";
 
