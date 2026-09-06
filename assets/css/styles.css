@@ -1903,8 +1903,8 @@
     .viz-mode-btn.active { background:var(--accent, #b8600c); color:#fff; border-color:transparent; }
     .viz-month-sel { flex:1; min-width:140px; max-width:220px; font-size:.85rem; padding:6px 10px; border-radius:8px; border:1px solid var(--border, rgba(127,82,28,.3)); background:var(--surface); color:var(--text); }
     .viz-kpi-row { display:grid; grid-template-columns:repeat(auto-fit, minmax(120px, 1fr)); gap:10px; margin:0 0 16px; padding:0 2px; }
-    .viz-kpi { background:var(--surface); border:1px solid var(--border, rgba(127,82,28,.18)); border-radius:14px; padding:14px 14px 12px; text-align:center; }
-    .viz-kpi-val { font-size:1.9rem; font-weight:900; letter-spacing:-.03em; color:var(--accent, #b8600c); line-height:1; }
+    .viz-kpi { background:var(--surface); border:1px solid var(--border, rgba(127,82,28,.18)); border-radius:14px; padding:14px 14px 12px; text-align:center; min-width:0; }
+    .viz-kpi-val { font-size:1.9rem; font-weight:900; letter-spacing:-.03em; color:var(--accent, #b8600c); line-height:1; overflow-wrap:break-word; }
     .viz-kpi-label { font-size:.72rem; font-weight:700; text-transform:uppercase; letter-spacing:.04em; color:var(--muted, #7a5c38); margin-top:4px; }
     .viz-bento { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
     .viz-card { background:var(--surface); border:1px solid var(--border, rgba(127,82,28,.18)); border-radius:18px; padding:16px 18px 14px; box-shadow:0 4px 16px rgba(0,0,0,.06); overflow:hidden; }
