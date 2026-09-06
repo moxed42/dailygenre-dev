@@ -775,7 +775,10 @@
         "url": "http://url.com",
         "reason": "Scott Pilgrim is one of the most plausible mainstream places a lot of people absorbed game-coded, hyperactive rock aesthetics without necessarily knowing the subgenre name. “Another Winter” carries bright chip textures and pop-punk/rock propulsion in a way that makes Nintendocore’s broader cultural footprint easier to grasp, even if it lands on the melodic edge of the style."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 1004,
@@ -3441,7 +3444,10 @@
       ],
       "completedAt": "",
       "lastWorkedAt": "2026-07-16T03:12:17.463Z"
-    }
+    },
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 1005,
@@ -4774,7 +4780,10 @@
     "favoritesong": "Better Days",
     "favoriteartist": "Currents",
     "favoritesongurl": "https://open.spotify.com/track/1BqzzWlA868p8J5VIbp50A",
-    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b273111a4efc860777cce697098b"
+    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b273111a4efc860777cce697098b",
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 7,
+    "taste_reading_threshold": 5
   },
   {
     "id": 1008,
@@ -5036,7 +5045,10 @@
         "url": "http://url.com",
         "reason": "Its appearance on the Gummo soundtrack gives sludge metal a concrete crossover point into cult film culture. The song’s filthy tone, narcotized pacing, and damaged-vocal atmosphere make it a strong shorthand for the genre outside metal circles."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 1,
+    "taste_reading_threshold": 5
   },
   {
     "id": 1009,
@@ -5931,7 +5943,9 @@
     "favoritesong": "Through The Fire And Flames",
     "favoriteartist": "DragonForce",
     "favoritesongurl": "https://open.spotify.com/track/1UMdbkqX19OiwfExH7gzYA",
-    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b2731f867e23a295217e98674bba"
+    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b2731f867e23a295217e98674bba",
+    "taste_reading": "No dislikes have shown up yet — reactions run from tolerant to enthusiastic across the board. Melodic, high-velocity tracks with soaring vocal lines and guitar heroics (Judas Priest recurs repeatedly) do best; nothing has been actively rejected so far.",
+    "taste_reading_status": "ready"
   },
   {
     "id": 101,
@@ -6948,7 +6962,10 @@
       "deletedSlotKeys": [],
       "completedAt": "",
       "lastWorkedAt": "2026-06-28T14:55:03.595Z"
-    }
+    },
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 1011,
@@ -8071,7 +8088,10 @@
         "url": "https://url.com",
         "reason": "Written specifically for this Arnold Schwarzenegger action film, its tight, palm-muted riffing and snarling vocals brought a pure thrash sensibility into a big-budget Hollywood context, turning the song into one of the most recognizable examples of thrash metal explicitly crafted as a film tie-in."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 1012,
@@ -8343,7 +8363,10 @@
         "url": "https://url.com",
         "reason": "The video’s mix of skate imagery, suburban frustration, and rapid-fire, metal-edged hardcore made it one of the first widely seen visual embodiments of crossover thrash, while its appearance in Repo Man tied the sound to 80s cult cinema and youth alienation."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 3,
+    "taste_reading_threshold": 5
   },
   {
     "id": 1013,
@@ -9166,7 +9189,10 @@
         "url": "http://url.com",
         "reason": "This gives dreampunk a specific media pairing without repeating the seminal track, and it fits the genre especially well because dreampunk often works like imagined interactive futurist space rather than conventional song form. A game soundtrack context makes the style’s immersive, exploratory, rain-soaked atmosphere instantly legible."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 103,
@@ -10169,7 +10195,9 @@
     "favoritesong": "HAMMS IN A GLASS",
     "favoriteartist": "Winona Fighter",
     "favoritesongurl": "https://open.spotify.com/track/3249EJWdvR7xuLbXoxvLcJ",
-    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b273a00396a539ff4bf60901f3ad"
+    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b273a00396a539ff4bf60901f3ad",
+    "taste_reading": "Hook-filled, slightly more polished garage punk (The Hives, The Muffs, The Gories, Oblivians) is consistently well liked, while the genre's most historically 'pure' foundational pick landed only as a middling fit.",
+    "taste_reading_status": "ready"
   },
   {
     "id": 1037,
@@ -10706,7 +10734,10 @@
       "identityIndex": -1,
       "identityLabel": "Seminal track",
       "name": "Noise Not War"
-    }
+    },
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 3,
+    "taste_reading_threshold": 5
   },
   {
     "id": 1045,
@@ -11435,7 +11466,10 @@
         "url": "https://url.com",
         "reason": "The song’s whiplash tempo shifts, meme-famous “arf arf” callout, and ultra-violent breakdowns, captured in an official video and countless filmed pits, have made it one of the most recognizable modern beatdown-adjacent anthems, visually codifying the genre’s hyper-physical, stage-dives-and-dog-barks aesthetic for a global audience."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 1049,
@@ -12848,7 +12882,9 @@
     ],
     "monthlycontender": false,
     "monthfavorite": false,
-    "monthleastfavorite": false
+    "monthleastfavorite": false,
+    "taste_reading": "Catchy, melodic horror punk in the Misfits/AFI/Blitzkid mold is consistently well liked; the one track that leaned into a meaner, more modern strain of the genre landed only as a middling fit.",
+    "taste_reading_status": "ready"
   },
   {
     "id": 1066,
@@ -13113,7 +13149,10 @@
         "url": "http://url.com",
         "reason": "Chicano punk rewrite of “Secret Agent Man” that threads through multiple scenes in Repo Man, making its tense, surf‑inflected punk sound one of the most recognizable Latin punk presences in a cult film soundtrack. [web:705][web:708]"
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 1067,
@@ -16433,7 +16472,10 @@
       "deletedSlotKeys": [],
       "completedAt": "",
       "lastWorkedAt": "2026-07-20T02:15:18.624Z"
-    }
+    },
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 1,
+    "taste_reading_threshold": 5
   },
   {
     "id": 1077,
@@ -17032,7 +17074,10 @@
         "url": "http://url.com",
         "reason": "This is a concrete, widely recognizable screen use that translates punk blues energy to a mass audience fast. The song’s distorted riffing, explosive dynamics, and trashy swagger make it an unusually clean media entry point into the genre outside its core underground context."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 1079,
@@ -17395,7 +17440,10 @@
         "url": "http://url.com",
         "reason": "This gives the genre a concrete film reference without duplicating the seminal track, and it places punk pathetique inside a widely circulated snapshot of the early-80s punk/new wave live circuit. The performance helps show how the style’s comic irreverence sat alongside rougher, more severe underground scenes."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 1,
+    "taste_reading_threshold": 5
   },
   {
     "id": 1083,
@@ -17911,7 +17959,9 @@
       "punky reggae"
     ],
     "identityQueueRolesEnabled": true,
-    "identityRolesSource": "song_queue_v258"
+    "identityRolesSource": "song_queue_v258",
+    "taste_reading": "Polished punk-reggae crossover with a strong hook (Rancid, The Clash, The Police) is well liked; the more confrontational, dub-heavy, or hardcore-reggae-hybrid end of the genre (The Slits, Bad Brains) lands cooler or as an outright miss.",
+    "taste_reading_status": "ready"
   },
   {
     "id": 1084,
@@ -19909,7 +19959,10 @@
       ],
       "completedAt": "",
       "lastWorkedAt": "2026-07-17T03:34:01.153Z"
-    }
+    },
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 1088,
@@ -20520,7 +20573,10 @@
         "url": "https://url.com",
         "reason": "Heard for decades as the instantly recognizable opening theme to a flagship BBC programme, its gentle strings and lilting melody defined light music in the public imagination, illustrating how the genre’s concise, atmospheric miniatures could become beloved fixtures of everyday media."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 1090,
@@ -21656,7 +21712,9 @@
         "identityLabel": "Media track",
         "name": "Ave Maria (Ellens dritter Gesang, D. 839)"
       }
-    ]
+    ],
+    "taste_reading": "Melodically direct, folk-adjacent Schubert Lieder ('Ave Maria,' 'An die Musik,' 'Die schone Mullerin') are well liked; the more harmonically adventurous, text-sensitive late-Romantic settings (Hugo Wolf especially) land cooler or as a miss.",
+    "taste_reading_status": "ready"
   },
   {
     "id": 1106,
@@ -24430,7 +24488,9 @@
       "lastWorkedAt": "2026-07-04T21:48:59.739Z"
     },
     "favoriteartist": "Felix Mendelssohn, Judi Dench, Boston Symphony Orchestra, Seiji Ozawa",
-    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b273b86f4327ed3790ecb955f7a5"
+    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b273b86f4327ed3790ecb955f7a5",
+    "taste_reading": "Vigorous, rhythmically driving, playful orchestral scherzos (Beethoven, Mendelssohn, Bartok) are consistently well liked; the more turbulent or somber entries (Chopin's minor-key piano scherzo, Shostakovich, Bruckner) land as middling fits.",
+    "taste_reading_status": "ready"
   },
   {
     "id": 1112,
@@ -25903,7 +25963,10 @@
         "url": "http://url.com",
         "reason": "This gives dark ambient a concrete screen reference without repeating the seminal track, and it links the genre directly to an actual psychological-horror film score rather than a general mood association. The piece’s slow dread, subterranean resonance, and disembodied atmosphere show how naturally dark ambient functions in cinematic space."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 1158,
@@ -26613,7 +26676,9 @@
     "favoritesong": "memory box",
     "favoriteartist": "Grandma's Cottage",
     "favoritesongurl": "https://open.spotify.com/track/3JekxCU43OeGCSn2RCjAG0",
-    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b27351e88b7f5fd28543aa091082"
+    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b27351e88b7f5fd28543aa091082",
+    "taste_reading": "Warmer, more melodic modern dungeon synth (Erang, Mortiis, medieval-ambient projects) is consistently well liked; the genre's raw black-metal-rooted progenitor track landed only as a middling fit — the same melodic-vs-raw split that shows up elsewhere in this data.",
+    "taste_reading_status": "ready"
   },
   {
     "id": 1171,
@@ -27359,7 +27424,10 @@
         "identityLabel": "Media track",
         "name": "Injeção"
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 2,
+    "taste_reading_threshold": 5
   },
   {
     "id": 1199,
@@ -30811,7 +30879,10 @@
     "rankReviewed": true,
     "rank_reviewed_at": "2026-07-04T04:27:00.811Z",
     "rankReviewedAt": "2026-07-04T04:27:00.811Z",
-    "rank_reviewed_source": "manual"
+    "rank_reviewed_source": "manual",
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 120,
@@ -31861,7 +31932,10 @@
     "favoritesong": "Atmosphères",
     "favoriteartist": "György Ligeti",
     "favoritesongurl": "https://open.spotify.com/track/7ei2fFrvTeea3ebvHpAZEf",
-    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b27307cc27ea91e741e73b581632"
+    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b27307cc27ea91e741e73b581632",
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 3,
+    "taste_reading_threshold": 5
   },
   {
     "id": 1203,
@@ -34476,7 +34550,10 @@
         "url": "https://url.com",
         "reason": "Used to score on-screen battles and demonstrations by dancers in a widely circulated mini‑documentary, it served as many viewers’ first audiovisual encounter with authentic Chicago footwork, tying the genre’s chopped‑up sonics directly to its lightning-fast street dance culture."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 1250,
@@ -35274,7 +35351,9 @@
     "favoritesong": "Turn Down for What",
     "favoriteartist": "DJ Snake, Lil Jon",
     "favoritesongurl": "https://open.spotify.com/track/67awxiNHNyjMXhVgsHuIrs",
-    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b273d905e78cad304de028db39b7"
+    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b273d905e78cad304de028db39b7",
+    "taste_reading": "No clear likes have emerged yet. Big-name festival trap anthems (Harlem Shake, Turn Down for What, RL Grime) land as middling fits, while more novelty/gimmicky vocal-loop tracks and the hardest festival 'drop' weapons are actively disliked.",
+    "taste_reading_status": "ready"
   },
   {
     "id": 131,
@@ -35614,7 +35693,10 @@
         "url": "http://url.com",
         "reason": "This is a concrete, widely recognized media placement that introduced a broad audience to the more crossover-friendly edge of UK bass. The song’s clipped percussion, bass-led groove, and UK club sensibility make it a practical gateway from mainstream gaming culture into the genre’s wider ecosystem."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 132,
@@ -35877,7 +35959,10 @@
         "url": "http://url.com",
         "reason": "This is a practical real-world encounter point because “Echo” served as the theme song for a mainstream Japanese TV series, giving wave-adjacent production a much broader audience than niche SoundCloud circles. The glossy melancholy, cinematic scale, and bass-led electronic atmosphere make it a useful public-facing touchstone for the genre."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 133,
@@ -36255,7 +36340,10 @@
     "favoritesong": "Take Me Back (1990 Rob Gordon Edit)",
     "favoriteartist": "Rhythmatic",
     "favoritesongurl": "https://open.spotify.com/track/6SK7MPCZC7zDzTRf6GWOvm",
-    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b2733fe43f2a760473eb69155e57"
+    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b2733fe43f2a760473eb69155e57",
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 2,
+    "taste_reading_threshold": 5
   },
   {
     "id": 136,
@@ -36747,7 +36835,10 @@
         "url": "http://url.com",
         "reason": "IG Culture is one of the key architects of broken beat, and this remix carried the style into a recognizable game setting without sanding off its rhythmic complexity. The tune’s elastic groove, warm fusion palette, and playable motion make it a strong example of how broken beat works outside specialist club spaces."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 3,
+    "taste_reading_threshold": 5
   },
   {
     "id": 144,
@@ -37144,7 +37235,10 @@
       "identityIndex": -1,
       "identityLabel": "Seminal track",
       "name": "Finished Symphony"
-    }
+    },
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 146,
@@ -37473,7 +37567,10 @@
         "url": "http://url.com",
         "reason": "Its use in Asphalt 8 gives psychedelic breakbeat a concrete crossover moment in a widely played racing game rather than only inside DJ culture. The track’s bright, aggressive synth pressure and break-driven momentum make the genre instantly legible to non-scene listeners."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 1,
+    "taste_reading_threshold": 5
   },
   {
     "id": 15,
@@ -37905,7 +38002,10 @@
         "url": "https://url.com",
         "reason": "With vinyl-crackled drums, mournful chords, and Beth Gibbons’ fragile vocal laid against grainy black‑and‑white imagery, this placement ties trip hop’s rain‑soaked, late‑night mood directly to art‑house cinema, helping cement the style as the sound of intimate, melancholic urban storytelling on screen."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 153,
@@ -38604,7 +38704,10 @@
         "url": "http://url.com",
         "reason": "“African Queen” is one of the signature records associated with the Cosmic ecosystem, with taut post-punk funk, chant-like energy, and a strong transnational groove that fits the scene’s adventurous selector logic. In a documented Cosmic tribute context, it helps show how Afro/cosmic worked as a total club sensibility rather than a narrowly defined studio genre."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 156,
@@ -39612,7 +39715,10 @@
       "deletedSlotKeys": [],
       "completedAt": "",
       "lastWorkedAt": "2026-07-16T03:28:35.539Z"
-    }
+    },
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 157,
@@ -40453,7 +40559,10 @@
         "score": 5,
         "media": "1980s European dance TV shows and YouTube digitizations of vintage performances"
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 163,
@@ -41196,7 +41305,9 @@
         "url": "https://url.com",
         "reason": "Academy Award–winning disco ballad prominently featured in the film Thank God It’s Friday; its combination of slow intro and driving Eurodisco climax became one of the most recognizable European‑flavored disco moments in mainstream cinema."
       }
-    ]
+    ],
+    "taste_reading": "Uniformly well liked so far — piano-driven, orchestral eurodisco and Europop (Sandra, Boney M., ABBA) with no misses or middling reactions yet.",
+    "taste_reading_status": "ready"
   },
   {
     "id": 165,
@@ -41252,7 +41363,10 @@
     "identity": {
       "seminalTrack": {},
       "mediaTouchstones": []
-    }
+    },
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 167,
@@ -41719,7 +41833,10 @@
         "url": "https://url.com",
         "reason": "Its explosive drops, cinematic intro, and ultra-aggressive darkstep sound made it a go-to soundtrack for user-made extreme sports and gaming clips, helping cement darkstep as the sonic shorthand for maximal, adrenaline-heavy digital violence."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 171,
@@ -42018,7 +42135,10 @@
         "media": "beatmania 6thMIX / Konami rhythm-game soundtrack"
       }
     ],
-    "monthleastfavorite": false
+    "monthleastfavorite": false,
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 172,
@@ -42580,7 +42700,10 @@
       }
     ],
     "favoriteartist": "Skrillex",
-    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b273d3004c7f9c57d391bbdb0850"
+    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b273d3004c7f9c57d391bbdb0850",
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 4,
+    "taste_reading_threshold": 5
   },
   {
     "id": 173,
@@ -42923,7 +43046,10 @@
         "spotifyId": ""
       }
     ],
-    "monthleastfavorite": false
+    "monthleastfavorite": false,
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 175,
@@ -43374,7 +43500,10 @@
       "identityIndex": -1,
       "identityLabel": "Seminal track",
       "name": "Return of Forever"
-    }
+    },
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 3,
+    "taste_reading_threshold": 5
   },
   {
     "id": 179,
@@ -43634,7 +43763,10 @@
         "url": "https://open.spotify.com/track/5fVZC9GiM4e8vu99W0Xf6J",
         "reason": "“Mannish Boy” is one of the most instantly recognizable Chicago blues anthems, and its appearance in The Blues Brothers tied the electrified South Side sound to a mainstream cinematic love letter to Chicago’s Black music. The track’s call‑and‑response shouts, raw guitar tone, and stomping riff function in the film as a kind of shorthand for authentic Chicago blues, helping cement the genre’s image for a global audience."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 180,
@@ -43972,7 +44104,10 @@
         "url": "http://url.com",
         "reason": "“Funquiada” is a strong media-facing sambass pick because it emphasizes the genre’s percussive lift, Brazilian groove vocabulary, and dancefloor fluency in a way that is instantly legible even outside specialist drum-and-bass circles. It also represents the São Paulo wave that helped make sambass feel like a real scene rather than a one-off crossover experiment."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 181,
@@ -45113,7 +45248,9 @@
     "favoritesong": "Don't You Want Me",
     "favoriteartist": "The Human League",
     "favoritesongurl": "https://open.spotify.com/track/3L7RtEcu1Hw3OXrpnthngx",
-    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b2735579d8a505c727349a203074"
+    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b2735579d8a505c727349a203074",
+    "taste_reading": "Song-forward, hook-heavy dance-rock (The Human League, LCD Soundsystem, Blondie, Franz Ferdinand) is consistently well liked; the more minimal, repetitive dance-punk grooves (New Order's 'Blue Monday,' The Rapture) land as middling fits by comparison.",
+    "taste_reading_status": "ready"
   },
   {
     "id": 187,
@@ -48125,7 +48262,10 @@
       ],
       "completedAt": "",
       "lastWorkedAt": "2026-07-16T03:11:35.645Z"
-    }
+    },
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 3,
+    "taste_reading_threshold": 5
   },
   {
     "id": 193,
@@ -51957,7 +52097,10 @@
       "deletedSlotKeys": [],
       "completedAt": "",
       "lastWorkedAt": "2026-07-16T03:01:08.506Z"
-    }
+    },
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 198,
@@ -52347,7 +52490,10 @@
     "identity": {
       "seminalTrack": {},
       "mediaTouchstones": []
-    }
+    },
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 20,
@@ -53480,7 +53626,10 @@
       "identityIndex": -1,
       "identityLabel": "Seminal track",
       "name": "The Host of Seraphim - Remastered"
-    }
+    },
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 1,
+    "taste_reading_threshold": 5
   },
   {
     "id": 207,
@@ -53802,7 +53951,10 @@
         "identityLabel": "Media track",
         "name": "Yü-Gung"
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 2,
+    "taste_reading_threshold": 5
   },
   {
     "id": 208,
@@ -54995,7 +55147,10 @@
       ],
       "completedAt": "",
       "lastWorkedAt": "2026-07-16T00:46:33.896Z"
-    }
+    },
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 1,
+    "taste_reading_threshold": 5
   },
   {
     "id": 212,
@@ -55089,7 +55244,10 @@
     "identity": {
       "seminalTrack": {},
       "mediaTouchstones": []
-    }
+    },
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 214,
@@ -55658,7 +55816,10 @@
         "url": "http://url.com",
         "reason": "A cult San Francisco synth-punk track used in a widely viewed online documentary about The Screamers and early synth-punk, helping frame the Units’ jagged, sequencer-driven sound as part of the genre’s core canon for a new generation of viewers."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 219,
@@ -56196,7 +56357,9 @@
         "identityLabel": "Media track",
         "name": "Hard Time Killing Floor Blues"
       }
-    ]
+    ],
+    "taste_reading": "Mixed reception overall. The genre's most mythologized, canonical Delta blues recording (Robert Johnson's 'Cross Road Blues') was disliked, while the talking-blues, storytelling-forward tracks (Bob Dylan, Loudon Wainwright III) landed well.",
+    "taste_reading_status": "ready"
   },
   {
     "id": 220,
@@ -56969,7 +57132,9 @@
     "favoritesong": "Sagacité",
     "favoriteartist": "Douk Saga",
     "favoritesongurl": "https://open.spotify.com/track/1KGEGtKTx1lUQGZ367z1F9",
-    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b2731fd62c3663d5b491a775ad61"
+    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b2731fd62c3663d5b491a775ad61",
+    "taste_reading": "Mostly a miss so far. The genre's single foundational hit landed well, but the other canonical picks (mostly DJ Arafat) were disliked; the one polished, mainstream-leaning track landed as a middling fit.",
+    "taste_reading_status": "ready"
   },
   {
     "id": 233,
@@ -57287,7 +57452,10 @@
       }
     ],
     "identityQueueRolesEnabled": true,
-    "identityRolesSource": "song_queue_v258"
+    "identityRolesSource": "song_queue_v258",
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 2,
+    "taste_reading_threshold": 5
   },
   {
     "id": 234,
@@ -57693,7 +57861,10 @@
     "favoritesongurl": "https://open.spotify.com/track/002s4YrqkFx680ZWYfwRpZ",
     "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b273fbb0160089d8e00b9d33decb",
     "identityQueueRolesEnabled": true,
-    "identityRolesSource": "song_queue_v258"
+    "identityRolesSource": "song_queue_v258",
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 2,
+    "taste_reading_threshold": 5
   },
   {
     "id": 238,
@@ -58048,7 +58219,10 @@
         "url": "http://url.com",
         "reason": "Hooker’s electric shuffle plays diegetically as he performs on the sidewalk in The Blues Brothers, giving mainstream audiences a vivid, on-screen encounter with Detroit blues as living, urban street music woven directly into the film’s action."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 240,
@@ -58280,7 +58454,10 @@
       "identityIndex": -1,
       "identityLabel": "Seminal track",
       "name": "La Roca"
-    }
+    },
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 241,
@@ -58668,7 +58845,9 @@
     "favoritesong": "Angra Dos Reis",
     "favoriteartist": "Mc Daleste",
     "favoritesongurl": "https://open.spotify.com/track/0wBBZUC6TCeGLYpAxJcdXe",
-    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b273fa2a8cb199386a844c5bd751"
+    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b273fa2a8cb199386a844c5bd751",
+    "taste_reading": "A consistent middling response across every track so far — no clear likes or dislikes have emerged.",
+    "taste_reading_status": "ready"
   },
   {
     "id": 244,
@@ -59018,7 +59197,10 @@
         "identityLabel": "Media track",
         "name": "Boa Noite"
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 2,
+    "taste_reading_threshold": 5
   },
   {
     "id": 246,
@@ -59336,7 +59518,10 @@
         "identityLabel": "Media track",
         "name": "Guallando"
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 2,
+    "taste_reading_threshold": 5
   },
   {
     "id": 247,
@@ -60095,7 +60280,10 @@
       }
     ],
     "identityQueueRolesEnabled": true,
-    "identityRolesSource": "song_queue_v258"
+    "identityRolesSource": "song_queue_v258",
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 1,
+    "taste_reading_threshold": 5
   },
   {
     "id": 253,
@@ -60483,7 +60671,10 @@
     "favoritesong": "You Can Call Me Al",
     "favoriteartist": "Paul Simon",
     "favoritesongurl": "https://open.spotify.com/track/0qxYx4F3vm1AOnfux6dDxP",
-    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b273e5855edffddef46b7feff49b"
+    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b273e5855edffddef46b7feff49b",
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 3,
+    "taste_reading_threshold": 5
   },
   {
     "id": 255,
@@ -60749,7 +60940,10 @@
         "url": "https://url.com",
         "reason": "Used as the namesake theme of a commercial feature film, its disco-inflected Manila Sound style, dance routines, and band performances broadcast the genre’s shiny, feel-good image across Philippine cinema and solidified it as a mainstream pop-cultural force."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 256,
@@ -61678,7 +61872,10 @@
       "spotifyUrl": "",
       "reason": ""
     },
-    "media_touchstones": []
+    "media_touchstones": [],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 269,
@@ -62639,7 +62836,10 @@
         "score": 5,
         "media": "Pi (1998 DVD release) – fan-synced cut used in underground edits and video art built from the film’s imagery"
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 273,
@@ -63020,7 +63220,10 @@
         "url": "https://url.com",
         "reason": "Captured in stark, dimly lit performance video with saturated, crushing sound, this recording gives a concrete audiovisual snapshot of death industrial’s live presence, linking the genre’s cavernous drones and screamed vocals directly to the Cold Meat scene that defined its visual and sonic identity."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 1,
+    "taste_reading_threshold": 5
   },
   {
     "id": 274,
@@ -63408,7 +63611,10 @@
     "favoritesong": "Palm Mall",
     "favoriteartist": "猫 シ Corp.",
     "favoritesongurl": "https://open.spotify.com/track/2UHJt0215Zk8vyhuB862cE",
-    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b273241d061ca23f9538ab767b0c"
+    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b273241d061ca23f9538ab767b0c",
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 2,
+    "taste_reading_threshold": 5
   },
   {
     "id": 276,
@@ -63814,7 +64020,10 @@
         "identityLabel": "Media track",
         "name": "NIMB #1"
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 2,
+    "taste_reading_threshold": 5
   },
   {
     "id": 28,
@@ -64411,7 +64620,10 @@
         "url": "http://url.com",
         "reason": "A widely-cited hardstyle track whose prominent spoken samples from the LSD documentary The Beyond Within became emblematic of the genre’s habit of lifting intense film dialogue to heighten its cinematic, psychedelic atmosphere for festival and online audiences."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 286,
@@ -64752,7 +64964,10 @@
         "url": "http://url.com",
         "reason": "This specific event debut is the most concrete and historically useful touchstone for dubstyle because it marks the style’s emergence in a major hard dance setting rather than a later retrospective. It shows how the genre first registered publicly: as a scene-level experiment connecting hardstyle crowds to dubstep’s rhythmic language."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 287,
@@ -65078,7 +65293,10 @@
         "url": "https://url.com",
         "reason": "Featured prominently in major hard dance festival recaps, its punishing kickdrums and crowd-chant breakdowns showcase rawstyle as the darker, more extreme face of the hardstyle spectrum for a global audience watching these official event films."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 29,
@@ -66033,7 +66251,10 @@
         "url": "http://url.com",
         "reason": "This track became one of the most recognizable gateways into modern Frenchcore because its folk-inflected melody and huge emotional lift translate instantly in festival footage and recap media. The combination of speed, sentiment, and crowd response makes it one of the clearest audiovisual signatures of the genre’s contemporary identity."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 3,
@@ -66397,7 +66618,10 @@
         "url": "http://url.com",
         "reason": "“Blues In The Dark” appears as the opening track on the Robert Altman *Kansas City* soundtrack, performed by an all-star jazz ensemble recreating 1930s Kansas City club music with riff-based horns and relaxed swing. Its prominent placement in the film’s club scenes offers a concrete, widely available cinematic entry point into the Kansas City blues/jazz hybrid sound."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 300,
@@ -68982,7 +69206,10 @@
       ],
       "completedAt": "",
       "lastWorkedAt": "2026-07-17T03:49:35.769Z"
-    }
+    },
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 3,
+    "taste_reading_threshold": 5
   },
   {
     "id": 301,
@@ -69931,7 +70158,18 @@
       "score": 5
     },
     "favoriteartist": "S3RL",
-    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b273125b721f053abbd946b2e9de"
+    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b273125b721f053abbd946b2e9de",
+    "taste_reading": "Positive reactions cluster around bright, pitched vocal hooks and a playful, bouncy production style. The genre's foundational/historical anthems ('Forever Young,' 'Wonderful Days') are perfect genre-fit examples but haven't landed as strongly, and the single most extreme/aggressive track was the one clear miss. A nightcore remix in this same set also landed well, pointing toward nightcore as a possible neighboring taste.",
+    "taste_reading_status": "ready",
+    "taste_reading_predicted_hit": {
+      "title": "Toca's Miracle",
+      "artist": "Fragma"
+    },
+    "taste_reading_predicted_miss": {
+      "title": "No Way Back",
+      "artist": "DJ Buzz Fuzz"
+    },
+    "taste_reading_niche_genre_id": 1230
   },
   {
     "id": 304,
@@ -70314,7 +70552,10 @@
         "url": "http://url.com",
         "reason": "A brutally fast, abrasive hardcore/speedcore-adjacent track whose appearance in the Need for Speed: Most Wanted soundtrack exposed console and PC players to the genre’s punishing tempo and distorted-kick aesthetic in the context of high-speed police chases."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 308,
@@ -70743,7 +70984,10 @@
         "url": "http://url.com",
         "reason": "Rather than film or TV, splittercore’s clearest media presence is in community rhythm games and stepchart culture, where ultra‑BPM tracks serve as endurance tests for expert players. odaxelagnia’s work, frequently cited in speedcore/splittercore circles, helped cement the association between this sound and maximal, almost absurd challenge in a gaming context."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 311,
@@ -72349,7 +72593,10 @@
         "identityLabel": "Media track",
         "name": "Ginseng Strip 2002"
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 2,
+    "taste_reading_threshold": 5
   },
   {
     "id": 326,
@@ -72847,7 +73094,10 @@
         "score": 5,
         "media": "Early-2000s MTV/BET rotation and club videos"
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 2,
+    "taste_reading_threshold": 5
   },
   {
     "id": 327,
@@ -73222,7 +73472,10 @@
         "url": "http://url.com",
         "reason": "This song’s use in and association with trashy late-2000s reality-TV party culture makes it a strong mainstream touchstone for the crunkcore-adjacent world that many listeners actually remember. Even though 3OH!3 sit on the poppier edge of the style, the placement helps situate crunkcore within the era’s neon, hedonistic, electro-scene crossover."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 328,
@@ -73420,7 +73673,10 @@
         "url": "https://url.com",
         "reason": "With its snap-driven beat, ringtone-ready hook, and heavily mimed dance, the track’s frequent use in television cutaways and youth-culture scenes turned snap music into a mainstream pop-cultural reference point far beyond Southern rap audiences."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 33,
@@ -73821,7 +74077,9 @@
       "Louisiana blues"
     ],
     "favoriteartist": "Fats Domino",
-    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b273635dcf3261792ab92bf8350d"
+    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b273635dcf3261792ab92bf8350d",
+    "taste_reading": "Fats Domino's smoother, radio-friendly New Orleans sound ('Walking to New Orleans') landed well; the rawer, more foundational piano-blues picks (Professor Longhair, Champion Jack Dupree) were disliked or landed as middling fits.",
+    "taste_reading_status": "ready"
   },
   {
     "id": 330,
@@ -76544,7 +76802,10 @@
     "rankReviewed": true,
     "rank_reviewed_at": "2026-07-04T04:28:08.735Z",
     "rankReviewedAt": "2026-07-04T04:28:08.735Z",
-    "rank_reviewed_source": "manual"
+    "rank_reviewed_source": "manual",
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 331,
@@ -76834,7 +77095,10 @@
         "url": "https://url.com",
         "reason": "The widely broadcast video, focused almost entirely on showcasing jerkin’ crews and moves, helped turn the sound and dance into a nationwide phenomenon, making the track a de facto tutorial and visual calling card for the entire jerk movement."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 334,
@@ -77440,7 +77704,9 @@
         "score": 5,
         "media": "Samurai Champloo (2004–2005 anime) – opening theme song"
       }
-    ]
+    ],
+    "taste_reading": "The more melodic, atmosphere-forward instrumental tracks ('Feather,' 'Egyptian Pools') were well liked, while the genre's more straightforward boom-bap/jazz-loop staples (Nujabes' 'Luv (sic),' J Dilla) landed as middling fits.",
+    "taste_reading_status": "ready"
   },
   {
     "id": 335,
@@ -77857,7 +78123,10 @@
     "favoritesong": "Bad and Boujee",
     "favoriteartist": "Migos",
     "favoritesongurl": "https://open.spotify.com/track/0M9ydKzuF3oZTfYYPfaGX1",
-    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b2736275aeac316378b0dd4f31fd"
+    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b2736275aeac316378b0dd4f31fd",
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 2,
+    "taste_reading_threshold": 5
   },
   {
     "id": 338,
@@ -78215,7 +78484,10 @@
         "url": "http://url.com",
         "reason": "This piece connects free funk’s broader Ornette universe to a concrete, widely recognized film title. Its presence in David Cronenberg’s Naked Lunch gives listeners a useful media anchor for Ornette’s jagged, exploratory sound outside the core jazz audience."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 34,
@@ -78644,7 +78916,9 @@
       }
     ],
     "favoriteartist": "Ozuna",
-    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b273b27654722f86a61ee41cd5f3"
+    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b273b27654722f86a61ee41cd5f3",
+    "taste_reading": "Mostly a middling response so far. The one standout like is the slow, heavy, melodic trap blueprint ('Se Preparo' by Ozuna) rather than the more rap-forward urbano crossover tracks.",
+    "taste_reading_status": "ready"
   },
   {
     "id": 344,
@@ -78999,7 +79273,10 @@
     "favoritesongurl": "https://open.spotify.com/track/6qyS9qBy0mEk3qYaH8mPss",
     "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b2731440ffaa43c53d65719e0150",
     "identityQueueRolesEnabled": true,
-    "identityRolesSource": "song_queue_v258"
+    "identityRolesSource": "song_queue_v258",
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 3,
+    "taste_reading_threshold": 5
   },
   {
     "id": 345,
@@ -79322,7 +79599,10 @@
     "favoritesong": "M4",
     "favoriteartist": "Teto, Matuê",
     "favoritesongurl": "https://open.spotify.com/track/07AQkmp456NpEnT8HR7WLy",
-    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b27326addbe7863ffd3bd276163d"
+    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b27326addbe7863ffd3bd276163d",
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 2,
+    "taste_reading_threshold": 5
   },
   {
     "id": 346,
@@ -79350,7 +79630,10 @@
     "identity": {
       "seminalTrack": {},
       "mediaTouchstones": []
-    }
+    },
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 347,
@@ -79815,7 +80098,10 @@
         "score": 5,
         "media": "A Soweto Love Story (2024 Netflix film) – official soundtrack EP"
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 351,
@@ -80137,7 +80423,10 @@
         "identityLabel": "Media track",
         "name": "Wish You Were Here (feat. Msaki)"
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 2,
+    "taste_reading_threshold": 5
   },
   {
     "id": 352,
@@ -80528,7 +80817,10 @@
       "identityIndex": -1,
       "identityLabel": "Seminal track",
       "name": "Kapapaala"
-    }
+    },
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 354,
@@ -81020,7 +81312,9 @@
     "favoritesong": "Vogue",
     "favoriteartist": "Madonna",
     "favoritesongurl": "https://open.spotify.com/track/27QvYgBk0CHOVHthWnkuWt",
-    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b2736b44fa8f5415cc4c945117be"
+    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b2736b44fa8f5415cc4c945117be",
+    "taste_reading": "Mainstream pop crossovers that borrow ballroom's vocabulary (Madonna's 'Vogue,' RuPaul's 'Sissy That Walk') landed better than the genre's own foundational DJ track ('The Ha Dance'), which was disliked.",
+    "taste_reading_status": "ready"
   },
   {
     "id": 357,
@@ -81620,7 +81914,10 @@
         "url": "http://url.com",
         "reason": "A frenetic, sample-heavy party track closely associated with the mid‑2000s bloghouse DJ circuit, featured in a key, chaotic sequence of Soulwax’s touring documentary that helped immortalize the scene’s sweaty, maximalist energy on film."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 361,
@@ -82101,7 +82398,10 @@
         "url": "http://url.com",
         "reason": "A big-beat-inflected rework of a vocal house track whose hoover-like bass, chopped vocal hook, and pounding, hardbag-aligned groove became a staple of late-90s UK TV and sports montages, giving mainstream visibility to the harder, riff-driven side of handbag-derived club music."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 367,
@@ -82452,7 +82752,10 @@
         "url": "http://url.com",
         "reason": "With its clipped vocal hook, chunky side‑chained bass, and sleek 128 BPM groove, “Put Your Hands Up for Detroit” became one of the most recognizable electro house tracks of the 2000s. Its inclusion in Need for Speed: ProStreet tied the sound of electro house to high-speed racing imagery, helping cement the genre’s association with glossy, adrenaline-fueled gaming and mainstream club culture."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 368,
@@ -82976,7 +83279,10 @@
       "identityIndex": -1,
       "identityLabel": "Seminal track",
       "name": "Say My Name (Original Mix)"
-    }
+    },
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 3,
+    "taste_reading_threshold": 5
   },
   {
     "id": 371,
@@ -83266,7 +83572,10 @@
         "url": "https://url.com",
         "reason": "While unofficial, this widely viewed aftermovie ties the track’s rubbery bounce bass and explosive drops directly to modern festival imagery, reinforcing Melbourne bounce as the sound of hyperactive, jump-cut rave spectacle in online festival culture."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 374,
@@ -83535,7 +83844,10 @@
         "url": "https://url.com",
         "reason": "Its inclusion on a major Disney animated feature’s soundtrack pushed electro swing into a mainstream family-film context, turning the track’s swaggering horns and electronic bounce into a widely heard emblem of the genre’s retro-futurist party vibe."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 375,
@@ -83903,7 +84215,10 @@
       "reason": "Released mid‑1980s and championed at Paradise Garage and Club Zanzibar, “Music Is the Answer” blends a four‑on‑the‑floor house groove with rich, gospel-inflected vocals, piano stabs, and emotive chord progressions. Its combination of disco’s soulful uplift with early house drum programming and extended club arrangement crystallized the vocal‑driven, church‑in‑the‑club aesthetic that defines classic garage house.",
       "url": "http://url.com"
     },
-    "media_touchstones": []
+    "media_touchstones": [],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 38,
@@ -84172,7 +84487,10 @@
         "url": "https://url.com",
         "reason": "The track’s slow, horn-laced groove and testifying vocal performance are used in the film to color a scene with grown-up melancholy, reinforcing soul blues as cinematic shorthand for adult heartbreak and lived-in emotional weight."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 380,
@@ -84537,7 +84855,10 @@
         "url": "http://url.com",
         "reason": "“Bounce” carries ghettotech’s hypersexual, high-velocity club energy into a charged teen-delinquency film context where its intensity reads instantly. The track’s stripped rhythmic attack and relentless body-motion logic make it a vivid screen example of Detroit club sound."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 382,
@@ -85053,7 +85374,10 @@
         "url": "https://url.com",
         "reason": "Captured in a professionally filmed festival set, the tune’s skippy percussion and disco-cut samples are showcased alongside crowd reaction, giving a clear, concrete audiovisual example of modern jackin house functioning in a real-world, high-profile club context."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 388,
@@ -85448,7 +85772,10 @@
       "identityIndex": -1,
       "identityLabel": "Seminal track",
       "name": "Nkalakatha"
-    }
+    },
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 39,
@@ -85842,7 +86169,10 @@
         "url": "http://url.com",
         "reason": "Gran Turismo 7 gave a broad audience a very concrete encounter with the cinematic, emotionally expansive side of melodic house. The track’s long-form build, luminous synth work, and driving but restrained pulse make it a strong media reference for the genre’s modern festival-to-headphone crossover identity."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 392,
@@ -86299,7 +86629,10 @@
     ],
     "synonyms": [
       "moombah"
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 3,
+    "taste_reading_threshold": 5
   },
   {
     "id": 395,
@@ -86978,7 +87311,10 @@
         "score": 5,
         "media": "Queer as Folk (US) – club scenes across the series, especially early-season dancefloor moments"
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 3,
+    "taste_reading_threshold": 5
   },
   {
     "id": 401,
@@ -87481,7 +87817,10 @@
         "url": "http://url.com",
         "reason": "This is a concrete, verifiable mainstream screen pairing that shows tropical house operating as polished crossover soundtrack music rather than only festival or playlist material. The track’s glossy warmth and approachable drop design make the genre legible to a broad audience without duplicating the seminal cut."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 405,
@@ -88008,7 +88347,10 @@
         "url": "http://url.com",
         "reason": "This is a specific and highly recognizable sync that helped fix the sound of trouse in mainstream culture outside EDM circles. The ad’s sleek, futuristic presentation matches the genre’s polished, anthemic, peak-time character especially well."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 406,
@@ -88583,7 +88925,10 @@
         "score": 5,
         "media": "Poltergeist official music video – dark electro/industrial rotation (late 1990s–2000s)"
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 1,
+    "taste_reading_threshold": 5
   },
   {
     "id": 413,
@@ -89282,7 +89627,10 @@
         "url": "http://url.com",
         "reason": "This gives EBM a concrete visual touchstone without duplicating the seminal track, and it captures the genre’s stripped-down, confrontational body-language in one of its most recognizable early visual artifacts. The chant structure, minimal sequencing, and militant physicality make it a strong shorthand for classic EBM beyond specialist club history."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 415,
@@ -90173,7 +90521,10 @@
     "favoritesong": "Hard Refresh",
     "favoriteartist": "DJ_Dave",
     "favoritesongurl": "https://open.spotify.com/track/0RJbtBExI8If2wURyvbnQl",
-    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b273a2fa79d5aa01256ea9b0b4ab"
+    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b273a2fa79d5aa01256ea9b0b4ab",
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 2,
+    "taste_reading_threshold": 5
   },
   {
     "id": 426,
@@ -90429,7 +90780,10 @@
         "url": "http://url.com",
         "reason": "This is a specific and culturally legible film pairing that places jungle’s wider drum-and-bass continuum inside a recognizable late-1990s UK club-culture document. It helps explain the genre’s social world beyond pirate radio and raves, giving a concrete screen reference that audiences can actually locate."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 428,
@@ -91341,7 +91695,9 @@
     "favoritesong": "Real Love",
     "favoriteartist": "Mary J. Blige",
     "favoritesongurl": "https://open.spotify.com/track/3XG801WWhqC753dekEBkMt",
-    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b27321110eef2bacdfe409af6903"
+    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b27321110eef2bacdfe409af6903",
+    "taste_reading": "No dislikes have shown up. Both classic swingbeat (Bell Biv DeVoe, En Vogue) and its later dance-pop descendants (Kylie Minogue, Katy Perry) land well, suggesting a broad tolerance for hook-driven pop production rather than a narrow trait specific to this genre.",
+    "taste_reading_status": "ready"
   },
   {
     "id": 434,
@@ -91741,7 +92097,10 @@
         "url": "https://open.spotify.com/track/6kLougsv54lD9R3rQu8s4j",
         "reason": "While not tied to one single famous film, “Cascade” circulated heavily in UK television as library and background music, so its glassy pads, soft kicks, and looping motifs became a recognizable audiovisual shorthand for a cool, weightless, high‑tech future. That semi-anonymous but pervasive usage helped anchor ambient techno in the wider public’s sense of what “futuristic electronic music” sounds like."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 437,
@@ -92245,7 +92604,10 @@
         "url": "http://url.com",
         "reason": "This kind of online DJ-set circulation is one of the most realistic ways listeners would have encountered jungletek outside dedicated freeparty scenes. The mix context matters because the genre’s identity is strongly tied to rave energy, rapid transitions, and soundsystem culture rather than to one canonical radio or film placement."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 444,
@@ -92723,7 +93085,10 @@
         "url": "https://url.com",
         "reason": "Its long-form, skeletal groove and subtly shifting textures, heard in DJ sets and film sequences tied to Berlin’s club culture, turned the track into a touchstone for how minimal techno is represented on screen: patient, immersive, and focused on the trance of small changes over big drops."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 3,
+    "taste_reading_threshold": 5
   },
   {
     "id": 447,
@@ -93674,7 +94039,10 @@
     ],
     "monthlycontender": false,
     "monthfavorite": false,
-    "monthleastfavorite": false
+    "monthleastfavorite": false,
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 1,
+    "taste_reading_threshold": 5
   },
   {
     "id": 455,
@@ -94021,7 +94389,10 @@
         "identityLabel": "Media track",
         "name": "Hit 'N' Run"
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 2,
+    "taste_reading_threshold": 5
   },
   {
     "id": 457,
@@ -94555,7 +94926,10 @@
       "Goa trance"
     ],
     "favoriteartist": "Astral Projection",
-    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b273f78bf0458b55787d8e419446"
+    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b273f78bf0458b55787d8e419446",
+    "taste_reading": "Melodic, Goa-style trance (Astral Projection's 'Dancing Galaxy,' 'Light Code') is well liked, while the harder-edged, more intense full-on psy tracks (Infected Mushroom's 'Becoming Insane,' 'Mahadeva') are disliked — pointing toward Goa trance specifically as a likely stronger fit than psytrance broadly.",
+    "taste_reading_status": "ready",
+    "taste_reading_niche_genre_id": 455
   },
   {
     "id": 46,
@@ -95200,7 +95574,9 @@
     "favoritesong": "Galaxian",
     "favoriteartist": "Sensient",
     "favoritesongurl": "https://open.spotify.com/track/3Ky1Z8413GvFSMT7h5tlxs",
-    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b2732c4bb825ecec1fe4c6a2d1fe"
+    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b2732c4bb825ecec1fe4c6a2d1fe",
+    "taste_reading": "Broadly disliked — even the tracks judged the better genre fits only reach a middling reaction, consistent with this genre's low overall rating.",
+    "taste_reading_status": "ready"
   },
   {
     "id": 463,
@@ -95797,7 +96173,10 @@
         "url": "http://url.com",
         "reason": "The track works as a vivid cultural signpost because its champagne-energy hook, MC-led drive, and instantly recognizable bounce capture UK garage at its most communal and combustible. In Pirates, it functions like social memory on screen, tying the genre to turn-of-the-millennium London youth culture and rave nostalgia."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 469,
@@ -96362,7 +96741,10 @@
     "favoritesong": "Midnight Request Line (Breakstep VIP)",
     "favoriteartist": "Skream",
     "favoritesongurl": "https://open.spotify.com/track/75zs01TZIdJsYKZnHmUj6B",
-    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b2739e7fe70b7a95aa05f59777e7"
+    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b2739e7fe70b7a95aa05f59777e7",
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 4,
+    "taste_reading_threshold": 5
   },
   {
     "id": 472,
@@ -97115,7 +97497,10 @@
         "url": "https://url.com",
         "reason": "Its massive sawtooth lead and pounding halftime drums blasting over opulent party imagery in a major Hollywood film trailer helped cement brostep’s screaming, cathartic drops as the go-to audiovisual shorthand for decadent, high-stakes excess in the early-2010s blockbuster era."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 474,
@@ -97726,7 +98111,10 @@
         "url": "http://url.com",
         "reason": "This is a more defensible media touchstone because Burial’s blurred vocals, unstable pulse, and dreamlike dislocation map directly onto a surreal visual campaign rather than a loosely remembered runway association. It also demonstrates how future garage’s emotional haze and broken-garage DNA entered fashion-film language without duplicating the seminal track."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 478,
@@ -98067,7 +98455,10 @@
         "url": "http://url.com",
         "reason": "A modern grime anthem whose inclusion on the soundtracks of NBA 2K17, Tony Hawk’s Pro Skater 1 + 2, and Watch Dogs: Legion blasted Skepta’s snarling, minimalist take on the style into mainstream gaming culture, making it many players’ first direct encounter with grime."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 479,
@@ -98521,7 +98912,9 @@
       "releasePrecision": "day",
       "releaseSource": "Spotify",
       "score": 5
-    }
+    },
+    "taste_reading": "A consistent middling response across every track so far — no clear likes or dislikes have emerged.",
+    "taste_reading_status": "ready"
   },
   {
     "id": 481,
@@ -100677,7 +101070,10 @@
       "deletedSlotKeys": [],
       "completedAt": "",
       "lastWorkedAt": "2026-07-16T03:26:01.426Z"
-    }
+    },
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 494,
@@ -101114,7 +101510,10 @@
         "url": "http://url.com",
         "reason": "An ethereal Gaelic-language song originally written for a TV drama, later used prominently in Patriot Games, whose layered voices and synth-tinged Celtic arrangement became one of the most internationally famous examples of Celtic music in mainstream cinema."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 1,
+    "taste_reading_threshold": 5
   },
   {
     "id": 498,
@@ -101469,7 +101868,10 @@
         "url": "http://url.com",
         "reason": "The Sundowners’ bush-band arrangement for the Cash and Co. theme brought fiddles, accordion, and jaunty colonial-style rhythms straight into Australian living rooms every week. As a made-for-TV bush tune tied to images of gold‑rush bushrangers and horseback action, it became a widely recognized audiovisual shorthand for bush-band sound and 19th‑century outback adventure."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 2,
+    "taste_reading_threshold": 5
   },
   {
     "id": 500,
@@ -102221,7 +102623,10 @@
         "url": "http://url.com",
         "reason": "This gives Celtic rock a concrete and widely recognizable media anchor without repeating the seminal track. Even though the song leans Celtic punk, its accordion-led arrangement, Irishness-in-diaspora setting, and huge cultural afterlife make it an effective screen-era touchstone for the broader Celtic rock world."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 506,
@@ -103991,7 +104396,10 @@
         "url": "http://url.com",
         "reason": "“Pursuit of Happiness” became a defining sync for the blog-era hipster rap mood when its introspective hook and spaced-out production scored the delirious party scenes in Project X. The contrast between huge on-screen excess and Cudi’s weary, self-aware verses turned the track into a generational anthem and firmly linked hipster hop with cinematic images of suburban, hedonistic, but emotionally conflicted youth."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 525,
@@ -105147,7 +105555,10 @@
       "deletedSlotKeys": [],
       "completedAt": "",
       "lastWorkedAt": "2026-06-28T15:27:37.993Z"
-    }
+    },
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 528,
@@ -105709,7 +106120,10 @@
         "url": "http://url.com",
         "reason": "This gives traditional bluegrass a concrete and hugely recognizable screen reference without repeating the seminal track. Though the soundtrack spans old-time, gospel, and related roots styles beyond strict bluegrass, Stanley’s stark banjo-and-voice performance became a major cultural gateway into the traditional mountain sound-world that bluegrass emerged from."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 540,
@@ -106443,7 +106857,9 @@
     "favoritesong": "Bossy",
     "favoriteartist": "Kelis",
     "favoritesongurl": "https://open.spotify.com/track/37t0Qym2FUMXwoEfeFDEYa",
-    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b27322687823c3073eeabb1cf027"
+    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b27322687823c3073eeabb1cf027",
+    "taste_reading": "Polished, playful, production-forward takes on explicit content (Kelis's 'Bossy') land better than the more blunt, aggressive club-rap end of the genre (2 Live Crew, Khia, Tyga, Petey Pablo), several of which were disliked.",
+    "taste_reading_status": "ready"
   },
   {
     "id": 548,
@@ -106696,7 +107112,10 @@
         "url": "http://url.com",
         "reason": "Parton’s virtuosic cover of “Mule Skinner Blues” appears on the official soundtrack to Ken Burns’ Country Music, where her bright timbre and agile yodels bring Rodgers’ blue-yodel technique into a vivid modern recording. Framed by archival footage and narrative segments about country’s roots, this version functions as the series’ definitive audiovisual reference for blue yodeling, connecting Rodgers’ innovations to contemporary country iconography."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 2,
+    "taste_reading_threshold": 5
   },
   {
     "id": 550,
@@ -107331,7 +107750,10 @@
         "url": "http://url.com",
         "reason": "Three 6 Mafia are one of the genre’s most influential groups, and this soundtrack placement carries their sinister Memphis sound into an actual screen context. The ominous production and menace-heavy delivery make it a good cultural marker for horrorcore’s darker, underground energy."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 551,
@@ -107676,7 +108098,10 @@
         "url": "https://url.com",
         "reason": "With its pounding 808s, stark repetitive riff, and call-and-response hook rooted in Memphis’s chant tradition, the song’s central role in the film and later adoption by the Memphis Grizzlies as an arena anthem turned it into one of the most visible bridges between underground Memphis rap energy and mainstream visual culture.["
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 552,
@@ -108424,7 +108849,10 @@
       "identityIndex": -1,
       "identityLabel": "Seminal track",
       "name": "Pimp tha Pen, Pt. 1 (Screwed)"
-    }
+    },
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 3,
+    "taste_reading_threshold": 5
   },
   {
     "id": 57,
@@ -109437,7 +109865,9 @@
     "favoritesong": "Ms. Jackson",
     "favoriteartist": "OutKast",
     "favoritesongurl": "https://open.spotify.com/track/0I3q5fE6wg7LIfHGngUTnV",
-    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b273153b3d6495031cb813a7451c"
+    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b273153b3d6495031cb813a7451c",
+    "taste_reading": "The psychedelic, funk-inflected Atlanta lineage (OutKast, Goodie Mob, Geto Boys) is consistently well liked, while several harder trap-adjacent regional cuts (Big K.R.I.T.'s 'Country Shit,' JID's 'Gz,' Denzel Curry's 'STILL IN THE PAINT') were disliked.",
+    "taste_reading_status": "ready"
   },
   {
     "id": 572,
@@ -109821,7 +110251,10 @@
         "url": "http://url.com",
         "reason": "A dark, driving phonk track whose pounding 808s, cowbell patterns, and pitched vocals have become a default soundtrack for countless viral short-form videos, making it one of the most recognizable phonk songs to general audiences and a de facto audiovisual emblem of the genre’s online aesthetic."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 578,
@@ -110148,7 +110581,10 @@
         "url": "http://url.com",
         "reason": "Breakthrough hit whose surging synth lead and maximalist rage production became a staple soundtrack for Fortnite and NBA 2K-style clips and streams, making it one of the first rage tracks many players associated with high-intensity gaming footage."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 58,
@@ -110640,7 +111076,9 @@
     "favoritesong": "Zydeco Gris Gris",
     "favoriteartist": "BeauSoleil",
     "favoritesongurl": "https://open.spotify.com/track/7Hp6EZqUZkCwO5kYmyxw76",
-    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b273b23cb8865f54f7efe852d424"
+    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b273b23cb8865f54f7efe852d424",
+    "taste_reading": "A consistent middling response across every track so far — no clear likes or dislikes have emerged.",
+    "taste_reading_status": "ready"
   },
   {
     "id": 580,
@@ -111269,7 +111707,10 @@
         "url": "https://url.com",
         "reason": "Its rubbery G‑funk bass, whiny synth leads, and laid‑back yet precise Dre production, showcased prominently in a classic West Coast hood comedy, turned the track into an enduring audiovisual shorthand for 1990s Los Angeles rap, cruising, and cookout culture.[web:238][web:239][web:244]"
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 584,
@@ -111681,7 +112122,10 @@
         "url": "http://url.com",
         "reason": "“Clear” in a breakdance-film context gives electro one of its most legible screen-era signatures, linking the style directly to B-boy movement, urban futurism, and early electronic street culture. It is a strong touchstone because the track’s skeletal machine-funk and sci-fi tone communicate the genre instantly without repeating the seminal cut."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 1,
+    "taste_reading_threshold": 5
   },
   {
     "id": 586,
@@ -112658,7 +113102,10 @@
       "deletedSlotKeys": [],
       "completedAt": "",
       "lastWorkedAt": "2026-07-20T01:32:13.539Z"
-    }
+    },
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 593,
@@ -113822,7 +114269,10 @@
         "url": "http://url.com",
         "reason": "Space Is the Place is one of the most concrete and recognizable visual-cultural documents of avant-garde jazz, and “Rocket Number Nine” is inseparable from its Afrofuturist presentation. The pairing helps explain the genre as more than a sound: it was also performance art, alternative cosmology, and a challenge to jazz’s usual visual and social frame."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 606,
@@ -114083,7 +114533,10 @@
         "url": "http://url.com",
         "reason": "One of bebop’s most recognizable standards, whose on-screen performance in The Talented Mr. Ripley uses its restless rhythm changes and exotic harmonies to signal both modern jazz sophistication and underlying tension in a key club sequence. [web:723][web:726][web:730]"
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 607,
@@ -114520,7 +114973,10 @@
         "url": "http://url.com",
         "reason": "Swing-era vocal boogie-woogie standard introduced on-screen in Abbott and Costello’s Buck Privates, whose energetic camp performance scene turned the style into a mass-audience pop phenomenon and a lasting cinematic symbol of World War II–era boogie-woogie."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 609,
@@ -115302,7 +115758,10 @@
       "identityIndex": -1,
       "identityLabel": "Seminal track",
       "name": "Moon Dreams"
-    }
+    },
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 616,
@@ -115676,7 +116135,10 @@
         "url": "https://url.com",
         "reason": "Featured multiple times in a prestige drama explicitly about New Orleans music culture, this rendition ties the most recognizable Dixieland anthem to vivid images of clubs, second lines, and neighborhood life, cementing the style as a living, modern sound rather than a museum piece."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 3,
+    "taste_reading_threshold": 5
   },
   {
     "id": 618,
@@ -116183,7 +116645,10 @@
         "url": "http://url.com",
         "reason": "This gives free funk a concrete film anchor without repeating the seminal selection, and it directly links Ornette’s free-funk era to a widely recognized cult film. Its hypnotic drone, ritual percussion, and improvisatory drift show the genre’s psychedelic and cinematic edge outside specialist jazz contexts."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 621,
@@ -116767,7 +117232,10 @@
       }
     ],
     "favoriteartist": "John Coltrane",
-    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b273870242be73ff3269f9b86689"
+    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b273870242be73ff3269f9b86689",
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 1,
+    "taste_reading_threshold": 5
   },
   {
     "id": 623,
@@ -118245,7 +118713,10 @@
         "url": "http://url.com",
         "reason": "Its performance in Downtown 81 anchors punk jazz to a specific, highly recognizable downtown New York document of the no wave era. The track’s nervous funk pulse, shrieking sax, and theatrical attack make it an effective bridge between the genre’s art-scene roots and a concrete media reference."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 3,
+    "taste_reading_threshold": 5
   },
   {
     "id": 644,
@@ -118544,7 +119015,10 @@
         "url": "https://url.com",
         "reason": "Heard in a major animated feature as shorthand for suave, mid-century Brazilian cool, this bossa-rooted but jazz-improvisational recording helped cement the bright, syncopated samba‑jazz feel in global pop culture as the sound of stylish, lightly comic sophistication."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 645,
@@ -118842,7 +119316,10 @@
         "url": "http://url.com",
         "reason": "This placement became a practical entry point for many non-Japanese listeners because the song’s mod-pop bounce and playful sophistication stand out immediately in an animated TV context. It helps explain Shibuya-kei as pop-cultural collage: retro, stylish, cosmopolitan, and a little tongue-in-cheek, without repeating the seminal track."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 646,
@@ -119808,7 +120285,10 @@
         "url": "http://url.com",
         "reason": "This is a concrete and useful screen reference because Marsalis’s contribution places straight-ahead jazz in a noir film setting where the acoustic combo format, walking pulse, and standards-based language read instantly. It works as a cultural entry point for the genre without duplicating the seminal track."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 65,
@@ -120743,7 +121223,10 @@
       "deletedSlotKeys": [],
       "completedAt": "",
       "lastWorkedAt": "2026-07-16T03:26:48.490Z"
-    }
+    },
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 650,
@@ -121317,7 +121800,10 @@
         "url": "http://url.com",
         "reason": "John Lewis’s score for Odds Against Tomorrow gives third stream a concrete screen landmark without repeating the seminal track. The music’s orchestral writing and modern-jazz tension make it a vivid example of how third stream ideas translated into noir cinema."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 654,
@@ -121906,7 +122392,10 @@
         "url": "http://url.com",
         "reason": "Baker’s cool, fragile rendition of the standard—strongly associated with his West Coast period—anchors several key scenes in the Chet Baker biopic Born to Be Blue, foregrounding the muted, lyrical West Coast jazz sound for a modern film audience."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 656,
@@ -122702,7 +123191,10 @@
         "url": "http://url.com",
         "reason": "“Love Story” is a heavily pop‑leaning country single whose Romeo‑and‑Juliet narrative, bright guitars, and massive chorus were already ubiquitous on radio when its placement in Valentine’s Day helped cement it as a millennial rom‑com anthem. The sync reinforced country pop’s role as mainstream cinematic shorthand for youthful, idealized romance, and showcased how the genre had become indistinguishable from chart pop in a film context."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 4,
+    "taste_reading_threshold": 5
   },
   {
     "id": 660,
@@ -123259,7 +123751,10 @@
       "identityIndex": -1,
       "identityLabel": "Seminal track",
       "name": "Tamally Maak"
-    }
+    },
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 661,
@@ -127321,7 +127816,10 @@
       "deletedSlotKeys": [],
       "completedAt": "",
       "lastWorkedAt": "2026-07-16T03:13:21.865Z"
-    }
+    },
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 668,
@@ -127765,7 +128263,10 @@
         "url": "http://url.com",
         "reason": "This is a highly specific media pairing that helped place a Chinese pop singer in a globally recognizable crossover context. It is useful for understanding C-pop beyond its home markets because the song linked star-oriented Chinese-language pop to a major game franchise and became an enduring point of entry for international listeners."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 67,
@@ -128072,7 +128573,10 @@
         "url": "https://url.com",
         "reason": "Its banjo-driven trap beat and viral crossover success, paired with blockbuster action-franchise marketing, turned the track into the definitive mainstream image of country rap for a global audience, cementing the sound as a pop-cultural phenomenon rather than a niche southern curiosity."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 670,
@@ -128488,7 +128992,10 @@
         "url": "http://url.com",
         "reason": "This Hokkien-language adaptation of “Queen’s Road East” became widely known through its use as the theme song for Stephen Chow’s hit comedy Fight Back to School II, carrying pointed, locally grounded lyrics into a mass East Asian audience. Its presence in such a commercially successful film helped demonstrate how Hokkien pop could function as both catchy entertainment and a vehicle for social and political commentary."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 4,
+    "taste_reading_threshold": 5
   },
   {
     "id": 672,
@@ -129992,7 +130499,10 @@
     "rankReviewed": true,
     "rank_reviewed_at": "2026-07-04T04:26:59.104Z",
     "rankReviewedAt": "2026-07-04T04:26:59.104Z",
-    "rank_reviewed_source": "manual"
+    "rank_reviewed_source": "manual",
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 677,
@@ -131743,7 +132253,9 @@
     "favoritesong": "Big Iron",
     "favoriteartist": "Marty Robbins",
     "favoritesongurl": "https://open.spotify.com/track/0AQquaENerGps8BQmbPw14",
-    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b273084051346f432cc68a1279cd"
+    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b273084051346f432cc68a1279cd",
+    "taste_reading": "Story-song, narrative-driven cowboy pop with a jauntier tempo (Marty Robbins' 'Big Iron,' 'Don't Fence Me In,' 'Ghost Riders in the Sky') landed well, while the smoothest, most close-harmony crooning track was disliked.",
+    "taste_reading_status": "ready"
   },
   {
     "id": 691,
@@ -132381,7 +132893,10 @@
         "url": "http://url.com",
         "reason": "BlackJack is one of the most specific and recognizable film references for dansband culture, treating the dance band milieu itself as a social world rather than a background detail. Vikingarna’s song works well as a touchstone because it embodies the sentimental, couple-dance-friendly side of the genre that the film helped make legible beyond Sweden’s dance-hall circuit."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 701,
@@ -133055,7 +133570,10 @@
         "score": 5,
         "media": "Slumdog Millionaire (2008 film) – plays over the climactic train-station dance sequence and end credits"
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 704,
@@ -133401,7 +133919,10 @@
         "url": "http://url.com",
         "reason": "In Crossing the Bridge, fragments of vintage Iranian pop appear alongside Turkish and other regional musics, using Googoosh’s instantly recognizable voice and lush 1970s arrangement to evoke diasporic memory and cross-border pop culture. This kind of documentary placement has helped frame Iranian pop for international art-house audiences as sophisticated, cosmopolitan, and deeply tied to exile and nostalgia."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 705,
@@ -134062,7 +134583,10 @@
         "url": "https://url.com",
         "reason": "Used as the opening for a prime‑time anime about stylish Tokyo thieves, its neon-lit groove, chic brass, and late‑night city aura tied the sound of early city pop directly to animated depictions of urban Japan, making it one of the clearest on-screen embodiments of the genre."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 1,
+    "taste_reading_threshold": 5
   },
   {
     "id": 709,
@@ -134397,7 +134921,10 @@
         "url": "https://open.spotify.com/track/4S518ci8UY4op0Xyp6Hx6o",
         "reason": "With its easygoing island groove, sand‑and‑beer imagery, and relaxed country‑rock band feel, this song’s TV placements reinforce tropical rock as beach‑escape, flip‑flop music tied to casual, sun‑soaked everyday scenes."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 710,
@@ -134906,7 +135433,10 @@
         "url": "https://url.com",
         "reason": "Its tender, metaphor-rich lyrics and gently swaying ballad rhythm, woven diegetically into key scenes, helped cement the Latin ballad as cinematic shorthand for sensuality, vulnerability, and romantic longing in contemporary Latin American film."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 717,
@@ -135218,7 +135748,10 @@
         "url": "http://url.com",
         "reason": "Already a global hit after his 1999 Grammy performance, “Livin’ la Vida Loca” became an audiovisual emblem of turn‑of‑the‑millennium Latin pop when Hollywood synced it to high‑energy montage sequences. Its brassy horns, rock‑inflected guitars, and hyper‑catchy Spanglish chorus turned Latin pop into a cinematic mood-board for wild, stylish fun, cementing the genre’s crossover image for mainstream audiences."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 2,
+    "taste_reading_threshold": 5
   },
   {
     "id": 718,
@@ -135412,7 +135945,10 @@
         "url": "https://url.com",
         "reason": "Though rooted in folk, the rock-infused, pop-structured arrangement used in the biopic’s key concert and studio scenes turned this rendition into an enduring global emblem of Mexican-origin pop in film, showing how Mexican melody and language could drive a crossover hit at the heart of a Hollywood narrative."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 719,
@@ -136056,7 +136592,9 @@
         "url": "http://url.com",
         "reason": "Written for and inseparable from The Breakfast Club, this anthemic, synth-tinged track became one of the most iconic needle drops of 1980s teen cinema. Its soaring chorus, gated drums, and atmospheric keyboards tied the emotional world of Brat Pack movies directly to new pop’s polished, radio-ready reinvention of post-punk-era sensibilities."
       }
-    ]
+    ],
+    "taste_reading": "Strongly and consistently well liked — maximalist synth-pop production with hook-first structure (Frankie Goes to Hollywood, Culture Club, Duran Duran) across nearly every track.",
+    "taste_reading_status": "ready"
   },
   {
     "id": 72,
@@ -136509,7 +137047,9 @@
       }
     ],
     "favoriteartist": "Bo Carter",
-    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b27302707a5624f5ddde7b690c4a"
+    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b27302707a5624f5ddde7b690c4a",
+    "taste_reading": "No likes have shown up despite a fairly clear sample — several tracks were disliked and the rest landed as middling fits, consistent with this genre's low overall rating.",
+    "taste_reading_status": "ready"
   },
   {
     "id": 721,
@@ -136856,7 +137396,10 @@
         "url": "http://url.com",
         "reason": "The song is one of the classic OPM movie themes and carries the grand romantic ballad style that shaped mainstream Filipino popular music for decades. Basil Valdez’s vocal delivery and the song’s dramatic sweep make it an especially clear example of how OPM lived in public memory through cinema."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 3,
+    "taste_reading_threshold": 5
   },
   {
     "id": 725,
@@ -137381,7 +137924,10 @@
         "url": "http://url.com",
         "reason": "Written for and prominently used throughout 8 Mile, “Lose Yourself” marries an arena-sized rock riff and unforgettable chorus to tightly structured rap verses about ambition and fear, perfectly embodying pop rap’s fusion of hook and narrative. Its Oscar win and pervasive use in trailers, sports montages, and motivational edits made it a global reference point for cinematic, inspirational pop rap."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 4,
+    "taste_reading_threshold": 5
   },
   {
     "id": 727,
@@ -138937,7 +139483,10 @@
         "url": "http://url.com",
         "reason": "Written for Cocktail and used over sun-soaked bar and beach scenes, “Kokomo” became a late-1980s touchstone for the laid-back, escapist side of yacht-adjacent soft rock on screen. Its breezy harmonies, island imagery, and association with Tom Cruise’s bartender fantasy cemented smooth, coastal rock as a cinematic shorthand for carefree, tropical luxury."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 735,
@@ -139381,7 +139930,10 @@
         "url": "http://url.com",
         "reason": "A gently pulsing, Texas-bred pop ballad whose celesta, handclaps, and intimate vocal accompany nostalgic scenes in Big Fish, giving a wide audience a warm, cinematic encounter with the softer, more reflective side of the Lubbock‑born sound."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 740,
@@ -140073,7 +140625,10 @@
       "identityIndex": -1,
       "identityLabel": "Seminal track",
       "name": "Zwei kleine Italiener"
-    }
+    },
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 743,
@@ -140892,7 +141447,10 @@
       "deletedSlotKeys": [],
       "completedAt": "",
       "lastWorkedAt": "2026-07-16T03:30:06.636Z"
-    }
+    },
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 744,
@@ -144829,7 +145387,9 @@
     "rankReviewed": true,
     "rank_reviewed_at": "2026-07-04T04:25:57.106Z",
     "rankReviewedAt": "2026-07-04T04:25:57.106Z",
-    "rank_reviewed_source": "manual"
+    "rank_reviewed_source": "manual",
+    "taste_reading": "Unanimously well liked — bright synth leads and big, anthemic choruses across every track reacted to so far, even ones (Joy Division, Tiffany) that are only loosely synth-pop.",
+    "taste_reading_status": "ready"
   },
   {
     "id": 748,
@@ -145493,7 +146053,10 @@
         "url": "http://url.com",
         "reason": "The song became inseparable from a screen persona that turned suave, story-driven country into mass-market television mythology. Its polished storytelling, adult-contemporary warmth, and broad recognizability make it a strong cultural doorway into countrypolitan’s mainstream era."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 764,
@@ -146612,7 +147175,10 @@
       ],
       "completedAt": "",
       "lastWorkedAt": "2026-07-17T03:24:03.456Z"
-    }
+    },
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 766,
@@ -147676,7 +148242,10 @@
       ],
       "completedAt": "",
       "lastWorkedAt": "2026-07-17T03:52:56.993Z"
-    }
+    },
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 3,
+    "taste_reading_threshold": 5
   },
   {
     "id": 77,
@@ -148886,7 +149455,10 @@
         "url": "http://url.com",
         "reason": "This gives the capsule a concrete broadcast-world reference without repeating the seminal song, and it fits the genre’s core radio-to-lifestyle identity. The track’s warm groove and polished romanticism make it a credible shorthand for the smooth, adult-soul environment quiet storm came to represent."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 787,
@@ -149315,7 +149887,10 @@
         "url": "http://url.com",
         "reason": "Its placement in Super Fly T.N.T. gives Afro rock a specific film anchor tied to a full Osibisa soundtrack rather than a vague association. The track shows how the genre’s percussion-heavy grooves and rock-funk charge translated into action cinema and helped frame Afro rock for audiences outside its core record-buying world."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 79,
@@ -151872,7 +152447,10 @@
       ],
       "completedAt": "",
       "lastWorkedAt": "2026-07-17T03:16:48.054Z"
-    }
+    },
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 1,
+    "taste_reading_threshold": 5
   },
   {
     "id": 790,
@@ -153757,7 +154335,10 @@
     "favoritesong": "Reina",
     "favoriteartist": "Field Mouse",
     "favoritesongurl": "https://open.spotify.com/track/3TdsPF2Xaw4FtckBifUnZI",
-    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b273cfef79ce9aa1c24a28fd4201"
+    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b273cfef79ce9aa1c24a28fd4201",
+    "taste_reading": "More melodic, dream-pop-adjacent shoegaze (Silversun Pickups, Parannoul, Field Mouse, Pity Sex) was well liked, while the genre's classic, most canonical 'wall of sound' foundational tracks (Slowdive, My Bloody Valentine) landed only as middling fits — pointing toward dream pop as a possible stronger fit than shoegaze's purist end.",
+    "taste_reading_status": "ready",
+    "taste_reading_niche_genre_id": 795
   },
   {
     "id": 797,
@@ -154787,7 +155368,10 @@
       "deletedSlotKeys": [],
       "completedAt": "",
       "lastWorkedAt": "2026-06-28T15:04:01.429Z"
-    }
+    },
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 8,
@@ -157204,7 +157788,10 @@
       "deletedSlotKeys": [],
       "completedAt": "",
       "lastWorkedAt": "2026-07-17T04:40:59.559Z"
-    }
+    },
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 811,
@@ -157692,7 +158279,10 @@
         "url": "http://url.com",
         "reason": "A woozy, feedback-hazed ballad whose placement over the drifting night-time taxi scene in Lost in Translation gave a huge audience a slow, dreamlike dose of noise-pop/shoegaze texture, tying the style’s blurred guitars and fragile melody to one of the 2000s’ most iconic film moments."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 816,
@@ -158176,7 +158766,10 @@
         "identityLabel": "Media track",
         "name": "İnce İnce Bir Kar Yağar"
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 2,
+    "taste_reading_threshold": 5
   },
   {
     "id": 82,
@@ -159001,7 +159594,10 @@
       "name": "It's Gone"
     },
     "identityQueueRolesEnabled": true,
-    "identityRolesSource": "song_queue_v258"
+    "identityRolesSource": "song_queue_v258",
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 2,
+    "taste_reading_threshold": 5
   },
   {
     "id": 828,
@@ -159362,7 +159958,10 @@
         "url": "http://url.com",
         "reason": "This song’s presence in a widely seen biographical film about Renato Russo gives it a concrete cultural anchor outside the core music scene. It also helps explain Brazilian rock’s emotional and generational reach, especially the introspective, poetic strand that defined 1980s BRock."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 83,
@@ -159941,7 +160540,9 @@
       "releasePrecision": "day",
       "releaseSource": "Spotify",
       "score": 5
-    }
+    },
+    "taste_reading": "A consistent middling response across nearly every track so far (Jorge Ben Jor, Trio Mocoto, Seu Jorge) — no clear likes or dislikes have emerged yet.",
+    "taste_reading_status": "ready"
   },
   {
     "id": 831,
@@ -160232,7 +160833,10 @@
         "url": "http://url.com",
         "reason": "This lecture-style documentary is a specific, verifiable media reference that directly situates Tang Dynasty within the broader history of Chinese rock. The song is useful as a touchstone because it shows how the genre expanded beyond early protest-rock frameworks into grander, heritage-inflected heavy rock with Chinese historical imagery."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 833,
@@ -164410,7 +165014,18 @@
       "lastWorkedAt": "2026-07-08T02:13:35.545Z"
     },
     "favoriteartist": "Journey",
-    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b273c5653f9038e42efad2f8a266"
+    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b273c5653f9038e42efad2f8a266",
+    "taste_reading": "You respond to driving, mid-to-uptempo, guitar-riff-forward tracks built around a chorus meant to be sung along to — Bohemian Rhapsody, Livin' on a Prayer, Highway to Hell. Tracks that lean into extended form, orchestration, or a slow, atmospheric build — Stairway to Heaven, Hotel California, Wish You Were Here — haven't landed the same way, even though they're often considered the genre's high points.",
+    "taste_reading_status": "ready",
+    "taste_reading_predicted_hit": {
+      "title": "Tom Sawyer",
+      "artist": "Rush"
+    },
+    "taste_reading_predicted_miss": {
+      "title": "Free Bird",
+      "artist": "Lynyrd Skynyrd"
+    },
+    "taste_reading_niche_genre_id": 821
   },
   {
     "id": 835,
@@ -168983,7 +169598,10 @@
       "deletedSlotKeys": [],
       "completedAt": "",
       "lastWorkedAt": "2026-07-16T03:05:06.185Z"
-    }
+    },
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 839,
@@ -171188,7 +171806,10 @@
       ],
       "completedAt": "",
       "lastWorkedAt": "2026-07-17T03:40:14.147Z"
-    }
+    },
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 840,
@@ -171582,7 +172203,9 @@
         "url": "http://url.com",
         "reason": "Adapted from “Una Paloma Blanca,” “I Am a Cider Drinker” has become the default musical cue for West Country cider on British TV—turning up in features, nostalgia segments, and cider documentaries. Its boisterous chorus, oompah rhythm, and unabashed praise of scrumpy make it the go-to sonic postcard for scrumpy and western’s boozy, comedic identity."
       }
-    ]
+    ],
+    "taste_reading": "A consistent middling response across every track so far — no clear likes or dislikes have emerged.",
+    "taste_reading_status": "ready"
   },
   {
     "id": 850,
@@ -172844,7 +173467,10 @@
         "url": "http://url.com",
         "reason": "The song distills the elegant, emotionally detached, art-conscious side of art rock into a form that translates beautifully on screen. Its use in Lost in Translation strengthened its association with urbane melancholy, sophisticated atmosphere, and the genre’s crossover between pop surface and deeper aesthetic intent."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 1,
+    "taste_reading_threshold": 5
   },
   {
     "id": 856,
@@ -173740,7 +174366,10 @@
         "url": "https://url.com",
         "reason": "The fuzzed-out guitars, shouty vocals, and deliberately rough performance framed on-screen as a scrappy local band capture the aesthetic of classic garage rock for a modern audience, making the scene a vivid cinematic shorthand for the genre’s noisy, DIY charm."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 869,
@@ -177019,7 +177648,9 @@
       ],
       "completedAt": "",
       "lastWorkedAt": "2026-07-16T19:02:50.993Z"
-    }
+    },
+    "taste_reading": "Unanimously well liked so far — theatrical, swaggering glam (Bowie, Queen, Twisted Sister) across every track reacted to.",
+    "taste_reading_status": "ready"
   },
   {
     "id": 873,
@@ -178332,7 +178963,18 @@
     "favoritesong": "Enter Sandman (Remastered)",
     "favoriteartist": "Metallica",
     "favoritesongurl": "https://open.spotify.com/track/3VqHuw0wFlIHcIPWkhIbdQ",
-    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b2731f9edf15e43f4c2f4938b869"
+    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b2731f9edf15e43f4c2f4938b869",
+    "taste_reading": "Riff-driven, energetic tracks do well, but the clearest exception is telling: 'Soldier of Fortune,' an acoustic Deep Purple ballad, landed well despite being musically atypical for the genre — songwriting quality can override what's expected of a hard rock track. Generic heavy riffing without much else going on hasn't fared as well.",
+    "taste_reading_status": "ready",
+    "taste_reading_predicted_hit": {
+      "title": "Round and Round",
+      "artist": "Ratt"
+    },
+    "taste_reading_predicted_miss": {
+      "title": "Since I've Been Loving You",
+      "artist": "Led Zeppelin"
+    },
+    "taste_reading_niche_genre_id": 986
   },
   {
     "id": 875,
@@ -179122,7 +179764,9 @@
         "url": "https://url.com",
         "reason": "Its acoustic-guitar backbone, handclaps, and coming‑of‑age lyrics about “two American kids growin’ up in the heartland,” prominently featured in a period film, solidify it as a cultural shorthand for heartland rock’s nostalgic yet clear-eyed view of small-town American youth."
       }
-    ]
+    ],
+    "taste_reading": "Unanimously well liked so far — working-class narrative songwriting and big, chiming, sing-along choruses (Springsteen, Petty, Mellencamp, Taylor Swift) across every track.",
+    "taste_reading_status": "ready"
   },
   {
     "id": 876,
@@ -179399,7 +180043,10 @@
     "identity": {
       "seminalTrack": {},
       "mediaTouchstones": []
-    }
+    },
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 879,
@@ -179783,7 +180430,10 @@
     "favoritesong": "Evidências",
     "favoriteartist": "Chitãozinho & Xororó",
     "favoritesongurl": "https://open.spotify.com/track/0cbLWRr0UgZVCTd7yVsxM8",
-    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b273e8a8746dfc7447c8668dfd82"
+    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b273e8a8746dfc7447c8668dfd82",
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 2,
+    "taste_reading_threshold": 5
   },
   {
     "id": 880,
@@ -180431,7 +181081,9 @@
     "synonyms": [
       "rock latino",
       "Spanish-language rock"
-    ]
+    ],
+    "taste_reading": "Driving, riff-heavy, aggressive rock en espanol (Molotov, Puya, Los Lobos, Los Enanitos Verdes) was well liked, while the more polished new-wave/pop-rock end of the genre (Soda Stereo's 'Cuando Pase el Temblor,' Hombres G, Mana) landed as a middling fit.",
+    "taste_reading_status": "ready"
   },
   {
     "id": 887,
@@ -181000,7 +181652,10 @@
         "url": "http://url.com",
         "reason": "Dylan’s use of the form in the early folk revival made talking blues legible to a much wider modern audience, and Don't Look Back remains one of the clearest cultural entry points into that moment. The track shows how the style could carry satire, topical unease, and character voice while keeping the stripped acoustic framework intact."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 2,
+    "taste_reading_threshold": 5
   },
   {
     "id": 890,
@@ -181477,7 +182132,10 @@
         "url": "https://url.com",
         "reason": "One of the most widely exposed revivalist classic‑rock tracks of the 2010s; its Led Zeppelin‑esque sound and prominent use in TV promos and syncs made it a high‑visibility example of the new wave of classic‑rock style for mainstream viewers."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 892,
@@ -184898,7 +185556,10 @@
       "deletedSlotKeys": [],
       "completedAt": "",
       "lastWorkedAt": "2026-07-16T03:07:38.249Z"
-    }
+    },
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 898,
@@ -185520,7 +186181,10 @@
         "url": "http://url.com",
         "reason": "Written for Smokey and the Bandit and used repeatedly over its high-speed run-and-chase sequences, this banjo-charged anthem became inseparable from cinematic images of 1970s trucking and remains the most instantly recognizable truck-driving country song on film."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 900,
@@ -186112,7 +186776,10 @@
       "identityIndex": -1,
       "identityLabel": "Seminal track",
       "name": "Larks' Tongues in Aspic, Part One"
-    }
+    },
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 901,
@@ -186964,7 +187631,10 @@
         "url": "http://url.com",
         "reason": "A slow-building, textural rock piece that blends post-rock atmosphere with progressive structure, featured prominently in Michael Mann’s Miami Vice, where its evolving dynamics and guitar-based soundscape helped introduce a broader audience to a modern, cinematic strain of post-progressive guitar music. [web:1127][web:1132]"
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 3,
+    "taste_reading_threshold": 5
   },
   {
     "id": 908,
@@ -188149,7 +188819,10 @@
         "url": "https://url.com",
         "reason": "The Doors’ intense, LSD‑shadowed acid rock has been repeatedly used in films like Apocalypse Now to sonically frame late‑60s counterculture and war‑era psychedelia, making this song one of the most recognizable acid‑rock moments in cinema."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 914,
@@ -189122,7 +189795,10 @@
         "url": "http://url.com",
         "reason": "This soundtrack is one of the clearest cultural entry points for rapcore because it deliberately paired hip-hop and rock acts track by track in a major studio release. “Just Another Victim” is one of its best-known cuts and makes the genre’s crossover logic immediately legible outside underground scenes."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 923,
@@ -189608,7 +190284,9 @@
         "url": "http://url.com",
         "reason": "“Amber” became one of the most widely recognized soft-focus reggae-rock songs in mainstream screen culture, with its laid-back groove, polished alt-rock framing, and beach-pop warmth. In film context it communicates the radio-friendly, sunlit side of the genre immediately."
       }
-    ]
+    ],
+    "taste_reading": "The punkier, more energetic end of reggae rock (No Doubt, The Police, Sublime's 'Santeria') was well liked, while the mellower, more laid-back stoner-reggae mode (Sublime's 'Smoke Two Joints,' UB40's 'Red Red Wine') was disliked.",
+    "taste_reading_status": "ready"
   },
   {
     "id": 924,
@@ -190152,7 +190830,10 @@
         "score": 5,
         "media": "1960s U.S. pop radio and oldies playlists featuring New Mexico–recorded hits"
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 932,
@@ -190569,7 +191250,10 @@
     "favoritesong": "Sayonee",
     "favoriteartist": "Junoon",
     "favoritesongurl": "https://open.spotify.com/track/075QYa566prNemChnZDEY1",
-    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b273e1b17914e8154d8f5fecf19f"
+    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b273e1b17914e8154d8f5fecf19f",
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 2,
+    "taste_reading_threshold": 5
   },
   {
     "id": 935,
@@ -190943,7 +191627,10 @@
         "url": "http://url.com",
         "reason": "A classic early surf instrumental whose reverb-drenched guitars and ocean sound effects underscore the laid-back, drug-dealer domestic scene in Pulp Fiction, helping cement surf rock as a key part of the film’s iconic retro soundtrack."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 2,
+    "taste_reading_threshold": 5
   },
   {
     "id": 937,
@@ -191243,7 +191930,10 @@
         "url": "http://url.com",
         "reason": "In the cat-centered documentary Kedi, “Deli Kadın” appears alongside other Turkish classics, its fuzz guitar, swirling organ, and emotive vocal helping score drifting city images with a distinctly Anatolian rock mood. This placement introduced international art‑house audiences to Turkish psych rock’s sound, turning the track into a modern reference point for the genre’s cinematic, nostalgic side."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 938,
@@ -191580,7 +192270,10 @@
         "url": "http://url.com",
         "reason": "This use shows how viking rock’s nationalist and historical symbolism can move from subcultural music space into a charged screen setting. The song’s adaptation of the Swedish national anthem makes the genre’s identity politics and ceremonial grandeur immediately legible."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 939,
@@ -192074,7 +192767,10 @@
     "favoritesong": "Voldemort Can't Stop the Rock!",
     "favoriteartist": "Harry and the Potters",
     "favoritesongurl": "https://open.spotify.com/track/1Aq2i4KoApYumeuwgVFYW6",
-    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b273fae327939d15d0e65d7ea961"
+    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b273fae327939d15d0e65d7ea961",
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 4,
+    "taste_reading_threshold": 5
   },
   {
     "id": 943,
@@ -192850,7 +193546,10 @@
         "url": "https://url.com",
         "reason": "The cameo performance and soundtrack placement in a major early-90s comedy pushed the hyper-funky, bass-forward metal sound into multiplexes, helping codify funk metal’s image as cartoonishly groovy, skate- and slacker-adjacent heavy music."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 1,
+    "taste_reading_threshold": 5
   },
   {
     "id": 946,
@@ -194108,7 +194807,10 @@
     "identity": {
       "seminalTrack": {},
       "mediaTouchstones": []
-    }
+    },
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 954,
@@ -194410,7 +195112,10 @@
         "url": "http://url.com",
         "reason": "A sprawling, folk-tinged epic that moves between acoustic passages and expansive black metal surges, repeatedly showcased in online video essays and scenic compilations, making it a de facto audiovisual shorthand for the genre’s nature-bound, cinematic side."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 956,
@@ -194935,7 +195640,10 @@
     "favoritesong": "Mourning Palace",
     "favoriteartist": "Dimmu Borgir",
     "favoritesongurl": "https://open.spotify.com/track/2t0DnOIEpkbJqDc6h1IKnw",
-    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b2733e470f11b0a73cd99d4bb6b5"
+    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b2733e470f11b0a73cd99d4bb6b5",
+    "taste_reading": "Symphonic, orchestral melodic black metal (Dimmu Borgir) was well liked, while the icier, colder Scandinavian strain (Vinterland, Naglfar) was disliked — the same melodic/theatrical-vs-raw axis that shows up in black metal and mathcore.",
+    "taste_reading_status": "ready",
+    "taste_reading_niche_genre_id": 958
   },
   {
     "id": 957,
@@ -195448,7 +196156,10 @@
         "url": "http://url.com",
         "reason": "This gives the genre a concrete film reference without repeating the seminal track, and it ties symphonic black metal to a recognizable feature-film setting rather than just scene mythology. Early Dimmu Borgir’s dramatic keyboard-heavy sound works especially well in the film’s pagan, martial atmosphere, making it a useful cultural entry point."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 959,
@@ -195746,7 +196457,10 @@
         "url": "http://url.com",
         "reason": "A richly orchestrated, genre-bending track that blends black metal with psychedelic keys and brass, frequently excerpted in online documentaries and explainer videos about avant-garde black metal, making it a go-to audiovisual reference point for the style’s eccentric side."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 96,
@@ -196450,7 +197164,10 @@
         "url": "http://url.com",
         "reason": "A key track from one of the most prominent early Norwegian Christian black metal bands, frequently excerpted in documentaries and online retrospectives about the scene, making it many viewers’ first audiovisual encounter with unblack metal’s sound and ideology."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 964,
@@ -197003,7 +197720,10 @@
         "url": "http://url.com",
         "reason": "This is a specific and verifiable media placement that carried death 'n' roll into a recognizable mainstream gaming context. The song’s hooky, driving groove makes it a strong example of how the style translates outside extreme metal circles without losing its grit."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 966,
@@ -197233,7 +197953,10 @@
         "url": "https://url.com",
         "reason": "Released as an ultra-graphic horror short built around the track and hosted on genre sites after mainstream platforms rejected it, the film’s notoriety pushed this song far beyond underground metal, making its hyperblasting, deathgrind sound synonymous with extreme audiovisual transgression."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 967,
@@ -198098,7 +198821,10 @@
         "url": "http://url.com",
         "reason": "This kind of surreal late-night TV context is a more realistic way many listeners might have brushed against funeral doom’s glacial heaviness outside the metal underground. Bell Witch’s massive duration, organ-like sustain, and grief-soaked atmosphere make the pairing a useful modern touchstone for the genre’s oppressive emotional scale."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 975,
@@ -198437,7 +199163,10 @@
         "url": "http://url.com",
         "reason": "While technically rooted in stoner/doom rather than pure blackened doom, the edited use of Dopesmoker’s glacially slow, monolithic riff in Broken Flowers brought extreme doom’s oppressive, ritualistic weight—sonically close to later blackened doom aesthetics—into a major art‑film context and helped normalize this kind of sound in cinema."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   },
   {
     "id": 976,
@@ -201278,7 +202007,9 @@
       "deletedSlotKeys": [],
       "completedAt": "",
       "lastWorkedAt": "2026-07-08T02:15:20.655Z"
-    }
+    },
+    "taste_reading": "Strongly liked overall, especially anthemic Celtic/Nordic folk metal with prominent traditional instrumentation (Ensiferum, Korpiklaani, Eluveitie); a couple of tracks leaning harder into humppa/pagan-blackened territory landed only as middling fits.",
+    "taste_reading_status": "ready"
   },
   {
     "id": 981,
@@ -204124,7 +204855,10 @@
       ],
       "completedAt": "",
       "lastWorkedAt": "2026-06-28T14:40:03.970Z"
-    }
+    },
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 3,
+    "taste_reading_threshold": 5
   },
   {
     "id": 987,
@@ -206663,7 +207397,9 @@
         "url": "http://url.com",
         "reason": "The track’s sheer hostility, low-end violence, and stop-start rhythmic impact fit the sadistic mechanical intensity of the Saw universe unusually well. It works as a useful public-facing marker of deathcore because the genre’s exaggerated brutality is presented in an unmistakably cinematic horror setting."
       }
-    ]
+    ],
+    "taste_reading": "Uniformly disliked so far, consistent with this genre's low overall rating — no exceptions have emerged yet even among tracks judged strong genre fits.",
+    "taste_reading_status": "ready"
   },
   {
     "id": 995,
@@ -207829,7 +208565,9 @@
     "favoritesong": "One of Us Is the Killer",
     "favoriteartist": "The Dillinger Escape Plan",
     "favoritesongurl": "https://open.spotify.com/track/7d8u78sSmLggpjU9tk0o2J",
-    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b2733aec5cc43a1f0a2c9834b127"
+    "favoritesongartwork": "https://i.scdn.co/image/ab67616d0000b2733aec5cc43a1f0a2c9834b127",
+    "taste_reading": "Most tracks land as dislikes, and the rating reflects that, but the dislikes aren't random: the sludgy/dissonant hardcore lineage (Botch, Coalesce, Cave In, Converge, Deadguy, Norma Jean) is disliked almost across the board, while the more manic, technical Dillinger Escape Plan lineage does noticeably better ('One of Us Is the Killer,' 'Unretrofied'). This reads as a real within-genre split, not a blanket rejection of mathcore.",
+    "taste_reading_status": "ready"
   },
   {
     "id": 997,
@@ -208300,6 +209038,9 @@
         "url": "http://url.com",
         "reason": "There is not a strong major-film or game sync that cleanly functions as a canonical neoclassical metal touchstone, so the most concrete recognizable reference is the album’s enduring circulation as a documented shred landmark. This works because the Becker/Friedman pairing became a widely cited gateway for understanding the genre outside its original niche."
       }
-    ]
+    ],
+    "taste_reading_status": "insufficient_data",
+    "taste_reading_reacted_count": 0,
+    "taste_reading_threshold": 5
   }
 ]

@@ -3129,6 +3129,51 @@
     }
     .track-reaction-counter .emoji { font-size:25px; line-height:1; }
     .track-reaction-counter strong { font-size:1.05rem; }
+    .taste-reading-block {
+      margin:18px 0 14px;
+      border-radius:16px;
+      padding:13px;
+      border:1px solid rgba(127,82,28,.16);
+      background:rgba(255,252,241,.58);
+    }
+    .taste-reading-pending { background:rgba(255,248,230,.5); }
+    .taste-reading-text {
+      margin:8px 0 0;
+      line-height:1.45;
+    }
+    .taste-reading-predictions {
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:10px;
+    }
+    .taste-reading-prediction {
+      display:flex;
+      flex-direction:column;
+      gap:2px;
+      padding:8px 10px;
+      border-radius:12px;
+      background:rgba(255,248,230,.88);
+      border:1px solid rgba(127,82,28,.10);
+      font-size:.85rem;
+    }
+    .taste-reading-prediction-label {
+      font-size:.65rem;
+      font-weight:800;
+      letter-spacing:.04em;
+      text-transform:uppercase;
+      color:var(--muted);
+    }
+    .taste-reading-hit .taste-reading-prediction-label { color:#396817; }
+    .taste-reading-miss .taste-reading-prediction-label { color:#8a2e2e; }
+    .taste-reading-niche-pill {
+      display:inline-block;
+      margin-top:10px;
+      cursor:pointer;
+      background:rgba(76,110,245,.12);
+      color:#2c3fae;
+      border:1px solid rgba(76,110,245,.25);
+    }
     .track-reaction-counter small {
       color:var(--muted);
       font-size:.61rem;
