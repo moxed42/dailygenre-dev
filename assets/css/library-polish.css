@@ -10189,6 +10189,45 @@ textarea[data-dg-identity-textarea="1"] {
   min-height: 30px;
   padding: 6px 10px !important;
 }
+
+/* Compact icon+label buttons for the song details action row (X Here /
+   X Everywhere / Close / Apply URL) -- replaces the previous full-width
+   danger buttons so the row fits without pushing content down. */
+.song-focus-details-actions-icons {
+  gap: 4px;
+}
+.song-focus-icon-btn {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  min-width: 44px;
+  min-height: 40px;
+  padding: 4px 6px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 0.95rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.song-focus-icon-btn span {
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+.song-focus-icon-btn.song-focus-icon-danger {
+  border-color: rgba(220, 60, 50, 0.45);
+  color: #c0392b;
+}
+.song-focus-url-row-secondary {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 6px;
+}
 .song-focus-details-grid.compact .song-focus-delete-card {
   display: none !important;
 }
@@ -10352,7 +10391,8 @@ textarea[data-dg-identity-textarea="1"] {
     display: grid !important;
   }
   #spotifyStickyPlayer {
-    width: min(420px, calc(100vw - 20px)) !important;
+    max-width: 420px !important;
+    margin: 0 auto !important;
     left: 10px !important;
     right: 10px !important;
     transform: translateY(130%) !important;
