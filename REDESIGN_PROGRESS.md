@@ -1011,3 +1011,136 @@ assumed problem didn't fully exist — each time, documented honestly
 here rather than forcing an unneeded change. Nothing from Part 3 has
 been ported to production (`moxed42/dailygenre`) yet; that remains a
 separate, explicitly-deferred step.
+
+## 2026-09-06 — bug-bash pass on live-Safari feedback (9 items)
+
+Went through 9 issues reported from real iPhone 15 Safari + desktop use.
+As with earlier phases, investigated the actual code/data before
+assuming a fix, and a couple of items turned out to already be
+substantially handled by existing mechanisms.
+
+1. **Horizontal-scroll-stuck bug on iPhone Safari.** The prime suspect
+   found by grep was `#spotifyStickyPlayer`: it used
+   `width:min(920px, calc(100vw - 28px))` with `left:50%` +
+   `transform:translate(-50%, …)` (both in `styles.css` and again in a
+   `max-width:720px` override in `library-polish.css`). `100vw` on iOS
+   Safari does not track the true visual viewport 1:1 in every scroll
+   state, and a `position:fixed` element sized off it can end up a few
+   px wider than the real viewport — plausible root cause for a
+   viewport that "gets stuck wide" until Safari restarts. Replaced both
+   rules with `left`/`right` insets (`14px`/`10px`) plus `max-width` and
+   `margin:0 auto`, dropping `100vw` and the `translate(-50%, …)`
+   centering entirely — width now derives purely from the layout
+   viewport via `left`/`right`, which iOS computes consistently. Also
+   confirmed the existing `html, body { overflow-x: clip }` safety net
+   (added earlier, `library-polish.css`) is still in place as a second
+   line of defense. **Honesty note**: this is a real, hard-to-reproduce
+   Safari-only bug. I fixed the one concrete `100vw`-on-a-fixed-element
+   instance that matches the symptom, and confirmed (via `jsdom`,
+   `check-build.sh`, and the test suite) it introduces no regressions,
+   but I could not reproduce the actual stuck-viewport bug in this
+   sandbox (no real iOS Safari, and the sandbox's network policy blocks
+   downloading a headless-Chromium binary for a live Playwright pass).
+   Please verify on-device before considering this closed.
+2. **Blank leftmost ("Spin") tab.** Investigated the tab bar, the
+   `.tab-btn`/`.tab-btn.active` CSS, and every JS reference — "Spin" is
+   static markup in `index.html`, and nothing in `app.js` or any
+   `core/*.js` module ever touches `#tab-spin`'s contents or reassigns
+   its text. No code-level cause of an empty leftmost tab was found.
+   Left unfixed pending a repro (screenshot or a step-by-step) since I
+   don't want to guess-patch a UI bug I can't reproduce or trace to a
+   specific line.
+3. **Fit score for routed songs.** Routed/off-topic songs already had
+   fit-scoring fields (`originFit`, `nominatedFit`) and UI to set them,
+   but new pending entries could sit with `nominatedFit: null` until
+   someone clicked a fit button, and legacy pending rows could be
+   missing one entirely. Changed the one in-app site that creates a
+   pending/routed entry (`removeTrackFromCard`'s "send back to Pending"
+   path) to default `nominatedFit` to the song's last known score up
+   front, and added the same backfill to `normalizePendingSongs` so any
+   pending entry missing a fit gets one from `originFit` on load. Wrote
+   `tools/backfill-song-roles.js` (see #7) which also backfills
+   `nominatedFit` for any ROUTED entry that's missing one — currently a
+   no-op since `genres_data.json` has zero `pending_songs` entries
+   across all 1036 genres today, but it's there for the next import run.
+4. **Version bump**: `v299` → `v300`, cache-bust `build-v299` →
+   `build-v300`, footer/meta timestamp updated, `check-build.sh` passes.
+5. **Removed the "How this works" onboarding banner** (`#onboardingBanner`
+   in `index.html`, `initOnboardingBanner()` in `app.js`, its CSS in
+   `styles.css`) — the Phase 11 dismissible banner turned out to be the
+   only on-screen spin-then-listen instructional copy in the app.
+   Removed entirely (markup, JS wiring, and CSS), not just dismissed.
+6. **Spotify miniplayer plays only a 30s preview.** Checked the embed
+   URL in `spotify.js`: `https://open.spotify.com/embed/track/<id>?utm_source=generator&theme=0`
+   — this is Spotify's own current, standard embed-generator URL format,
+   unchanged and correct. Full-track playback through an anonymous
+   embed iframe requires the viewer to be logged into Spotify with
+   Premium in that browser context; without that, Spotify's own embed
+   always falls back to a preview. **No code regression found** — this
+   is inherent to Spotify's embed platform, not something fixable here
+   short of a full Premium-authenticated Web Playback SDK integration
+   (a materially larger feature, not attempted).
+7. **Every song tagged CANON/MEDIA/SEMINAL/LEVEL UP/ROUTED/ADD.** The
+   dataset had no explicit role field — status was only ever implicit in
+   flags (`isLevelUp`, `isAdd`, `isIdentityTrack`, `isPending`). Added a
+   `role` field (one of the 6 tags) to the song model:
+   `songRoleTag()`/`normalizeSongsListened()`/`normalizePendingSongs()`
+   in `app.js` now stamp it going forward, preferring an existing
+   conforming tag, then deriving from the flags (LEVEL UP > SEMINAL/MEDIA
+   via `isIdentityTrack` > ADD > CANON; ROUTED for anything pending).
+   Wrote `tools/backfill-song-roles.js` for the retroactive pass — run
+   with `--write` against `genres_data.json`, it tagged all 2639
+   existing `songs_listened` entries (1781 CANON, 639 ADD, 107 LEVEL UP,
+   56 SEMINAL, 56 MEDIA, 0 ROUTED) and is safe to re-run. **Known
+   limitation**: distinguishing SEMINAL from MEDIA needs the genre's
+   `identity.seminalTrack` for comparison, which the script has and uses
+   (URL or title+artist match) but the in-browser fallback (for a brand
+   new identity-tagged entry added through a code path that doesn't
+   already know the role) can't — it defaults to MEDIA, which is
+   correct except for the rare case of a newly-added SEMINAL track that
+   isn't stamped through the genre-identity flow that already sets it
+   explicitly.
+8. **Game Room moved to the last tab.** `core/game-room.js`'s
+   `ensureUi()` previously inserted the dynamically-created Game Room
+   tab button with `nav.insertBefore(button, nav.querySelector('[data-screen="viz"]'))`,
+   landing it 4th. Changed to `nav.appendChild(button)` so it's always
+   last regardless of how many other tabs exist, and moved the
+   dynamically-created `#screen-game` section to after `#screen-ranking`
+   in the DOM to match. Confirmed nothing in `switchScreen`/tab-highlight
+   logic depends on tab position or index (all lookups are by
+   `data-screen`/id), so no other code needed to change.
+9. **Song details panel** (`renderSongDetails()` in `songs.js`):
+   - Moved the Track URL/override card to the top of the details grid
+     (was last, below "Why this song fits" and "Metadata" — now first).
+   - Replaced the "Remove from genre" / "Delete everywhere" / "Close"
+     row of full-width buttons with a compact icon-button row (`Apply
+     URL` / `X Here` / `X Everywhere` / `Close`), same handlers
+     (`deleteSongFromDetails`, `hardDeleteSongFromDetails`,
+     `setSongFocusDetailsOpen`), plus a new `Apply URL` icon that
+     focuses the URL input in the (now-relocated) override card.
+   - Added a `Clear override` button next to the title/artist override
+     inputs: blanks them and re-runs the existing `updateTrackUrlFromCard`
+     flow so the song falls back to freshly-fetched metadata (new
+     `clearTrackOverrideFromCard()` in `app.js`).
+   - Added a `Fill missing overrides` bulk button to the Song Queue
+     header (`renderSongQueue()` in `songs.js`) that runs the
+     fetch-and-fill flow individually across every Spotify-track song on
+     the current genre page missing artwork/title/artist (new
+     `bulkFillMissingSongOverrides()` in `app.js`, sequential to avoid
+     Spotify rate limits). Non-Spotify platforms (YouTube/Apple/
+     SoundCloud/Bandcamp) still need the per-song Apply URL flow since
+     there's no headless refetch for those here.
+
+**Verified**: `npm test` (136/136, after installing the missing `jsdom`
+dev dependency the suite needs), `tools/check-build.sh` (JS syntax,
+minified-asset sync after `tools/build-min.sh`, JSON validity, and
+version/cache-bust consistency), and `genres_data.json` re-validated as
+parseable JSON after the role/fit backfill. Could **not** do a live
+local-server + headless-Chromium/Playwright visual pass — this sandbox's
+network policy blocks downloading the Chromium binary — so items 1, 2,
+8, and 9 are verified by code reading, `jsdom`-based DOM checks, and the
+unit-test suite rather than an actual rendered/interactive screenshot.
+Items 2 and 6 are reported honestly as not-fixed-in-code: #2 has no
+identified cause, #6 is normal Spotify platform behavior. Nothing here
+has been ported to production (`moxed42/dailygenre`); review at
+https://moxed42.github.io/dailygenre-dev before approving that.
