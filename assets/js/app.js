@@ -1322,6 +1322,29 @@ function switchScreen(name, options = {}) {
     return { title: normalizedTitle, artist: normalizedArtist, pendingGenreTag: titleTag.tag };
   }
 
+  const SONG_ROLE_TAGS = ['CANON', 'MEDIA', 'SEMINAL', 'LEVEL UP', 'ROUTED', 'ADD'];
+  // Every song entry must carry one of the 6 role tags above. Preserve an
+  // already-conforming tag (set by the one-time backfill or by an editor
+  // that knows the genre's identity track, e.g. distinguishing SEMINAL from
+  // MEDIA), and otherwise derive the closest defensible tag from the flags
+  // already on the entry. Note: without genre.identity context this can't
+  // tell SEMINAL apart from MEDIA on its own, so a brand-new identity track
+  // added through code paths that don't already know the role defaults to
+  // MEDIA -- the genre-identity flow and the backfill script both stamp
+  // SEMINAL explicitly when they know which track it is.
+  function songRoleTag(s) {
+    const existing = String(s?.role || '').trim().toUpperCase();
+    if (SONG_ROLE_TAGS.includes(existing)) return existing;
+    if (s?.isPending) return 'ROUTED';
+    const rawUrl = String(s?.url || '');
+    const isLevelUp = !!s?.isLevelUp || /^(?:🔼\s*)?LEVEL\s*UP:\s*/i.test(rawUrl);
+    const isAdd = !!s?.isAdd || /^(?:🔼\s*)?ADD:\s*/i.test(rawUrl);
+    if (isLevelUp) return 'LEVEL UP';
+    if (s?.isIdentityTrack) return 'MEDIA';
+    if (isAdd) return 'ADD';
+    return 'CANON';
+  }
+
   function normalizeSongsListened(arr) {
     const source = arr || [];
     const normalized = source.map(s => {
@@ -1368,6 +1391,8 @@ function switchScreen(name, options = {}) {
         isLevelUp,
         isAdd,
         isPromote: !!s?.isPromote,
+        isIdentityTrack: !!s?.isIdentityTrack,
+        role: songRoleTag(s),
         _pendingGenreTag: s?._pendingGenreTag || songLabel.pendingGenreTag || '',
         __levelUpParentKey: s?.__levelUpParentKey || s?.levelUpParentKey || s?.levelUpForKey || '',
         levelUpParentKey: s?.levelUpParentKey || s?.__levelUpParentKey || s?.levelUpForKey || '',
@@ -3366,6 +3391,72 @@ Overwrite the selected queue row anyway? This will replace its title, artist, ar
     }
 
 
+    // Runs the URL-override auto-fetch (artwork/name/artist) individually
+    // across every song on the current genre page that's missing it --
+    // not one URL applied to every song, but the fetch-and-fill flow
+    // triggered per song that needs it. Spotify tracks only, since that's
+    // the only platform with a reliable headless refresh available here;
+    // other platforms still need the per-song Apply URL / Overrides flow.
+    async function bulkFillMissingSongOverrides(button) {
+      if (!currentGenre) return;
+      syncBulkDraftIntoSongModel();
+      const songs = inflateSongsFromStorage(currentGenre.songs_listened || []).filter(s => !s.isPending);
+      const candidates = [];
+      songs.forEach(song => {
+        [song, song.levelUp].filter(Boolean).forEach(s => {
+          const url = normalizeSongUrl(s.url || s.spotifyUrl || '');
+          const isSpotify = /spotify\.com\/track\//i.test(url) || /^spotify:track:/i.test(url);
+          const missing = !s.artwork || !s.title || !s.artist;
+          if (isSpotify && missing) candidates.push(s);
+        });
+      });
+
+      if (!candidates.length) {
+        showSaveToast('No songs here are missing artwork, title, or artist.', false);
+        return;
+      }
+
+      const oldText = button?.textContent || '';
+      if (button) {
+        button.disabled = true;
+        button.textContent = `Filling 0/${candidates.length}…`;
+      }
+
+      let filled = 0, failed = 0;
+      for (let i = 0; i < candidates.length; i++) {
+        const song = candidates[i];
+        try {
+          const url = normalizeSongUrl(song.url || song.spotifyUrl || '');
+          const refreshed = await fetchSpotifyTrackResult(url, true);
+          if (refreshed.ok) {
+            applyOfficialSpotifyMetadata(song, refreshed.track);
+            filled += 1;
+          } else {
+            failed += 1;
+            if (refreshed.code === 'rate_limited') {
+              beginSpotifyPause(refreshed.retryAfterSeconds || 30);
+              break;
+            }
+          }
+        } catch (err) {
+          failed += 1;
+          console.warn('Bulk override fill failed for a song', err);
+        }
+        if (button) button.textContent = `Filling ${i + 1}/${candidates.length}…`;
+      }
+
+      currentGenre.songs_listened = songs;
+      loadListenScreen(currentGenre, { preserveDirty: true, skipSpotifyHydration: true });
+      markListeningUpdatePending();
+      showSaveToast(`Filled ${filled} song${filled === 1 ? '' : 's'}${failed ? `, ${failed} failed` : ''} — use Save in the top bar to keep it.`, failed > 0 && filled === 0);
+
+      if (button && document.body.contains(button)) {
+        button.disabled = false;
+        button.textContent = oldText || 'Fill missing overrides';
+      }
+    }
+    window.bulkFillMissingSongOverrides = bulkFillMissingSongOverrides;
+
     async function refreshGenrePageSpotifyTrack(encodedKey, button, path = '') {
       if (!currentGenre) return;
       syncBulkDraftIntoSongModel();
@@ -3484,6 +3575,19 @@ Overwrite the selected queue row anyway? This will replace its title, artist, ar
       song.releaseSource = '';
       song.durationMs = null;
     }
+
+    // Clears a manually-typed title/artist override and re-runs the normal
+    // URL-apply flow so the song falls back to freshly fetched metadata
+    // instead of the staged override values.
+    async function clearTrackOverrideFromCard(encodedKey, pendingIndex, button, path = '') {
+      const editor = button?.closest('.track-card-editor, .song-focus-url-card, .song-focus-details-drawer, .song-focus-details-grid');
+      const titleInput = editor?.querySelector?.('[data-track-title-input]');
+      const artistInput = editor?.querySelector?.('[data-track-artist-input]');
+      if (titleInput) titleInput.value = '';
+      if (artistInput) artistInput.value = '';
+      await updateTrackUrlFromCard(encodedKey, pendingIndex, button, path);
+    }
+    window.clearTrackOverrideFromCard = clearTrackOverrideFromCard;
 
     async function updateTrackUrlFromCard(encodedKey, pendingIndex, button, path = '') {
       if (!currentGenre) return;
@@ -3862,7 +3966,11 @@ Overwrite the selected queue row anyway? This will replace its title, artist, ar
           isPending: true,
           pendingFrom: currentGenre.genre || '',
           originFit: removedSong.score != null ? Number(removedSong.score) : null,
-          nominatedFit: null,
+          // Routed/pending songs get a numeric fit score up front, same as CANON
+          // entries do, instead of sitting unscored until someone clicks a fit
+          // button later. Default it to the song's last known fit and let the
+          // per-song fit buttons refine it.
+          nominatedFit: removedSong.score != null ? Number(removedSong.score) : null,
           isLevelUp: false,
           isAdd: false,
           levelUp: null
@@ -3976,6 +4084,12 @@ Overwrite the selected queue row anyway? This will replace its title, artist, ar
         song.isLevelUp = false;
         song.isAdd = false;
         song.levelUp = null;
+        song.role = 'ROUTED';
+        // Routed songs always carry a numeric fit score, same as CANON tracks --
+        // backfill any legacy/imported pending entry that is missing one.
+        if (song.nominatedFit == null && song.originFit != null) {
+          song.nominatedFit = Number(song.originFit);
+        }
 
         const keys = songIdentityKeys(song);
         const duplicate = keys.some(key => seen.has(key));
@@ -7220,19 +7334,6 @@ function ensureBackToTopButton() {
   sync();
 }
 
-const ONBOARDING_DISMISSED_KEY = 'dailyGenreOnboardingDismissed';
-function initOnboardingBanner() {
-  const banner = document.getElementById('onboardingBanner');
-  if (!banner) return;
-  if (safeStorageGet(ONBOARDING_DISMISSED_KEY)) return;
-  banner.classList.remove('hidden');
-  const dismiss = () => {
-    banner.classList.add('hidden');
-    safeStorageSet(ONBOARDING_DISMISSED_KEY, '1');
-  };
-  document.getElementById('onboardingBannerClose')?.addEventListener('click', dismiss, { once: true });
-}
-
 bootApp().catch(err => {
   console.error('App boot failed:', err);
   if (remainingCount) remainingCount.textContent = 'Could not start app. Check console.';
@@ -7257,7 +7358,6 @@ async function bootApp() {
   if (spotifySession?.access_token) spotifyStartPolling();
   await loadData();
   ensureBackToTopButton();
-  initOnboardingBanner();
   suppressAutofillOnGeneratedControls();
   const activeScreen = document.querySelector('.screen.active');
   if (activeScreen) applyScreenInertState(activeScreen);
