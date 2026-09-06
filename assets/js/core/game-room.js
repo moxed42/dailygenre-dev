@@ -230,14 +230,14 @@
   function ensureUi() {
     if (!document.getElementById("gameRoomTab")) {
       const nav = document.querySelector(".tabs");
-      const before = nav?.querySelector('[data-screen="viz"]');
       const button = document.createElement("button");
       button.type = "button";
       button.id = "gameRoomTab";
       button.className = "tab-btn";
       button.textContent = "Game Room";
       button.addEventListener("click", openGameRoom);
-      if (nav) nav.insertBefore(button, before || null);
+      // Game Room is the last (rightmost) tab in the nav order.
+      if (nav) nav.appendChild(button);
     }
 
     if (!document.getElementById("screen-game")) {
@@ -247,7 +247,7 @@
       section.id = "screen-game";
       section.innerHTML = '<div class="game-room-shell" id="gameRoomMount"></div>';
       const ranking = document.getElementById("screen-ranking");
-      if (ranking?.parentNode) ranking.parentNode.insertBefore(section, ranking);
+      if (ranking?.parentNode) ranking.parentNode.insertBefore(section, ranking.nextSibling);
       else app?.appendChild(section);
     }
   }
