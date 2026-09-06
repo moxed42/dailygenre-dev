@@ -4005,6 +4005,18 @@
   border: 1px solid color-mix(in oklab, #1DB954 30%, transparent);
   border-radius: 10px; padding: 10px 14px;
 }
+/* Persistent topbar variant: compact single-line chip instead of the roomy
+   hero-card block, since this now renders on every screen (mirrors
+   #saveStatusChip's persistent-topbar treatment). */
+#spotifyNowPlaying.spotify-now-playing-topbar {
+  margin:0; padding:6px 12px; max-width:260px;
+}
+#spotifyNowPlaying.spotify-now-playing-topbar .spotify-now-playing-inner { gap:8px; }
+#spotifyNowPlaying.spotify-now-playing-topbar .spotify-now-playing-text { min-width:0; }
+#spotifyNowPlaying.spotify-now-playing-topbar .spotify-now-playing-match { display:none; }
+@media (max-width: 600px) {
+  #spotifyNowPlaying.spotify-now-playing-topbar { max-width:100%; width:100%; order:99; }
+}
 .spotify-now-playing-inner { display:flex; align-items:center; gap:10px; }
 .spotify-now-playing-text { display:flex; flex-direction:column; gap:2px; min-width:0; }
 .spotify-now-playing-label { font-size:0.7rem; font-weight:700; color:#1DB954; text-transform:uppercase; letter-spacing:.05em; }
