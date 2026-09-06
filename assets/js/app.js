@@ -2295,9 +2295,9 @@ function switchScreen(name, options = {}) {
       if (status === 'insufficient_data') {
         const reacted = Number(genre.taste_reading_reacted_count || 0);
         const threshold = Number(genre.taste_reading_threshold || 0);
-        return `<div class="taste-reading-block taste-reading-pending">
-          <div class="eyebrow" style="margin:0;">Taste Reading</div>
-          <div class="small">Not enough ranked songs yet — ${reacted} reacted, need ${threshold}.</div>
+        return `<div class="meta-box meta-box-full taste-reading-box taste-reading-pending">
+          <h3>Taste Reading</h3>
+          <p class="small">Not enough ranked songs yet — ${reacted} reacted, need ${threshold}.</p>
           ${nicheHtml}
         </div>`;
       }
@@ -2311,9 +2311,9 @@ function switchScreen(name, options = {}) {
         ${miss ? `<div class="taste-reading-prediction taste-reading-miss"><span class="taste-reading-prediction-label">Predicted to miss</span><span>${escapeHtml(miss.title || '')}${miss.artist ? ` — ${escapeHtml(miss.artist)}` : ''}</span></div>` : ''}
       </div>` : '';
 
-      return `<div class="taste-reading-block">
-        <div class="eyebrow" style="margin:0;">Taste Reading</div>
-        <p class="taste-reading-text">${escapeHtml(genre.taste_reading)}</p>
+      return `<div class="meta-box meta-box-full taste-reading-box">
+        <h3>Taste Reading</h3>
+        <p>${escapeHtml(genre.taste_reading)}</p>
         ${predictionsHtml}
         ${nicheHtml}
       </div>`;
@@ -5008,10 +5008,10 @@ function loadListenScreen(genre, options = {}) {
               <p>${genre.suggested_songs ? escapeHtml(genre.suggested_songs) : 'Not added yet.'}</p>
             </div>
           </div>
+          ${renderTasteReadingBlock(genre)}
           ${renderGenreRatingPanel(genre)}
           ${renderListeningActionsPanel(genre)}
           ${renderGenreReactionSummary(genre)}
-          ${renderTasteReadingBlock(genre)}
           ${renderPendingSongNotesPanel(genre)}
           ${renderLevelUpIntegrityPanel(genre)}
           <div class="detail-log-section listening-focus-section-shell" data-listening-focus="${escapeHtml(listeningFocusMode)}">

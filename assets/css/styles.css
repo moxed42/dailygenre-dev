@@ -3129,17 +3129,14 @@
     }
     .track-reaction-counter .emoji { font-size:25px; line-height:1; }
     .track-reaction-counter strong { font-size:1.05rem; }
-    .taste-reading-block {
-      margin:18px 0 14px;
-      border-radius:16px;
-      padding:13px;
-      border:1px solid rgba(127,82,28,.16);
-      background:rgba(255,252,241,.58);
+    .meta-box-full {
+      margin-top:18px;
     }
-    .taste-reading-pending { background:rgba(255,248,230,.5); }
-    .taste-reading-text {
-      margin:8px 0 0;
+    .taste-reading-box p {
       line-height:1.45;
+    }
+    .taste-reading-pending {
+      background:rgba(255,248,230,.5);
     }
     .taste-reading-predictions {
       display:flex;
