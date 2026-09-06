@@ -883,7 +883,7 @@ This removes it from every genre and Studio queue. It becomes permanent after yo
       </div>
       <div class="song-focus-main">
         <div class="song-focus-kicker">Now Listening · ${songTypeBadge(entry)}</div>
-        <h3 class="song-focus-title">${hasHref ? `<a href="${html(href)}" target="_blank" rel="noopener noreferrer">${titleMarkup} <span class="song-link-arrow">↗</span></a>` : titleMarkup}</h3>
+        <h3 class="song-focus-title">${hasHref ? `<a href="${html(href)}" target="_blank" rel="noopener noreferrer">${titleMarkup}&nbsp;<span class="song-link-arrow">↗</span></a>` : titleMarkup}</h3>
         ${subline ? `<div class="song-focus-subline">${html(subline)}</div>` : ""}
         ${relation}
         ${reason ? `<p class="song-focus-reason">${html(reason)}</p>` : ""}
@@ -1035,7 +1035,7 @@ This removes it from every genre and Studio queue. It becomes permanent after yo
                   const hasHref = /^https?:\/\//i.test(href);
                   const safeKeyAttr = html(key).replace(/'/g, "&#39;");
                   const titleMarkup = hasHref
-                    ? `<a class="song-focus-row-title" href="${html(href)}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">${html(title)} <span class="song-link-arrow">↗</span></a>`
+                    ? `<a class="song-focus-row-title" href="${html(href)}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">${html(title)}&nbsp;<span class="song-link-arrow">↗</span></a>`
                     : `<span class="song-focus-row-title">${html(title)}</span>`;
                   const rowMiniTitle = encodeURIComponent(title || "Spotify track");
                   const rowMiniArtist = encodeURIComponent(song.artist || (Array.isArray(song.artists) ? song.artists.join(", ") : ""));
