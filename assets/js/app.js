@@ -1392,6 +1392,7 @@ function switchScreen(name, options = {}) {
         isAdd,
         isPromote: !!s?.isPromote,
         isIdentityTrack: !!s?.isIdentityTrack,
+        recommendedBy: Array.isArray(s?.recommendedBy) ? s.recommendedBy.filter(Boolean) : [],
         role: songRoleTag(s),
         _pendingGenreTag: s?._pendingGenreTag || songLabel.pendingGenreTag || '',
         __levelUpParentKey: s?.__levelUpParentKey || s?.levelUpParentKey || s?.levelUpForKey || '',

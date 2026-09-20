@@ -342,13 +342,29 @@
     }
     if (entry.label === "Level Up" || entry.song?.isDetachedLevelUp)
       return '<span class="song-focus-badge level">Level Up</span>';
-    if (entry.song?.promotedFrom || entry.song?.promotedTo || entry.song?.reviewedAt || entry.label === "Routed")
-      return '<span class="song-focus-badge routed">Routed</span>';
-    if (entry.label === "Add")
+    if (entry.song?.isAdd || entry.label === "Add")
       return '<span class="song-focus-badge add">Add</span>';
-    if (entry.song?.score != null)
-      return `<span class="song-focus-badge">Fit ${html(entry.song.score)}/5</span>`;
-    return '<span class="song-focus-badge">Canon</span>';
+    // NOTE: `promotedFrom` alone is NOT a routing signal -- it's also used on
+    // plain ADD rows (see above) to record which genre's picks inspired an
+    // assistant add, e.g. `promotedFrom: "Scherzo"` on an unrelated ADD
+    // track. Only pendingFrom/isPending (this project's actual pending-inbox
+    // -> ROUTED convention) or an explicit "Routed" label mean routed.
+    if (entry.song?.pendingFrom || entry.song?.isPending || entry.song?.promotedTo || entry.song?.reviewedAt || entry.label === "Routed")
+      return '<span class="song-focus-badge routed">Routed</span>';
+    const fitBadge =
+      entry.song?.score != null
+        ? ` <span class="song-focus-badge">Fit ${html(entry.song.score)}/5</span>`
+        : "";
+    return `<span class="song-focus-badge recc">Recc</span>${fitBadge}`;
+  }
+
+  function songRecommenderBadge(entry) {
+    const names = Array.isArray(entry.song?.recommendedBy)
+      ? entry.song.recommendedBy.filter(Boolean)
+      : [];
+    if (!names.length) return "";
+    const label = names.join(", ");
+    return ` <span class="song-focus-badge recommender" title="Recommended by ${html(label)}">🎙 ${html(label)}</span>`;
   }
 
   function genreFocusStorageKey(genre) {
@@ -882,7 +898,7 @@ This removes it from every genre and Studio queue. It becomes permanent after yo
         ${art ? `<img class="song-focus-art" src="${html(art)}" alt="${html(title)} artwork" loading="lazy">` : '<div class="song-focus-art song-focus-art-placeholder">♪</div>'}
       </div>
       <div class="song-focus-main">
-        <div class="song-focus-kicker">Now Listening · ${songTypeBadge(entry)}</div>
+        <div class="song-focus-kicker">Now Listening · ${songTypeBadge(entry)}${songRecommenderBadge(entry)}</div>
         <h3 class="song-focus-title">${hasHref ? `<a href="${html(href)}" target="_blank" rel="noopener noreferrer">${titleMarkup}&nbsp;<span class="song-link-arrow">↗</span></a>` : titleMarkup}</h3>
         ${subline ? `<div class="song-focus-subline">${html(subline)}</div>` : ""}
         ${relation}

@@ -1993,6 +1993,21 @@
   border-color: rgba(73, 107, 59, 0.32);
 }
 
+.song-focus-badge.recc {
+  color: #e5f0ff;
+  background: #2d4a80;
+  border-color: rgba(90, 140, 220, 0.32);
+}
+
+.song-focus-badge.recommender {
+  color: #3a2a12;
+  background: #f0dba6;
+  border-color: rgba(58, 42, 18, 0.28);
+  font-weight: 700;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
 .song-focus-details-drawer,
 .song-focus-queue-card {
   border-radius: 24px;
